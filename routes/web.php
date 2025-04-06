@@ -18,6 +18,8 @@ Route::get('contact', [ContactController::class, 'index'])->name('contactus');
 Route::post('contact', [ContactController::class, 'store'])->name('contactus.store');
 
 Route::get('destination/{url}', [DestinationController::class, 'index'])->name('destination');
+Route::get('filter-package', [DestinationController::class, 'filter']);
+
 Route::get('package-all', [PackageController::class, 'all'])->name('package.all');
 Route::get('filter_package', [PackageController::class, 'Filter_Package'])->name('filter_package');
 Route::get('package-destination/{url}', [PackageController::class, 'destination'])->name('package.destination');

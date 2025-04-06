@@ -50,8 +50,9 @@
 .sub {
     transition: visibility 0.3s, opacity 0.3s ease-in-out;
 }
-
     </style>
+@stack('style')
+
 </head>
 
 <body>
@@ -164,9 +165,13 @@
         crossorigin="anonymous"></script>
     <!-- Splide.js JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    @stack('script')
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            let traveler_slider=document.getElementById('traveler-slider');
+            if (traveler_slider) {
+
             new Splide('#traveler-slider', {
                 type: 'loop',
                 perPage: 1,
@@ -177,9 +182,13 @@
                 arrows: false,
                 pagination: false,
             }).mount();
+        }
+
         });
 
         document.addEventListener('DOMContentLoaded', function () {
+            let testimonial_slider=document.getElementById('testimonial-slider');
+            if (testimonial_slider) {
             new Splide('#image-slider', {
                 type: 'loop',
                 perPage: 5,
@@ -190,9 +199,12 @@
                 arrows: false,
                 pagination: false,
             }).mount();
+        }
         });
 
         document.addEventListener('DOMContentLoaded', function () {
+            let epic_img_slider=document.getElementById('epic-img-slider');
+            if(epic_img_slider){
             new Splide('#epic-img-slider', {
                 type: 'loop',
                 perPage: 5,
@@ -203,11 +215,14 @@
                 arrows: false,
                 pagination: false,
             }).mount();
+        }
         });
     </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
+            let recentPostsSlider=document.getElementById('recentPostsSlider');
+            if (recentPostsSlider) {
             var splide = new Splide("#recentPostsSlider", {
                 type: "loop",
                 perPage: 3,
@@ -232,9 +247,13 @@
             document.getElementById("custom-next").addEventListener("click", function () {
                 splide.go("+1");
             });
+        }
         });
 
+
         document.addEventListener("DOMContentLoaded", function () {
+            let recentPostsSlider=document.getElementById('recentPostsSlider');
+            if (recentPostsSlider) {
             var splide = new Splide("#testimonialSlider", {
                 type: "loop",
                 perPage: 1,
@@ -245,6 +264,7 @@
                 autoWidth: false,
                 focus: "center",
             }).mount();
+        }
         });
     </script>
 
