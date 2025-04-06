@@ -55,24 +55,12 @@ Route::resource('/departures', App\Http\Controllers\BackEnd\Travel\DeparturesCon
 Route::get('/departures/delete/{id}', [App\Http\Controllers\BackEnd\Travel\DeparturesController::class, 'destroy'])->name('departures.delete');
 
 // Blog
-Route::resource('/blogs', App\Http\Controllers\BackEnd\Blog\BlogController::class);
-Route::get('/blogs/delete/{id}', [App\Http\Controllers\BackEnd\Blog\BlogController::class, 'destroy'])->name('blogs.delete');
+Route::resource('/blogs', App\Http\Controllers\BackEnd\BlogController::class);
+Route::get('/blogs/delete/{id}', [App\Http\Controllers\BackEnd\BlogController::class, 'destroy'])->name('blogs.delete');
 
 // Event
 Route::resource('/events', App\Http\Controllers\BackEnd\EventController::class);
 Route::get('/events/delete/{id}', [App\Http\Controllers\BackEnd\EventController::class, 'destroy'])->name('events.delete');
-
-// CMS
-Route::resource('/cms', App\Http\Controllers\BackEnd\Cms\CmsController::class);
-Route::get('/cms/delete/{id}', [App\Http\Controllers\BackEnd\Cms\CmsController::class, 'destroy'])->name('cms.delete');
-
-// Newsletter
-Route::get('newsletters', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'index'])->name('newsletters.index');
-Route::get('newsletters/create', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'create'])->name('newsletters.create');
-Route::post('newsletters/store', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'store'])->name('newsletters.store');
-Route::get('newsletters/show/{id}', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'show'])->name('newsletters.show');
-Route::get('/newsletters/delete/{id}', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'destroy'])->name('newsletters.delete');
-Route::get('newsletters-history', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'emailHistory'])->name('newsletter.history');
 
 // Contact
 Route::get('contacts', [App\Http\Controllers\BackEnd\ContactController::class, 'index'])->name('contacts.index');
@@ -85,7 +73,6 @@ Route::get('banners/delete/{id}', [App\Http\Controllers\BackEnd\BannerController
 
 // Setting
 Route::resource('/websites', App\Http\Controllers\BackEnd\SettingController::class);
-Route::resource('section-control', App\Http\Controllers\BackEnd\Main\SectionControlController::class);
 
 // Role and Permission
 Route::get('/role_permission', [App\Http\Controllers\BackEnd\RoleController::class, 'index'])->name('role');
@@ -106,25 +93,18 @@ Route::get('role_permission/assign_role/delete/{id}/{table}', [App\Http\Controll
 // Active and Deactive Routes
 Route::get('active/{id}/{table}', [App\Http\Controllers\BackEnd\BannerController::class, 'active'])->name('active');
 Route::get('deactive/{id}/{table}', [App\Http\Controllers\BackEnd\BannerController::class, 'deactive'])->name('deactive');
-Route::get('blog/active/{id}/{table}', [App\Http\Controllers\BackEnd\Blog\BlogController::class, 'active'])->name('blog.active');
-Route::get('blog/deactive/{id}/{table}', [App\Http\Controllers\BackEnd\Blog\BlogController::class, 'deactive'])->name('blog.deactive');
+Route::get('blog/active/{id}/{table}', [App\Http\Controllers\BackEnd\BlogController::class, 'active'])->name('blog.active');
+Route::get('blog/deactive/{id}/{table}', [App\Http\Controllers\BackEnd\BlogController::class, 'deactive'])->name('blog.deactive');
 
 // Miscellaneous Routes
-Route::resource('contact-details', App\Http\Controllers\BackEnd\Main\ContactDetailsController::class);
-Route::resource('important-links', App\Http\Controllers\BackEnd\ImportantLinks\ImportantLinksController::class);
-Route::resource('/main-slider', App\Http\Controllers\BackEnd\Main\MainSliderController::class);
-Route::resource('/blog', App\Http\Controllers\BackEnd\Blog\BlogController::class);
-Route::resource('videos', App\Http\Controllers\BackEnd\Main\VideosController::class, array('only' => array('update')));
+Route::resource('/blog', App\Http\Controllers\BackEnd\BlogController::class);
 
-// Booking
-Route::get('booking', [App\Http\Controllers\BackEnd\Main\MainController::class, 'getBooking']);
-Route::get('booking/{id}', [App\Http\Controllers\BackEnd\Main\MainController::class, 'BookingDetail'])->name('bookingdetail');
 
 // Country
 Route::resource('/country', App\Http\Controllers\BackEnd\CountryController::class);
 
 // Blog Upload Image
-Route::post('/blog-posts/upload', [App\Http\Controllers\BackEnd\Blog\BlogController::class, 'uploadimage']);
+Route::post('/blog-posts/upload', [App\Http\Controllers\BackEnd\BlogController::class, 'uploadimage']);
 
 // Cache Clear Route
 Route::get('/cache', function () {
