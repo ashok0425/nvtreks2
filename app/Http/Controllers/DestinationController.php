@@ -36,20 +36,28 @@ public function filter(Request $request)
     }
 
     // 💰 Price Range Filter
-    if ($request->filled('price_min') && $request->filled('price_max')) {
-        $query->whereBetween('price', [
-            $request->price_min,
-            $request->price_max,
+    $minPrice = data_get($request, 'price.min');
+    $maxPrice = data_get($request, 'price.max');
+
+    if (!is_null($minPrice) && !is_null($maxPrice)) {
+        $query->whereBetween('price', [$minPrice, $maxPrice]);
+    }
+
+
+    // 📅 Days Filter (assumed to be mapped with `duration`)
+    if (
+        $request->filled('days.min') &&
+        $request->filled('days.max')
+    ) {
+        $minDays = (int) $request->input('days.min');
+        $maxDays = (int) $request->input('days.max');
+
+        $query->whereRaw("CAST(REGEXP_REPLACE(duration, '[^0-9]', '') AS UNSIGNED) BETWEEN ? AND ?", [
+            $minDays,
+            $maxDays
         ]);
     }
 
-    // 📅 Days Filter (assumed to be mapped with `duration`)
-    if ($request->filled('days_min') && $request->filled('days_max')) {
-        $query->whereBetween('duration', [
-            $request->days_min,
-            $request->days_max,
-        ]);
-    }
 
     // ⛰ Difficulty Filter
     if ($request->filled('difficulty')) {

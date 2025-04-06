@@ -38,14 +38,7 @@ public function home(Request $request) {
         ->limit(10)
         ->get();
         $blogs=Blog::where('display_homepage',1)->limit(5)->get();
-        $testimonials = DB::table('testimonials')
-    ->where('status', 1)
-    ->whereRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) < 60')
-    ->orderByRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) DESC')
-    ->limit(5)
-    ->get();
-    $faqs=Faq::with('package')->where('show_on_home_page',1)->latest()->get();
-      return view('frontend.index',compact('destinations','popular_package','destination_categories','discounted_packages','departures','month','year','blogs','testimonials','faqs'));
+      return view('frontend.index',compact('destinations','popular_package','destination_categories','discounted_packages','departures','month','year','blogs'));
 }
 
 

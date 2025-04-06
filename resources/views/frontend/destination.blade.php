@@ -195,7 +195,7 @@
                                         $@{{ package.price }}
                                     </span>
                                 </div>
-                                <a :href="" class='btn btn_darkprimary rounded-0 px-3'>VIEW DETAILS</a>
+                                <a :href="package.url" class='btn btn_darkprimary rounded-0 px-3'>VIEW DETAILS</a>
                             </div>
                         </div>
                     </div>
@@ -250,7 +250,13 @@
     </div>
     </div>
     </div>
+
+
 </section>
+
+@include('frontend.inc.escape')
+@include('frontend.inc.testimonial')
+@include('frontend.inc.contactus')
 @endsection
 @push('style')
     <style>

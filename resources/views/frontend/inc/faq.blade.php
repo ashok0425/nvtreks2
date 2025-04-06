@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-8 faqs_accordion">
                 <div class="accordion" id="faqAccordion">
-                    @foreach ($faqs as $faq)
+                    @foreach (App\Models\Faq::with('package')->where('show_on_home_page',1)->latest()->get() as $faq)
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingOne">
                             <button class="accordion-button accordion_button_title py-4" type="button"

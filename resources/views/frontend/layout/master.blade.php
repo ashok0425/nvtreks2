@@ -252,7 +252,7 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-            let recentPostsSlider=document.getElementById('recentPostsSlider');
+            let recentPostsSlider=document.getElementById('testimonialSlider');
             if (recentPostsSlider) {
             var splide = new Splide("#testimonialSlider", {
                 type: "loop",
