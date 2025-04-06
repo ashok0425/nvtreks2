@@ -1,0 +1,7 @@
+User-agent: *
+Disallow:/admin
+sitemap:https://nepalvisiontreks.com/sitemap.xml
+sitemap:https://www.nepalvisiontreks.com/sitemap.xml
+sitemap:https://nepalvisiontreks.com/public/sitemap.xml
+
+

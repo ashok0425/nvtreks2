@@ -1,0 +1,126 @@
+.border_grey_color {
+    border-color: #525252 !important;
+}
+
+.phone-input-container {
+    max-width: 400px;
+    margin: auto;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-group .form-select {
+    flex: 0 0 auto;
+    width: 80px;
+}
+
+.input-group .form-control {
+    flex: 1;
+}
+
+.trip_itinerary_card img {
+    width: 51px;
+    height: 51px;
+}
+
+.trip_itinerary_content h4 {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.trip_itinerary_content p {
+    font-weight: 400;
+    font-size: 14px;
+    color: #383838;
+}
+
+.trip_details h5 {
+    font-weight: 800;
+    font-size: 32px;
+    color: #101F46;
+}
+
+.trip_details p {
+    font-weight: 400;
+    font-size: 16px;
+    color: #383838;
+    font-family: "Montserrat", serif;
+}
+
+.trip_details p a {
+    font-weight: 400;
+    font-size: 16px;
+    color: #383838;
+    font-family: "Montserrat", serif;
+}
+
+.outline_itinerary_content {
+    font-size: 16px;
+    border-color: #C29500 !important;
+}
+
+.text_darkgray {
+    color: #778088;
+}
+
+.checkColor {
+    color: rgb(61, 163, 61);
+}
+
+.day-badge {
+    width: 40px;
+    height: 30px;
+    top: 13px;
+    left: 0px;
+}
+
+
+@media (max-width: 768px) {
+    .day-badge {
+        width: 30px;
+        /* Adjust size for mobile */
+        height: 25px;
+        font-size: 14px;
+        top: 10px;
+        left: 0;
+    }
+
+    .bi-calendar {
+        font-size: 2rem;
+        /* Smaller icon on mobile */
+    }
+
+    .trip_itinerary_card img {
+        width: 41px;
+        height: 41px;
+    }
+
+    .trip_itinerary_content h4 {
+        font-size: 14px;
+    }
+
+    .trip_itinerary_content p {
+        font-size: 12px;
+    }
+
+    .trip_details h5 {
+        font-size: 22px;
+    }
+
+    .trip_details p {
+        font-size: 14px;
+    }
+
+    .trip_details p a {
+        font-size: 14px;
+    }
+
+    .outline_itinerary_content {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {}

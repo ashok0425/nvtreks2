@@ -1,0 +1,459 @@
+/* General Styles */
+
+.travel-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.travel-line {
+    border-color: #ffff;
+    border-width: 3px;
+    width: 50px;
+    margin: 0;
+}
+
+.travel-subtitle {
+    margin-left: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+}
+
+.section-description {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: #666;
+}
+
+.badge-arrow {
+    display: inline-block;
+    padding: 10px 15px 10px 40px;
+    color: white;
+    position: relative;
+    font-size: 16px;
+    font-weight: 800;
+    clip-path: polygon(100% 0%, 100% 100%, 100% 100%, 0% 100%, 15% 50%, 0% 0%);
+}
+
+.popular_card_head {
+    font-family: Mulish;
+    font-weight: 800;
+    font-size: 24px;
+    color: #101F46;
+}
+
+.star_color {
+    color: #F9C108;
+}
+
+/* Destination Card */
+.destination-card {
+    position: relative;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.destination-card img {
+    transition: transform 0.4s ease-in-out;
+}
+
+.destination-card:hover img {
+    transform: scale(1.4); /* Zoom In */
+}
+
+.destination-card:active img {
+    transform: scale(0.95); /* Zoom Out on Click */
+}
+
+.destination-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(217, 217, 217, 0) -30.79%, rgba(0, 0, 0, 0.73) 116.58%);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.destination-title {
+    color: white;
+    text-align: center;
+    padding: 8px 10px;
+    font-weight: bold;
+    max-width: 140px;
+}
+
+.destination-description {
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Destination Button */
+.destination-button {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 0;
+}
+
+/* Ensure the card container does not overflow */
+.card {
+    position: relative;
+}
+
+
+/* Discount Badge: Adjust Position for Small Screens */
+.discount-badge {
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    z-index: 3;
+}
+
+.discount-badge div {
+    width: 65px;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Details */
+.card-details {
+    position: absolute;
+    bottom: -15%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    padding: 15px;
+    margin: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 8px 8px;
+    transition: bottom 0.3s ease-in-out;
+}
+
+.email_input input::placeholder {
+    color: white !important;
+    font-family: "Montserrat", serif;
+}
+
+.table {
+    --bs-table-border-color: #77777780 !important;
+    font-family: 'Mulish', sans-serif;
+    border-collapse: separate !important;
+}
+
+.trip_table tr {
+    border-bottom: 2px solid #77777780;
+}
+
+.trip_table_text {
+    font-size: 24px;
+}
+
+.trip_table thead th {
+    background-color: #ffff !important;
+    font-weight: 800;
+    font-size: 18px;
+    color: #777777;
+    padding: 20px 30px;
+    text-align: start;
+    /* width: 600px; */
+}
+
+.trip_table tbody tr:last-child td {
+    border-bottom: none !important;
+}
+
+.trip_table.lightwhite thead th {
+    background-color: #F8F8F8 !important;
+}
+
+.trip_table.lightwhite tbody tr td {
+    background-color: #F8F8F8 !important;
+}
+
+.trip_table tbody td {
+    padding: 20px 30px;
+}
+
+/* Remove left padding from the first column */
+.trip_table th:first-child,
+.trip_table td:first-child {
+    padding-left: 0 !important;
+}
+
+/* Remove right padding from the last column */
+.trip_table th:last-child,
+.trip_table td:last-child {
+    padding-right: 0 !important;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+#traveler-slider .splide__slide img {
+    height: 285px;
+    width: 100%; /* Ensures full width scaling */
+    object-fit: cover; /* Crops to fit while preserving aspect ratio */
+}
+
+.recent_post_card_img img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+}
+
+.recent_posts_slider .splide_btn_section .splide_btn button {
+    background-color: transparent;
+    color: #C29500;
+    border: none;
+    width: 50px;
+    height: 50px;
+    font-size: 36px;
+    border-radius: 50px;
+}
+
+.recent_posts_slider .splide_btn_section .splide_btn .btn_disabled {
+    color: #999999;
+}
+
+.recent_posts_slider .splide_btn_section .splide_btn_prev {
+    position: absolute;
+    top: 50%;
+    left: -50px;
+}
+
+.recent_posts_slider .splide_btn_section .splide_btn_next {
+    position: absolute;
+    top: 50%;
+    right: -50px;
+
+}
+
+.contact_info_card.contact_info_card_broder {
+    border-right: 0.5px solid #D9D9D9;
+}
+
+.instagram_card {
+    border: 0.86px solid #737373B2;
+    box-shadow: 0px 3.44px 3.44px 0px #00000040;
+}
+
+.instagram_card_border_bottom {
+    border-bottom: 0.86px solid #737373;
+}
+
+.instagram_card_btn {
+    color: #737373;
+}
+
+.instagram_card_input input::placeholder {
+    color: #737373 !important;
+    font-weight: 500;
+}
+
+.testimonial_slider .splide__pagination__page.is-active {
+    background: #2169A7 !important;
+}
+
+.testimonial_slider .splide__pagination__page {
+    background: #737373 !important;
+}
+
+.faqs_accordion .accordion-item {
+    --bs-accordion-border-color: none !important
+}
+
+.faqs_accordion .accordion-item:last-of-type {
+    border-bottom: none;
+    /* Removes border from last item */
+}
+
+.faqs_accordion .accordion-button {
+    background-color: transparent !important;
+    /* Removes blue background */
+    box-shadow: none !important;
+    /* Removes focus shadow */
+    color: inherit;
+    /* Keeps text color consistent */
+}
+
+.faqs_accordion.lightwhite .accordion-button:not(.collapsed) {
+    background-color: #F8F8F8 !important;
+    /* Prevents blue background when expanded */
+    color: inherit;
+    /* Keeps text color same as normal */
+}
+
+.faqs_accordion.lightwhite .accordion-button {
+    background-color: #F8F8F8 !important;
+    /* Removes blue background */
+    box-shadow: none !important;
+    /* Removes focus shadow */
+    color: inherit;
+    /* Keeps text color consistent */
+}
+
+.faqs_accordion.lightwhite .accordion-button:not(.collapsed) {
+    background-color: #F8F8F8 !important;
+    /* Prevents blue background when expanded */
+    color: inherit;
+    /* Keeps text color same as normal */
+}
+
+.faqs_accordion.lightwhite .accordion-body {
+    background-color: #F8F8F8 !important;
+}
+
+.faqs_accordion .accordion-button:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.faqs_accordion .accordion-item {
+    border-bottom: 1px solid #000000;
+    /* Adds bottom border */
+}
+
+/* Optional: Add spacing for a cleaner look */
+.faqs_accordion .accordion-item:last-of-type {
+    border-bottom: none;
+    /* Removes border from last item for a cleaner design */
+}
+
+.accordion_button_title {
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.accordion_body_content {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.search_input {
+    border-color: #A8A6A6 !important;
+    color: #777777;
+}
+
+.search_input span,
+.search_input input {
+    border-color: #A8A6A6 !important;
+    color: #777777;
+}
+
+.offcanvas {
+    z-index: 1050; /* Bootstrap default */
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .badge-arrow {
+        font-size: 12px;
+    }
+
+    .popular_card_head {
+        font-size: 16px;
+    }
+
+    .accordion_button_title {
+        font-size: 15px;
+    }
+
+    .accordion_body_content {
+        font-size: 14px;
+    }
+
+    .contact_info_card.contact_info_card_broder {
+        border-right: none;
+    }
+
+    .splide_btn_section {
+        display: none;
+    }
+
+    .recent_post_card {
+        width: 100%;
+    }
+
+    .recent_post_card_img img {
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+    }
+
+    .email_input input::placeholder {
+        font-size: 10px;
+    }
+
+    .trip_table_text {
+        font-size: 16px;
+    }
+
+    .discount-badge div {
+        width: 80px;
+        height: 80px;
+        font-size: 1rem;
+    }
+
+    .card-details {
+        position: relative;
+        margin: 0;
+        padding: 12px;
+        box-shadow: none;
+    }
+
+    .discount-badge {
+        top: 5px;
+        right: 5px;
+    }
+
+    .discount-badge div {
+        width: 50px;
+        height: 50px;
+        font-size: 0.75rem;
+    }
+
+    .discount-badge div {
+        width: 60px;
+        height: 60px;
+        font-size: 1rem;
+    }
+
+    .destination-card {
+        height: 200px;
+    }
+
+    .destination-title {
+        font-size: 14px;
+        padding: 6px 8px;
+        max-width: 80px;
+    }
+
+    .destination-description {
+        font-size: 1rem;
+    }
+
+    .section-description {
+        text-align: center;
+    }
+
+    .destination-button {
+        width: 100%;
+    }
+}

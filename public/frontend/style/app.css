@@ -1,0 +1,551 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Mulish", serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+input[type="date"]:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+.container_1320 {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.text_darkprimary {
+  color: #2169A7;
+}
+
+.text_lightprimary {
+  color: #4690BF;
+}
+
+.text_lightwhite {
+  color: #F8F8F8;
+}
+
+.bg_lightwhite {
+  background-color: #F8F8F8;
+}
+
+.font_volkhov {
+  font-family: "Volkhov", serif;
+}
+
+.font_montserrat {
+  font-family: "Montserrat", serif;
+}
+
+.text_lightDark {
+  color: #383838;
+}
+
+.bg_darkprimary {
+  background-color: #2169A7;
+  color: #ffffff;
+}
+
+.bg_lightprimary {
+  background-color: #4690BF;
+}
+
+.btn_lightprimary_outline {
+  background-color: transparent;
+  border: 1px solid #4690BF;
+  color: #4690BF;
+}
+
+.btn_lightprimary_outline:hover,
+.btn_lightprimary_outline:focus {
+  background-color: #4690BF;
+  border: 1px solid #4690BF !important;
+  color: white;
+}
+
+.btn_white {
+  background-color: #ffff;
+  color: black !important;
+}
+
+.btn_white:hover,
+.btn_white:focus {
+  background-color: black;
+  border: 1px solid #0000 !important;
+  color: white !important;
+}
+
+
+.btn_darkprimary {
+  background-color: #2169A7;
+  color: white;
+}
+
+.btn_darkprimary:hover,
+.btn_darkprimary:focus {
+  background-color: white;
+  border: 1px solid #2169A7 !important;
+  color: #2169A7;
+}
+
+.btn_darkgray {
+  background-color: #B8B5B5;
+  color: white;
+}
+
+.btn_darkgray:hover,
+.btn_darkgray:focus {
+  background-color: white;
+  border: 1px solid #B8B5B5 !important;
+  color: #B8B5B5;
+}
+
+.btn_lightBlue {
+  background-color: #0095F6;
+  color: white;
+}
+
+.btn_lightBlue:hover,
+.btn_lightBlue:focus {
+  background-color: white;
+  border: 1px solid #0095F6 !important;
+  color: #0095F6;
+}
+
+.text_darkGray {
+  color: #787878;
+}
+
+.btn_lightgray {
+  background-color: #F1F3F4;
+  color: black;
+}
+
+.btn_lightgray:hover,
+.btn_lightgray:focus {
+  background-color: #2169A7;
+  color: #ffffff;
+}
+
+.btn_outline_darkprimary {
+  border: 1px solid #2169A7;
+  background-color: transparent;
+  color: #2169A7;
+}
+
+.btn_outline_darkprimary:hover,
+.btn_outline_darkprimary:focus {
+  background-color: #2169A7;
+  color: white !important;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+}
+
+.section-line {
+  border-color: #2169A7;
+  border-width: 3px;
+  width: 50px;
+  margin: 0;
+}
+
+.home_banner_subtitle {
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 26.36px;
+  letter-spacing: 10px;
+}
+
+.home_banner_title {
+  font-weight: 1000;
+  font-size: 250px;
+  background: linear-gradient(17deg, #000000 0%, #FFFFFF 30%, #FFFFFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.home_banner_input input::placeholder {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  color: #2169A7;
+}
+
+/* Style the select dropdown */
+.form-select.month_select {
+  background-color: #2169A7;
+  color: white;
+  appearance: none;
+  /* Remove default browser styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 40px;
+  /* Space for the custom arrow */
+  position: relative;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 15px;
+}
+
+
+/* Remove blue highlight when focused */
+.form-select.month_select:focus {
+  background-color: #2169A7;
+  color: white;
+  border-color: white;
+  box-shadow: none;
+}
+
+.section-subtitle {
+  margin-left: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #2169A7;
+}
+
+.video_section {
+  position: relative !important;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+}
+
+.navbar_overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+
+.head_title {
+  font-size: 48px;
+  font-weight: 900;
+  font-family: "Mulish", serif;
+}
+
+.font_mulish {
+  font-family: "Mulish", serif;
+}
+
+.text_darkOrange {
+  color: #C29500;
+}
+
+.bg_darkOrange {
+  background-color: #C29500;
+}
+
+.fs_18 {
+  font-size: 18px;
+}
+
+.text_lightGrey {
+  color: #999999;
+}
+
+.bg_lightGreen {
+  background-color: #1FAF38;
+}
+
+.text_lightGreen {
+  color: #1FAF38;
+}
+
+.font_12 {
+  font-size: 12px;
+}
+
+.hover_effect {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.hover_effect:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.15);
+}
+
+.banner-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 80%;
+}
+
+.banner-title {
+  font-weight: 900;
+  font-size: 64px;
+  max-width: 900px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 10px 15px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.page-item.active .page-link {
+  background-color: #2169A7;
+  color: white;
+  border-color: #2169A7;
+}
+
+.page-item.disabled .page-link {
+  background-color: #f0f0f0;
+  color: #999;
+  cursor: not-allowed;
+}
+
+.team_card_title {
+  font-family: 'Mulish', sans-serif;
+  font-weight: 700;
+  font-size: 23px;
+  color: #101F46;
+}
+
+.team_card_subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  color: #787878;
+}
+
+.team_card_desc {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  color: #383838;
+}
+
+.checkIcon {
+  font-size: 220px;
+  color: #2169A7;
+}
+
+.listing_Card .form-check-input {
+  border: 2px solid #99999999;
+  background-color: white;
+  width: 16px;
+  height: 16px;
+  appearance: none;
+  border-radius: 50%;
+  /* Ensures it's round */
+  position: relative;
+  cursor: pointer;
+}
+/* Apply focus styles to the whole input group */
+.input-group:focus-within {
+  border-color: #86b7fe !important; /* Bootstrap primary focus color */
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important; /* Same as Bootstrap */
+}
+
+/* Remove default border from input and input-group-text */
+.input-group-text,
+.input-group .form-control {
+  outline: none !important;
+  box-shadow: none !important; /* Prevents inner glow */
+}
+
+
+/* Style when the radio button is selected */
+.listing_Card .form-check-input:checked {
+  background-color: #99999999;
+  /* Change the color when checked */
+  border: 2px solid #99999999;
+}
+
+/* Add a custom inner dot */
+.listing_Card .form-check-input:checked::before {
+  content: "";
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  /* Inner dot color */
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Hover effect */
+.listing_Card .form-check-input:hover {
+  border-color: #99999999;
+}
+
+/* Focus effect */
+.listing_Card .form-check-input:focus {
+  box-shadow: 0 0 5px #99999960;
+}
+
+.nav_tab .nav-item .nav-link {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+  color: #000000;
+}
+
+.nav_tab .nav-item .nav-link.active {
+  color: #2169A7;
+}
+
+.boxShadow {
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.bg_blackoverlay {
+  background-color: #151515;
+  opacity: 75%;
+}
+
+.bg_whiteoverlay {
+  background-color: #FFFFFF;
+  opacity: 40%;
+}
+
+@media (max-width: 768px) {
+  
+  .contact_info_section{
+    height: 850px;
+  }
+.home_banner_subtitle {
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+.home_banner_title {
+  font-weight: 800;
+  font-size: 45px;
+}
+
+.home_banner_input input::placeholder {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 16px;
+  color: #2169A7;
+}
+
+
+  .checkIcon {
+    font-size: 120px;
+  }
+
+  .fs_18 {
+    font-size: 16px;
+  }
+
+  .team_card_title {
+    font-size: 18px;
+  }
+
+  .team_card_subtitle {
+    font-size: 12px;
+  }
+
+  .team_card_desc {
+    font-size: 14px;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+  }
+
+  .page-link {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .page-item {
+    margin: 2px;
+  }
+
+  .banner-container {
+    height: 70vh;
+    /* Reduce height */
+    /* padding: 20px; */
+  }
+
+  .banner-title {
+    font-size: 1.8rem;
+    /* Adjust title size */
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+  }
+
+  .video_section {
+    height: 50vh;
+    /* Reduce height for better mobile UX */
+  }
+
+  .navbar_overlay {
+    padding: 5px 0;
+  }
+
+  .head_title {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .banner-container {
+    height: 60vh;
+    /* Reduce height further */
+    padding: 15px;
+  }
+
+  .banner-title {
+    font-size: 1.5rem;
+    /* Make title smaller */
+  }
+}

@@ -1,0 +1,121 @@
+/* Header Container */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.navbar_overlay {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.navbar-brand img {
+  width: 180px; 
+  height: 61px;
+}
+/* Logo */
+.logo img {
+  /* height: 50px; */
+  width: auto;
+}
+
+/* Navigation */
+.navbar_overlay .nav {
+  display: flex;
+  align-items: center;
+}
+
+/* Nav Links */
+.navbar_overlay .nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar_overlay .nav-links li {
+  margin: 0 15px;
+}
+
+.navbar_overlay .nav-links a {
+  text-decoration: none;
+  color: black;
+  transition: color 0.3s;
+  font: normal normal bold 16px/21px "DM Sans", sans-serif;
+}
+
+/* Hover Effect */
+.navbar_overlay .nav-links a:hover {
+  color: rgba(242, 103, 44, 1);
+}
+
+/* Active Link Styling */
+.navbar_overlay .nav-links a.active {
+  color: rgba(242, 103, 44, 1);
+  font-weight: bold;
+}
+
+/* Mobile Menu Button */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none !important;
+  cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+
+  .navbar-brand img {
+    width: 120px;
+    height: auto;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar_overlay .nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar_overlay .nav.open {
+    height: auto;
+    padding: 10px 0;
+  }
+
+  .navbar_overlay .nav-links {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar_overlay .nav-links li {
+    text-align: center;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo img {
+    height: 40px;
+  }
+
+  .navbar_overlay .nav-links a {
+    font-size: 14px;
+  }
+}
