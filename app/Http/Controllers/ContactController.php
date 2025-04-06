@@ -1,13 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\FrontEnd;
+namespace App\Http\Controllers;
 
-use App\Homesection;
-use App\Http\Controllers\Controller;
-use App\Models\Destination;
-use App\Models\MainSlider;
-use App\Models\Package;
-use App\Models\SectionControl;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Contact;

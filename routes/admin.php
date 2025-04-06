@@ -1,142 +1,134 @@
 <?php
 
-use App\Http\Controllers\BackEnd\Blog\BlogController;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
-// Route::middleware('guest:admin')->group(function(){
-Route::get('login', 'AuthController@index')->name('login');
-Route::post('login', 'AuthController@store')->name('login');
-// });
+Route::get('login', [App\Http\Controllers\BackEnd\AuthController::class, 'index'])->name('login');
+Route::post('login', [App\Http\Controllers\BackEnd\AuthController::class, 'store'])->name('login');
+Route::get('/dashboard', [App\Http\Controllers\BackEnd\AuthController::class, 'show'])->name('dashboard');
+Route::get('/profile', [App\Http\Controllers\BackEnd\AuthController::class, 'profile'])->name('profile');
+Route::post('profile/update-profile', [App\Http\Controllers\BackEnd\AuthController::class, 'update'])->name('profile.update');
+Route::post('profile/change-password', [App\Http\Controllers\BackEnd\AuthController::class, 'changePassword'])->name('password');
+Route::get('profile/change-password', [App\Http\Controllers\BackEnd\AuthController::class, 'getpassword'])->name('password');
+Route::post('profile/logout', [App\Http\Controllers\BackEnd\AuthController::class, 'destroy'])->name('logout');
+Route::get('profile/logout/admin', [App\Http\Controllers\BackEnd\AuthController::class, 'destroy'])->name('logout');
 
-Route::get('/dashboard', 'AuthController@show')->name('dashboard');
-Route::get('/profile', 'AuthController@profile')->name('profile');
-Route::post('profile/update-profile', 'AuthController@update')->name('profile.update');
-Route::post('profile/change-password', 'AuthController@changePassword')->name('password');
-Route::get('profile/change-password', 'AuthController@getpassword')->name('password');
-Route::post('profile/logout', 'AuthController@destory')->name('logout');
-Route::get('profile/logout/admin', 'AuthController@destory')->name('logout');
+// Destination
+Route::resource('/destinations', App\Http\Controllers\BackEnd\Travel\DestinationsController::class);
+Route::get('/destinations/delete/{id}', [App\Http\Controllers\BackEnd\Travel\DestinationsController::class, 'destroy'])->name('destination.delete');
 
-//   destination
-Route::resource('/destinations', 'Travel\DestinationsController');
-Route::get('/destinations/delete/{id}', 'Travel\DestinationsController@desoy')->name('destination.delete');
+// Destination category
+Route::resource('/categories-destinations', App\Http\Controllers\BackEnd\Travel\CategoriesDestinationsController::class);
+Route::get('/categoriesdestinations/delete/{id}', [App\Http\Controllers\BackEnd\Travel\CategoriesDestinationsController::class, 'destroy'])->name('categories-destinations.delete');
 
-//   destination category
-Route::resource('/categories-destinations', 'Travel\CategoriesDestinationsController');
-Route::get('/categoriesdestinations/delete/{id}', 'Travel\CategoriesDestinationsController@desoy')->name('categories-destinations.delete');
+// Category Region
+Route::resource('/categories-places', App\Http\Controllers\BackEnd\Travel\CategoriesPlacesController::class);
+Route::get('/categories-places/delete/{id}', [App\Http\Controllers\BackEnd\Travel\CategoriesPlacesController::class, 'destroy'])->name('categories-places.delete');
 
+// Packages
+Route::resource('/packages', App\Http\Controllers\BackEnd\Travel\PackagesController::class);
+Route::get('categories-package/delete/{id}', [App\Http\Controllers\BackEnd\Travel\CategoriesPlacesController::class, 'destroy'])->name('categories-packages.delete');
+Route::get('/country-packages', [App\Http\Controllers\BackEnd\Travel\PackagesController::class, 'countryPackage'])->name('package.country');
+Route::get('/country-packages/create', [App\Http\Controllers\BackEnd\Travel\PackagesController::class, 'countryPackageCreate'])->name('package.country.create');
+Route::post('/country-packages/store', [App\Http\Controllers\BackEnd\Travel\PackagesController::class, 'countryPackageStore'])->name('package.country.store');
+Route::get('/country-packages/edit/{id}', [App\Http\Controllers\BackEnd\Travel\PackagesController::class, 'countryPackageEdit'])->name('package.country.edit');
+Route::post('/country-packages/update', [App\Http\Controllers\BackEnd\Travel\PackagesController::class, 'countryPackageUpdate'])->name('package.country.update');
 
-//    category Region
-Route::resource('/categories-places', 'Travel\CategoriesPlacesController');
-Route::get('/categories-places/delete/{id}', 'Travel\CategoriesPlacesController@desoy')->name('categories-places.delete');
+// Package Gallery
+Route::get('/package-gallery', [App\Http\Controllers\BackEnd\Travel\PackagesGalleryController::class, 'index'])->name('package.gallery');
+Route::get('/package-gallery/create', [App\Http\Controllers\BackEnd\Travel\PackagesGalleryController::class, 'create'])->name('package.gallery.create');
+Route::post('/package-gallery/store', [App\Http\Controllers\BackEnd\Travel\PackagesGalleryController::class, 'store'])->name('package.gallery.store');
+Route::get('/package-gallery/edit/{id}', [App\Http\Controllers\BackEnd\Travel\PackagesGalleryController::class, 'edit'])->name('package.gallery.edit');
+Route::post('/package-gallery/update', [App\Http\Controllers\BackEnd\Travel\PackagesGalleryController::class, 'update'])->name('package.gallery.update');
+Route::get('/package-gallery/{id}/destroy', [App\Http\Controllers\BackEnd\Travel\PackagesGalleryController::class, 'destroy'])->name('package.gallery.delete');
 
-//   packages
-Route::resource('/categories-packages', 'Travel\PackagesController');
-Route::get('categories-package/delete/{id}', 'Travel\CategoriesPlacesController@desoy')->name('categories-packages.delete');
-Route::get('/country-packages', 'Travel\PackagesController@countryPackage')->name('package.country');
-Route::get('/country-packages/create', 'Travel\PackagesController@countryPackagecreate')->name('package.country.create');
-Route::post('/country-packages/store', 'Travel\PackagesController@countryPackageStore')->name('package.country.store');
-Route::get('/country-packages/edit/{id}', 'Travel\PackagesController@countryPackageEdit')->name('package.country.edit');
-Route::post('/country-packages/update', 'Travel\PackagesController@countryPackagupdate')->name('package.country.update');
-
-Route::get('/package-gallery', 'Travel\PackagesGalleryController@index')->name('package.gallery');
-Route::get('/package-gallery/create', 'Travel\PackagesGalleryController@create')->name('package.gallery.create');
-Route::post('/package-gallery/store', 'Travel\PackagesGalleryController@store')->name('package.gallery.store');
-Route::get('/package-gallery/edit/{id}', 'Travel\PackagesGalleryController@edit')->name('package.gallery.edit');
-Route::post('/package-gallery/update', 'Travel\PackagesGalleryController@update')->name('package.gallery.update');
-Route::get('/package-gallery/{id}/destroy', 'Travel\PackagesGalleryController@desoy')->name('package.gallery.delete');
-
-
-
-// testimonials
-Route::resource('/testimonials', 'Testimonials\TestimonialsController');
-Route::get('/testimonials/delete/{id}', 'Testimonials\TestimonialsController@desoy')->name('testimonials.delete');
+// Testimonials
+Route::resource('/testimonials', App\Http\Controllers\BackEnd\Testimonials\TestimonialsController::class);
+Route::get('/testimonials/delete/{id}', [App\Http\Controllers\BackEnd\Testimonials\TestimonialsController::class, 'destroy'])->name('testimonials.delete');
 
 // Faq
-Route::resource('faqs', 'Travel\FaqsController');
-Route::get('faq/delete/{id}', 'Travel\FaqsController@desoy')->name('faqs.delete');
+Route::resource('faqs', App\Http\Controllers\BackEnd\Travel\FaqsController::class);
+Route::get('faq/delete/{id}', [App\Http\Controllers\BackEnd\Travel\FaqsController::class, 'destroy'])->name('faqs.delete');
 
-//depatures
-Route::resource('/departures', 'Travel\DeparturesController');
-Route::get('/departures/delete/{id}', 'Travel\DeparturesController@desoy')->name('departures.delete');
+// Departures
+Route::resource('/departures', App\Http\Controllers\BackEnd\Travel\DeparturesController::class);
+Route::get('/departures/delete/{id}', [App\Http\Controllers\BackEnd\Travel\DeparturesController::class, 'destroy'])->name('departures.delete');
 
-//blog
-Route::resource('/blogs', 'BlogController');
-Route::get('/blogs/delete/{id}', 'BlogController@desoy')->name('blogs.delete');
+// Blog
+Route::resource('/blogs', App\Http\Controllers\BackEnd\Blog\BlogController::class);
+Route::get('/blogs/delete/{id}', [App\Http\Controllers\BackEnd\Blog\BlogController::class, 'destroy'])->name('blogs.delete');
 
-//Event
-Route::resource('/events', 'EventController');
-Route::get('/events/delete/{id}', 'EventController@desoy')->name('events.delete');
+// Event
+Route::resource('/events', App\Http\Controllers\BackEnd\EventController::class);
+Route::get('/events/delete/{id}', [App\Http\Controllers\BackEnd\EventController::class, 'destroy'])->name('events.delete');
 
-// cms
-Route::resource('/cms', 'Cms\CmsController');
-Route::get('/cms/delete/{id}', 'Cms\CmsController@desoy')->name('cms.delete');
+// CMS
+Route::resource('/cms', App\Http\Controllers\BackEnd\Cms\CmsController::class);
+Route::get('/cms/delete/{id}', [App\Http\Controllers\BackEnd\Cms\CmsController::class, 'destroy'])->name('cms.delete');
 
-//Newletter
-Route::get('newsletters', 'Newsletter\NewsletterController@index')->name('newsletters.index');
-Route::get('newsletters/create', 'Newsletter\NewsletterController@create')->name('newsletters.create');
-Route::post('newsletters/store', 'Newsletter\NewsletterController@store')->name('newsletters.store');
-Route::get('newsletters/show/{id}', 'Newsletter\NewsletterController@show')->name('newsletters.show');
+// Newsletter
+Route::get('newsletters', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'index'])->name('newsletters.index');
+Route::get('newsletters/create', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'create'])->name('newsletters.create');
+Route::post('newsletters/store', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'store'])->name('newsletters.store');
+Route::get('newsletters/show/{id}', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'show'])->name('newsletters.show');
+Route::get('/newsletters/delete/{id}', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'destroy'])->name('newsletters.delete');
+Route::get('newsletters-history', [App\Http\Controllers\BackEnd\Newsletter\NewsletterController::class, 'emailHistory'])->name('newsletter.history');
 
-Route::get('/newsletters/delete/{id}', 'Newsletter\NewsletterController@desoy')->name('newsletters.delete');
-Route::get('newsletters-history', 'Newsletter\NewsletterController@emailHistory')->name('newsletter.history');
-
-//Contact
-Route::get('contacts', 'ContactController@index')->name('contact.index');
-Route::get('/contacts/delete/{id}', 'ContactController@desoy')->name('contacts.delete');
-Route::get('contacts-history', 'ContactController@emailHistory')->name('contact.history');
-
-
+// Contact
+Route::get('contacts', [App\Http\Controllers\BackEnd\ContactController::class, 'index'])->name('contacts.index');
+Route::get('/contacts/delete/{id}', [App\Http\Controllers\BackEnd\ContactController::class, 'destroy'])->name('contacts.delete');
+Route::get('contacts-history', [App\Http\Controllers\BackEnd\ContactController::class, 'emailHistory'])->name('contact.history');
 
 // Banner
-Route::resource('/banners', 'BannerController');
-Route::get('banners/delete/{id}', 'BannerController@desoy')->name('banners.delete');
-
+Route::resource('/banners', App\Http\Controllers\BackEnd\BannerController::class);
+Route::get('banners/delete/{id}', [App\Http\Controllers\BackEnd\BannerController::class, 'destroy'])->name('banners.delete');
 
 // Setting
-Route::resource('/websites', 'SettingController');
-Route::resource('section-control', 'Main\SectionControlController');
+Route::resource('/websites', App\Http\Controllers\BackEnd\SettingController::class);
+Route::resource('section-control', App\Http\Controllers\BackEnd\Main\SectionControlController::class);
 
-// Role and permission
-Route::get('/role_permission', 'RoleController@index')->name('role');
-Route::get('/role_permission/create', 'RoleController@create')->name('role.create');
-Route::post('/role_permission/store', 'RoleController@store')->name('role.store');
-Route::get('/role_permission/edit/{id}', 'RoleController@edit')->name('role.edit');
-Route::post('/role_permission/update', 'RoleController@update')->name('role.update');
-Route::get('/role_permission/delete/{id}/{table}', 'RoleController@desoy')->name('role.delete');
+// Role and Permission
+Route::get('/role_permission', [App\Http\Controllers\BackEnd\RoleController::class, 'index'])->name('role');
+Route::get('/role_permission/create', [App\Http\Controllers\BackEnd\RoleController::class, 'create'])->name('role.create');
+Route::post('/role_permission/store', [App\Http\Controllers\BackEnd\RoleController::class, 'store'])->name('role.store');
+Route::get('/role_permission/edit/{id}', [App\Http\Controllers\BackEnd\RoleController::class, 'edit'])->name('role.edit');
+Route::post('/role_permission/update', [App\Http\Controllers\BackEnd\RoleController::class, 'update'])->name('role.update');
+Route::get('/role_permission/delete/{id}/{table}', [App\Http\Controllers\BackEnd\RoleController::class, 'destroy'])->name('role.delete');
 
-// Assign
-Route::get('role_permission/assign_role', 'AssignroleController@index')->name('assignrole');
-Route::get('role_permission/assign_role/create', 'AssignroleController@create')->name('assignrole.create');
-Route::post('role_permission/assign_role/store', 'AssignroleController@store')->name('assignrole.store');
-Route::get('role_permission/assign_role/edit/{id}', 'AssignroleController@edit')->name('assignrole.edit');
-Route::post('role_permission/assign_role/update', 'AssignroleController@update')->name('assignrole.update');
-Route::get('role_permission/assign_role/delete/{id}/{table}', 'AssignroleController@desoy')->name('assignrole.delete');
+// Assign Roles
+Route::get('role_permission/assign_role', [App\Http\Controllers\BackEnd\AssignroleController::class, 'index'])->name('assignrole');
+Route::get('role_permission/assign_role/create', [App\Http\Controllers\BackEnd\AssignroleController::class, 'create'])->name('assignrole.create');
+Route::post('role_permission/assign_role/store', [App\Http\Controllers\BackEnd\AssignroleController::class, 'store'])->name('assignrole.store');
+Route::get('role_permission/assign_role/edit/{id}', [App\Http\Controllers\BackEnd\AssignroleController::class, 'edit'])->name('assignrole.edit');
+Route::post('role_permission/assign_role/update', [App\Http\Controllers\BackEnd\AssignroleController::class, 'update'])->name('assignrole.update');
+Route::get('role_permission/assign_role/delete/{id}/{table}', [App\Http\Controllers\BackEnd\AssignroleController::class, 'destroy'])->name('assignrole.delete');
 
-Route::get('active/{id}/{table}', 'BannerController@active')->name('active');
-Route::get('deactive/{id}/{table}', 'BannerController@deactive')->name('deactive');
+// Active and Deactive Routes
+Route::get('active/{id}/{table}', [App\Http\Controllers\BackEnd\BannerController::class, 'active'])->name('active');
+Route::get('deactive/{id}/{table}', [App\Http\Controllers\BackEnd\BannerController::class, 'deactive'])->name('deactive');
+Route::get('blog/active/{id}/{table}', [App\Http\Controllers\BackEnd\Blog\BlogController::class, 'active'])->name('blog.active');
+Route::get('blog/deactive/{id}/{table}', [App\Http\Controllers\BackEnd\Blog\BlogController::class, 'deactive'])->name('blog.deactive');
 
+// Miscellaneous Routes
+Route::resource('contact-details', App\Http\Controllers\BackEnd\Main\ContactDetailsController::class);
+Route::resource('important-links', App\Http\Controllers\BackEnd\ImportantLinks\ImportantLinksController::class);
+Route::resource('/main-slider', App\Http\Controllers\BackEnd\Main\MainSliderController::class);
+Route::resource('/blog', App\Http\Controllers\BackEnd\Blog\BlogController::class);
+Route::resource('videos', App\Http\Controllers\BackEnd\Main\VideosController::class, array('only' => array('update')));
 
-Route::get('blog/active/{id}/{table}', 'BlogController@active')->name('blog.active');
-Route::get('blog/deactive/{id}/{table}', 'BlogrController@deactive')->name('blog.deactive');
+// Booking
+Route::get('booking', [App\Http\Controllers\BackEnd\Main\MainController::class, 'getBooking']);
+Route::get('booking/{id}', [App\Http\Controllers\BackEnd\Main\MainController::class, 'BookingDetail'])->name('bookingdetail');
 
+// Country
+Route::resource('/country', App\Http\Controllers\BackEnd\CountryController::class);
 
-Route::resource('contact-details', 'Main\ContactDetailsController');
-Route::resource('important-links', 'ImportantLinks\ImportantLinksController');
+// Blog Upload Image
+Route::post('/blog-posts/upload', [App\Http\Controllers\BackEnd\Blog\BlogController::class, 'uploadimage']);
 
-Route::resource('/main-slider', 'Main\MainSliderController');
-Route::resource('/blog', 'Blog\BlogController');
-Route::resource('videos', 'Main\VideosController', array('only' => array('update')));
-
-Route::get('booking', 'Main\MainController@getBooking');
-Route::get('booking/{id}', 'Main\MainController@BookingDetail')->name('bookingdetail');
-
-Route::resource('/country', 'CountryController');
-
-Route::post('/blog-posts/upload','Blog\BlogController@uploadimage');
-
+// Cache Clear Route
 Route::get('/cache', function () {
-	Artisan::call('cache:synblog');
-	// Artisan::call('cache:clear');
-	// Artisan::call('config:clear');
+    Artisan::call('cache:synblog');
+    // Artisan::call('cache:clear');
+    // Artisan::call('config:clear');
 });

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\FrontEnd;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\CategoryDestination;
 use App\Models\Destination;

@@ -1,67 +1,12 @@
-
-@php
-    $setting = DB::table('websites')->first();
-    $agent = new \Jenssegers\Agent\Agent();
-
-@endphp
-@if ($agent->isMobile())
-    @section('title')
-        {{ $setting->mobile_title }}
-    @endsection
-    @section('descr')
-        {{ $setting->mobile_description }}
-    @endsection
-    @section('keyword')
-        {{ $setting->mobile_keyword }}
-    @endsection
-@else
-    @section('title')
-        {{ $setting->title }}
-    @endsection
-    @section('descr')
-        {{ $setting->descr }}
-    @endsection
-    @section('keyword')
-        {{ $setting->title }}
-    @endsection
-@endif
-@section('img')
-    {{ getImageurl($setting->image) }}
-@endsection
-@section('url')
-    {{ Request::url() }}
-@endsection
-@section('fev')
-    {{ getImageurl($setting->fev) }}
-@endsection
-
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta property="fb:app_id" content="160443599540603" />
-    <meta property="og:url" content="@yield('url')" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="@yield('title')" />
-    <meta property="og:description" content="@yield('descr')" />
-    <meta property="og:image" content="@yield('img')" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    @yield('noindex')
-    <meta name="keyword" content="@yield('keyword')">
-    <meta name="description" content="@yield('descr')">
-   @if (url()->current() == 'https://www.nepalvisiontreks.com' ||
-            url()->current() == 'https://www.nepalvisiontreks.com/index.php')
-        <link rel="canonical" href="https://www.nepalvisiontreks.com" />
-    @elseif(url()->current() == 'https://www.nepalvisiontreks.com/{country?}/package-detail/{url?}')
-    <link rel="canonical" href="https://www.nepalvisiontreks.com/package-detail/{url?}" />
-    @else
-    <link rel="canonical" href="{{url()->current()}}" />
-    @endif
-    <link rel="shortcut  icon" href="@yield('fev')" type="image/icon type">
-    <title>@yield('title')</title>
+
+    {{-- @include('frontend.inc.seo_block') --}}
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Splide.js CSS -->

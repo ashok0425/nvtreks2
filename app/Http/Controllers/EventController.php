@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\FrontEnd;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Models\Package;
 
@@ -16,7 +15,7 @@ public function index(){
 
 
 
-         
+
 public function show($id){
      $event=Event::orderBy('id','desc')->where('status',1)->where('id',$id)->first();
      $mores=Event::where('status',1)->inRandomOrder()->where('title','!=',null)->limit(5)->get();

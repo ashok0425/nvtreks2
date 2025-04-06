@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\FrontEnd;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -17,7 +16,7 @@ public function index(){
 
 
 
-         
+
 public function show($url){
      $blog=Blog::orderBy('ID','desc')->where('post_status','publish')->where('ID',$url)->orwhere('url',$url)->first();
      if (!$blog) {
@@ -61,7 +60,7 @@ if(count($blogs)<=0){
                   $data.= "<div class='date'>
                       <span>".
                        Carbon::parse($blog->post_date)->format('d')."
-                  </span>                        
+                  </span>
                        ". Carbon::parse($blog->post_date)->format('M Y') ."
 
                   </div>
@@ -77,7 +76,7 @@ if(count($blogs)<=0){
       </div>";
      }
      return $data;
-     
+
 }
 
 }

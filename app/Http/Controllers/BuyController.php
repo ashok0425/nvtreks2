@@ -1,14 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\FrontEnd;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use App\Models\Customer;
-use App\Models\Invoice;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -160,7 +157,7 @@ class BuyController extends Controller
             if (!$package) {
                   $packages = Package::where('status', 1)->get();
             }
-       
+
             return view('frontend.online_pay', compact('package','packages'));
       }
 
@@ -171,7 +168,7 @@ class BuyController extends Controller
 
       public function Confirmation(Request $request)
       {
-            
+
         return view('frontend.confirmpayment',compact('request'));
       }
 
@@ -239,17 +236,17 @@ class BuyController extends Controller
       {
             $apiURL = 'https://api.geoapify.com/v1/ipinfo?apiKey=ba7648986b064e67a1418a20662a6dba';
 
-            // Make HTTP GET request using cURL 
+            // Make HTTP GET request using cURL
             $ch = curl_init($apiURL);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $apiResponse = curl_exec($ch);
 
             curl_close($ch);
 
-            // Retrieve IP data from API response 
+            // Retrieve IP data from API response
             $ipData = json_decode($apiResponse, true);
 
-            // Return geolocation data 
+            // Return geolocation data
             return !empty($ipData) ? $ipData : false;
       }
 }

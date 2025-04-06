@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\FrontEnd;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\CategoryDestination;
 use App\Models\CategoryPlace;
 use App\Models\Package;
@@ -15,14 +14,14 @@ class DestinationController extends Controller
 {
 
 public function index($url) {
-	$data = Destination::where('url',$url)->orwhere('id',$url)->first();
+	$destination = Destination::where('url',$url)->orwhere('id',$url)->first();
 	if(!$data){
 	    abort(404);
 	}
 	$categories = CategoryDestination::where('destination_id',$data->id)->where('status',1)->get();
 	$packages = Package::where('destination_id',$data->id)->where('status',1)->orderBy('order','desc')->where('price','!=',0)->limit(8)->orderBy('id','desc')->get();
 
-      return view('frontend.destination',compact('categories','packages','data'));
+      return view('frontend.destination',compact('categories','packages','destination'));
 }
 
 public function loadCategory($data) {
@@ -43,19 +42,19 @@ public function search(Request $request) {
   if(isset($request->destination)&&!empty($request->destination)){
     $query.=" AND `destination_id`=$request->destination ";
   }
-  
+
   if(isset($request->category)&&!empty($request->category)){
     $query.=" AND `category_destination_id`=$request->category ";
 }
 
 if(isset($request->month)&&!empty($request->month)){
   $query.=" AND `best_month` LIKE '%$request->duration%' ";
-  
+
 }
 
 if(isset($request->keyword)&&!empty($request->keyword)){
   $query.=" AND `name` LIKE '%$request->keyword%' ";
-  
+
 }
 $package_s=DB::select($query);
 
@@ -72,12 +71,12 @@ $package_s=DB::select($query);
     }
     if(isset($request->keyword)&&!empty($request->keyword)){
       $query.=" AND `name` LIKE '%$request->keyword%' ";
-      
+
     }
     $packages=DB::select($query);
   }
 
-    
+
       $data=Destination::find($request->destination);
       $categories=CategoryDestination::where('destination_id',$request->destination)->where('status',1)->get();
 
@@ -98,14 +97,14 @@ $package_s=DB::select($query);
       }
       if(isset($request->duration)&&!empty($request->duration)){
         $query.=" AND `duration`= '$request->duration' ";
-        
+
       }
 
       if(isset($request->activity)&&!empty($request->activity)){
         $query.=" AND `activity`= '$request->activity' ";
-        
+
       }
-      
+
       $packages=DB::select($query);
 $data='';
    foreach($packages as $package){
@@ -120,7 +119,7 @@ $data='';
            else {
             $data.="<img src='". getImageurl($package->banner)."' alt='".$package->name."' class='img-fluid w-100'>";
             }
-              
+
             $data.=" </div>
            <div class='img-desc'>
                <div class='about-img row'>
@@ -132,15 +131,15 @@ $data='';
                         $data.= $package->duration ."|";
 
                        }
-                       
+
                        if (!empty($package->activity))
                        {
                         $data.= Str::limit($package->activity,20) ;
 
                        }
-                           
-                       
-                       $data.=  " </p> 
+
+
+                       $data.=  " </p>
 
                </div>
                <div class='col-6 '>
@@ -149,29 +148,29 @@ $data='';
                        for ($i=1;$i<=$package->rating;$i++)
                        {
 
-                       
+
                         $data.="<i class='fas fa-star'></i> ";
                         }
                        for ($i=1;$i<=5-$package->rating;$i++)
                        {
                         $data.=   "<i class='far fa-star'></i> ";
-                       
+
                       }
-                    
+
                       $data.=   "</div>
                </div>
 
                <div class='col-6 custom-fw-600 custom-text-primary'>
                US  \$".$package->price ."
 
-           
+
        </div>
                </div>
                <div class='title mt-1'>";
                $data.=$package->name;
-               
+
                $data.=" </div>
-              
+
            </div>
    </a>
 

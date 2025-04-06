@@ -1,26 +1,7 @@
 <?php
-use Illuminate\Support\Facades\Auth;
-use App\Models\Category;
- function __getAdmin(){
-return Auth::guard('admin')->user();
-}
 
-
-function __getVendor(){
-    return Auth::guard('vendor')->user();
-    }
-
-
-
-function __getPriceunit(){
-return 'Rs';
-}
-
-function ___getPriceafterVat($total,$vat,$shipping){
-$vat_amount=($vat*$total)/100;
-$totalsum=$vat_amount+$total+$shipping;
-return $totalsum;
-}
+use App\Models\Website;
+use Illuminate\Support\Facades\Cache;
 
 
 function getImageurl($path){
@@ -45,3 +26,13 @@ function getFilePath($path){
 
   }
 }
+
+
+function setting($key=null){
+    $setting =Cache::remember('setting', 24*60*60, function () {
+     return Website::first();
+
+    });
+    return $key?$setting->key:$setting;
+}
+

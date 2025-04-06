@@ -7,9 +7,7 @@
 @section('content')
 <section class="video_section mb-md-5 mb-4">
     <!-- navbar -->
-
     @include('frontend.layout.header')
-
     <div class="video_banner_container ">
         <video loop muted autoPlay playsInline poster='./images/herobgvideo.mp4' class="video-banner">
             <source src='{{asset('frontend/images/herobgvideo.mp4')}}' type="video/mp4" />
@@ -62,6 +60,7 @@
     <div class="row g-3">
         <!-- First Two Columns -->
         <div class="col-12 col-md">
+            <a href="{{route('destination',['url'=>'nepal'])}}" >
             <div class="card destination-card  p-0 border-0 rounded-3">
                 <img src="{{getImageUrl($destinations[0]['image'])}}" alt="NEPAL" class="card-img-top rounded-3"
                     style="height: 455px;object-fit: cover;">
@@ -70,6 +69,7 @@
                     <p class="destination-description">{{count($destinations[0]->packages)}} Destinations</p>
                 </div>
             </div>
+        </a>
         </div>
 
         <div class="col-12 col-md">
