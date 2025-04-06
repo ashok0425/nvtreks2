@@ -7,7 +7,7 @@
 @endphp
 <div class="container">
 <div class="card">
-        <h3 class="card-title pl-3 mt-1">Edir Role</h3>
+        <h3 class="card-title pl-3 mt-1">Edit Role</h3>
 
     <div class="card-body">
 
@@ -94,7 +94,7 @@
     <div class="col-md-4">
         <label class="font-weight-600"><input type="checkbox" name="subscribe" value="1" @if($role->subscribe==1) checked @endif>&nbsp; <span class="font-weignt-800">Subscriber</span></label>
     </div>
-    
+
     <div class="col-md-4">
         <label class="font-weight-600"><input type="checkbox" name="email_history" value="1" @if($role->email_history==1) checked @endif>&nbsp; <span class="font-weignt-800">Email History</span></label>
     </div>

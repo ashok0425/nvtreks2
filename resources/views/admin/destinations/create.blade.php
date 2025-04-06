@@ -1,4 +1,4 @@
-@extends('admin.layouts.app') 
+@extends('admin.layouts.app')
 @section('content')
 <div class="card">
 	<div class="card-header">
@@ -9,7 +9,7 @@
     <div class="clearfix"></div>
     <div class="card-body">
         <x-errormsg/>
-    
+
 
         <form action="{{ route('admin.destinations.store') }}" enctype="multipart/form-data" method="POST">
             @csrf
@@ -20,8 +20,14 @@
             </div>
 
             <div class="form-group col-md-6">
-                <label >Select Image</label>
+                <label >Select Thumbnail</label>
            <input type="file" class="form-control" name="file" placeholder="Destination Name">
+            </div>
+
+
+            <div class="form-group col-md-6">
+                <label >Select Cover Image</label>
+           <input type="file" class="form-control" name="cover_image" placeholder="Destination Name">
             </div>
 
             <div class="form-group col-md-12">
@@ -29,11 +35,11 @@
                 <textarea name="details"  cols="30" rows="10" id="summernote"></textarea>
             </div>
 
-            <hr>            
+            <hr>
             <div class="card-header col-12">
 		<h2 class="card-title">SEO </h2>
             </div>
-          <hr>            
+          <hr>
             <div class="form-group col-md-6">
                 <label >Meta Title</label>
            <input type="text" class="form-control" name="meta_title" >
@@ -54,7 +60,7 @@
         </div>
 
         </form>
-        
+
     </div>
 </div>
 <!-- panel -->

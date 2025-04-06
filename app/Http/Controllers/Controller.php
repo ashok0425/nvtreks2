@@ -12,11 +12,13 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function uploadFile($path,$file){
+        if($file){
         $extension = $file->getClientOriginalExtension();
-
         $filename = uniqid(). time() . '.' . $extension;
-        $file->storeAs('public/upload/',$filename,'s3');
+        $path=$file->storeAs('public/upload/',$filename,'s3');
         return 'upload/'.$filename;
+    }
+        return null;
     }
 
 

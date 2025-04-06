@@ -3,14 +3,9 @@
 namespace App\Http\Controllers\BackEnd\Travel;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
-use App\Models\AllImage;
 use App\Models\Destination;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
-use File;
+use Illuminate\Support\Str;
 class DestinationsController extends Controller
 {
 
@@ -43,45 +38,26 @@ class DestinationsController extends Controller
      */
     public function store(Request $request)
     {
-        $url = $this->toAscii($request->name);
-        $request['url'] = $url;
         $this->validate($request, [
             'name' => 'required|min:3|max:255|unique:destinations'
         ]);
-        try {
-            DB::beginTransaction();
+
             $destination = new Destination;
             $destination->name = $request->name;
             $destination->status = 1;
             $destination->details = $request->details;
-            $destination->url = $request->url;
+            $destination->url = Str::slug($request->name);
             $destination->meta_title = $request->meta_title;
             $destination->meta_keyword = $request->meta_keyword;
             $destination->meta_description = $request->meta_description;
-                $file=$request->file('file');
-            
-                if($file){
-                    $destination->image=$this->uploadFile('upload/destination',$file);
-
-                }
-             $destination->save();
-            DB::commit();
+            $destination->image=$this->uploadFile('upload/destination',$request->file('file'));
+            $destination->cover_image=$this->uploadFile('upload/destination',$request->file('cover_image'));
+            $destination->save();
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Successfully created destination.',
-               
-             );
-        } catch (QueryException $e) {
-            DB::rollback();
-            return $e->getMessage();
-        
-            $notification=array(
-                'alert-type'=>'error',
-                'messege'=>'Failed to create destination, Try again.',
-               
-             );
-        }
 
+             );
         return redirect()->route('admin.destinations.index')->with($notification);
     }
 
@@ -102,10 +78,9 @@ class DestinationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Destination $destination)
     {
-        $data['destination'] = Destination::findOrFail($id);
-        return view('admin.destinations.edit', $data);
+        return view('admin.destinations.edit', compact('destination'));
     }
 
     /**
@@ -115,47 +90,29 @@ class DestinationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Destination $destination)
     {
-   
-        $url = $this->toAscii($request->name);
-        $request['url'] = $url;
+
         $this->validate($request, [
             'name' => 'required|min:3|max:255|'
         ]);
-        try {
-            DB::beginTransaction();
-            $destination = Destination::find($id);
             $destination->name = $request->name;
             $destination->status = 1;
             $destination->details = $request->details;
-            $destination->url = $request->url;
+            $destination->url = Str::slug($request->name);
             $destination->meta_title = $request->meta_title;
             $destination->meta_keyword = $request->meta_keyword;
+            $destination->status = $request->status??0;
             $destination->meta_description = $request->meta_description;
-                $file=$request->file('file');
-                if($file){
-                  
-                    $this->deleteFile($destination->image);
-                    $destination->image=$this->uploadFile('upload/destination',$file);
-                }
-             $destination->save();
-            DB::commit();
+            $destination->image=$this->uploadFile('upload/destination',$request->file('file'))??$destination->image;
+            $destination->cover_image=$this->uploadFile('upload/destination',$request->file('cover_image'))??$destination->cover_image;
+            $destination->save();
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Successfully created destination.',
-               
+
              );
-        } catch (QueryException $e) {
-            DB::rollback();
-            return $e->getMessage();
-      
-            $notification=array(
-                'alert-type'=>'error',
-                'messege'=>'Failed to create destination, Try again.',
-               
-             );
-        }
+
 
         return redirect()->route('admin.destinations.index')->with($notification);
     }
@@ -166,40 +123,17 @@ class DestinationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Destination $destination)
     {
-        try {
-            $destination = Destination::findOrFail($id);
             $this->deleteFile($destination->image);
-
             $destination->delete();
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Successfully deleted destinations.',
-               
+
              );
-          
-        } catch (QueryException $e) {
-            $notification=array(
-                'alert-type'=>'error',
-                'messege'=>'Failed to delete destination, Try again.',
-               
-             );
-        }
 
         return redirect()->back()->with($notification);
     }
-  
 
-    private function toAscii($str) {
-        $clean = preg_replace('~[^\\pL\d]+~u', '-', $str);
-        $clean = strtolower(trim($clean, '-'));
-
-        return $clean;
-    }
-
-
-
-        
-    
 }

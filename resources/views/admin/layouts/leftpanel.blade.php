@@ -6,7 +6,7 @@
         <!-- User Info -->
         <div class="user-panel mt-3 pb-3 mb-3">
             <a href="{{ route('admin.dashboard') }}">
-                <img src="{{ getFilePath('public/'.setting()->image) }}" alt="Admin Logo" style="width:100px" class="bg-white">
+                <img src="{{ getImageUrl(setting()->image) }}" alt="Admin Logo" style="width:100px" class="bg-white">
             </a>
         </div>
 
@@ -84,12 +84,12 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ route('admin.newsletters.index') }}" class="nav-link">
                         <i class=" fas fa-envelope"></i>
                         <p>Newsletters</p>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="nav-item">
                     <a href="{{ route('admin.contacts.index') }}" class="nav-link">

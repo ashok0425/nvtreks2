@@ -10,7 +10,7 @@
         <div class="card-body">
             <x-errormsg />
 
-            <form action="{{ route('admin.destinations.update', $destination->id) }}" enctype="multipart/form-data"
+            <form action="{{ route('admin.destinations.update', $destination) }}" enctype="multipart/form-data"
                 method="POST">
                 @method('PATCH')
                 @csrf
@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label>Select Image</label>
+                        <label>Select Thumbnail</label>
                         <input type="file" class="form-control" name="file" placeholder="Destination Image">
                         <a href="{{ getImageurl($destination->image) }}" download="destination" rel="noreferrer"
                             target="_blank">
@@ -30,6 +30,28 @@
                                 width="100">
 
                         </a>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label>Select Cover Image</label>
+                        <input type="file" class="form-control" name="cover_image" placeholder="Destination Image">
+                        <a href="{{ getImageurl($destination->cover_image) }}" download="destination" rel="noreferrer"
+                            target="_blank">
+                            <img src="{{ getImageurl($destination->cover_image) }}" alt="{{ $destination->name }}"
+                                width="100">
+
+                        </a>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label>Status</label>
+                      <select name="status" id="" class="form-select form-control">
+                        <option value="">--select option--</option>
+                        <option value="1" {{$destination->status==1?'selected':""}}>Active</option>
+                        <option value="0" {{$destination->status==0?'selected':""}}>Inactive</option>
+
+                      </select>
                     </div>
 
                     <div class="form-group col-md-12">
