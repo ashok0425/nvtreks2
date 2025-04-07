@@ -631,6 +631,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                     <ul class="splide__list">
                         @foreach ($blogs as $blog)
                         <li class="splide__slide my-4">
+                            <a href="{{ route('blog.detail', ['url' => $blog->slug]) }}" class="text-decoration-none">
                             <div class="card rounded-0 border-0 hover_effect recent_post_card mx-md-2">
                                 <div class="recent_post_card_img">
                                     <img src="{{getImageUrl($blog->thumbnail)}}" alt="{{$blog->title}}" class="img-fluid">
@@ -640,6 +641,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                                     <p class='mb-0 text_darkGray small'>{{Carbon\Carbon::parse($blog->created_at)->format('F d, Y')}}</p>
                                 </div>
                             </div>
+                        </a>
                         </li>
                         @endforeach
 
