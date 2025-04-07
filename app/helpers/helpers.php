@@ -2,17 +2,15 @@
 
 use App\Models\Website;
 use Illuminate\Support\Facades\Cache;
-
+use Illuminate\Support\Facades\Storage;
 
 function getImageurl($path){
 
-    if (env('APP_ENV')=='local') {
-      return  "https://d2i9o55ouvfvau.cloudfront.net/public/$path";
-    }else{
+if (!Storage::disk('s3')->exists('public/'.$path)) {
+return null;
+}
       return  "https://d2i9o55ouvfvau.cloudfront.net/public/$path";
 
-
-    }
 }
 
 

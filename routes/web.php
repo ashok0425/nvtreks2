@@ -18,14 +18,11 @@ Route::get('contact', [ContactController::class, 'index'])->name('contactus');
 Route::post('contact', [ContactController::class, 'store'])->name('contactus.store');
 
 Route::get('destination/{url}', [DestinationController::class, 'index'])->name('destination');
+Route::get('package-destination/{url}', [DestinationController::class, 'index'])->name('package.destination');
 Route::get('filter-package', [DestinationController::class, 'filter']);
-
-Route::get('package-all', [PackageController::class, 'all'])->name('package.all');
-Route::get('filter_package', [PackageController::class, 'Filter_Package'])->name('filter_package');
-Route::get('package-destination/{url}', [PackageController::class, 'destination'])->name('package.destination');
-Route::get('package-category/{url}', [PackageController::class, 'category'])->name('package.category');
-Route::get('deals', [PackageController::class, 'Deals'])->name('deals');
-Route::get('package-place/{url}', [PackageController::class, 'place'])->name('package.place');
+Route::get('package-category/{url}', [DestinationController::class, 'index'])->name('package.category');
+Route::get('package-place/{url}', [DestinationController::class, 'index'])->name('package.place');
+Route::get('deals', [DestinationController::class, 'index'])->name('deals');
 
 Route::get('{country?}/package-detail/{url?}', [PackageController::class, 'show'])->name('package.detail');
 Route::get('package-detail/{url?}', [PackageController::class, 'show'])->name('package.detail');

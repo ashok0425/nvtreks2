@@ -4,14 +4,19 @@
 <section class="video_section mb-md-5 mb-4">
     <!-- navbar -->
     @include('frontend.layout.header')
+    @php
+    $imagePath = $data->cover_image ?? $data->image;
+    $defaultImage = asset('/frontend/images/everestbaseBanner.png'); // fallback image
+    $finalImage = $imagePath&&getImageUrl($imagePath) ? getImageUrl($imagePath) : $defaultImage;
 
+@endphp
     <div class="position-absolute top-0 start-0 w-100 h-100">
         <div class="banner-container"
-            style="background-image: url({{getImageUrl($destination->cover_image)}});background-size: cover;background-position: center;">
+            style="background-image: url({{$finalImage}});background-size: cover;background-position: center;">
             <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
                 style='background-color: #000000;opacity: 20%'></div>
             <div class="banner-content">
-                <h1 class="banner-title">{{$destination->name}}</h1>
+                <h1 class="banner-title">{{$data->name}}</h1>
             </div>
         </div>
     </div>
@@ -117,7 +122,7 @@
                 <hr class="section-line py-2" style="border-color: #C29500;" />
                 <p class="section-subtitle text_darkOrange">Explore Destinations</p>
             </div>
-            <h2 class='head_title mb-md-3'>NEPAL</h2>
+            <h2 class='head_title mb-md-3'>{{$data->name}}</h2>
             <p class='font_montserrat fs-6 text_lightDark' style='max-width: 500px;'>
                 Explore our curated list of the best countries to visit in 2024 and discover incredible
                 destinations waiting to be explored
@@ -161,7 +166,8 @@
                             <div class="position-absolute bottom-0 w-100 py-2" style="background-color: #0791BE4D;">
                                 <div class="d-flex justify-content-center align-items-center gap-2 text-white fw-bold mb-0">
                                     <i></i>
-                                    @{{ package.duration }} DAYS
+                                    @{{ package.duration.toLowerCase().includes('day') ? package.duration : package.duration + ' DAYS' }}
+
                                 </div>
                             </div>
                         </div>
@@ -312,7 +318,8 @@
             days: { min: 1, max: 30 },
             difficulty: '',
             category: '',
-            destination_id: "{{$destination->id}}"
+            destination_id: "{{$data->id}}",
+            type:"{{$type}}"
           }
         };
       },
@@ -372,7 +379,8 @@
             days: { min: 1, max: 30 },
             difficulty: '',
             category: '',
-            destination_id: "{{$destination->id}}"
+            destination_id: "{{$data->id}}",
+            type:''
           };
           this.fetchPackages(); // Re-fetch with cleared filters
         }

@@ -8,21 +8,36 @@ use App\Models\CategoryPlace;
 use App\Models\Package;
 use Illuminate\Http\Request;
 use App\Models\Destination;
+use ArrayObject;
 use DB;
+use Illuminate\Support\Facades\Route;
 use Str;
 
 class DestinationController extends Controller
 {
 
-public function index($url) {
-	$destination = Destination::where('url',$url)->orwhere('id',$url)->first();
-	if(!$destination){
-	    abort(404);
-	}
-	$categories = CategoryDestination::where('destination_id',$destination->id)->where('status',1)->get();
-	$packages = Package::where('destination_id',$destination->id)->where('status',1)->orderBy('order','desc')->where('price','!=',0)->limit(8)->orderBy('id','desc')->get();
+public function index(Request $request,$url=null) {
+    if(Route::is('package.place')){
+        $data = CategoryPlace::where('url',$url)->orwhere('id',$url)->firstOrFail();
+        $categories = CategoryDestination::where('status',1)->limit(10)->get();
+        $type=null;
+    }elseif(Route::is('package.category')){
+        $data = CategoryDestination::where('url',$url)->orwhere('id',$url)->firstOrFail();
+	   $categories = CategoryDestination::where('status',1)->limit(10)->get();
+       $type=null;
+    }
+    elseif(Route::is('deals')){
+        $data = (object)['name'=>'Special Deals','cover_image'=>null,'image'=>null,'id'=>1];
+	   $categories = CategoryDestination::where('status',1)->limit(10)->get();
+       $type='deal';
+    }else{
+        $data = Destination::where('url',$url)->orwhere('id',$url)->firstOrFail();
+	   $categories = CategoryDestination::where('destination_id',$data->id)->where('status',1)->get();
+       $type='destination';
+    }
 
-      return view('frontend.destination',compact('categories','packages','destination'));
+
+      return view('frontend.destination',compact('categories','data','type'));
 }
 
 
@@ -67,6 +82,13 @@ public function filter(Request $request)
     // 📂 Category Filter (assumed to be category_destination_id or category_place_id)
     if ($request->filled('category')) {
         $query->where('category_destination_id', $request->category);
+    }
+
+    if ($request->type=='destination') {
+        $query->where('destination_id', $request->destination_id)->get();
+    }
+    if ($request->type=='deal') {
+        $query->whereNotNull('discounted_price')->get();
     }
 
     // 🔄 Paginate or get the results

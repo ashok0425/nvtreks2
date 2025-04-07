@@ -17,49 +17,7 @@ use Illuminate\Support\Facades\DB ;
 use Str;
 class PackageController extends Controller
 {
- public function destination($url) {
-    $data = Destination::where('url',$url)->orwhere('id',$url)->first();
-      $packages = Package::where('destination_id',$data->id)->orderBy('order','desc')->where('status',1)->where('price','!=',0)->orderBy('id','desc')->paginate(12);
-      return view('frontend.package',compact('packages','data'));
- }
 
- public function all() {
-     $packages = Package::where('status',1)->orderBy('order','desc')->where('price','!=',0)->orderBy('id','desc')->paginate(20);
-     $data=Destination::find(8);
-     return view('frontend.package',compact('packages','data'));
-}
-
-public function Deals() {
-    $packages = Cache::remember('dealpackages', 604800, function () {
-        return DB::table('packages')
-            ->orderBy('id', 'desc')
-            ->where('status', 1)
-            ->where('duration', '!=', null)
-            ->where('activity', '!=', null)
-            ->where('discounted_price', '!=', null)
-            ->paginate(24);
-    });
-
-    return view('frontend.deal',compact('packages'));
-}
-
- public function category($url) {
-  $data = CategoryDestination::where('url',$url)->orwhere('id',$url)->first();
-if(!$data){
-    abort(404);
-}
-      $packages = Package::where('category_destination_id',$data->id)->orderBy('order','desc')->where('status',1)->where('price','!=',0)->orderBy('id','desc')->paginate(12);
-      return view('frontend.package',compact('packages','data'));
- }
-
-
- public function place($url) {
-
-    $data = CategoryPlace::where('url',$url)->orwhere('id',$url)->first();
-
-      $packages = Package::where('category_place_id',$data->id)->orderBy('order','desc')->where('status',1)->where('price','!=',0)->orderBy('id','desc')->paginate(12);
-      return view('frontend.package',compact('packages','data'));
- }
 
 public function show() {
     $s2=request()->segment(1);
