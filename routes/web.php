@@ -42,9 +42,6 @@ Route::any('payment-failed', function () {
 
 Route::get('package/print/{package}', [PackageController::class, 'printpackage'])->name('print');
 
-Route::get('load-category/{data}', [DestinationController::class, 'loadCategory']);
-Route::get('search-package', [DestinationController::class, 'search'])->name('search');
-Route::get('get-ajax-package', [DestinationController::class, 'getAjaxpackage']);
 
 Route::get('blogs', [BlogController::class, 'index'])->name('blog');
 Route::get('blog-detail/{url}', [BlogController::class, 'show'])->name('blog.detail');

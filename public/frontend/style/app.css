@@ -453,7 +453,7 @@ input[type="date"]:focus {
 }
 
 @media (max-width: 768px) {
-  
+
   .contact_info_section{
     height: 850px;
   }

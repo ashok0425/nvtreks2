@@ -1,153 +1,134 @@
 @extends('frontend.layout.master')
 
 
-@section('title')
-    Blog & Articles |Nepal Vision Treks & Expedition
-@endsection
-@section('descr')
-    Nepal Vision Blog is packed with different articles in the tourism field.
-@endsection
-@section('keyword')
-    Blog
-@endsection
-
-@section('url')
-    {{ Request::url() }}
-@endsection
-
-
-@php
-    define('PAGE', 'blog');
-    $num = rand(1, 7);
-@endphp
 @section('content')
-    <style>
-        .blog-post img {
-            height: 220px !important;
-            width: 100% !important;
+<section class="video_section mb-md-5 mb-4">
+    <!-- navbar -->
+    @include('frontend.layout.header')
+    @php
+    $defaultImage = asset('/frontend/images/everestbaseBanner.png'); // fallback image
+    $finalImage = $defaultImage;
 
-        }
-    </style>
-    <x-page-header title="Blog" :route="route('blog')" :img="getImageurl('banners/' . $num . '.webp')" />
-
-    <div class="container mt-4">
-        <div class="event-header">
-            <form action="abc" method="post" id="Filterblog">
-                <div class="row">
-                    <div class="col-md-4 col-sm-3 d-flex">
-                        <h3 class="align-self-center">Blogs</h3>
-                    </div>
-                    <div class="col-md-8 col-sm-9">
-                        <div class="row">
-
-                            <div class="col-6 col-md-5 my-1">
-                                <input type="text" class="form-control" id="from" placeholder="Date From"
-                                    autocomplete="off" required>
-                            </div>
-                            <div class="col-md-5 col-6 my-1">
-                                <input type="text" class="form-control" required id="to" placeholder="Date To"
-                                    autocomplete="off">
-
-                            </div>
-                            <div class="col-md-2 col-12 my-1">
-                                <input class="btn btn-primary btn-block d-block w-100" type="submit" value="Search">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
+@endphp
+    <div class="position-absolute top-0 start-0 w-100 h-100">
+        <div class="banner-container"
+            style="background-image: url({{$finalImage}});background-size: cover;background-position: center;">
+            <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
+                style='background-color: #000000;opacity: 20%'></div>
+            <div class="banner-content">
+                <h1 class="banner-title">BLOGS
+                </h1>
+            </div>
         </div>
     </div>
-    <section class="blog-post ">
-        <div class="container">
-            <div class="row" id="blog_data">
-                @foreach ($blogs as $blog)
-                    <div class="col-md-4 col-sm-12  my-2">
-                        <div class="post-card-1 card">
-                            <a href="{{ route('blog.detail', ['url' => $blog->url]) }}">
-                                <div class="img-container">
-                                    @if ($blog->guid != null)
-                                        <img src="{{ getImageurl($blog->guid) }}" class="img-fluid w-100"
-                                            alt="{{ $blog->post_title }}">
-                                    @else
-                                        <img src="{{ getImageurl('frontend/assets/recent-post.png') }}"
-                                            alt="{{ $blog->post_title }}" class="img-fluid">
-                                    @endif
-                                    <div class="date">
-                                        <span>
-                                            {{ carbon\carbon::parse($blog->post_date)->format('d') }}
-                                        </span>
-                                        {{ carbon\carbon::parse($blog->post_date)->format('M Y') }}
 
-                                    </div>
-                                </div>
-                                <div class="px-2">
+</section>
 
-                                    <div class="img-desc">
-                                        <h2 class="custom-fs-18 text-dark custom-fw-700">
-                                            {{ Str::limit($blog->post_title, 35) }}</h2>
-                                    </div>
-                                </div>
-                            </a>
+
+<section class='mb-5'>
+    <div class='container'>
+        <div class='row'>
+            <div class='col-md-8'>
+                <div class='row g-md-5 g-4 mb-md-4 mb-3'>
+                    <!-- Repeat this block for each item -->
+                    @foreach ($blogs as $blog)
+                    <div class='col-md-6'>
+                        <div class='card border-0 hover_effect'>
+                            <img src='{{getImageUrl($blog->thumbnail)}}' alt='{{$blog->title}}' class='img-fluid' />
+                            <div class='card-body'>
+                                <p class='popular_card_head mb-2'>{{$blog->title}}</p>
+                                <p class='small text_darkGray font_montserrat mb-3'>Nepal vision | {{Carbon\Carbon::parse($blog->created_at)->format('d/m/Y')}}</p>
+                                <p class='fs-6 font_montserrat'>{!!Str::limit(strip_tags($blog->long_description),100)!!}</p>
+                                <a href='{{route('blog.detail',['url'=>$blog->slug])}}' class='text_darkprimary fs-6 text-decoration-none fw-semibold'>CONTINUE
+                                    READING..</a>
+                            </div>
                         </div>
                     </div>
-                @endforeach
-                <div class="text-center">
-                    {{ $blogs->links() }}
+                    @endforeach
+
+
+                    <!-- End of repeated block -->
+                </div>
+                <div>
+                    {{ $blogs->withQueryString()->links() }}
                 </div>
             </div>
+            <div class='col-md-4'>
+                <div class='px-md-4'>
+                    <form action="{{route('blog')}}" method="get">
+                    <div class='input-group search_input mb-md-5 mb-3'>
+                         <span class='input-group-text bg-transparent ps-3 pe-0 rounded-0'><i
+                             class="bi bi-search"></i></span>
+                     <input type='search' class='form-control border border-start-0 ps-2 py-3 rounded-0'
+                         placeholder='Search for blogs.....' name="keyword" value="{{request()->query('keyword')}}"/>
+                     </div>
+                    </form>
 
+                    <div class='text-center mb-md-5 mb-3'>
+                        <button class='btn btn_outline_darkprimary fw-bold rounded-0 px-3'>RECENT POSTS</button>
+                    </div>
+                    <div class='mb-md-5 mb-3'>
+                        <!-- Repeat this block for recent posts -->
+                        @foreach ($recentBlogs as $blog)
+                        <div class='card border-0 mb-3'>
+                            <a href="{{route('blog.detail',['url'=>$blog->slug])}}" class="text-decoration-none text-dark">
+                            <div class='row align-items-center'>
+                                <div class='col-md-4'>
+                                    <img src='{{getImageUrl($blog->thumbnail)}}' alt='{{$blog->title}}' class='img-fluid' />
+                                </div>
+                                <div class='col-md-8'>
+                                    <p class='mb-0 fs-6 fw-bold'>{{$blog->title}}</p>
+                                    <p class='mb-0 small text_darkGray'>Nepal vision | {{Carbon\Carbon::parse($blog->created_at)->format('d/m/Y')}}</p>
+                                </div>
+                            </div>
+                        </a>
+                        </div>
+                        @endforeach
+
+                        <!-- End of repeated block -->
+                    </div>
+                    <div class='text-center mb-md-4 mb-3'>
+                        <button class='btn btn_outline_darkprimary fw-bold rounded-0 px-3'>FOLLOW US ON</button>
+                    </div>
+                    <div class='d-flex justify-content-center'>
+                        <div class='d-flex gap-3' style='max-width: 220px;'>
+                            <a href='{{setting()->facebook}}'><img src='{{asset('frontend/images/fb_logo.png')}}' alt='fb' class='img-fluid' width='28'
+                                    height='28' /></a>
+                                    <a href='{{setting()->instagram}}'><img src='{{asset('frontend/images/instagram.png')}}' alt='symbol' class='img-fluid'
+                                        width='28' height='28' /></a>
+                            {{-- <a href='#{{setting()->pinterest}}'><img src='{{asset('frontend/images/pinterest_logo.png')}}' alt='pinterest' class='img-fluid' --}}
+                                    {{-- width='28' height='28' /></a> --}}
+                            {{-- <a href='{{setting()->whatsapp}}'><img src='{{asset('frontend/images/whatsapp_logo.png')}}' alt='whatsapp' class='img-fluid' --}}
+                                    {{-- width='28' height='28' /></a> --}}
+                            <a href='{{setting()->linkedin}}'><img src='{{asset('frontend/images/linkedin_logo.png')}}' alt='linkedin' class='img-fluid'
+                                    width='28' height='28' /></a>
+                            <a href='{{setting()->twitter}}'><img src='{{asset('frontend/images/x_logo.png')}}' alt='x' class='img-fluid' width='28'
+                                    height='28' /></a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
+@include('frontend.inc.escape')
+@include('frontend.inc.testimonial')
+@include('frontend.inc.contactus')
 @endsection
-
-
-
-@push('scripts')
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $("#from").datepicker({
-            changeYear: true
-        });
-        $("#to").datepicker({
-            changeYear: true
-        });
-    </script>
-@endpush
 @push('style')
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 @endpush
 
-@push('scripts')
-    <script>
-        async function FilterBlog(from, to) {
-            let token = $("meta[name='csrf-token']").attr('content')
-            let data = {
-                from: from,
-                to: to,
-                _token: token,
+@push('script')
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/vue@3.3.4/dist/vue.global.prod.js"></script>
 
-            }
 
-            let url = `{{ route('filterBlog') }}`
-            $.ajax({
-                url: url,
-                type: 'POST',
-                data: data,
-                success: function(res) {
-                    $('#blog_data').html('');
 
-                    $('#blog_data').html(res);
-                }
-            })
-        }
-
-        $('#Filterblog').submit(function(e) {
-            e.preventDefault()
-            let from = $('#from').val()
-            let to = $('#to').val()
-            FilterBlog(from, to)
-        })
-    </script>
 @endpush
+
+
+

@@ -9,24 +9,26 @@ use Str;
 class BlogController extends Controller
 {
 
-public function index(){
-     $blogs=Blog::orderBy('id','desc')->where('post_status','publish')->where('post_title','!=',null)->paginate(12);
-     return view('frontend.blog',compact('blogs'));
+public function index(Request $request){
+     $blogs=Blog::orderBy('id','desc')->where('status',1)->where('title','!=',null)
+     ->when($request->keyword,function($query) use ($request){
+          $query->where('title','LIKE',"%$request->keyword%")->orWhere('long_description','LIKE',"%$request->keyword%");
+     })->paginate(12);
+     $recentBlogs=Blog::where('status',1)->inRandomOrder()->where('title','!=',null)->limit(5)->get();
+     return view('frontend.blog',compact('blogs','recentBlogs'));
 }
 
 
-
-
 public function show($url){
-     $blog=Blog::orderBy('ID','desc')->where('post_status','publish')->where('ID',$url)->orwhere('url',$url)->first();
+    $blog=Blog::orderBy('id','desc')->where('status',1)->where('id',$url)->orwhere('slug',$url)->first();
      if (!$blog) {
         return redirect('/blogs');
      }
-     $mores=Blog::where('post_status','publish')->inRandomOrder()->where('post_title','!=',null)->limit(5)->get();
-       $next=Blog::where('post_status','publish')->inRandomOrder()->where('post_title','!=',null)->first();
-       $prev=Blog::where('post_status','publish')->inRandomOrder()->where('post_title','!=',null)->first();
+     $recentBlogs=Blog::where('status',1)->inRandomOrder()->where('title','!=',null)->limit(5)->get();
+       $next=Blog::where('status',1)->inRandomOrder()->where('title','!=',null)->first();
+       $prev=Blog::where('status',1)->inRandomOrder()->where('title','!=',null)->first();
 
-     return view('frontend.blog_detail',compact('blog','mores','next','prev'));
+     return view('frontend.blog_detail',compact('blog','recentBlogs','next','prev'));
 }
 
 
