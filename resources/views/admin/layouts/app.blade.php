@@ -66,6 +66,13 @@
         input::placeholder {
             font-size: 11px !important;
         }
+        .card-title{
+            font-weight: 600;
+
+        }
+        .card-header{
+            background: gray;
+        }
     </style>
 </head>
 
@@ -83,10 +90,10 @@
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
-            @include('admin.layouts.breadcrum')
-
-            @yield('content')
-
+            <div class="container">
+                @include('admin.layouts.breadcrum')
+                @yield('content')
+            </div>
         </div>
         <!-- /.content-wrapper -->
 

@@ -57,6 +57,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('admin.websites.index') }}" class="nav-link">
+                        <i class=" fas fa-wrench"></i>
+                        <p>Setting</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('admin.faqs.index') }}" class="nav-link">
                         <i class=" fas fa-question-circle"></i>
                         <p>FAQs</p>

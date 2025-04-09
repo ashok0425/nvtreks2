@@ -102,11 +102,11 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         </p>
                         <p class="contact_info mb-2"><span class="pe-2"><img src="{{asset('frontend/images/phoneIcon.png')}}" alt="location"
-                                    width="14" height="14"></span>977-1-4524762</p>
+                                    width="14" height="14"></span>{{setting()->phone}}</p>
                         <p class="contact_info mb-2"><span class="pe-2"><img src="{{asset('frontend/images/messageIcon.png')}}"
-                                    alt="location" width="16" height="16"></span>info@nepalvisiontreks.com</p>
+                                    alt="location" width="16" height="16"></span>{{setting()->email}}</p>
                         <p class="contact_info mb-2"><span class="pe-2"><img src="{{asset('frontend/images/locationIcon.png')}}"
-                                    alt="location" width="16" height="16"></span>Keshar Mahal, Thamel, Nepal</p>
+                                    alt="location" width="16" height="16"></span>{{setting()->address}}</p>
                     </div>
 
                     <!-- Recent Posts -->

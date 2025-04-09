@@ -1,15 +1,11 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    @php
-        define('PAGE', 'setting');
-    @endphp
+
     <div class="card">
-        <div class="card-header">
+        <div class="card-header bg-gray">
             <h3 class="card-title">Update Website Information</h3>
-
         </div>
-
         <div class="card-body">
             <div class="container">
                 <form action="{{ route('admin.websites.store') }}" method="POST" enctype="multipart/form-data">
@@ -77,7 +73,7 @@
                                 <div class="file-upload-wrapper" data-text="Select your file!">
                                     <input name="file" type="file" class="file-upload-field" value="">
                                 </div>
-                                <br>
+
                                 <img src="{{ getImageurl($website->image) }}" width="70" alt="">
                             </div>
                         </div>
@@ -90,7 +86,7 @@
                                 <div class="file-upload-wrapper" data-text="Select your file!">
                                     <input name="fev" type="file" class="file-upload-field" value="">
                                 </div>
-                                <br>
+
                                 <img src="{{ getImageurl($website->fev) }}" width="70" alt="">
                             </div>
                         </div>
@@ -105,12 +101,12 @@
                         </div>
 
                         <div class="col-md-12">
-                            <div class="card-header bg-gray">
+                            <div class="card-header mb-3 bg-gray">
                                 <div class="card-title">
                                     Social Media
                                 </div>
                             </div>
-                            <br>
+
 
                         </div>
                         <div class="col-md-6">
@@ -126,7 +122,7 @@
                         <div class="col-md-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fab fa-instagram-square"></i></span>
+                                    <span class="input-group-text"><i class="fab fa-instagram"></i></span>
                                 </div>
                                 <input type="url" class="form-control" value="{{ $website->instagram }}"
                                     name="instagram">
@@ -140,7 +136,6 @@
                                 </div>
                                 <input type="url" class="form-control" value="{{ $website->twitter }}"
                                     name="twitter">
-
                             </div>
                         </div>
 
@@ -176,16 +171,12 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="card-header bg-gray">
+                            <div class="card-header mb-3 bg-gray">
                                 <div class="card-title">
                                     Nepal Branch Info
                                 </div>
                             </div>
-                            <br>
                         </div>
-
-
-
                         <div class="col-md-6">
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -201,7 +192,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                                 </div>
-                                <input type="email" class="form-control" value="{{ $website->email3 }}"
+                                <input type="email" class="form-control" value="{{ $website->email1 }}"
                                     name="email3">
 
                             </div>
@@ -228,12 +219,12 @@
 
 
                         <div class="col-md-12">
-                            <div class="card-header bg-gray">
+                            <div class="card-header mb-3 bg-gray">
                                 <div class="card-title">
                                     USA Branch Info
                                 </div>
                             </div>
-                            <br>
+
 
                         </div>
 
@@ -268,14 +259,55 @@
                             </div>
                         </div>
 
+                        <div class="col-md-12">
+                            <div class="card-header mb-3 bg-gray">
+                                <div class="card-title">
+                                    Australia Branch Info
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                </div>
+                                <input type="email" class="form-control" value="{{ $website->email3 }}"
+                                    name="email3">
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-phone-alt"></i></span>
+                                </div>
+                                <input type="tel" class="form-control" value="{{ $website->phone3 }}"
+                                    name="phone3">
+                            </div>
+                        </div>
 
                         <div class="col-md-12">
-                            <div class="card-header bg-gray">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control" value="{{ $website->address3 }}"
+                                    name="address3">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <div class="card-header mb-3 bg-gray">
                                 <div class="card-title">
                                     Expert Contact No
                                 </div>
                             </div>
-                            <br>
+
 
                         </div>
                         <div class="col-md-6">
@@ -300,12 +332,12 @@
 
 
                         <div class="col-md-12">
-                            <div class="card-header bg-gray">
+                            <div class="card-header mb-3 bg-gray">
                                 <div class="card-title">
                                     Map
                                 </div>
                             </div>
-                            <br>
+
                         </div>
                         <div class="col-md-6">
                             <input type="text" class="form-control" value="{{ $website->longitude }}"
@@ -315,7 +347,7 @@
                             <input type="text" class="form-control" value="{{ $website->latitude }}"
                                 name="latitude">
                         </div>
-                        <input type="submit" value="update" class="btn btn-block btn-info">
+                        <input type="submit" value="update" class="btn btn-block btn-info mt-4">
                     </div>
                 </form>
 

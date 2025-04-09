@@ -3,20 +3,11 @@
 namespace App\Http\Controllers\backEnd;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Banner;
-use App\Models\Page;
 use App\Models\Website;
-use File;
-use App\Http\Traits\status;
-use App\Models\Payment_type;
+use Illuminate\Support\Facades\Cache;
 
 class SettingController extends Controller
 {
-    use status;
-
-  
-
-
 
     public function index(){
         $website=Website::find(1);
@@ -33,10 +24,10 @@ class SettingController extends Controller
 
         if($file){
            $this->deleteFile($web->image);
-            $web->image=$this->uploadFile('upload/setting/logo',$file);           
+            $web->image=$this->uploadFile('upload/setting/logo',$file);
                 }
 
-                $fev=$request->file('fev');
+            $fev=$request->file('fev');
 
         if($fev){
             $this->deleteFile($web->fev);
@@ -56,11 +47,13 @@ class SettingController extends Controller
                 $web->email2=$request->email2;
                 $web->phone2=$request->phone2;
                 $web->address2=$request->address2;
+                $web->email2=$request->email1;
+                $web->phone2=$request->phone3;
+                $web->address2=$request->address3;
                 $web->expert_phone1=$request->expert_phone1;
                 $web->expert_phone2=$request->expert_phone2;
                 $web->longitude=$request->longitude;
                 $web->latitude=$request->latitude;
-
                 $web->url=$request->url;
                 $web->facebook=$request->facebook;
                 $web->twitter=$request->twitter;
@@ -71,16 +64,13 @@ class SettingController extends Controller
                 $web->copy_right=$request->copy_right;
 
         $web->save();
+        Cache::forget('setting');
         $notification=array(
             'alert-type'=>'success',
             'messege'=>'website setting updated',
 
         );
- return redirect()->back()->with($notification);
+   return redirect()->back()->with($notification);
     }
-
-
-
-
 
 }

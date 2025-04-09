@@ -15,7 +15,7 @@ Route::get('cms/{page?}', [HomeController::class, 'Page'])->name('cms.page');
 Route::get('cms-page/{page}/{id?}', [HomeController::class, 'PageDetail'])->name('cms.detail');
 
 Route::get('contact', [ContactController::class, 'index'])->name('contactus');
-Route::post('contact', [ContactController::class, 'store'])->name('contactus.store');
+Route::post('contact', [ContactController::class, 'store'])->name('contactus');
 
 Route::get('destination/{url}', [DestinationController::class, 'index'])->name('destination');
 Route::get('package-destination/{url}', [DestinationController::class, 'index'])->name('package.destination');

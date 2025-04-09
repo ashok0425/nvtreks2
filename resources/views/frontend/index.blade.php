@@ -238,7 +238,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
         </div>
 
         <div class="text-center">
-            <button class="btn btn_darkprimary destination-button">VIEW ALL OFFERS</button>
+            <a href="{{route('deals')}}" class="btn btn_darkprimary destination-button">VIEW ALL OFFERS</a>
         </div>
     </div>
 </section>

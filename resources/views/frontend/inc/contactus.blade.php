@@ -22,17 +22,17 @@
                             <img src="{{asset('frontend/images/thamel_location.png')}}" alt="location" class="mb-md-3 mb-1" width="50"
                                 height="50">
                             <div>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Keshar Mahal, Thamel
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">{{setting()->address}}
                                 </p>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Phone: 977-1-4524762
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Phone: {{setting()->phone}}
                                 </p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Fax: 977-1-4523296
                                 </p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">
-                                    info@nepalvisiontreks.com
+                                    {{setting()->email}}
                                 </p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">
-                                    sales@nepalvisiontreks.com</p>
+                                    {{setting()->email1}}</p>
                             </div>
                         </div>
                     </div>
@@ -43,16 +43,15 @@
                             <img src="{{asset('frontend/images/usa_location.png')}}" alt="location" class="mb-md-3 mb-1" width="50"
                                 height="50">
                             <div>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Washington, DC, USA
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">{{setting()->address2}}
                                 </p>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Phone: +1
-                                    202-368-6657
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Phone: {{setting()->phone2}}
                                 </p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Parashu Nepal
                                     (Marketing
                                     Director)</p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">
-                                    parashu@nepalvisiontreks.com</p>
+                                    {{setting()->email2}}</p>
                             </div>
                         </div>
                     </div>
@@ -63,15 +62,15 @@
                             <img src="{{asset('frontend/images/australia_location.png')}}" alt="location" class="mb-md-3 mb-1"
                                 width="50" height="50">
                             <div>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Sydney, Australia</p>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Whatsapp: +61 426 730
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">{{setting()->address3}}</p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Whatsapp: {{setting()->phone3}}
                                     548
                                 </p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Ashim Wagle
                                     (Marketing
                                     Director)</p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">
-                                    ashim@nepalvisiontreks.com</p>
+                                    {{setting()->phone3}}</p>
                             </div>
                         </div>
                     </div>

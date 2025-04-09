@@ -7,8 +7,10 @@ use App\Models\Booking;
 use App\Models\Contact;
 use App\Models\Newsletter;
 use App\Models\Website;
+use App\Notifications\EnquiryReceived;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Str;
 class ContactController extends Controller
 {
@@ -25,71 +27,36 @@ class ContactController extends Controller
       {
           if (Str::contains($request->email,  ".godaddy")) {
                 abort(403);
-
               }
            $request->validate([
-                  'fname' => 'required',
+                  'name' => 'required',
                   'email' => 'required|email',
                   'comment' => 'required',
-
-
             ]);
-            // try {
-                  //code...
                   $contact = new Contact;
-                  $contact->name = $request->fname.' '.$request->lname;
+                  $contact->name = $request->name;
                   $contact->email = $request->email;
-                  $contact->phone = $request->phone;
                   $contact->comment = $request->comment;
                   $contact->save();
-
-                  $user_agent = $request->server('HTTP_USER_AGENT');
                   $userIP = $request->ip();
-                  // $ipdata = $this->IPtoLocation($userIP);
-                  // $city = $ipdata['city']['name'];
-                  // $country = $ipdata['country']['name'];
-                  // $long = $ipdata['location']['latitude'];
-                  // $lat = $ipdata['location']['longitude'];
-                  $agent = DB::connection('mysql2')->table('users')->first()->name;
                   $data = [
                         'name' => $request->name,
-                        'myemail' => $request->email,
+                        'email' => $request->email,
                         'subject' => 'Inquiry',
-                        'mycontact' => $request->phone,
-                        'mycomment' => $request->comment,
-                        'country' => $request->country,
-                        'no_participants' => $request->no_participants,
-                        'expected_date' => $request->expected_date,
-                        'package_name' => $request->package_name,
+                        'comment' => $request->comment,
                         'user_info' => " IP:<a href='https://www.ip-tracker.org/locator/ip-lookup.php?ip={$userIP}'>Click here to view more info :{$userIP}</a>",
-                        'source' => $agent
+                        'source' => $request->source,
                   ];
 
-                  // return view('emails.contactus',$data);
-                  $result = Mail::send('email.enquiry', $data, function ($message) use ($data) {
-                        $message->from('noreply@nepalvisiontreks.com', 'Nepal Vision');
-                        $message->subject($data['subject']);
-                        $message->to('reservation@nepalvisiontreks.com');
-                        // $message->bcc('yubraj.misfit@gmail.com');
-                  });
-
-
-
-
-
+                  Notification::route('mail', 'ashokmehta1234y@gmail.com')
+                  ->notify(new EnquiryReceived($data));
 
                   $notification = array(
                         'alert-type' => 'success',
                         'messege' => 'Query placed sucessfully.',
 
                   );
-            // } catch (\Throwable $th) {
-            //       $notification = array(
-            //             'alert-type' => 'error',
-            //             'messege' => 'Failed to place query. Try again.',
 
-            //       );
-            // }
             return redirect()->back()->with($notification);
       }
 
@@ -149,13 +116,8 @@ class ContactController extends Controller
                   'source' => $agent
             ];
 
-            // return view('emails.contactus',$data);
-            $result = Mail::send('email.enquiry', $data, function ($message) use ($data) {
-                  $message->from('noreply@nepalvisiontreks.com', 'Nepal Vision');
-                  $message->subject($data['subject']);
-                  $message->to('inquiry@nepalvisiontreks.com');
-                  // $message->bcc('yubraj.misfit@gmail.com');
-            });
+            Notification::route('mail', 'inquiry@nepalvisiontreks.com')
+            ->notify(new EnquiryReceived($data));
 
 
             $notification = array(
