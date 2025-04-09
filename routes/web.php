@@ -48,11 +48,18 @@ Route::get('blog-detail/{url}', [BlogController::class, 'show'])->name('blog.det
 Route::post('filterBlog', [BlogController::class, 'filterBlog'])->name('filterBlog');
 
 Route::get('events', [EventController::class, 'index'])->name('events');
-Route::get('useful-info', [EventController::class, 'UsefulInfo'])->name('usefulinfo');
 Route::get('event-detail/{id}', [EventController::class, 'show'])->name('event.detail');
 
 Route::post('enquery-post', [ContactController::class, 'Enquery'])->name('enquery.post');
 Route::get('departure-date', [PackageController::class, 'Departure'])->name('departure');
+Route::get('about-us', [HomeController::class, 'about'])->name('about');
+Route::get('useful-info', [HomeController::class, 'UsefulInfo'])->name('usefulinfo');
+Route::get('privacy-policy', [HomeController::class, 'privacy'])->name('privacy');
+Route::get('term-condition', [HomeController::class, 'term'])->name('term');
+
+
+
+
 
 Route::get('testimonials/{package?}', [PackageController::class, 'Testimonial'])->name('testimonials');
 Route::post('testimonials/store', [PackageController::class, 'testimonialStore'])->name('testimonials.store');

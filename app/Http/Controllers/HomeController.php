@@ -41,26 +41,23 @@ public function home(Request $request) {
       return view('frontend.index',compact('destinations','popular_package','destination_categories','discounted_packages','departures','month','year','blogs'));
 }
 
-
-public function Page($page) {
-
-      $data = Cms::where('status', 1)->where('url',$page)->orderBy('position')->with('child')->first();
-      return view('frontend.page',compact('data'));
+public function about() {
+    return view('frontend.about-us');
 }
 
-public function PageDetail($page,$url=null) {
+public function privacy() {
+    return view('frontend.privacy-policy');
+}
 
-      if (!isset($url)) {
-            $data = Cms::where('status', 1)->where('url',$page)->first();
-
-      }else{
-
-            $data = Cms::where('status', 1)->where('parent_id',$page)->where('url',$url)->first();
-             $page=Cms::where('id',$page)->value('url');
-      }
-      return view('frontend.page_detail',compact('data','page'));
+public function term() {
+    return view('frontend.term-condition');
 }
 
 
+
+public function UsefulInfo(){
+    $UsefulInfo=Package::where('useful_info','!=',null)->value('useful_info');
+    return view('frontend.usefulinfo',compact('UsefulInfo'));
+    }
 
 }

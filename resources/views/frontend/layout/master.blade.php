@@ -81,7 +81,7 @@
                                 class="text-decoration-none font_mulish px-2 footer_border_end footer-link">About Us</a>
                             <a href="/blogs"
                                 class="text-decoration-none font_mulish px-2 footer_border_end footer-link">Blogs</a>
-                            <a href="/information"
+                            <a href="/usefulinfo"
                                 class="text-decoration-none font_mulish px-2 footer-link">Information</a>
                         </p>
                         <p>

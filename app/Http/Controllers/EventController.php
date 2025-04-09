@@ -27,11 +27,6 @@ public function show($id){
 
 
 
-public function UsefulInfo(){
-$UsefulInfo=Package::where('useful_info','!=',null)->value('useful_info');
-return view('frontend.usefulinfo',compact('UsefulInfo'));
-}
-
 
 
 
