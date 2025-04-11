@@ -9,6 +9,7 @@ use App\Models\Cms;
 use App\Models\Departure;
 use App\Models\Faq;
 use App\Models\Package;
+use App\Models\PackageImage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
@@ -54,10 +55,16 @@ public function term() {
 }
 
 
+public function gallery() {
+    $packages=Package::with('package_images:image,id')->whereHas('package_images')->paginate(5);
+    return view('frontend.gallery',compact('packages'));
+}
+
+
 
 public function UsefulInfo(){
     $UsefulInfo=Package::where('useful_info','!=',null)->value('useful_info');
     return view('frontend.usefulinfo',compact('UsefulInfo'));
-    }
+}
 
 }

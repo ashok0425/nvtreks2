@@ -10,4 +10,8 @@ class PackageImage extends Model
     use HasFactory;
 
     protected $table='packages_images';
+
+    function package(){
+        return $this->belongsTo(Package::class);
+    }
 }

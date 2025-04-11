@@ -11,8 +11,6 @@ use App\Http\Controllers\EventController;
 
 // Index page
 Route::get('/', [HomeController::class, 'home'])->name('/');
-Route::get('cms/{page?}', [HomeController::class, 'Page'])->name('cms.page');
-Route::get('cms-page/{page}/{id?}', [HomeController::class, 'PageDetail'])->name('cms.detail');
 
 Route::get('contact', [ContactController::class, 'index'])->name('contactus');
 Route::post('contact', [ContactController::class, 'store'])->name('contactus');
@@ -45,7 +43,6 @@ Route::get('package/print/{package}', [PackageController::class, 'printpackage']
 
 Route::get('blogs', [BlogController::class, 'index'])->name('blog');
 Route::get('blog-detail/{url}', [BlogController::class, 'show'])->name('blog.detail');
-Route::post('filterBlog', [BlogController::class, 'filterBlog'])->name('filterBlog');
 
 Route::get('events', [EventController::class, 'index'])->name('events');
 Route::get('event-detail/{id}', [EventController::class, 'show'])->name('event.detail');
@@ -56,6 +53,8 @@ Route::get('about-us', [HomeController::class, 'about'])->name('about');
 Route::get('useful-info', [HomeController::class, 'UsefulInfo'])->name('usefulinfo');
 Route::get('privacy-policy', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('term-condition', [HomeController::class, 'term'])->name('term');
+Route::get('gallery', [HomeController::class, 'gallery'])->name('gallery');
+
 
 
 
