@@ -152,22 +152,29 @@ class PackagesController extends Controller
                 }
             }
 
+            foreach ($request->itineraries??[] as $itinerary) {
+                DB::table('package_itineraries')->insert([
+                    'package_id' => $package->id,
+                    'title' => $itinerary['title'] ?? '',
+                    'car' => $itinerary['car'] ?? '',
+                    'walk' => $itinerary['walk'] ?? '',
+                    'flight' => $itinerary['flight'] ?? '',
+                    'distance' => $itinerary['distance'] ?? '',
+                    'accommodation' => $itinerary['accommodation'] ?? '',
+                    'meal' => $itinerary['meal'] ?? '',
+                    'overnight' => $itinerary['overnight'] ?? '',
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+
             DB::commit();
             $notification = [
                 'alert-type' => 'success',
                 'messege' => 'Successfully Added package.',
             ];
 
-            Cache::forget('dealpackages');
-            Cache::get('dealpackages', 604800, function () {
-                return DB::table('packages')
-                    ->orderBy('id', 'desc')
-                    ->where('status', 1)
-                    ->where('duration', '!=', null)
-                    ->where('activity', '!=', null)
-                    ->where('discounted_price', '!=', null)
-                    ->paginate(24);
-            });
         } catch (QueryException $e) {
             return $e->getMessage();
             DB::rollback();
@@ -236,7 +243,6 @@ class PackagesController extends Controller
             $package->name = $request->name;
             $package->trip_id = $request->trip_id;
             $package->hot_deal_package = $request->popular_package;
-            // $package->category_id = ($request->category_id == "")? null : $request->category;;
             $package->destination_id = $request->destination_id;
             $package->category_place_id = $request->category_place_id ? $request->category_place_id : null;
             $package->category_destination_id = $request->category_destination_id;
@@ -244,7 +250,6 @@ class PackagesController extends Controller
             $package->duration = $request->duration;
             $package->difficulty = $request->difficulty;
             $package->max_altitude = $request->max_altitude;
-            // $package->min_people_required = $request->min_people_required;
             $package->url = $request->url ? $request->url : $url;
             $package->overview = $request->overview;
             $package->outline_itinerary = $request->outline_itinerary;
@@ -290,8 +295,6 @@ class PackagesController extends Controller
             $package->is_luxury = $request->is_luxury;
             $package->is_group = $request->is_group;
 
-
-
             $banner = $request->file('thumbnail');
             if ($banner) {
                 $this->deleteFile($package->banner);
@@ -326,16 +329,7 @@ class PackagesController extends Controller
                 'alert-type' => 'success',
                 'messege' => 'Successfully updated package.',
             ];
-            Cache::forget('dealpackages');
-            Cache::get('dealpackages', 604800, function () {
-                return DB::table('packages')
-                    ->orderBy('id', 'desc')
-                    ->where('status', 1)
-                    ->where('duration', '!=', null)
-                    ->where('activity', '!=', null)
-                    ->where('discounted_price', '!=', null)
-                    ->paginate(24);
-            });
+
         } catch (QueryException $e) {
             return $e->getMessage();
             DB::rollback();

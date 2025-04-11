@@ -372,10 +372,57 @@
 
                     <div>
                         <div class="form-group">
-                             <div class="col-md-12">
-                                <label >Detailed  itinerary:</label>
-                                 <textarea name="detailed_itinerary"  cols="30" rows="10" id="summernote1"></textarea>
-                             </div>
+                            <div class="col-md-12">
+                                <label>Detailed itinerary:</label>
+                                <div id="itinerary-template" style="display: none;">
+                                    <div class="single-itinerary mb-3 border p-3 rounded">
+                                        <div class="form-group mb-2">
+                                            <input name="itineraries[][title]" class="form-control" placeholder="Title">
+                                        </div>
+
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">
+                                                <input type="text" name="itineraries[][car]" class="form-control" placeholder="Car">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" name="itineraries[][walk]" class="form-control" placeholder="Walk">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" name="itineraries[][flight]" class="form-control" placeholder="Flight">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">
+                                                <input type="text" name="itineraries[][distance]" class="form-control" placeholder="Distance">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" name="itineraries[][accommodation]" class="form-control" placeholder="Accommodation">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" name="itineraries[][meal]" class="form-control" placeholder="Meal">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2">
+                                            <div class="col-md-4">
+                                                <input type="text" name="itineraries[][overnight]" class="form-control" placeholder="Overnight">
+                                            </div>
+                                            <div class="col-md-8 d-flex align-items-center">
+                                                <button type="button" class="btn btn-danger remove-itinerary ms-auto">Remove</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="append-itinerary"></div>
+
+                                <div>
+                                    <button type="button" class="btn btn-primary" id="add"><i class="fas fa-plus"></i> Add</button>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>
@@ -583,8 +630,20 @@ if($input.val().length > 0) {
 
             ajaxCategory();
 
-
-
-
         </script>
+
+<script>
+    document.getElementById('add').addEventListener('click', function () {
+        let template = document.querySelector('#itinerary-template .single-itinerary').cloneNode(true);
+        document.querySelector('.append-itinerary').appendChild(template);
+    });
+
+    // Delegate remove event
+    document.querySelector('.append-itinerary').addEventListener('click', function (e) {
+        if (e.target && e.target.classList.contains('remove-itinerary')) {
+            e.target.closest('.single-itinerary').remove();
+        }
+    });
+</script>
+
     @endpush
