@@ -43,11 +43,11 @@
         <h5 class="popular_card_head mb-md-4 mb-3 text-start">{{$package->name}}
         </h5>
         <div class="d-flex align-items-center gap-1 mb-md-4 mb-3">
-            <span class="small text_darkGray">({{rand(20,28)}} reviews)</span>
-            @for ($i = 1; $i <= $package->rating; $i++)
+            <span class="small text_darkGray">({{$package->testimonial_count}} reviews)</span>
+            @for ($i = 1; $i <= $package->testimonial_avg; $i++)
             ⭐
                             @endfor
-                            @for ($i = 1; $i <= 5 - $package->rating; $i++)
+                            @for ($i = 1; $i <= 5 - $package->testimonial_avg; $i++)
                                 <i class="far fa-star text-gray"></i>
                             @endfor
         </div>

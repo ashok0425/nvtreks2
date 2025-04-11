@@ -187,9 +187,9 @@
                             <h5 class="popular_card_head mb-md-4 mb-3 text-start">@{{ package.name }}</h5>
 
                             <div class="d-flex align-items-center gap-1 mb-md-4 mb-3">
-                                <span class='small text_darkGray'>(@{{ package.rating ?? 0 }} reviews)</span>
+                                <span class='small text_darkGray'>(@{{ package.testimonial_count ?? 0 }} reviews)</span>
                                 <div class="text-warning">
-                                    <i v-for="i in 5" :class="['bi', i <= Math.floor(package.rating) ? 'bi-star-fill' : i - 0.5 === package.rating ? 'bi-star-half' : 'bi-star']"></i>
+                                    <i v-for="i in 5" :class="['bi', i <= Math.floor(package.testimonial_avg) ? 'bi-star-fill' : i - 0.5 === package.testimonial_avg ? 'bi-star-half' : 'bi-star']"></i>
                                 </div>
                             </div>
 

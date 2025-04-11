@@ -47,51 +47,61 @@ class TestimonialsController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
+
         try {
-            DB::beginTransaction();
-            $testimonials = new  Testimonial;
-            $testimonials->name = $request->name;
-            $testimonials->title = $request->title;
-            $testimonials->content = $request->content;
-            $testimonials->status = 1;
-            $testimonials->rating = $request->rating;
+            // Create and fill testimonial model
+            $testimonial = new Testimonial();
+            $testimonial->fill([
+                'name'          => $request->name,
+                'title'         => $request->title,
+                'content'       => $request->content,
+                'status'        => 1,
+                'rating'        => $request->rating,
+                'display_home'  => $request->display_home,
+                'date'          => $request->date,
+            ]);
 
-            $testimonials->display_home = $request->display_home;
-            $testimonials->date = $request->date;
-
-            $banner = $request->file('file');
-            if ($banner) {
-                $testimonials->image =$this->uploadFile('upload/testimonial',$banner);
-
+            // Handle file upload
+            if ($request->hasFile('file')) {
+                $testimonial->image = $this->uploadFile('upload/testimonial', $request->file('file'));
             }
-            if ($testimonials->save()) {
-                $length = count($request->package);
-                for ($i = 0; $i < $length; $i++) {
-                    $package_testmonial = [];
-                    $package_testmonial['package_id'] = $request->package[$i];
-                    $package_testmonial['testimonial_id'] = $testimonials->id;
-                    DB::table('package_testimonial')->insert($package_testmonial);
+
+            $testimonial->save();
+
+            // Insert testimonial-package pivot entries
+            if ($request->has('package') && is_array($request->package)) {
+                $testimonialPackages = [];
+
+                foreach ($request->package as $packageId) {
+                    $testimonialPackages[] = [
+                        'testimonial_id' => $testimonial->id,
+                        'package_id'     => $packageId,
+                    ];
                 }
+
+                DB::table('package_testimonial')->insert($testimonialPackages);
             }
 
-DB::commit();
+            DB::commit();
 
-            $notification = array(
+            return redirect()->route('admin.testimonials.index')->with([
                 'alert-type' => 'success',
-                'messege' => 'Successfully Added Testimonial.',
+                'messege'    => 'Successfully Added Testimonial.',
+            ]);
 
-            );
-        } catch (QueryException $qE) {
-DB::rollBack();
-            $notification = array(
+        } catch (QueryException $e) {
+            DB::rollBack();
+
+            report($e); // optional: log the error or send to Sentry
+
+            return redirect()->route('admin.testimonials.index')->with([
                 'alert-type' => 'error',
-                'messege' => 'Failed to Added Testimonial.',
-
-            );
+                'messege'    => 'Failed to Add Testimonial.',
+            ]);
         }
-
-        return redirect()->route('admin.testimonials.index')->with($notification);
     }
+
 
     /**
      * Display the specified resource.
