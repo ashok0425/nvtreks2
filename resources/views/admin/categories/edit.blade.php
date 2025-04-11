@@ -60,6 +60,15 @@
                         </a>
                     </div>
 
+                    <div class="col-md-6">
+                        <label class="form-label">Status</label>
+                        <select name="status" id="" class="form-select form-control">
+                            <option value="">--status--</option>
+                            <option value="1" {{$category->status?'selected':''}}>Active</option>
+                            <option value="0" {{!$category->status?'selected':''}}>InActive</option>
+
+                        </select>
+                    </div>
                     <div class="form-group col-md-12">
                         <label>Detail</label>
                         <textarea name="details" cols="30" rows="10" id="summernote">

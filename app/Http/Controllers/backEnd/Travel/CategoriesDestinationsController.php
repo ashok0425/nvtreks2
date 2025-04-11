@@ -14,7 +14,7 @@ use Illuminate\Database\QueryException;
 use File;
 class CategoriesDestinationsController extends Controller
 {
- 
+
     /**
      * Display a listing of the resource.
      *
@@ -68,7 +68,7 @@ class CategoriesDestinationsController extends Controller
             $category->meta_description = $request->meta_description;
 
             $file=$request->file('file');
-            
+
             if($file){
                 $category->image=$this->uploadFile('upload/category',$file);
             }
@@ -78,16 +78,16 @@ class CategoriesDestinationsController extends Controller
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Successfully created category.',
-               
+
              );
-       
+
         } catch (QueryException $e) {
             return $e->getMessage();
             DB::rollback();
             $notification=array(
                 'alert-type'=>'error',
                 'messege'=>'Failed to create category, Try again.',
-               
+
              );
         }
 
@@ -140,7 +140,7 @@ class CategoriesDestinationsController extends Controller
             $category->name = $request->name;
             $category->destination_id = $request->destination;
             $category->quick_trips = $request->quick_trip;
-            $category->status = 1;
+            $category->status = $request->status;
             $category->details = $request->details;
             $category->url = $request->url;
             $category->order=$request->order;
@@ -149,7 +149,7 @@ class CategoriesDestinationsController extends Controller
             $category->meta_description = $request->meta_description;
 
             $file=$request->file('file');
-            
+
             if($file){
                  $this->deleteFile($category->image);
                  $category->image=$this->uploadFile('upload/category',$file);
@@ -161,7 +161,7 @@ class CategoriesDestinationsController extends Controller
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Successfully updated category.',
-               
+
              );
         } catch (QueryException $e) {
             return $e->getMessage();
@@ -169,7 +169,7 @@ class CategoriesDestinationsController extends Controller
             $notification=array(
                 'alert-type'=>'error',
                 'messege'=>'Failed to updated category, Try again.',
-               
+
              );
         }
         return redirect()->route('admin.categories-destinations.index')->with($notification);
@@ -190,20 +190,20 @@ class CategoriesDestinationsController extends Controller
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Successfully deleted destinations.',
-               
+
              );
-        
+
         } catch (QueryException $e) {
             $notification=array(
                 'alert-type'=>'error',
                 'messege'=>'Failed to delete destination, Try again.',
-               
+
              );
         }
 
         return redirect()->back()->with($notification);
     }
-  
+
 
 
     private function toAscii($str) {

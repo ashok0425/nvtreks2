@@ -88,7 +88,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.categories-packages.update', $package->id) }}" method="POST"
+                <form action="{{ route('admin.packages.update', $package) }}" method="POST"
                     enctype="multipart/form-data">
                     @method('PATCH')
 

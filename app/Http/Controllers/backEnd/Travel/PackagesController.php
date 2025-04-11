@@ -26,53 +26,11 @@ class PackagesController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $packages = Package::orderBy('created_at', 'desc')
-                ->select('name', 'id', 'status', 'banner')
-                ->get();
-
-            return FacadesDataTables::of($packages)
-                ->editColumn('thumbnail', function ($row) {
-                    return '<img src="' . getImageurl($row->banner) . '" width="80">';
-                })
-
-                ->editColumn('status', function ($row) {
-                    return $row->status == '1' ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Deactive</span>';
-                })
-                ->addColumn('action', function ($row) {
-                    $html =
-                        '<a href="' .
-                        route('admin.categories-packages.edit', $row->id) .
-                        '" class="btn btn-primary btn-sm pull-left m-r-10"><i class="fa fa-edit"></i>
-                    </a>
-
-                    <a href="' .
-                        route('admin.categories-packages.delete', $row->id) .
-                        '" class="btn btn-danger btn-sm delete_row" id="" ><i class="fa fa-trash"></i>
-                    </a>
-
-
-                    <a href="' .
-                        route('admin.package.country', ['package_id' => $row->id]) .
-                        '" class="btn btn-success btn-sm " id="" ><i class="fa fa-plus"></i>
-                    </a>
-                    <a href="' .
-                    route('admin.package.gallery', ['package_id' => $row->id]) .
-                    '" class="btn btn-info btn-sm " id="" ><i class="fa fa-images"></i>
-                </a>'
-                    ;
-
-                    if ($row->status == 1) {
-                        $html .= '<a href="' . route('admin.deactive', ['id' => $row->id, 'table' => 'packages']) . '" class="btn btn-primary btn-sm"><i class="fas fa-thumbs-down"></i></a>';
-                    } else {
-                        $html .= ' <a href="' . route('admin.active', ['id' => $row->id, 'table' => 'packages']) . '" class="btn btn-primary btn-sm"><i class="fas fa-thumbs-up"></i></a>';
-                    }
-                    return $html;
-                })
-                ->rawColumns(['action', 'status', 'thumbnail'])
-                ->make(true);
-        }
-        return view('admin.packages.index');
+       $packages=Package::latest()
+       ->when($request->search,function($query) use ($request){
+        return $query->where('name','like','%'.$request->search.'%');
+       })->paginate(15);
+        return view('admin.packages.index',compact('packages'));
     }
 
     /**
@@ -220,7 +178,7 @@ class PackagesController extends Controller
         }
 
         return redirect()
-            ->route('admin.categories-packages.index')
+            ->route('admin.packages.index')
             ->with($notification);
     }
 
@@ -241,12 +199,11 @@ class PackagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Package $package)
     {
         $featured_package = Package::where('status', 1)
             ->orderBy('name')
             ->get();
-        $package = Package::findOrFail($id);
         $destinations = Destination::orderBy('name')->get();
         $places = CategoryPlace::orderBy('name')->get();
 
@@ -261,7 +218,7 @@ class PackagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Package $package)
     {
         $url = $this->toAscii($request->name);
         // $request['url'] = $url;
@@ -276,7 +233,6 @@ class PackagesController extends Controller
         try {
             DB::beginTransaction();
 
-            $package = Package::findOrFail($id);
             $package->name = $request->name;
             $package->trip_id = $request->trip_id;
             $package->hot_deal_package = $request->popular_package;
@@ -390,7 +346,7 @@ class PackagesController extends Controller
         }
 
         return redirect()
-            ->route('admin.categories-packages.index')
+            ->route('admin.packages.index')
             ->with($notification);
     }
 
@@ -402,16 +358,14 @@ class PackagesController extends Controller
      */
     public function destroy($id)
     {
-        try {
             $package = Package::findOrFail($id);
-            $package->newimages()->detach();
-            $package->homeimages()->detach();
-            $package->routemapimages()->detach();
             $package->delete();
-        } catch (QueryException $e) {
-        }
 
-        return redirect()->route('admin.packages.index');
+            $notification = [
+                'alert-type' => 'success',
+                'messege' => 'Successfully updated package.',
+            ];
+        return redirect()->route('admin.packages.index')->with($notification);
     }
 
     // public function removeImage($id, Request $request) {

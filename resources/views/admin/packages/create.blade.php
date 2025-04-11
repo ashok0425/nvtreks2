@@ -83,7 +83,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-<form action="{{ route('admin.categories-packages.store') }}" method="POST" enctype="multipart/form-data">
+<form action="{{ route('admin.packages.store') }}" method="POST" enctype="multipart/form-data">
               @csrf
     <div class="row">
         <div class="col-md-12">

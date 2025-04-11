@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 
 class FaqsController extends Controller
 {
-    public $status_message = null;
-    public $alert_type = "success";
 
     /**
      * Display a listing of the resource.

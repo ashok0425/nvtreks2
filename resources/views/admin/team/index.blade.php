@@ -34,7 +34,7 @@
                             <form action="{{route('admin.teams.destroy',$team)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                <button class="btn btn-danger btn-sm delete_row"><i class="fas fa-trash"></i></button>
                             </form>
                         </td>
 

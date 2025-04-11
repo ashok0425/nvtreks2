@@ -44,10 +44,11 @@
                                         <a href="{{ route('admin.destinations.edit', $destination) }}"
                                             class="btn btn-primary btn-sm pull-left m-r-10"><i class="fa fa-edit"></i>
                                         </a>
-                                        <a href="{{ route('admin.destination.delete', ['id' => $destination->id]) }}"
-                                            class="btn btn-danger btn-sm delete_row" id="delete_row"><i
-                                                class="fa fa-trash"></i>
-                                        </a>
+                                        <form action="{{route('admin.destinations.destroy',$destination)}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-sm delete_row" type="button"><i class="fas fa-trash"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

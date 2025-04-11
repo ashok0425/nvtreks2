@@ -118,7 +118,6 @@
                             <option value="1" {{$blog->status?'selected':''}}>Active</option>
                             <option value="0" {{!$blog->status?'selected':''}}>InActive</option>
 
-
                         </select>
                     </div>
                     <div class=" col-md-12 my-2">

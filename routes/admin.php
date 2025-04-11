@@ -19,15 +19,12 @@ Route::get('/destinations/delete/{id}', [App\Http\Controllers\BackEnd\Travel\Des
 
 // Destination category
 Route::resource('/categories-destinations', App\Http\Controllers\BackEnd\Travel\CategoriesDestinationsController::class);
-Route::get('/categoriesdestinations/delete/{id}', [App\Http\Controllers\BackEnd\Travel\CategoriesDestinationsController::class, 'destroy'])->name('categories-destinations.delete');
 
 // Category Region
 Route::resource('/categories-places', App\Http\Controllers\BackEnd\Travel\CategoriesPlacesController::class);
-Route::get('/categories-places/delete/{id}', [App\Http\Controllers\BackEnd\Travel\CategoriesPlacesController::class, 'destroy'])->name('categories-places.delete');
 
 // Packages
 Route::resource('/packages', App\Http\Controllers\BackEnd\Travel\PackagesController::class);
-Route::get('categories-package/delete/{id}', [App\Http\Controllers\BackEnd\Travel\CategoriesPlacesController::class, 'destroy'])->name('categories-packages.delete');
 Route::get('/country-packages', [App\Http\Controllers\BackEnd\Travel\PackagesController::class, 'countryPackage'])->name('package.country');
 Route::get('/country-packages/create', [App\Http\Controllers\BackEnd\Travel\PackagesController::class, 'countryPackageCreate'])->name('package.country.create');
 Route::post('/country-packages/store', [App\Http\Controllers\BackEnd\Travel\PackagesController::class, 'countryPackageStore'])->name('package.country.store');

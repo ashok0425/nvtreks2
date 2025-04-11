@@ -42,10 +42,12 @@
                                             class="btn btn-primary btn-sm pull-left m-r-10"><i class="fa fa-edit"></i>
                                         </a>
 
-                                        <a href="{{ route('admin.categories-places.delete', $category->id) }}"
-                                            class="btn btn-danger btn-sm delete_row" id="delete_row"><i
-                                                class="fa fa-trash"></i>
-                                        </a>
+
+                                        <form action="{{route('admin.categories-places.destroy',$category)}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn btn-danger btn-sm delete_row"><i class="fas fa-trash"></i></button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

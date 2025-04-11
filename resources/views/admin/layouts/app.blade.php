@@ -255,9 +255,9 @@
 <script src="{{ asset('ckeditor.js') }}"></script>
 
     <script>
-        $('#delete_row').click(function(e) {
-            e.preventDefault()
-            url = $(this).attr('href')
+        $(document).on('click','.delete_row',function(e) {
+            e.preventDefault();
+            let form=this.closest('form');
             swal({
                     title: "Are you sure?",
                     text: "Once deleted, you will not be able to recover this  file!",
@@ -267,9 +267,7 @@
                 })
                 .then((willDelete) => {
                     if (willDelete) {
-                        window.location.href = url;
-
-
+                        form.submit();
                     } else {
                         swal("Your Data is safe!");
                     }
