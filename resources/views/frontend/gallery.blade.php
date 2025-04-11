@@ -50,6 +50,9 @@
         </div>
         @endforeach
 
+        <div class="text-center">
+            {{$packages->links()}}
+        </div>
     </section>
 
 

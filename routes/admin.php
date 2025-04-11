@@ -90,14 +90,11 @@ Route::get('role_permission/assign_role/edit/{id}', [App\Http\Controllers\BackEn
 Route::post('role_permission/assign_role/update', [App\Http\Controllers\BackEnd\AssignroleController::class, 'update'])->name('assignrole.update');
 Route::get('role_permission/assign_role/delete/{id}/{table}', [App\Http\Controllers\BackEnd\AssignroleController::class, 'destroy'])->name('assignrole.delete');
 
-// Active and Deactive Routes
-Route::get('active/{id}/{table}', [App\Http\Controllers\BackEnd\BannerController::class, 'active'])->name('active');
-Route::get('deactive/{id}/{table}', [App\Http\Controllers\BackEnd\BannerController::class, 'deactive'])->name('deactive');
-Route::get('blog/active/{id}/{table}', [App\Http\Controllers\BackEnd\BlogController::class, 'active'])->name('blog.active');
-Route::get('blog/deactive/{id}/{table}', [App\Http\Controllers\BackEnd\BlogController::class, 'deactive'])->name('blog.deactive');
 
 // Miscellaneous Routes
-Route::resource('/blog', App\Http\Controllers\BackEnd\BlogController::class);
+Route::resource('/blogs', App\Http\Controllers\BackEnd\BlogController::class);
+Route::resource('/teams', App\Http\Controllers\BackEnd\TeamController::class);
+
 
 
 // Country

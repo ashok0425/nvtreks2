@@ -4,12 +4,9 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
-use Str;
-use File;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Throwable;
-use Yajra\DataTables\Facades\DataTables as FacadesDataTables;
 
 class BlogController extends Controller
 {
@@ -136,15 +133,13 @@ return $html;
     }
 
 
-    public function update(Request $request,$id)
+    public function update(Request $request,Blog $blog)
     {
-        $url = $this->toAscii($request->url);
 
         $request->validate([
             'title'=>'required|max:255',
 
         ]);
-        // try {
        $blog=[];
 
             $file=$request->file('image');
@@ -160,7 +155,7 @@ return $html;
             }
             $blog['post_title']=$request->title;
             $blog['display_homepage']=$request->display_homepage;
-            $blog['url']=$url;
+            $blog['url']=Str::slug($request->url());
             $blog['meta_title']=$request->meta_title;
             $blog['meta_description']=$request->meta_description;
             $blog['keyword']=$request->keyword;
@@ -179,35 +174,17 @@ return $html;
                  return redirect()->route('admin.blogs.index')->with($notification);
 
 
-
-        // } catch (\Throwable $th) {
-        //     $notification=array(
-        //         'alert-type'=>'error',
-        //         'messege'=>'Something went wrong. Please try again later.',
-
-        //      );
-        //      return redirect()->back()->with($notification);
-
-        // }
-
     }
 
     public function destroy($id)
     {
-        try {
-        DB::table('blogs')->where('ID',$id)->delete();
+        Blog::here('id',$id)->delete();
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Successfully deleted .',
 
              );
-        } catch (Throwable $e) {
-            $notification=array(
-                'alert-type'=>'error',
-                'messege'=>'Failed to delete , Try again.',
 
-             );
-        }
 
         return redirect()->back()->with($notification);
     }

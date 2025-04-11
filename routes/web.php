@@ -54,11 +54,7 @@ Route::get('useful-info', [HomeController::class, 'UsefulInfo'])->name('usefulin
 Route::get('privacy-policy', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('term-condition', [HomeController::class, 'term'])->name('term');
 Route::get('gallery', [HomeController::class, 'gallery'])->name('gallery');
-
-
-
-
-
+Route::get('our-team', [HomeController::class, 'team'])->name('team');
 
 Route::get('testimonials/{package?}', [PackageController::class, 'Testimonial'])->name('testimonials');
 Route::post('testimonials/store', [PackageController::class, 'testimonialStore'])->name('testimonials.store');

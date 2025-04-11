@@ -10,6 +10,7 @@ use App\Models\Departure;
 use App\Models\Faq;
 use App\Models\Package;
 use App\Models\PackageImage;
+use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
@@ -56,8 +57,13 @@ public function term() {
 
 
 public function gallery() {
-    $packages=Package::with('package_images:image,id')->whereHas('package_images')->paginate(5);
+    $packages=Package::with('package_images:image,id')->whereHas('package_images')->paginate(3);
     return view('frontend.gallery',compact('packages'));
+}
+
+public function team() {
+    $teams=Team::latest()->paginate(10);
+    return view('frontend.team',compact('teams'));
 }
 
 

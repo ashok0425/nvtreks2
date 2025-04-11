@@ -71,6 +71,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('admin.teams.index') }}" class="nav-link">
+                        <i class=" fas fa-users"></i>
+                        <p>Teams</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ route('admin.departures.index') }}" class="nav-link">
                         <i class="fas fa-clock"></i>
                         <p>Departures</p>

@@ -72,6 +72,11 @@
         }
         .card-header{
             background: gray;
+            color: #fff;
+        }
+        .btn-primary{
+            background: #2a87b7;
+            border-color: #2a87b7;
         }
     </style>
 </head>
