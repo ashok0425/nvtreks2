@@ -1,9 +1,16 @@
 @extends('admin.layouts.app')
 @section('content')
 <section class="container">
+    <div class="ml-auto" style="width: 230px;">
+        <form action="" >
+            <div class="form-group">
+                <input type="search" class="form-control" name="search" id="" placeholder="Search here..." value="{{request()->query('search')}}">
+            </div>
+        </form>
+    </div>
   <div class="card">
-
       <div class="card-body">
+
             <!-- /.-header -->
             <div class="d-flex justify-content-between">
                 <div>
@@ -50,6 +57,8 @@
           <!-- /. -->
         </div>
         <!-- /.col -->
+      {{$blogs->withQueryString()->links()}}
+
       </div>
       <!-- /.row -->
     </section>
