@@ -17,35 +17,11 @@ class BlogController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->ajax()){
-        $blogs=Blog::orderBy('ID','desc')->select('guid','ID','post_title','post_status')->get();
-
-            return FacadesDataTables::of($blogs)
-            ->editColumn('guid',function($row){
-                return '<img src="'. getImageurl($row->guid) .'" width="80">';
-            })
-
-            ->editColumn('status',function($row){
-                return  $row->post_status=="publish" ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Deactive</span>';
-            })
-            ->addColumn('action',function($row){
-                $html='<a href="'.route('admin.blogs.edit',$row->ID) .'" class="btn btn-primary btn-sm pull-left m-r-10"><i class="fa fa-edit"></i>
-                </a>
-
-                <a href="'. route('admin.blogs.delete',$row->ID ) .'" class="btn btn-danger btn-sm delete_row" id="" ><i class="fa fa-trash"></i>
-                </a>';
-
-                if($row->status==1){
-              $html.='<a href="'.route('admin.blog.deactive',['id'=>$row->ID,'table'=>'blogs']).'" class="btn btn-primary"><i class="fas fa-thumbs-down"></i></a>';
-                       }else{
-
-                        $html.=' <a href="'.route('admin.blog.active',['id'=>$row->ID,'table'=>'blogs']).'" class="btn btn-primary"><i class="fas fa-thumbs-up"></i></a>';
-            }
-return $html;
-            }) ->rawColumns(['action','status','guid'])
-            ->make(true);;
-        }
-       return view('admin.blog.index');
+        $blogs = Blog::when($request->search, function ($query, $search) {
+            return $query->where('title', 'like', '%' . $search . '%')
+            ->orWhere('long_description', 'like', '%' . $search . '%');
+            })->latest()->paginate(15);
+       return view('admin.blog.index',compact('blogs'));
     }
 
 
@@ -69,66 +45,55 @@ return $html;
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request)
-    {
-        $url = $this->toAscii($request->url);
+     public function store(Request $request)
+     {
+         // Validate input
+         $request->validate([
+             'title' => 'required|string|max:255',
+             'long_description' => 'required',
+             'thumbnail' => 'nullable|image',
+             'cover_image' => 'nullable|image',
+         ]);
 
-        $request->validate([
-            'title'=>'required|max:255',
+             // Upload images if available
+             $thumbnail = $request->hasFile('thumbnail')
+                 ? $this->uploadFile('upload/blog', $request->file('thumbnail'))
+                 : null;
 
-        ]);
-        // try {
-       $blog=[];
-            $file=$request->file('image');
+             $coverImage = $request->hasFile('cover_image')
+                 ? $this->uploadFile('upload/blog', $request->file('cover_image'))
+                 : null;
 
-            if($file){
-                $blog['guid']=$this->uploadFile('upload/blog',$file);
-            }
+             // Create blog
+             $blog = new Blog();
+             $blog->title = $request->title;
+             $blog->slug = Str::slug($request->url ?? $request->title);
+             $blog->thumbnail = $thumbnail;
+             $blog->cover_image = $coverImage;
+             $blog->display_homepage = $request->display_homepage ?? false;
+             $blog->meta_title = $request->meta_title;
+             $blog->meta_description = $request->meta_description;
+             $blog->meta_keyword = $request->meta_keyword;
+             $blog->mobile_title = $request->mobile_title;
+             $blog->mobile_description = $request->mobile_description;
+             $blog->mobile_keyword = $request->mobile_keyword;
+             $blog->status = 1;
+             $blog->long_description = $request->long_description;
+             $blog->save();
 
-            $cover_image=$request->file('cover_image');
-            if($cover_image){
-                 $blog['cover_image']=$this->uploadFile('upload/blog',$cover_image);
+             // Clear cache
+             Cache::forget('blogs');
 
-            }
+             return redirect()->route('admin.blogs.index')->with([
+                 'alert-type' => 'success',
+                 'messege' => 'Blog created successfully.',
+             ]);
 
-            $blog['post_title']=$request->title;
-            $blog['url']=$url;
-            $blog['display_homepage']=$request->display_homepage;
-            $blog['meta_title']=$request->meta_title;
-            $blog['meta_description']=$request->meta_description;
-            $blog['keyword']=$request->keyword;
-            $blog['mobile_title']=$request->mobile_title;
-            $blog['mobile_description']=$request->mobile_description;
-            $blog['mobile_keyword']=$request->mobile_keyword;
-            $blog['post_date']=today();
-            $blog['post_status']='publish';
-            $blog['post_content']=$request->content;
-           DB::table('blogs')->insert($blog);
-          Cache::forget('blogs');
-                $notification=array(
-                    'alert-type'=>'success',
-                    'messege'=>'Blog  updated',
+     }
 
-                 );
-                 return redirect()->route('admin.blogs.index')->with($notification);
-
-
-
-        // } catch (\Throwable $th) {
-        //     $notification=array(
-        //         'alert-type'=>'error',
-        //         'messege'=>'Something went wrong. Please try again later.',
-
-        //      );
-        //      return redirect()->back()->with($notification);
-
-        // }
-
-    }
 
     public function edit(Blog $blog)
     {
-              $blog=Blog::find($blog->ID);
         return view('admin.blog.edit',compact('blog'));
     }
 
@@ -136,55 +101,57 @@ return $html;
     public function update(Request $request,Blog $blog)
     {
 
-        $request->validate([
-            'title'=>'required|max:255',
+       // Validate input
+       $request->validate([
+        'title' => 'required|string|max:255',
+        'long_description' => 'required',
+        'thumbnail' => 'nullable|image',
+        'cover_image' => 'nullable|image',
+    ]);
 
+        // Upload images if available
+        $thumbnail = $request->hasFile('thumbnail')
+            ? $this->uploadFile('upload/blog', $request->file('thumbnail'))
+            : $blog->thumbnail;
+
+        $coverImage = $request->hasFile('cover_image')
+            ? $this->uploadFile('upload/blog', $request->file('cover_image'))
+            : $blog->cover_image;
+
+        // Create blog
+        $blog->title = $request->title;
+        $blog->slug = Str::slug($request->url ?? $request->title);
+        $blog->thumbnail = $thumbnail;
+        $blog->cover_image = $coverImage;
+        $blog->display_homepage = $request->display_homepage ?? false;
+        $blog->meta_title = $request->meta_title;
+        $blog->meta_description = $request->meta_description;
+        $blog->meta_keyword = $request->meta_keyword;
+        $blog->mobile_title = $request->mobile_title;
+        $blog->mobile_description = $request->mobile_description;
+        $blog->mobile_keyword = $request->mobile_keyword;
+        $blog->status = $request->status;
+        $blog->long_description = $request->long_description;
+        $blog->save();
+
+        // Clear cache
+        Cache::forget('blogs');
+
+        return redirect()->route('admin.blogs.index')->with([
+            'alert-type' => 'success',
+            'messege' => 'Blog created successfully.',
         ]);
-       $blog=[];
-
-            $file=$request->file('image');
-
-            if($file){
-                $blog['guid']=$this->uploadFile('upload/blog',$file);
-            }
-
-            $cover_image=$request->file('cover_image');
-            if($cover_image){
-                 $blog['cover_image']=$this->uploadFile('upload/blog',$cover_image);
-
-            }
-            $blog['post_title']=$request->title;
-            $blog['display_homepage']=$request->display_homepage;
-            $blog['url']=Str::slug($request->url());
-            $blog['meta_title']=$request->meta_title;
-            $blog['meta_description']=$request->meta_description;
-            $blog['keyword']=$request->keyword;
-            $blog['mobile_title']=$request->mobile_title;
-            $blog['mobile_description']=$request->mobile_description;
-            $blog['mobile_keyword']=$request->mobile_keyword;
-            $blog['post_content']=$request->content;
-           DB::table('blogs')->where('ID',$id)->update($blog);
-           Cache::forget('blogs');
-
-                $notification=array(
-                    'alert-type'=>'success',
-                    'messege'=>'Blog  updated',
-
-                 );
-                 return redirect()->route('admin.blogs.index')->with($notification);
-
 
     }
 
-    public function destroy($id)
+    public function destroy(Blog $blog)
     {
-        Blog::here('id',$id)->delete();
+        $blog->delete();
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Successfully deleted .',
 
              );
-
 
         return redirect()->back()->with($notification);
     }

@@ -86,45 +86,55 @@
 
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Edit Banner Form</h3>
+            <h3 class="card-title">Edit Blog</h3>
         </div>
 
         <div class="card-body">
             <x-errormsg />
-            <form action="{{ route('admin.blogs.update', $blog->ID) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.blogs.update', $blog) }}" method="POST" enctype="multipart/form-data">
                 @method('PATCH')
                 @csrf
                 <div class="row">
                     <div class=" col-md-6">
                         <label class="form-label">Blog Title</label>
-                        <input name="title" class='form-control' maxlength="225" value=' {{ $blog->post_title }}'
+                        <input name="title" class='form-control' maxlength="225" value=' {{ $blog->title }}'
                             type='text' placeholder="Enter  Title">
                     </div>
                     <div class=" col-md-6">
                         <label class="form-label"> Url</label>
-                        <input name="url" class='form-control' value=' {{ $blog->url }}' type='text'
+                        <input name="url" class='form-control' value=' {{ $blog->slug }}' type='text'
                             placeholder="Enter  Url">
                     </div>
-                    <div class=" col-md-6">
+                    <div class=" col-md-3 mt-3">
                         <label class="form-label">
                             <input type="checkbox" name="display_homepage" id="" value="1"
                                 @if ($blog->display_homepage == 1) checked @endif> Display in Homepage
                         </label>
                     </div>
+                    <div class="col-md-3 mt-3">
+                        <label class="form-label">Blog Status</label>
+                        <select name="status" id="" class="form-select form-control">
+                            <option value="">--status--</option>
+                            <option value="1" {{$blog->status?'selected':''}}>Active</option>
+                            <option value="0" {{!$blog->status?'selected':''}}>InActive</option>
+
+
+                        </select>
+                    </div>
                     <div class=" col-md-12 my-2">
                         <label class="form-label">Detail</label>
-                        <textarea name="content" id="summernote" cols="30" rows="10">{{ $blog->post_content }}</textarea>
+                        <textarea name="long_description" id="summernote" cols="30" rows="10">{{ $blog->long_description }}</textarea>
                     </div>
 
 
                     <div class=" col-md-12">
                         <label class="form-label">Blog Thumbnail </label>
                         <div class="image-input">
-                            <input type="file" accept="image/*" id="imageInput1" name="image" value="">
+                            <input type="file" accept="image/*" id="imageInput1" name="thumbnail" value="">
                             <label for="imageInput1" class="image-button"><i class="far fa-image"></i> Choose image</label>
                             <img src="" class="image-preview1">
                         </div>
-                        <img src="{{ getImageurl($blog->guid) }}" alt="" width="100">
+                        <img src="{{ getImageurl($blog->thumbnail) }}" alt="" width="100">
                     </div>
 
 
@@ -146,7 +156,7 @@
 
                     <div class=" col-md-6">
                         <label class="form-label"> Meta Keyword</label>
-                        <input name="keyword" class='form-control' value=' {{ $blog->keyword }}' type='text'
+                        <input name="meta_keyword" class='form-control' value=' {{ $blog->meta_keyword }}' type='text'
                             placeholder="Keyword">
                     </div>
 

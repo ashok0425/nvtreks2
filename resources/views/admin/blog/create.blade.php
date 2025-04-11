@@ -66,7 +66,7 @@
         margin: 10px 17px;
     }
     .nav-tabs{
-    
+
     }
     </style>
 @endpush
@@ -99,14 +99,14 @@
             </div>
             <div class=" col-md-12 my-2">
                 <label class="form-label">Detail</label>
-             <textarea name="content"  cols="30" rows="10" id="summernote">{{ old('content') }}</textarea>
+             <textarea name="long_description"  cols="30" rows="10" id="summernote">{{ old('long_description') }}</textarea>
             </div>
-          
+
 
             <div class=" col-md-12">
                 <label class="form-label">Thumbnail </label>
                     <div class="image-input">
-                        <input type="file" accept="image/*" id="imageInput1" name="image" value="{{ old('image') }}">
+                        <input type="file" accept="image/*" id="imageInput1" name="thumbnail" value="{{ old('image') }}">
                         <label for="imageInput1" class="image-button"><i class="far fa-image"></i> Choose image</label>
                         <img src="" class="image-preview1">
                   </div>
@@ -123,7 +123,7 @@
 
             <div class=" col-md-6">
                 <label class="form-label"> Meta Keyword</label>
-             <input name="keyword"   class='form-control' value=' {{ old('keyword') }}' type='text' placeholder="Keyword">
+             <input name="meta_keyword"   class='form-control' value=' {{ old('meta_keyword') }}' type='text' placeholder="Keyword">
             </div>
 
             <div class=" col-md-6">
@@ -133,7 +133,7 @@
 
             <div class=" col-md-12">
                 <label class="form-label"> Meta Description</label>
-           
+
              <input type="text" name="meta_description" class="form-control" value="{{old('meta_description')}}">
             </div>
 
@@ -144,15 +144,15 @@
 
             <div class=" col-md-6">
                 <label class="form-label">Mobile Meta Title</label>
-             <input name="mobile_title"   class='form-control' value=' {{ old('meta_title') }}' type='text' placeholder="Mobile Meta  Title">
+             <input name="mobile_title"   class='form-control' value=' {{ old('mobile_title') }}' type='text' placeholder="Mobile Meta  Title">
             </div>
 
             <div class=" col-md-12">
                 <label class="form-label">Mobile Meta Description</label>
-           
+
              <input type="text" name="mobile_description" class="form-control" value="{{old('mobile_description')}}">
             </div>
-           
+
             <button type="submit" class="btn btn-primary btn-block mt-2">Save</button>
         </div>
         </form>
@@ -162,7 +162,7 @@
 
 
 @push('scripts')
-         
+
 {{-- custom input fielsd file  --}}
 	  <script>
 	// Add the following code if you want the name of the file appear on select
