@@ -56,7 +56,7 @@ class Package extends Model
 	}
 
 	public function itenaries() {
-		return $this->hasMany('App\Models\OutlineItinerary', 'package_id');
+		return $this->hasMany(PackageItinerary::class, 'package_id');
 	}
 
 	public function departure_dates() {

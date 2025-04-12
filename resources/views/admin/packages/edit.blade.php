@@ -471,13 +471,127 @@
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <label>Detailed itinerary:</label>
-                                                <textarea name="detailed_itinerary" cols="30" rows="10" id="summernote1">
 
-                                  {{ $package->detailed_itinerary }}
+                                                {{-- EXISTING ITINERARIES --}}
+                                                <div class="append-itinerary">
+                                                    @foreach ($package->itenaries as $index => $itinerary)
+                                                        <div class="single-itinerary mb-3 border p-3 rounded">
+                                                            <div class="row">
+                                                                <div class="form-group mb-2 col-md-6">
+                                                                    <input name="itineraries[{{ $index }}][title]" class="form-control" placeholder="Title" value="{{ $itinerary->title }}">
+                                                                </div>
+                                                                <div class="form-group mb-2 col-md-6">
+                                                                    <input name="itineraries[{{ $index }}][file]" class="form-control" type="file">
+                                                                    <input name="itineraries[{{ $index }}][pre_file]" class="form-control" hidden="file" value="{{$itinerary->thumbnail}}">
 
-                                 </textarea>
+                                                                    @if($itinerary->thumbnail)
+                                                                        <small>Current File: <a href="{{getImageUrl($itinerary->thumbnail)}}" target="_blank">Click</a></small>
+                                                                    @endif
+                                                                </div>
+                                                                <div class="form-group mb-2 col-12">
+                                                                    <input name="itineraries[{{ $index }}][content]" class="form-control" placeholder="Content" value="{{ $itinerary->content }}">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-4">
+                                                                    <input type="text" name="itineraries[{{ $index }}][car]" class="form-control" placeholder="Car" value="{{ $itinerary->car }}">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <input type="text" name="itineraries[{{ $index }}][walk]" class="form-control" placeholder="Walk" value="{{ $itinerary->walk }}">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <input type="text" name="itineraries[{{ $index }}][flight]" class="form-control" placeholder="Flight" value="{{ $itinerary->flight }}">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-4">
+                                                                    <input type="text" name="itineraries[{{ $index }}][distance]" class="form-control" placeholder="Distance" value="{{ $itinerary->distance }}">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <input type="text" name="itineraries[{{ $index }}][accommodation]" class="form-control" placeholder="Accommodation" value="{{ $itinerary->accommodation }}">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <input type="text" name="itineraries[{{ $index }}][meal]" class="form-control" placeholder="Meal" value="{{ $itinerary->meal }}">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-4">
+                                                                    <input type="text" name="itineraries[{{ $index }}][overnight]" class="form-control" placeholder="Overnight" value="{{ $itinerary->overnight }}">
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <input type="text" name="itineraries[{{ $index }}][breakfast]" class="form-control" placeholder="Breakfast" value="{{ $itinerary->breakfast }}">
+                                                                </div>
+                                                                <div class="col-md-8 d-flex align-items-center">
+                                                                    <button type="button" class="btn btn-danger remove-itinerary ms-auto">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
+                                                {{-- TEMPLATE FOR NEW --}}
+                                                <div id="itinerary-template" style="display: none;">
+                                                    <div class="single-itinerary mb-3 border p-3 rounded">
+                                                        <div class="row">
+                                                            <div class="form-group mb-2 col-md-6">
+                                                                <input name="itineraries[][title]" class="form-control" placeholder="Title">
+                                                            </div>
+                                                            <div class="form-group mb-2 col-md-6">
+                                                                <input name="itineraries[][file]" class="form-control" type="file">
+                                                            </div>
+                                                            <div class="form-group mb-2 col-12">
+                                                                <input name="itineraries[][content]" class="form-control" placeholder="Content">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-2">
+                                                            <div class="col-md-4">
+                                                                <input type="text" name="itineraries[][car]" class="form-control" placeholder="Car">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="text" name="itineraries[][walk]" class="form-control" placeholder="Walk">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="text" name="itineraries[][flight]" class="form-control" placeholder="Flight">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-2">
+                                                            <div class="col-md-4">
+                                                                <input type="text" name="itineraries[][distance]" class="form-control" placeholder="Distance">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="text" name="itineraries[][accommodation]" class="form-control" placeholder="Accommodation">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="text" name="itineraries[][meal]" class="form-control" placeholder="Meal">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mb-2">
+                                                            <div class="col-md-4">
+                                                                <input type="text" name="itineraries[][overnight]" class="form-control" placeholder="Overnight">
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <input type="text" name="itineraries[][breakfast]" class="form-control" placeholder="Breakfast">
+                                                            </div>
+                                                            <div class="col-md-8 d-flex align-items-center">
+                                                                <button type="button" class="btn btn-danger remove-itinerary ms-auto">Remove</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {{-- BUTTON TO ADD --}}
+                                                <div>
+                                                    <button type="button" class="btn btn-primary mt-2" id="add"><i class="fas fa-plus"></i> Add</button>
+                                                </div>
                                             </div>
                                         </div>
+
 
                                     </div>
                                 </div>
@@ -704,5 +818,30 @@ if($input.val().length > 0) {
         }
 
         ajaxCategory();
+    </script>
+        <script>
+    let itineraryIndex = {{ count($package->itenaries) }};
+
+    document.getElementById('add').addEventListener('click', function () {
+        let template = document.querySelector('#itinerary-template .single-itinerary').cloneNode(true);
+
+        template.querySelectorAll('input').forEach(input => {
+            let name = input.getAttribute('name');
+            if (name) {
+                input.setAttribute('name', name.replace(/\[\]/, `[${itineraryIndex}]`));
+            }
+            input.value = '';
+        });
+
+        itineraryIndex++;
+        document.querySelector('.append-itinerary').appendChild(template);
+    });
+
+    document.querySelector('.append-itinerary').addEventListener('click', function (e) {
+        if (e.target && e.target.classList.contains('remove-itinerary')) {
+            e.target.closest('.single-itinerary').remove();
+        }
+    });
+
     </script>
 @endpush

@@ -376,10 +376,17 @@
                                 <label>Detailed itinerary:</label>
                                 <div id="itinerary-template" style="display: none;">
                                     <div class="single-itinerary mb-3 border p-3 rounded">
-                                        <div class="form-group mb-2">
+                                        <div class="row">
+                                        <div class="form-group mb-2 col-md-6">
                                             <input name="itineraries[][title]" class="form-control" placeholder="Title">
                                         </div>
-
+                                        <div class="form-group mb-2 col-md-6">
+                                            <input name="itineraries[][file]" class="form-control" placeholder="file" type="file">
+                                        </div>
+                                        <div class="form-group mb-2 col-12">
+                                            <input name="itineraries[][content]" class="form-control" placeholder="Content">
+                                        </div>
+                                    </div>
                                         <div class="row mb-2">
                                             <div class="col-md-4">
                                                 <input type="text" name="itineraries[][car]" class="form-control" placeholder="Car">
@@ -407,6 +414,9 @@
                                         <div class="row mb-2">
                                             <div class="col-md-4">
                                                 <input type="text" name="itineraries[][overnight]" class="form-control" placeholder="Overnight">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <input type="text" name="itineraries[][breakfast]" class="form-control" placeholder="Breakfast">
                                             </div>
                                             <div class="col-md-8 d-flex align-items-center">
                                                 <button type="button" class="btn btn-danger remove-itinerary ms-auto">Remove</button>
@@ -633,8 +643,25 @@ if($input.val().length > 0) {
         </script>
 
 <script>
+    let itineraryIndex = 0; // Start from 0
+
     document.getElementById('add').addEventListener('click', function () {
         let template = document.querySelector('#itinerary-template .single-itinerary').cloneNode(true);
+
+        // Update name attributes with the current index
+        template.querySelectorAll('input').forEach(input => {
+            // Get the original name like itineraries[][title]
+            let name = input.getAttribute('name');
+            if (name) {
+                // Replace [] with [index]
+                let updatedName = name.replace(/\[\]/, `[${itineraryIndex}]`);
+                input.setAttribute('name', updatedName);
+            }
+
+            input.value = ''; // Clear input value
+        });
+
+        itineraryIndex++; // Increment index for next one
         document.querySelector('.append-itinerary').appendChild(template);
     });
 
@@ -645,5 +672,6 @@ if($input.val().length > 0) {
         }
     });
 </script>
+
 
     @endpush

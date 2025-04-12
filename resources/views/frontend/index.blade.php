@@ -72,7 +72,7 @@
         </a>
         </div>
 
-        <div class="col-12 col-md">
+        {{-- <div class="col-12 col-md">
             <div class="card destination-card  p-0 border-0 rounded-3">
                 <img src="{{getImageUrl($destinations[3]['image'])}}" alt="BHUTAN" class="card-img-top rounded-3"
                     style="height: 455px;object-fit: cover;">
@@ -81,7 +81,7 @@
                     <p class="destination-description">{{count($destinations[0]->packages)}} Destinations</p>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Third Column with Stacked Cards -->
         <div class="col-12 col-md-5 d-flex flex-column">

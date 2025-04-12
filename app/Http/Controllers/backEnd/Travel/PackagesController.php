@@ -10,6 +10,7 @@ use App\Models\CategoryPlace;
 use App\Models\Country;
 use App\Models\Destination;
 use App\Models\Package;
+use App\Models\PackageItinerary;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -59,14 +60,13 @@ class PackagesController extends Controller
     {
         $url = $this->toAscii($request->name);
         $this->validate($request, [
-            'name' => 'required|min:3|max:255|unique:packages',
+            'name' => 'required|min:3|max:255',
             'destination_id' => 'required',
             'category_destination_id' => 'required',
         ]);
 
         try {
             DB::beginTransaction();
-
             $package = new Package();
             $package->name = $request->name;
             $package->trip_id = $request->trip_id;
@@ -122,8 +122,8 @@ class PackagesController extends Controller
             $package->mobile_meta_description = $request->mobile_meta_description;
             $package->map_title = $request->map_title;
             $package->circuit_title = $request->circuit_title;
-            $package->is_luxury = $request->is_luxury;
-            $package->is_group = $request->is_group;
+            $package->is_luxury = $request->is_luxury??0;
+            $package->is_group = $request->is_group??0;
             $banner = $request->file('thumbnail');
             if ($banner) {
                 $package->banner = $this->uploadFile('upload/package/banner', $banner);
@@ -153,21 +153,23 @@ class PackagesController extends Controller
             }
 
             foreach ($request->itineraries??[] as $itinerary) {
+                if(count($itinerary)>=3){
                 DB::table('package_itineraries')->insert([
                     'package_id' => $package->id,
                     'title' => $itinerary['title'] ?? '',
+                    'content' => $itinerary['content'] ?? '',
+                    'thumbnail' => $this->uploadFile('upload/package/iternary', $itinerary['file']),
                     'car' => $itinerary['car'] ?? '',
                     'walk' => $itinerary['walk'] ?? '',
                     'flight' => $itinerary['flight'] ?? '',
                     'distance' => $itinerary['distance'] ?? '',
                     'accommodation' => $itinerary['accommodation'] ?? '',
                     'meal' => $itinerary['meal'] ?? '',
+                    'breakfast' => $itinerary['breakfast'] ?? '',
                     'overnight' => $itinerary['overnight'] ?? '',
-                    'created_at' => now(),
-                    'updated_at' => now(),
                 ]);
             }
-
+            }
 
             DB::commit();
             $notification = [
@@ -229,10 +231,9 @@ class PackagesController extends Controller
     {
         $url = $this->toAscii($request->name);
         // $request['url'] = $url;
-        // dd($request->all());
 
         $this->validate($request, [
-            'name' => 'required|min:3|max:255|unique:packages,name,' . $id,
+            'name' => 'required|min:3|max:255|unique:packages,name,' . $package->id,
             'destination_id' => 'required',
             'category_destination_id' => 'required',
         ]);
@@ -292,8 +293,8 @@ class PackagesController extends Controller
             $package->mobile_meta_description = $request->mobile_meta_description;
             $package->map_title = $request->map_title;
             $package->circuit_title = $request->circuit_title;
-            $package->is_luxury = $request->is_luxury;
-            $package->is_group = $request->is_group;
+            $package->is_luxury = $request->is_luxury??$package->is_luxury;
+            $package->is_group = $request->is_group??$package->is_group;
 
             $banner = $request->file('thumbnail');
             if ($banner) {
@@ -324,6 +325,26 @@ class PackagesController extends Controller
                     DB::table('package_featured')->insert(['package_id' => $package->id, 'featured_id' => $value]);
                 }
             }
+              $package->itenaries()->delete();
+            foreach ($request->itineraries??[] as $itinerary) {
+                if(count($itinerary)>=3){
+                DB::table('package_itineraries')->insert([
+                    'package_id' => $package->id,
+                    'title' => $itinerary['title'] ?? '',
+                    'content' => $itinerary['content'] ?? '',
+                    'thumbnail' => $itinerary['pre_file']?? $this->uploadFile('upload/package/iternary', $itinerary['file']),
+                    'car' => $itinerary['car'] ?? '',
+                    'walk' => $itinerary['walk'] ?? '',
+                    'flight' => $itinerary['flight'] ?? '',
+                    'distance' => $itinerary['distance'] ?? '',
+                    'accommodation' => $itinerary['accommodation'] ?? '',
+                    'meal' => $itinerary['meal'] ?? '',
+                    'breakfast' => $itinerary['breakfast'] ?? '',
+                    'overnight' => $itinerary['overnight'] ?? '',
+                ]);
+            }
+            }
+
             DB::commit();
             $notification = [
                 'alert-type' => 'success',

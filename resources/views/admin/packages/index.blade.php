@@ -30,6 +30,7 @@
                                 <th>Name</th>
                                 <th>Status</th>
                                 <th>Action</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -41,8 +42,7 @@
                                     <td>{!! $package->status == 1
                                         ? '<span class="badge bg-success">Active</span>'
                                         : '<span class="badge bg-danger">Deactive</span>' !!}</td>
-                                    <td>
-                                        <td class="d-flex">
+                                        <td>
                                             <a href="{{ route('admin.packages.edit', $package) }}" class="btn-sm btn btn-primary"><i class="fas fa-edit"></i>
                                             </a>
 
