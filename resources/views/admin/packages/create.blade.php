@@ -374,6 +374,11 @@
                         <div class="form-group">
                             <div class="col-md-12">
                                 <label>Detailed itinerary:</label>
+                                <div>
+                                    <textarea name="detailed_itinerary" id="summernote1" class="form-control" rows="2" >
+
+                                    </textarea>
+                                </div>
                                 <div id="itinerary-template" style="display: none;">
                                     <div class="single-itinerary mb-3 border p-3 rounded">
                                         <div class="row">

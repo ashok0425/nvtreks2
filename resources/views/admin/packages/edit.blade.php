@@ -471,7 +471,11 @@
                                         <div class="form-group">
                                             <div class="col-md-12">
                                                 <label>Detailed itinerary:</label>
-
+                                                <div>
+                                                    <textarea name="detailed_itinerary" id="summernote1" class="form-control" rows="2" >
+                                         {{$package->detailed_itinerary}}
+                                                    </textarea>
+                                                </div>
                                                 {{-- EXISTING ITINERARIES --}}
                                                 <div class="append-itinerary">
                                                     @foreach ($package->itenaries as $index => $itinerary)

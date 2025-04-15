@@ -5,15 +5,15 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\PackageController;
-use App\Http\Controllers\BuyController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
 
 // Index page
-Route::get('/', [HomeController::class, 'home'])->name('/');
+Route::get('/', [HomeController::class, 'home'])->name('home');
 
 Route::get('contact', [ContactController::class, 'index'])->name('contactus');
-Route::post('contact', [ContactController::class, 'store'])->name('contactus');
+Route::post('contact', [ContactController::class, 'store'])->name('contactus.store');
 
 Route::get('destination/{url}', [DestinationController::class, 'index'])->name('destination');
 Route::get('package-destination/{url}', [DestinationController::class, 'index'])->name('package.destination');
@@ -24,21 +24,17 @@ Route::get('deals', [DestinationController::class, 'index'])->name('deals');
 
 Route::get('{country?}/package-detail/{url?}', [PackageController::class, 'show'])->name('package.detail');
 Route::get('package-detail/{url?}', [PackageController::class, 'show'])->name('package.detail');
+Route::get('package/print/{package}', [PackageController::class, 'printpackage'])->name('print');
+Route::get('departure-date', [PackageController::class, 'Departure'])->name('departure');
 
-Route::get('book-now/{url?}/{date?}', [BuyController::class, 'index'])->name('booknow');
-Route::post('booking/step2', [BuyController::class, 'step2'])->name('booking.step2');
-Route::post('booking/store', [BuyController::class, 'store'])->name('booking.step2.store');
-Route::get('booking-online/{id?}', [BuyController::class, 'payonline'])->name('booking.online');
-Route::post('payment-confirmation', [BuyController::class, 'Confirmation'])->name('booking.confirmation');
-Route::any('payment', [BuyController::class, 'getPayment'])->name('payment-from-bank');
-Route::any('payment-success', [BuyController::class, 'getPayment'])->name('payment-from-bank-reponse');
-Route::any('pay-thankyou', [BuyController::class, 'thanku'])->name('pay.thanku');
+Route::get('book-now', [BookingController::class, 'index'])->name('booknow');
+Route::post('book-now', [BookingController::class, 'store'])->name('booknow.store');
+Route::any('payment-success', [BookingController::class, 'success'])->name('booknow.success');
 
 Route::any('payment-failed', function () {
     return view('frontend.failed');
 })->name('failed');
 
-Route::get('package/print/{package}', [PackageController::class, 'printpackage'])->name('print');
 
 
 Route::get('blogs', [BlogController::class, 'index'])->name('blog');
@@ -48,7 +44,6 @@ Route::get('events', [EventController::class, 'index'])->name('events');
 Route::get('event-detail/{id}', [EventController::class, 'show'])->name('event.detail');
 
 Route::post('enquery-post', [ContactController::class, 'Enquery'])->name('enquery.post');
-Route::get('departure-date', [PackageController::class, 'Departure'])->name('departure');
 Route::get('about-us', [HomeController::class, 'about'])->name('about');
 Route::get('useful-info', [HomeController::class, 'UsefulInfo'])->name('usefulinfo');
 Route::get('privacy-policy', [HomeController::class, 'privacy'])->name('privacy');

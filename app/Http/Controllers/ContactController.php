@@ -29,14 +29,17 @@ class ContactController extends Controller
                 abort(403);
               }
            $request->validate([
-                  'name' => 'required',
+                  'name' => 'required_without:first_name',
+                  'first_name' => 'required_without:name',
                   'email' => 'required|email',
-                  'comment' => 'required',
+                  'message' => 'required',
             ]);
                   $contact = new Contact;
-                  $contact->name = $request->name;
+                  $contact->name = $request->name??$request->first_name.''.$request->last_name;
                   $contact->email = $request->email;
-                  $contact->comment = $request->comment;
+                  $contact->phone = $request->phone;
+                  $contact->comment = $request->message;
+                  $contact->page = $request->message;
                   $contact->save();
                   $userIP = $request->ip();
                   $data = [

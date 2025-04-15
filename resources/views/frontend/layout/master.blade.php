@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{asset('frontend/style/footer.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/style/app.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/style/home.css')}}">
+   {{-- toastr --}}
+   <link defer rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style>
         /* Ensure that the dropdown menu shows on hover */
@@ -165,6 +167,29 @@
         crossorigin="anonymous"></script>
     <!-- Splide.js JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    {{-- toastr --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    {{-- toastr --}}
+    <script>
+        @if (Session::has('messege')) //toatser
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    toastr.info("{{ Session::get('messege') }}");
+                    break;
+                case 'success':
+                    toastr.success("{{ Session::get('messege') }}");
+                    break;
+                case 'warning':
+                    toastr.warning("{{ Session::get('messege') }}");
+                    break;
+                case 'error':
+                    toastr.error("{{ Session::get('messege') }}");
+                    break;
+            }
+        @endif
+    </script>
     @stack('script')
 
     <script>

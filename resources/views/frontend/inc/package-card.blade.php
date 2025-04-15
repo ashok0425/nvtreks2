@@ -46,10 +46,10 @@
             <span class="small text_darkGray">({{$package->testimonial_count}} reviews)</span>
             @for ($i = 1; $i <= $package->testimonial_avg; $i++)
             ⭐
-                            @endfor
-                            @for ($i = 1; $i <= 5 - $package->testimonial_avg; $i++)
-                                <i class="far fa-star text-gray"></i>
-                            @endfor
+             @endfor
+              @for ($i = 1; $i <= 5 - $package->testimonial_avg; $i++)
+                <i class="far fa-star text-gray"></i>
+              @endfor
         </div>
         <div
             class="d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-3">
@@ -63,7 +63,7 @@
                 @endif
 
             </div>
-            <button class="btn btn_darkprimary rounded-0 px-3">VIEW DETAILS</button>
+            <a href="{{route('package.detail',['url'=>$package->url])}}" class="btn btn_darkprimary rounded-0 px-3">VIEW DETAILS</a>
         </div>
     </div>
 </div>

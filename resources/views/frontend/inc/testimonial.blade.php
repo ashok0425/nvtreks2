@@ -1,4 +1,14 @@
+@php
+if (!isset($testimonials)) {
+   $testimonials =DB::table('testimonials')
+    ->where('status', 1)
+    ->whereRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) < 60')
+    ->orderByRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) DESC')
+     ->limit(5)
+      ->get();
+}
 
+@endphp
     <!-- TESTIMONIALS -->
     <section class="position-relative"
         style="background-image: url({{asset('frontend/images/testimonials_banner.png')}}); background-size: cover; background-position: center; min-height: 550px;">
@@ -15,19 +25,14 @@
                     <div class="splide" id="testimonialSlider">
                         <div class="splide__track">
                             <ul class="splide__list">
-                                @foreach (DB::table('testimonials')
-                                ->where('status', 1)
-                                ->whereRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) < 60')
-                                ->orderByRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) DESC')
-                                ->limit(5)
-                                ->get() as $testimonial)
+                                @foreach ($testimonials as $testimonial)
                                 <li class="splide__slide my-4">
                                     <div class="text-center mb-md-5 mb-3">
                                         <p class='font_montserrat fs-6 fst-italic mb-md-5 mb-3'>{!! strip_tags($testimonial->content),100 !!}</p>
 
                                         <p class='font_montserrat fs-5 fst-italic mb-1 fw-bold text_darkprimary'>
                                             {{ $testimonial->name }}</p>
-                                        <p class='font_montserrat fs-6 fst-italic mb-0'>Canada</p>
+                                        {{-- <p class='font_montserrat fs-6 fst-italic mb-0'>Canada</p> --}}
                                     </div>
                                 </li>
                                 @endforeach

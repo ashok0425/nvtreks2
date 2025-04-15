@@ -35,6 +35,7 @@
                 <p class='section-description mb-4'>Explore our curated list of the best countries to visit in 2024
                     and discover incredible destinations waiting to be explored</p>
                 <form action="{{route('contactus')}}" method="POST">
+                    <input type="hidden" name="page" value="contact">
                     @csrf
                     <input type="hidden" name="source" value="{{request()->query('utm_source')}}">
                     <div class="mb-3 mb-md-4">
@@ -47,7 +48,7 @@
                     </div>
                     <div class="mb-3 mb-md-5">
                         <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="5"
-                            placeholder='Your Message*' required name="comment"></textarea>
+                            placeholder='Your Message*' required name="message"></textarea>
                     </div>
                     <div>
                         <button class='btn btn_darkprimary rounded-0 py-2 py-md-3 px-3 px-md-4 fw-semibold'>SUBMIT

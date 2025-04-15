@@ -19,7 +19,7 @@ class PackageController extends Controller
 {
 
 
-public function show() {
+public function show(Request $request) {
     $s2=request()->segment(1);
     $s3=request()->segment(3);
 if ($s3) {
@@ -29,17 +29,18 @@ if ($s3) {
     $url=request()->segment(2);
     $country_id='npee';
 }
-	$package = Package::with('gallery')->where('status',1)->where('url',$url)->first();
+	$package = Package::with('package_images','testimonials','feature_packages')->where('status',1)->where('url',$url)->first();
 	if(!$package){
         abort(404);
    }
-      $reviews=DB::table('testimonials')->join('package_testimonial','package_testimonial.testimonial_id','testimonials.id')->where('testimonials.status',1)->where('package_testimonial.package_id',$package->id)->orderBy('testimonials.date','desc')->limit(20)->get();
-      $features=DB::table('packages')->join('package_featured','packages.id','package_featured.featured_id')->where('package_featured.package_id',$package->id)->select('packages.*')->where('status',1)->get();
+      $reviews=$package->testimonials;
+      $features=$package->feature_packages;
       $before=Destination::find($package->destination_id);
       $country=Country::where('slug',$country_id)->value('id');
       $countries=Country::where('slug','!=','np')->select('slug')->get();
-
-      return view('frontend.package_detail',compact('package','reviews','features','before','country','countries','url'));
+      $month = $request->get('month', Carbon::now()->month);
+      $year = $request->get('year', Carbon::now()->year);
+      return view('frontend.package_detail',compact('package','reviews','features','before','country','countries','url','year','month'));
 }
 
 public function printpackage($id){
@@ -51,10 +52,20 @@ public function printpackage($id){
 
 
 public function Departure(Request $request){
-     $package=Package::find($request->packageid);
-      $departures=Departure::where('status',1)->orderBy('start_date')->where('package_id',$request->packageid)->whereYear('start_date', '=', $request->year)->whereMonth('start_date', '=', $request->month)->where('start_date', '>=', Carbon::today())->get();
-     return view('frontend.departure',compact('departures','package'));
+    $month = $request->get('month', Carbon::now()->month);
+    $year = $request->get('year', Carbon::now()->year);
+    $departures = Departure::where('package_id',$request->id)
+    ->with('package:name,duration,id,price,discounted_price')
+    ->whereMonth('start_date', $month)
+    ->whereYear('start_date', $year)
+    ->select('id', 'package_id', 'start_date', 'end_date', 'total_seats', 'booked_seats')
+    ->orderBy('start_date')
+    ->limit(10)
+    ->get();
+return response()->json([
+    'departures' => $departures,
 
+]);
 }
 
 

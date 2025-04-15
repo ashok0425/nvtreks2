@@ -1,1682 +1,998 @@
-@php
-    $agent = new \Jenssegers\Agent\Agent();
-@endphp
-@if ($agent->isMobile())
-    @section('title')
-        {{ $package->country($country) != null ? $package->country($country)->pivot->mobile_meta_title : $package->mobile_meta_title }}
-    @endsection
-    @section('descr')
-        {{ $package->country($country) != null ? $package->country($country)->pivot->mobile_meta_description : $package->mobile_meta_description }}
-    @endsection
-    @section('keyword')
-        {{ $package->country($country) != null ? $package->country($country)->pivot->mobile_meta_keyword : $package->mobile_meta_keyword }}
-    @endsection
-@else
-    @section('title')
-        {{ $package->country($country) != null ? $package->country($country)->pivot->page_title : $package->page_title }}
-    @endsection
-    @section('descr')
-        {{ $package->country($country) != null ? $package->country($country)->pivot->meta_description : $package->meta_description }}
-    @endsection
-    @section('keyword')
-        {{ $package->country($country) != null ? $package->country($country)->pivot->meta_keywords : $package->meta_keywords }}
-    @endsection
-
-@endif
-@section('img')
-    {{ getImageurl($package->thumbnail) }}
-@endsection
-@section('url')
-    {{ Request::url() }}
-@endsection
-
 @extends('frontend.layout.master')
-@php
-    define('PAGE', 'destination');
-@endphp
-<style>
-    .sticky-position {
-        position: sticky;
-        top: 50px;
-    }
-    .accordion-button:not(.collapsed){
-        background: #fff!important;
-        color: #000!important;
-
-    }
-
-    .about-trip .head .nav-link {
-        font-weight: 500;
-        font-size: 18px;
-        color: #fff !important;
-    }
-
-    #about_trip {
-        position: sticky !important;
-        top: 50px !important;
-        z-index: 99;
-    }
-
-    .about-trip .head .nav-link i {
-        font-size: 17px;
-    }
-
-    .border_bottom {
-        border-bottom: 2px solid rgb(99, 99, 99);
-    }
-
-    .about-trip .head .nav-link.active {
-        color: rgb(42, 135, 183) !important;
-    }
-
-    .about-trip .head {
-        background: rgb(42, 135, 183) !important;
-    }
-
-    .about-trip ul li {
-        outline: none !important;
-        border: none;
-    }
-
-    .btn_sm {
-        /* border-radius: 10px; */
-    }
-
-    .at-icon-wrapper {
-        width: 38px !important;
-        height: 38px !important;
-        line-height: 38px !important;
-
-    }
-
-    .at-icon-wrapper svg {
-        width: 38px !important;
-        height: 38px !important;
-
-    }
-
-    .boder-0 {
-        border: 0px !important
-    }
 
 
-
-
-    @media only screen and (max-width: 600px) {
-        #about_trip {
-            top: 0px !important;
-        }
-
-    }
-</style>
-
-{!! NoCaptcha::renderJs() !!}
 @section('content')
-    <link rel="alternate" hreflang="en-np" href="{{ url("package-detail/$url") }}" />
+<section id="departureApp">
+    <section class="video_section">
+        <!-- navbar -->
+        @include('frontend.layout.header')
+        @php
+            $defaultImage = getImageUrl($package->cover_image)??asset('/frontend/images/galleyBanner.png'); // fallback image
+            $finalImage = $defaultImage;
 
-    @foreach ($countries as $item)
-        <link rel="alternate" hreflang="en-{{ $item->slug }}" href="{{ url("$item->slug/package-detail/$url") }}" />
-    @endforeach
-    <div class=" px-0 mx-0">
-        <main>
-            <section class="trip-desc my-3 my-md-0">
-                <div class="container">
-                    <div class="row">
-                        {{-- 1st col staart  --}}
-                        <div class="col-md-9 my-1">
-                            @php
-                                $packages_id = $package->id;
-                                $arr = trim($package->country($country) != null ? $package->country($country)->pivot->name : $package->name);
-                                // return isset() ? $arr[0] : $string;
-                            @endphp
-                            {{-- banner section start  --}}
-                            <div class="my-2">
-                                <h1 class="custom-text-primary custom-fs-25 mb-2">
-                                    {{ $package->country($country) != null ? $package->country($country)->pivot->name : $package->name }}
-                                </h1>
+        @endphp
+        <div class="position-absolute top-0 start-0 w-100 h-100">
+            <div class="banner-container"
+                style="background-image: url({{ $finalImage }});background-size: cover;background-position: center;">
+                <div class="position-absolute top-0 start-0 w-100 h-100 z-1" style='background-color: #000000;opacity: 20%'>
+                </div>
+                <div class="banner-content">
+                    <h1 class="banner-title">{{$package->name}}
+                    </h1>
+                </div>
+            </div>
+        </div>
 
-                                <section class="hero2">
-                                    @if (empty($package->thumbnail))
-                                        <img data-src="{{ getImageurl('frontend/getImageurl(s/hero4.webp') }}"
-                                            class="lazy" alt="cover image" width="2000" height="300">
-                                    @else
-                                        <img data-src="{{ getImageurl($package->thumbnail) }}" alt="cover image"
-                                            class="lazy" width="2000" height="300">
-                                    @endif
-
-                                </section>
-                            </div>
-
-                            <div class="book-now mx-0 card  shadow-sm bg_secondary  px-5 py-2 d-md-none d-md-block">
-                                @if (!empty($package->duration))
-                                    <div class="col-12 py-2">
-                                        <strong class='my-0 py-0'>Duration</strong>
-                                        <p class='my-0 py-0'>{{ $package->duration }} </p>
-                                    </div>
-                                @endif
-                                @if (!empty($package->activity))
-                                    <div class="col-12 py-2">
-                                        <strong class='my-0 py-0'>Trip Type</strong>
-                                        <p class='my-0 py-0'>{{ $package->activity }}</p>
-                                    </div>
-                                @endif
-                                @if (!empty($package->difficulty))
-                                    <div class="col-12 py-2">
-                                        <strong class='my-0 py-0'>Difficuilty</strong>
-                                        <p class='my-0 py-0'>
-                                            {{ $package->difficulty }}
-                                        </p>
-                                    </div>
-                                @endif
-
-                                @if (!empty($package->meals))
-                                    <div class="col-12 py-2">
-                                        <strong class='my-0 py-0'>Meal & Accommodation</strong>
-                                        <p class='my-0 py-0'>
-                                            {{ $package->meals }}
-                                        </p>
-                                    </div>
-                                @endif
-
-                                @if (!empty($package->group_size))
-                                    <div class="col-12 py-2">
-                                        <strong class='my-0 py-0'>Group Size</strong>
-                                        <p class='my-0 py-0'>
-                                            {{ $package->group_size }}
-                                        </p>
-                                    </div>
-                                @endif
-
-                                @if (!empty($package->transport))
-                                    <div class="col-12 py-2">
-                                        <strong class='my-0 py-0'>Transport</strong>
-                                        <p class='my-0 py-0'>
-                                            {{ $package->transport }}
-                                        </p>
-                                    </div>
-                                @endif
-
-                                @if (!empty($package->arrival))
-                                    <div class="col-12 py-2">
-                                        <strong class='my-0 py-0'>Arrival On</strong>
-                                        <p class='my-0 py-0'>
-                                            {{ $package->arrival }}
-                                        </p>
-                                    </div>
-                                @endif
+    </section>
 
 
-                                @if (!empty($package->departure_from))
-                                    <div class="col-12 py-2">
-                                        <strong class='my-0 py-0'>Departure From</strong>
-                                        <p class='my-0 py-0'>
-                                            {{ $package->departure_from }}
-                                        </p>
-                                    </div>
-                                @endif
+    <!-- list details -->
+    <section>
+        <div class="mb-md-5 pb-3 position-sticky top-0 z-1 " style="z-index: 99999">
+            <div class="boxShadow bg-white">
+                <div class="container py-3">
+                    <!-- Tab Navigation + Book Button -->
+<div class="d-flex flex-md-row flex-column justify-content-md-between align-items-center">
+    <ul class="nav nav_tab justify-content-center">
+        @if(!empty($package->overview))
+        <li class="nav-item">
+            <a class="nav-link active" href="#overview">Overview</a>
+        </li>
+        @endif
 
+        @if(!empty($package->itinerary))
+        <li class="nav-item">
+            <a class="nav-link" href="#itinerary">Itinerary</a>
+        </li>
+        @endif
 
-                                @if (!empty($package->operation))
-                                    <div class="col-12 py-2">
-                                        <strong class='my-0 py-0'>Operation</strong>
-                                        <p class='my-0 py-0'>
-                                            {{ $package->operation }}
-                                        </p>
-                                    </div>
-                                @endif
+        @if(!empty($package->departure_dates))
+        <li class="nav-item">
+            <a class="nav-link" href="#departureDates">Departure Dates</a>
+        </li>
+        @endif
 
-                                @if (!empty($package->route_detail))
-                                    <div class="col-12 py-2">
-                                        <strong class='my-0 py-0'>Route Detail</strong>
-                                        <p class='my-0 py-0'>
-                                            {{ $package->route_detail }}
-                                        </p>
-                                    </div>
-                                @endif
+        @if(!empty($package->faqs))
+        <li class="nav-item">
+            <a class="nav-link" href="#faqs">FAQs</a>
+        </li>
+        @endif
 
+        <li class="nav-item">
+            <a class="nav-link" href="#reviews">Reviews</a>
+        </li>
+    </ul>
 
-                                @if (!empty($package->best_month))
-                                    <div class="col-12 py-2">
-                                        <strong class='my-0 py-0'>Best Month</strong>
-                                        <p class='my-0 py-0'>
-                                            {{ $package->best_month }}
-                                        </p>
-                                    </div>
-                                @endif
+    <a  href="{{route('booknow')}}" class="btn bg_darkprimary rounded-0 py-2 px-4 fw-bold fs-6 mt-3 mt-md-0">BOOK A TRIP</a>
+</div>
 
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class=" mb-md-5 mb-4">
+                <h2 class='head_title mb-3'>{{$package->name}}</h2>
+                <div class="d-flex align-items-center gap-3">
 
-
-                                <div class="col-12 py-2">
-                                    <strong class='my-0 py-0'>Review</strong>
-                                    <p class='my-0 py-0'>
-                                    <div class="rating">
-                                        @for ($i = 1; $i <= $package->rating; $i++)
-                                            <i class="fas fa-star text-warning"></i>
-                                        @endfor
-                                        @for ($i = 1; $i <= 5 - $package->rating; $i++)
-                                            <i class="fas fa-star text-gray"></i>
-                                        @endfor
-                                    </div>
-                                    </p>
-                                </div>
-
-                                @if ($package->country($country) !== null && $package->country($country)->pivot->price != null)
-                                    @if (!empty($package->discounted_price))
-                                        <div class="col-12 py-2">
-
-                                            <strong class='my-0 py-0'> Price</strong>
-                                            <strong class='my-0 py-0 custom-fs-25 custom-fw-700'>
-                                                {{ $package->country($country)->pivot->currency }}<span
-                                                    class="text-danger "><s>
-                                                        {{ $package->country($country)->pivot->price }}</s> </span>
-
-                                                <span class="text-success">
-                                                    {{ $package->country($country)->pivot->offer_price }}
-                                                </span>
-                                            </strong>
-                                        </div>
-                                    @else
-                                        <div class="col-12 py-2">
-
-                                            <strong class='my-0 py-0'>Price</strong>
-
-                                            <span class="custom-text-primary">
-                                                <strong class="text-dark custom-fs-25 custom-fw-700">
-
-                                                    {{ $package->country($country)->pivot->currency }}
-                                                    {{ $package->country($country)->pivot->price }}
-                                                </strong>
-                                                Per Person</span>
-
-                                        </div>
-                                    @endif
-                                @else
-                                    @if (!empty($package->discounted_price))
-                                        <div class="col-12 py-2">
-
-                                            <strong class='my-0 py-0'> Price</strong>
-                                            <strong class='my-0 py-0 custom-fs-25 custom-fw-700'>
-                                                US <span class="text-danger "><s>${{ $package->price }}</s> </span>
-
-                                                <span class="text-success">${{ $package->discounted_price }} </span>
-                                            </strong>
-                                        </div>
-                                    @else
-                                        <div class="col-12 py-2">
-
-                                            <strong class='my-0 py-0'>Price</strong>
-
-                                            <span class="custom-text-primary">
-                                                <strong class="text-dark custom-fs-25 custom-fw-700">
-
-                                                    USD ${{ $package->price }}
-                                                </strong>
-                                                Per Person</span>
-
-                                        </div>
-                                    @endif
-                                @endif
-
-
-
-                                <div class="row">
-                                    <div class="col-md-12 col-12 py-2">
-                                        <a class="btn btn-primary w-100"
-                                            href="{{ route('booknow', ['url' => $package->url, 'cu' => $package->country($country) != null ? $package->country($country)->pivot->currency : 'USD']) }}">Book
-                                            Now</a>
+                    <p class='fs-5 fw-bold font_montserrat mb-0'>
+                        <div class="d-flex align-items-center gap-1 mb-md-4 mb-3">
+                            <span class="small text_darkGray"></span>
+                            @for ($i = 1; $i <= $package->testimonial_avg; $i++)
+                            <i class="fas fa-star text-gray text-warning"></i>
+                             @endfor
+                              @for ($i = 1; $i <= 5 - $package->testimonial_avg; $i++)
+                                <i class="fas fa-star text-gray"></i>
+                              @endfor
+                        </span>
+                        {{$package->testimonial_avg}}/{{$package->testimonial_count}}</p>
+                </div>
+            </div>
+            <div class="row align-items-end mb-md-5 mb-4">
+                <div class="mb-md-5">
+                    <div class="row gap-3 gap-md-0">
+                        <div class="col-md-6 d-flex">
+                            <img loading='lazy' src="{{getImageUrl($package->package_images()->first()?->image)??$finalImage}}" alt="{{$package->name}}"
+                                class="img-fluid w-100 h-100 object-fit-cover">
+                        </div>
+                        <div class="col-md-3 d-flex flex-column">
+                            <img loading='lazy' src="{{getImageUrl($package->package_images()->skip(1)->first()?->image)??$finalImage}}" alt="{{$package->name}}"
+                                class="img-fluid w-100 h-50 object-fit-cover mb-4">
+                            <img loading='lazy' src="{{getImageUrl($package->package_images()->skip(2)->first()?->image)??$finalImage}}" alt="{{$package->name}}"
+                                class="img-fluid w-100 h-50 object-fit-cover">
+                        </div>
+                        <div class="col-md-3 d-flex">
+                            <img loading='lazy' src="{{getImageUrl($package->package_images()->skip(3)->first()?->image)??$finalImage}}" alt="{{$package->name}}"
+                                class="img-fluid w-100 h-100 object-fit-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 pe-md-4">
+                    <div class="card boxShadow p-3 p-md-4 pb-md-5 mb-md-5 mb-4 border-0">
+                        <div class="row align-items-center g-md-5 g-4">
+                            @if ($package->duration)
+                            <div class="col-6 col-md-4 trip_itinerary_card">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src="{{asset('frontend/images/tripIcon.png')}}" alt="Trip Duration" class="img-fluid" width="51" height="51" />
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class="mb-0 border-bottom border-light-subtle">Trip Duration</h4>
+                                        <p class="mb-0 font_montserrat">{{$package->duration}}</p>
                                     </div>
                                 </div>
+                            </div>
+                            @endif
+
+                            @if ($package->activity)
+                            <div class="col-6 col-md-4 trip_itinerary_card">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src="{{asset('frontend/images/naturetripIcon.png')}}" alt="Nature Of Trip" class="img-fluid" width="51" height="51" />
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class="mb-0 border-bottom border-light-subtle">Nature Of Trip</h4>
+                                        <p class="mb-0 font_montserrat">{{$package->activity}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if ($package->altitude)
+                            <div class="col-6 col-md-4 trip_itinerary_card">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src="{{asset('frontend/images/maxaltitudeIcon.png')}}" alt="Maximum Altitude" class="img-fluid" width="51" height="51" />
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class="mb-0 border-bottom border-light-subtle">Maximum Altitude</h4>
+                                        <p class="mb-0 font_montserrat">{{$package->altitude}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if ($package->difficulty)
+                            <div class="col-6 col-md-4 trip_itinerary_card">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src="{{asset('frontend/images/gradeIcon.png')}}" alt="Difficulty Grade" class="img-fluid" width="51" height="51" />
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class="mb-0 border-bottom border-light-subtle">Difficulty Grade</h4>
+                                        <p class="mb-0 font_montserrat">{{$package->difficulty}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if ($package->start_end_point)
+                            <div class="col-6 col-md-4 trip_itinerary_card">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src="{{asset('frontend/images/poinsIcon.png')}}" alt="Start & End Point" class="img-fluid" width="51" height="51" />
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class="mb-0 border-bottom border-light-subtle">Start & End Point</h4>
+                                        <p class="mb-0 font_montserrat">{{$package->start_end_point}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if ($package->best_month)
+                            <div class="col-6 col-md-4 trip_itinerary_card">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src="{{asset('frontend/images/seasonsIcon.png')}}" alt="Best Seasons" class="img-fluid" width="51" height="51" />
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class="mb-0 border-bottom border-light-subtle">Best Seasons</h4>
+                                        <p class="mb-0 font_montserrat">{{$package->best_month}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if ($package->meal)
+                            <div class="col-6 col-md-4 trip_itinerary_card">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src="{{asset('frontend/images/mealsIcon.png')}}" alt="Meals" class="img-fluid" width="51" height="51" />
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class="mb-0 border-bottom border-light-subtle">Meals</h4>
+                                        <p class="mb-0 font_montserrat">{{$package->meal}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if ($package->transport)
+                            <div class="col-6 col-md-4 trip_itinerary_card">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src="{{asset('frontend/images/transportationIcon.png')}}" alt="Transportation" class="img-fluid" width="51" height="51" />
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class="mb-0 border-bottom border-light-subtle">Transportation</h4>
+                                        <p class="mb-0 font_montserrat">{{$package->transport}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if ($package->accommodation)
+                            <div class="col-6 col-md-4 trip_itinerary_card">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src="{{asset('frontend/images/accommodationIcon.png')}}" alt="Accommodation" class="img-fluid" width="51" height="51" />
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class="mb-0 border-bottom border-light-subtle">Accommodation</h4>
+                                        <p class="mb-0 font_montserrat">{{$package->accommodation}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                    </div>
+
+
+                    <div class="card boxShadow bg_lightwhite p-3 p-md-4 mb-md-5 mb-4 trip_details">
+                        {!!$package->overview!!}
+                    </div>
+
+                    @if ($package->routemap)
+                    <div class="card boxShadow p-3 p-md-4 pb-md-5 mb-md-5 mb-4 trip_details">
+                        <h5 class="mb-md-4 mb-3">{{$package->name}} Route</h5>
+                        <img src="{{getImageUrl($package->routemap)}}" alt="Everest camp" class="img-fluid" />
+                    </div>
+                    @endif
+
+
+                    <div class="card boxShadow p-3 p-md-4 pb-md-5 mb-md-5 mb-4 trip_details bg_lightwhite"
+                        id="itinerary">
+                        <h5 class="mb-md-4 mb-3">Outline Itinerary</h5>
+                        <div>
+                            @foreach ($package->itenaries as $itenary)
+
+                            <div
+                                class="d-flex flex-md-row flex-column align-items-center justify-content-md-start justify-content-center text-md-start text-center gap-md-2 gap-1 border-bottom font_montserrat py-md-3 py-2 outline_itinerary_content">
+
+                             @php
+                                                $day_text = $itenary->title; // or whatever your variable is
+                                                preg_match('/^([^:]+:)(.*)/', $day_text, $matches);
+                                            @endphp
+
+                                            @if(count($matches) === 3)
+                                            <strong>{{ $matches[1] }}</strong>{{ $matches[2] }}
+                                            @else
+                                            {{ $day_text }}
+                                            @endif
+                            </div>
+                            @endforeach
+
+
+                            <!-- Add more itinerary days as per the requirements -->
+                        </div>
+                    </div>
+
+                    @if ($package->circuit_image)
+                    <div class="pb-md-5 mb-md-5 mb-4">
+                        <div class="card boxShadow p-3 p-md-4 pb-md-5 trip_details">
+                            <h5 class="mb-md-4 mb-3">{{$package->name}} Altitude Chart</h5>
+                            <img src="{{getImageUrl($package->circuit_image)}}" alt="Everest camp altitude chart"
+                                class="img-fluid" />
+                        </div>
+                    </div>
+                    @endif
+
+
+                    <div class="card boxShadow bg_lightwhite p-3 p-md-4 mb-md-5 mb-4 trip_details">
+                        <h5 class="mb-md-5 mb-4">Detailed Itinerary</h5>
+                        <p class="mb-3">{!!$package->detailed_itinerary!!}</p>
+                        @foreach ($package->itenaries as $itenary)
+                        <div>
+                        <div class="d-flex align-items-center gap-3 mb-md-4 mb-3">
+                            <div class="position-relative">
+                                <img src="{{asset("frontend/images/$loop->iteration.webp")}}" alt="{{$itenary->title}}" loading='lazy' width="40">
 
                             </div>
-                            <div class="d-none d-md-block">
+                            <h6 class="fs_18 fw-bolder mb-0 flex-grow-1 text-break">
+                                {{$itenary->title}}
+                            </h6>
+                        </div>
 
-                                <table class="table table-bordered table-geninfo mb-0  w-100">
+                        <div
+                            class="row">
+                            @if ($itenary->car)
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src='{{asset('frontend/images/cardIcon.png')}}' alt='car' class='img-fluid' width='40'
+                                        height='40' loading="lazy"/>
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class='mb-0 border-bottom border-light-subtle'>Car</h4>
+                                        <p class='mb-0 font_montserrat'>{{$itenary->car}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if ($itenary->overnight)
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src='{{asset('frontend/images/locationIcon.png')}}' alt='overnight' class='img-fluid' width='40'
+                                    height='40' loading="lazy"/>
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class='mb-0 border-bottom border-light-subtle'>Overnight</h4>
+                                        <p class='mb-0 font_montserrat'>{{$itenary->overnight}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            @if ($itenary->meal)
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src='{{asset('frontend/images/mealsIcon.png')}}' alt='meal' width='40'
+                                    height='40' loading="lazy"/>
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class='mb-0 border-bottom border-light-subtle'>Meal</h4>
+                                        <p class='mb-0 font_montserrat'>{{$itenary->meal}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if ($itenary->flight)
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src='{{asset('frontend/images/flight.png')}}' alt='meal' width='40'
+                                    height='40' loading="lazy"/>
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class='mb-0 border-bottom border-light-subtle'>Flight</h4>
+                                        <p class='mb-0 font_montserrat'>{{$itenary->flight}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+                            @if ($itenary->distance)
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src='{{asset('frontend/images/distance.webp')}}' alt='meal' width='40'
+                                    height='40' loading="lazy"/>
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class='mb-0 border-bottom border-light-subtle'>Trekking Distance</h4>
+                                        <p class='mb-0 font_montserrat'>{{$itenary->distance}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if ($itenary->walking)
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src='{{asset('frontend/images/walking.png')}}' alt='meal' width='40'
+                                    height='40' loading="lazy"/>
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class='mb-0 border-bottom border-light-subtle'>Walking</h4>
+                                        <p class='mb-0 font_montserrat'>{{$itenary->walking}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+
+                            @if ($itenary->accommodation)
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src='{{asset('frontend/images/accommodation.png')}}' alt='meal' width='40'
+                                    height='40' loading="lazy"/>
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class='mb-0 border-bottom border-light-subtle'>Accommodation</h4>
+                                        <p class='mb-0 font_montserrat'>{{$itenary->accommodation}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+
+                            @if ($itenary->breakfast)
+                            <div class="col-md-4 mb-3">
+                                <div class="d-flex flex-md-row flex-column align-items-center gap-2">
+                                    <img src='{{asset('frontend/images/breakfast.png')}}' alt='meal' width='40'
+                                    height='40' loading="lazy"/>
+                                    <div class="text-md-start text-center trip_itinerary_content">
+                                        <h4 class='mb-0 border-bottom border-light-subtle'>Breakfast</h4>
+                                        <p class='mb-0 font_montserrat'>{{$itenary->breakfast}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
+
+                        </div>
+                        <p class="mb-md-5 mb-4">  {{$itenary->content}}</p>
+
+                        <img src="{{getImageUrl($itenary->thumbnail)}}"
+                            class='img-fluid mb-2' />
+                        {{-- <p class='mb-0'>Kathmandu International Airport</p> --}}
+                        </div>
+                        @endforeach
+
+                    </div>
+
+                    <div class="card boxShadow p-3 p-md-4 mb-md-5 mb-4 trip_details">
+                        <h5 class="mb-md-5 mb-4">Trip cost includes</h5>
+                        <div class="mb-md-5 mb-4">
+                           {!! $package->include_exclude !!}
+                            <!-- Add more inclusions here as per your data -->
+                        </div>
+                        <h5 class="mb-md-5 mb-4">Trip cost excludes</h5>
+                        <div class="">
+                            {!! $package->trip_excludes !!}
+
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <div class="card boxShadow p-3 p-md-4 mb-md-5 mb-4 bg_lightwhite">
+                            <div class="mb-md-4 mb-3">
+                                <div class="section-header mb-md-1">
+                                    <hr class="section-line py-2" />
+                                    <p class="section-subtitle">ONGOING TRIPS</p>
+                                </div>
+                                <h2 class='head_title mb-md-3'>JOIN FIXED DEPARTURE TRIPS</h2>
+                            </div>
+                            <div class="d-flex flex-md-row flex-column justify-content-between mb-md-4 mb-3">
+                                <div>
+                                    <button class="btn btn_darkprimary rounded-0 py-2 px-4 fw-bold">GROUP TRIP</button>
+                                <button class="btn btn_darkgray rounded-0 py-2 px-4 fw-bold">PRIVATE TRIP</button>
+                                </div>                                <!-- Month/Year Filter -->
+                            <div class="dropdown month_select mb-3">
+                                <button class="btn btn_darkprimary rounded-0 py-2 px-4 fw-bold dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    @{{ getMonthName(month) }}, @{{ year }}
+                                </button>
+                                <div class="dropdown-menu p-3" style="min-width: 250px;">
+                                    <div class="mb-2">
+                                        <label>Select Month</label>
+                                        <select v-model="month" class="form-select">
+                                            <option v-for="m in 12" :value="m">@{{ getMonthName(m) }}</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label>Select Year</label>
+                                        <select v-model="year" class="form-select">
+                                            <option v-for="y in years" :value="y">@{{ y }}</option>
+                                        </select>
+                                    </div>
+                                    <button @click="fetchDepartures" class="btn btn_darkprimary rounded-0 py-2 px-4 fw-bold">Filter</button>
+                                </div>
+                            </div>
+                            </div>
+
+
+                            <!-- Table -->
+                            <div class="" v-if="departures.length">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Departure Date</th>
+                                            <th>Status</th>
+                                            <th>Prices</th>
+                                        </tr>
+                                    </thead>
                                     <tbody>
-                                        @if ($package->activity || $package->fitness_level)
-                                            <tr>
-                                                @if ($package->activity)
-                                                    <td> <i class="fas fa-map"></i> <strong>Activities:</strong></td>
-                                                    <td>{{ $package->activity }}</td>
-                                                @endif
-                                                @if ($package->fitness_level)
-                                                    <td> <i class="fas fa-heartbeat"></i> <strong>Fitness Level:</strong>
-                                                    </td>
-                                                    <td>{{ $package->fitness_level }}</td>
-                                                @endif
-                                            </tr>
-                                        @endif
-                                        <tr>
-                                            @if ($package->max_altitude)
-                                                <td> <i class="fas fa-signal"></i> <strong>Max Elevation:</strong></td>
-                                                <td>{{ $package->max_altitude }}</td>
-                                            @endif
-                                            @if ($package->transport)
-                                                <td> <i class="fas fa-bus"></i> <strong>Transportation:</strong></td>
-                                                <td>{{ $package->transport }}</td>
-                                            @endif
-                                        </tr>
-                                        <tr>
-                                            @if ($package->best_month)
-                                                <td> <i class="fas fa-calendar"></i> <strong>Best Month:</strong></td>
-                                                <td>{{ $package->best_month }}</td>
-                                            @endif
-                                            @if ($package->group_size)
-                                                <td> <i class="fas fa-users"></i> <strong>Group Size:</strong></td>
-                                                <td>{{ $package->group_size }}</td>
-                                            @endif
-                                        </tr>
-                                        <tr>
-                                            @if ($package->arrival)
-                                                <td> <i class="fas fa-location-arrow"></i> <strong>Arrival on:</strong></td>
-                                                <td>{{ $package->arrival }}</td>
-                                            @endif
-                                            @if ($package->departure_from)
-                                                <td> <i class="fas fa-space-shuttle"></i> <strong>Departure from:</strong>
-                                                </td>
-                                                <td>{{ $package->departure_from }}</td>
-                                            @endif
-                                        </tr>
-                                        @if ($package->meals)
-                                            <tr>
-                                                <td class="border-top-0"> <i class="fas fa-utensils"></i>
-                                                    <strong>Meal:</strong>
-                                                </td>
-                                                <td class="border-top-0">{{ $package->meals }}</td>
-
-                                                <td class="border-top-0"> <i class="fas fa-clock"></i>
-                                                    <strong>Duration:</strong>
-                                                </td>
-                                                <td class="border-top-0">{{ $package->duration }}</td>
-
-
-                                            </tr>
-                                        @endif
-                                        <tr>
-                                            @if ($package->room)
-                                                <td class="border-top-0"> <i class="fas fa-bed"></i>
-                                                    <strong>Accommodation:</strong>
-                                                </td>
-                                                <td class="border-top-0">{{ $package->room }}</td>
-                                            @endif
-
-                                            <td class="border-top-0"> <i class="fas fa-comments-dollar"></i>
-                                                <strong>Price:</strong>
+                                        <tr v-for="departure in departures" :key="departure.id">
+                                            <td>
+                                                <span class="trip_table_text fw-bolder">@{{ departure.package.duration }}</span><br />
+                                                <span class="fs-6 text_lightDark">
+                                                    From @{{ formatDate(departure.start_date) }} -
+                                                    @{{ formatEndDate(departure.start_date, departure.package.duration) }}
+                                                </span>
                                             </td>
-                                            <td class="border-top-0  ">
-                                                @if ($package->country($country) != null && $package->country($country)->pivot->price != null)
-                                                    <sub><small class="custom-fs-16">
-                                                            {{ $package->country($country)->pivot->currency }}</small>
-                                                    </sub>
-                                                    <strong class="custom-fs-22 ">
-                                                        {{ $package->country($country)->pivot->offer_price ? $package->country($country)->pivot->offer_price : $package->country($country)->pivot->price }}</strong>
-                                                @else
-                                                    <sub><small class="custom-fs-16">USD</small> </sub>
-                                                    <strong class="custom-fs-22 ">
-                                                        {{ $package->discounted_price ? $package->discounted_price : $package->price }}</strong>
-                                                @endif
-
-                                                <sub> <small class="custom-fs-16">per person</small></sub></strong>
+                                            <td>
+                                                <p class="d-flex align-items-center gap-1 mb-0 fw-bold trip_table_text">
+                                                    <img src="{{ asset('frontend/images/gurantedIcon.png') }}" alt="guranted" width="24" height="24">
+                                                    Guaranteed
+                                                </p>
+                                                <span class="fs-6 font_montserrat">@{{ departure.total_seats - departure.booked_seats }} Seats Left</span>
+                                                <div class="progress">
+                                                    <div class="progress-bar bg_lightprimary rounded-0"
+                                                        :style="{ width: getProgress(departure) + '%' }"
+                                                        role="progressbar"
+                                                        :aria-valuenow="getProgress(departure)"
+                                                        aria-valuemin="0"
+                                                        aria-valuemax="100">
+                                                    </div>
+                                                </div>
                                             </td>
-
+                                            <td>
+                                                <div v-if="departure.package.discounted_price && departure.package.discounted_price < departure.package.price">
+                                                    <span class="fs-6 font_montserrat fw-bolder text-success">
+                                                        $@{{ departure.package.discounted_price }}
+                                                    </span>
+                                                    <span class="ps-2 text-decoration-line-through text-danger small">
+                                                        $@{{ departure.package.price }}
+                                                    </span>
+                                                </div>
+                                                <div v-else>
+                                                    <span class="fs-6 font_montserrat fw-bolder text-success">
+                                                        $@{{ departure.package.price }}
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <button class="btn btn_lightprimary_outline mt-2 rounded-0 px-md-4 py-md-2">JOIN US</button>
+                                                </div>
+                                            </td>
                                         </tr>
-
-
                                     </tbody>
                                 </table>
                             </div>
-
-                            {{-- banner section End  --}}
-
-                            {{-- we accept section start --}}
-                            <div class="my-2 card  shadow-sm bg_secondary  p-3 pb-2 d-block d-md-none">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <strong class="custom-fs-18">All inclusive cost</strong>
-                                        @if ($package->country($country) !== null && $package->country($country)->pivot->price != null)
-                                            <strong
-                                                class="custom-fs-19"><sub>{{ $package->country($country)->pivot->currency }}</sub>
-                                                <strong class="custom-fs-25">
-                                                    {{ $package->country($country)->pivot->offer_price ? $package->country($country)->pivot->offer_price : $package->country($country)->pivot->price }}</strong>
-                                                <sub>per person</sub></strong>
-                                        @else
-                                            <strong class="custom-fs-19"><sub>USD</sub> <strong class="custom-fs-25">
-                                                    {{ $package->discounted_price ? $package->discounted_price : $package->price }}</strong>
-                                                <sub>per person</sub></strong>
-                                        @endif
-
-                                        <div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4">
-                                        <img src="{{ getImageurl('best_price.png') }}" alt="Bes price"
-                                            class="img-fluid">
-
-                                    </div>
-                                    <div class="col-12 mt-3">
-                                        <p class="border_bottom text-center custom-fs-16  custom-fw-700 w-75 m-auto">We
-                                            support online payment</p>
-
-
-                                        <p class="mt-2 mb-0 custom-fs-14">
-                                            <span><i class="fas fa-edit custom-text-primary"></i> Customize this trip as
-                                                per
-                                                your need.</span>
-                                        </p>
-                                        <p class="mt-1 mb-0 custom-fs-14">
-                                            <span><i class="fas fa-users custom-text-primary"></i> Big groups are adjusted
-                                                accordingly.</span>
-                                        </p>
-
-                                        <p class="mt-1 mb-0 custom-fs-14">
-                                            <span><i class="fas fa-tag custom-text-primary"></i> Adjust your budget
-                                                depending on your need.</span>
-                                        </p>
-
-
-
-
-                                        <p class="mt-1 mb-0 custom-fs-14">
-                                            <span><i class="fas fa-calendar custom-text-primary"></i> You can schedule your
-                                                own departure dates.</span>
-                                        </p>
-
-
-
-                                        <div class="col-md-12 col-12 mt-3">
-                                            <a class="btn btn-primary w-100"
-                                                href="{{ route('booknow', ['url' => $package->url, 'cu' => $package->country($country) != null ? $package->country($country)->pivot->currency : 'USD']) }}">Book
-                                                Now</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- we accept section end --}}
-
-                            {{-- Enquiry form start --}}
-                            <div class="card  shadow-sm bg_secondary  sticky-div   py-0 d-block d-md-none">
-                                <div class="card-header border-white custom-bg-primary">
-                                    <p class="mb-0 text-white custom-fw-500 ">Send us your queries or requests:</p>
-                                </div>
-                                <div class="card-body py-1">
-                                    <form action="{{ route('enquery.post') }}" method="post" id="demo-form">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" value="{{ $package->id }}" name="booking">
-                                        <input type="hidden"
-                                            value="{{ $package->country($country) != null ? $package->country($country)->pivot->name : $package->name }}"
-                                            name="package_name">
-
-                                        <input type="hidden" value="1" name="no_participants">
-                                        <input type="hidden" value="1" name="agent">
-                                        <input type="hidden" value="{{ date('d-m-Y') }}" name="expected_date">
-
-
-                                        <div class="row">
-                                            <div class="col-12 my-2">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Enter Full Name" name="name" required />
-                                                </div>
-                                            </div>
-                                            <div class="col-12 my-2">
-                                                <div class="form-group">
-                                                    <input type="email" class="form-control"
-                                                        placeholder="Enter Email Address" name="email" required />
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 my-2">
-                                                <div class="form-group">
-                                                    <input type="number" class="form-control"
-                                                        placeholder="Enter Phone Number" name="phone" required />
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12 my-2">
-                                                <div class="form-group">
-                                                    <textarea name="comment" class="form-control" placeholder="Enter your message" id="message" required></textarea>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-12 mt-2">
-                                                {!! app('captcha')->display() !!}
-                                                @if ($errors->has('g-recaptcha-response'))
-                                                    <span class="help-block text-danger">
-                                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                                                    </span>
-                                                @endif
-                                                <p>
-                                                    <i>Your information will never be shared with anyone outside our
-                                                        company. </i>
-                                                </p>
-                                                <div class="form-group mb-0 text-left">
-                                                    <button type="submit" class="btn btn-primary  btn-sm"
-                                                        data-callback='onSubmit' data-action='submit'>Enquire Now</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            {{-- Enquiry form end  --}}
-
-                            <div>
-                                <div class="about-trip" id="about_trip">
-                                    <div class="head">
-                                        <ul class="nav nav-tabs d-flex justify-content-around">
-                                            <li class="nav-item">
-                                                <a class="nav-link " href="#home">
-                                                    Overview
-
-                                                    <i class="fas fa-binoculars"></i>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item " role="presentation">
-                                                <a class="nav-link  font-weight-700 " href="#profile" role="tab">
-                                                    Itinerary
-
-                                                    <i class="fas fa-map-marker"></i>
-                                                </a>
-                                            </li>
-
-                                            <li class="nav-item " role="presentation">
-                                                <a class="nav-link  font-weight-700" href="#datePrice">
-
-                                                    Departure Date
-                                                    <i class="fas fa-calendar"></i>
-                                                </a>
-                                            </li>
-
-                                            @if (!empty($package->faq))
-                                                <li class="nav-item " role="presentation">
-                                                    <a class="nav-link  font-weight-700" href="#faq">
-                                                        Faq
-                                                        <i class="fas fa-question"></i>
-                                                    </a>
-                                                </li>
-                                            @endif
-
-
-
-                                            @if (!empty($package->equiment))
-                                                <li class="nav-item " role="presentation">
-                                                    <a class="nav-link  font-weight-700 " data-bs-toggle="tab"
-                                                        href="#equiment">Equiment
-
-                                                        <i class="fab fa-wrench"></i>
-                                                    </a>
-                                                </li>
-                                            @endif
-
-                                            <li class="nav-item " role="presentation">
-                                                <a class="nav-link  font-weight-700" href="#review"> Review
-                                                    <i class="fas fa-comment"></i>
-                                                </a>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div id="home">
-                                    <h2 class="custom-text-primary mt-5">Overview
-                                    </h2>
-                                    <div class="mt-2">
-                                        {!! $package->country($country) != null ? $package->country($country)->pivot->overview : $package->overview !!}
-                                        {!! $package->country($country) != null
-                                            ? $package->country($country)->pivot->outline_itinerary
-                                            : $package->outline_itinerary !!}
-                                        {!! $package->country($country) != null
-                                            ? $package->country($country)->pivot->include_exclude
-                                            : $package->include_exclude !!}
-                                        {!! $package->country($country) != null
-                                            ? $package->country($country)->pivot->trip_excludes
-                                            : $package->trip_excludes !!}
-                                    </div>
-                                </div>
-
-                                <div class="routemap my-4">
-                                    @if ($package->map_title)
-                                        <h3 class="custom-text-primary">{{ $package->map_title }}</h3>
-                                        <img src="{{ getImageurl($package->routemap) }}" alt="{{ $package->map_title }}"
-                                            class="img-fluid">
-                                    @endif
-                                </div>
-
-                                <div id="profile">
-                                    <h2 class="custom-text-primary mt-5">Itinerary
-                                    </h2>
-                                    <div class="mt-2">
-
-                                        @php
-                                            $itenary = $package->detailed_itinerary;
-                                        @endphp
-                                        @if ($package->country($country) != null)
-                                            $itenary=$package->country($country)->pivot->detailed_itinerary;
-                                        @endif
-
-                                        @php
-                                            $itenaries = explode('#@#', $itenary);
-                                            $i = 1;
-                                        @endphp
-                                        <div class="">
-
-                                            <div class="accordion bg-transparent" id="accordionExample">
-                                                @foreach ($itenaries as $key => $itenary)
-                                                    @if ($key != 0)
-                                                        <div class="accordion-item mb-1">
-                                                            @if ($key % 2 != 0)
-                                                                <h2 class="accordion-header"
-                                                                    id="heading{{ $key + 1 }}">
-                                                                    <button class="accordion-button collapsed" type="button"
-                                                                        data-bs-toggle="collapse"
-                                                                        data-bs-target="#collapse{{ $key + 1 }}"
-                                                                        aria-expanded="true"
-                                                                        aria-controls="collapse{{ $key + 1 }}">
-                                                                        {!! strip_tags($itenary) !!}
-                                                                    </button>
-                                                                </h2>
-                                                            @else
-                                                                <div id="collapse{{ $key }}"
-                                                                    class="accordion-collapse collapse"
-                                                                    aria-labelledby="heading{{ $key }}"
-                                                                    data-bs-parent="#accordionExample">
-                                                                    <div class="accordion-body m-0  bg-transparent">
-                                                                        {!! strip_tags($itenary) !!}
-                                                                    </div>
-                                                                </div>
-                                                            @endif
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="routemap my-4">
-                                    @if ($package->circuit_image)
-                                        <h3 class="custom-text-primary"> {{ $package->circuit_title }}</h3>
-                                        <img src="{{ getImageurl($package->circuit_image) }}"
-                                            alt="{{ $package->circuit_title }}" class="img-fluid">
-                                    @endif
-                                </div>
-
-                                @if (!empty($package->faq))
-                                    <div id="faq">
-                                        <h2 class="custom-text-primary mt-5">FAQ
-                                        </h2>
-                                        <div class="mt-2">
-                                            @php
-                                                $faq = $package->faq;
-                                            @endphp
-                                            @if ($package->country($country) != null)
-                                                $faq=$package->country($country)->pivot->faq;
-                                            @endif
-
-                                            @php
-                                                $faqs = explode('#@#', $faq);
-                                                $i = 1;
-                                            @endphp
-                                            <div class="">
-
-                                                <div class="accordion bg-transparent" id="accordionExample">
-                                                    @foreach ($faqs as $key => $faq)
-                                                        @if ($key != 0)
-                                                            <div class="accordion-item mb-1">
-                                                                @if ($key % 2 != 0)
-                                                                    <h2 class="accordion-header"
-                                                                        id="heading{{ $key + 1 }}">
-                                                                        <button class="accordion-button collapsed" type="button"
-                                                                            data-bs-toggle="collapse"
-                                                                            data-bs-target="#collapse{{ $key + 1 }}"
-                                                                            aria-expanded="true"
-                                                                            aria-controls="collapse{{ $key + 1 }}">
-                                                                            {!! strip_tags($faq) !!}
-                                                                        </button>
-                                                                    </h2>
-                                                                @else
-                                                                    <div id="collapse{{ $key }}"
-                                                                        class="accordion-collapse collapse"
-                                                                        aria-labelledby="heading{{ $key }}"
-                                                                        data-bs-parent="#accordionExample">
-                                                                        <div class="accordion-body m-0  bg-transparent">
-                                                                            {!! strip_tags($faq) !!}
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-
-                                @if ($package->equiment)
-                                    <div id="equiment">
-                                        <h2 class="custom-text-primary mt-5">Equiment
-                                        </h2>
-                                        <div class="mt-2">
-                                            {!! $package->equiment !!}
-                                        </div>
-                                    </div>
-                                @endif
-                                <div id="datePrice">
-                                    <h2 class="custom-text-primary mt-5">Departure Date
-                                    </h2>
-                                    <strong class="mt-2">Departure dates for {!! $package->country($country) != null ? $package->country($country)->pivot->name : $package->name !!}</strong>
-                                    <p>We provide a series of fixed departure trek, tour and expeditions in Nepal, Bhutan,
-                                        Tibet and India. If you are single and wishing to be with a group, you can join our
-                                        fixed departure schedule. If the schedule dates are not convenient for you, contact
-                                        us & let us know; we are more than happy to customize our trips to suit your needs.
-                                        If any individuals or group doesn’t want to join with our other group, we can
-                                        operate as per your wish and requirement. We are ground operator of these Himalayan
-                                        destination and able to arrange your trip as per your interested date and choice.
-                                    </p>
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <p>Check out all the available dates</p>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="row">
-                                                    <div class="col-6 col-lg-4">
-                                                        <div class="input-group mb-3">
-                                                            <span class="input-group-text" id="basic-addon1">
-                                                                <i class="fa mx-1 fa-calendar  custom-text-primary"></i>
-                                                            </span>
-                                                            <select class="form-control select-year"
-                                                                aria-describedby="basic-addon1">
-                                                                <option value="{{ date('Y') }}">Select Dates</option>
-                                                                <option value="{{ date('Y') }}" selected>
-                                                                    {{ date('Y') }}
-                                                                </option>
-                                                                <option value="{{ date('Y') + 1 }}">{{ date('Y') + 1 }}
-                                                                </option>
-                                                                <option value="{{ date('Y') + 2 }}">{{ date('Y') + 2 }}
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-6 col-lg-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-text" id="basic-addon2">
-                                                                <i class="fa mx-1 fa-calendar  custom-text-primary"></i>
-                                                            </span>
-                                                            <select class="form-control" id="select-month"
-                                                                aria-describedby="basic-addon2">
-                                                                <option value="1">Jan</option>
-                                                                <option value="2">Feb</option>
-                                                                <option value="3">Mar</option>
-                                                                <option value="4">Apr</option>
-                                                                <option value="5">May</option>
-                                                                <option value="6">June</option>
-                                                                <option value="7">July</option>
-                                                                <option value="8">Aug</option>
-                                                                <option value="9">Sep</option>
-                                                                <option value="10">Oct</option>
-                                                                <option value="11">Nov</option>
-                                                                <option value="12">Dec</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                    <table class="table table-bordered text-center">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Start Date</th>
-                                                <th scope="col">Finish Date</th>
-                                                <th scope="col">Availability</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="ajaxloadmoredeparture">
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                                <div id="review" class="mt-5">
-
-                                    @include('frontend.template.package_detail_testimonial')
-                                </div>
-
-                                @if(count($package->gallery))
-                                <div class="mt-5">
-                                    @include('frontend.template.gallery')
-                                </div>
-                                @endif
+                            <div v-else class="text-center py-4">
+                                No departures found for @{{ getMonthName(month) }}, @{{ year }}
                             </div>
                         </div>
+                    </div>
 
+                    <div class="card boxShadow mb-md-5 mb-4">
+                     @include('frontend.inc.testimonial',[
+                        'testimonials' => $package->testimonials,
+                     ])
+                    </div>
 
-                        {{-- 1st col end  --}}
+                    <div class="card boxShadow p-3 p-md-4 mb-md-5 mb-4 bg_lightwhite trip_details" id="faqs">
+                        <h5 class='mb-md-4 mb-3'>FAQs</h5>
+                        <div class="faqs_accordion lightwhite">
+                            <div class="accordion" id="faqAccordion">
+                                @foreach ($package->faqs as $faq)
 
-                        {{-- 1st col staart  --}}
-                        <div class="col-md-3 px-md-0 mx-md-0 my-5 ">
-                            <div class="mt-1"></div>
-                            {{-- we accept section start --}}
-                            <div class="my-2  card  shadow-sm bg_secondary  p-3 pb-2 d-none d-md-block">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <strong class="custom-fs-18">All inclusive cost</strong>
-                                        @if ($package->country($country) !== null && $package->country($country)->pivot->price != null)
-                                            <strong
-                                                class="custom-fs-19"><sub>{{ $package->country($country)->pivot->currency }}</sub>
-                                                <strong class="custom-fs-25">
-                                                    {{ $package->country($country)->pivot->offer_price ? $package->country($country)->pivot->offer_price : $package->country($country)->pivot->price }}</strong>
-                                                <sub>per person</sub></strong>
-                                        @else
-                                            <strong class="custom-fs-19"><sub>USD</sub> <strong class="custom-fs-25">
-                                                    {{ $package->discounted_price ? $package->discounted_price : $package->price }}</strong>
-                                                <sub>per person</sub></strong>
-                                        @endif
-                                        <div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <img src="{{ getImageurl('best_price.png') }}" alt="Bes price"
-                                            class="img-fluid">
-                                    </div>
-                                    <div class="col-12 mt-3">
-                                        <p class="border_bottom text-center custom-fs-16  custom-fw-700 w-75 m-auto">We
-                                            support online payment</p>
-                                        <p class="mt-2 mb-0 custom-fs-14">
-                                            <span><i class="fas fa-edit custom-text-primary"></i> Customize this trip as
-                                                per your need.</span>
-                                        </p>
-                                        <p class="mt-1 mb-0 custom-fs-14">
-                                            <span><i class="fas fa-users custom-text-primary"></i> Big groups are adjusted
-                                                accordingly.</span>
-                                        </p>
-                                        <p class="mt-1 mb-0 custom-fs-14">
-                                            <span><i class="fas fa-tag custom-text-primary"></i> Adjust your budget
-                                                depending on your need.</span>
-                                        </p>
-                                        <p class="mt-1 mb-0 custom-fs-14">
-                                            <span><i class="fas fa-calendar custom-text-primary"></i> You can schedule your
-                                                own departure dates.</span>
-                                        </p>
-                                        <div class="col-md-12 col-12 mt-3">
-                                            <a class="btn btn-primary w-100"
-                                                href="{{ route('booknow', ['url' => $package->url, 'cu' => $package->country($country) != null ? $package->country($country)->pivot->currency : 'USD']) }}">Book
-                                                Now</a>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading{{$faq->id}}">
+                                        <button class="accordion-button accordion_button_title py-4" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#collapse{{$faq->id}}" aria-expanded="true"
+                                            aria-controls="collapse{{$faq->id}}">
+                                            {{$faq->question}}
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{$faq->id}}" class="accordion-collapse collapse {{$loop->iteration==1?'show':''}}"
+                                        aria-labelledby="heading{{$faq->id}}" data-bs-parent="#faqAccordion">
+                                        <div class="accordion-body">
+                                            <p class="accordion_body_content text_lightDark font_montserrat mb-0">
+                                                {{$faq->answer}}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {{-- we accept section end --}}
+                                @endforeach
 
-                            <div class="sticky-position">
-                                {{-- Enquiry form start --}}
-                                <div class="card  shadow-sm bg_secondary  sticky-div   py-0 d-none d-md-block">
-                                    <div class="card-header border-white custom-bg-primary">
-                                        <p class="mb-0 text-white custom-fw-500 ">Send us your queries or requests:</p>
-                                    </div>
-                                    <div class="card-body py-1">
-                                        <form action="{{ route('enquery.post') }}" method="post">
-                                            {{ csrf_field() }}
-                                            <input type="hidden" value="{{ $package->id }}" name="booking">
-                                            <input type="hidden"
-                                                value="{{ $package->country($country) != null ? $package->country($country)->pivot->name : $package->name }}"
-                                                name="package_name">
-                                            <input type="hidden" value="1" name="no_participants">
-                                            <input type="hidden" value="1" name="agent">
-                                            <input type="hidden" value="{{ date('d-m-Y') }}" name="expected_date">
-                                            <div class="row">
-                                                <div class="col-12 my-2">
-                                                    <div class="form-group">
-                                                        <input type="text" class="form-control"
-                                                            placeholder="Enter Full Name" name="name" required />
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 my-2">
-                                                    <div class="form-group">
-                                                        <input type="email" class="form-control"
-                                                            placeholder="Enter Email Address" name="email" required />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12 my-2">
-                                                    <div class="form-group">
-                                                        <input type="number" class="form-control"
-                                                            placeholder="Enter Phone Number" name="phone" required />
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12 my-2">
-                                                    <div class="form-group">
-                                                        <textarea name="comment" class="form-control" placeholder="Enter your message" id="message" required></textarea>
-
-                                                    </div>
-                                                </div>
-                                                <div class="col-12 mt-2">
-                                                    {!! app('captcha')->display() !!}
-                                                    @if ($errors->has('g-recaptcha-response'))
-                                                        <span class="help-block text-danger">
-                                                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                                                        </span>
-                                                    @endif
-                                                    <p>
-                                                        <i>Your information will never be shared with anyone outside our
-                                                            company. </i>
-
-                                                    </p>
-                                                    <div class="form-group mb-0 text-left mt-1">
-                                                        <button type="submit" class="btn btn-primary  btn-sm">Enquire
-                                                            Now</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                {{-- Enquiry form end  --}}
-
-
-                                <div class="card  shadow-sm bg_secondary    my-2 ">
-                                    <div class="card-body ">
-                                        <div class="d-flex justify-content-around flex-md-row flex-column">
-                                            <div class="my-1 mx-1 ">
-                                                <a href="#"class=" btn btn-primary  text-decoration-none text-light  d-flex align-items-center justify-content-center"
-                                                    data-bs-toggle="modal" data-bs-target="#customize">
-                                                    Customize</a>
-                                            </div>
-                                            <div class="my-1 mx-1">
-                                                <a href="{{ route('print', $package->id) }}"
-                                                    class=" btn btn-primary   text-decoration-none text-light btn_sm d-flex align-items-center justify-content-center">
-                                                    Print </a>
-                                            </div>
-                                            <div class="my-1 mx-1">
-                                                <a href=""
-                                                    class=" btn btn-primary   text-decoration-none text-light  d-flex align-items-center justify-content-center copy_link">
-                                                    Copy </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {{-- we accept section start --}}
-                                <div class="my-2  card">
-                                    <strong class="custom-bg-primary text-white custom-fs-19 py-2 px-2"> We Accept</strong>
-                                    <div class="p-2">
-                                        <img src="{{ getImageurl('weaccept.webp') }}" alt="we accept" class="img-fluid">
-                                    </div>
-                                </div>
-                                {{-- we accept section end --}}
-
-                                {{--  Trip advesior start --}}
-                                <div class="my-2  card  shadow-sm bg_secondary  p-3">
-                                    <div class="">
-                                        <img src="{{ getImageurl('trip2.webp') }}" alt="Trip advisor" class="img-fluid">
-                                    </div>
-                                    <div class="text">
-                                        <p class="mt-2 mb-1 font-weight-400 custom-fs-16">
-                                            Speak to one of our travel consultants:
-                                        </p>
-                                        <p class="mt-2 mb-1 font-weight-400 custom-fs-16">
-                                            Call Us (24/7): <strong class="custom-text-primary">
-                                                +977-9802342081
-                                            </strong>
-                                        </p>
-                                        <p class="mt-2 mb-1 font-weight-400 custom-fs-16">
-                                            WhatsApp (24/7): <strong class="custom-text-primary">
-                                                +977-9802342081
-                                            </strong>
-
-                                        </p>
-                                    </div>
-                                </div>
-                                {{--  Trip advesior End --}}
                             </div>
                         </div>
-                        {{-- 2nd col end  --}}
                     </div>
                 </div>
-            </section>
-            @if (count($features) > 0)
-                <section class="packages">
-                    <div class="container">
-                        <div class="heading my-5">
-                            <h2 class='my-0 py-0 custom-fs-22'>Featured Packages</h2>
-                        </div>
-                        <div class="row">
-                            @foreach ($features as $packaged)
-                                <div class="col-md-3 col-sm-4">
-                                    @include('frontend.template.card1', ['package' => $packaged])
+                <div class="col-md-4 ps-md-4">
+                    <div class="position-sticky mb-md-5 mb-4" style="top: 20px;">
+                        <div class="card boxShadow border-0 p-3 p-md-4 w-100 mb-md-5 mb-4" style="max-width: 400px;">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <p class="mb-0 fs_18 fw-bold">All Inclusive Cost</p>
+                                <p class="mb-0 bg-danger bg-opacity-10 text-danger rounded-3 px-3 py-2 small fw-bold">
+                                    -5%
+                                </p>
+                            </div>
+                            @php
+    $price = $package->price;
+    $discounted = $package->discounted_price;
+@endphp
+
+<p class="mb-md-4 mb-3 fw-bold font_montserrat text-nowrap">
+    US
+    @if($discounted && $discounted < $price)
+        <span class="fs_18 fw-bolder text-success">${{ $discounted }}</span>
+        <span class="text-black text-decoration-line-through ms-2">
+            <span class="text-danger">${{ $price }}</span> per
+        </span>
+        person
+    @else
+        <span class="fs_18 fw-bolder text-danger">${{ $price }}</span> per person
+    @endif
+</p>
+
+                            <div class="">
+                                <div>
+                                  <!-- Form Starts -->
+<form action="{{route('booknow')}}">
+    <input type="hidden" name="package" value="{{$package->id}}">
+    <input type="hidden" name="destination" value="{{$package->destination_id}}">
+
+    <label class="form-label">Pick Your Private Date</label>
+    <div class="position-relative">
+    <input
+        type="date"
+        name="departure_date"
+        class="form-control outline-0"
+        required
+        min="{{ date('Y-m-d') }}"
+    >
+    </div>
+
+    <!-- Group Size -->
+    <div class="my-4">
+        <label class="form-label">Group Size</label>
+        <div class="input-group outline-0">
+            <button type="button" class="btn border outline-0" @click="decreaseGroupSize">-</button>
+            <input type="number" name="size" class="form-control outline-0 text-center" v-model="groupSize" readonly>
+            <button type="button" class="btn border outline-0" @click="increaseGroupSize">+</button>
+        </div>
+    </div>
+
+    <!-- Total Price -->
+    <div class="d-flex justify-content-between align-items-center">
+        <h6>Total Price</h6>
+        <span class="text-primary fs-5 fw-bolder">US $@{{ totalPrice }}</span>
+    </div>
+
+    <button class="btn bg_darkprimary w-100 rounded-0 py-2 px-4 fw-bold fs-6 mt-3 mt-md-0">BOOK A TRIP</button>
+</form>
+<!-- Form Ends -->
+
                                 </div>
-                            @endforeach
 
+
+                            <div class="mt-3 text-md-start text-center">
+                                <p class="text-muted small font_montserrat mb-1">Got Queries? We’re at your service</p>
+                                <a target="_blank" href="https://api.whatsapp.com/send?phone=9779802342081" class="d-flex text-decoration-none justify-content-md-start justify-content-center">
+                                    <img src="{{asset('frontend/images/whatsapp.png')}}" alt="whatsapp" width="24" height="24">
+                                    <p class="text-muted  fs-6 fw-bold font_montserrat ms-2">+977-9802342081</p>
+                                </a>
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="card position-relative text-white  boxShadow" style=" background-image: url('./images/touchformBanner.png'); background-size: cover; background-position: center; min-height: auto; ">
+                            <!-- Background Overlay -->
+                            <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
+                                style="background-color: #2169A7; opacity: 0.75;"></div>
+
+                            <!-- Content - Responsive Padding -->
+                            <div class="position-relative z-3 p-4">
+                                <p class="mb-2 fs-5 fw-bold">Get in Touch</p>
+                                <p class="font_montserrat fs-6 mb-md-4 mb-3">
+                                    We’d love to hear from you. Please fill out this form.
+                                </p>
+
+                                <form action="{{route('contactus.store')}}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="page" value="package-detail">
+                                    <!-- First Name -->
+                                    <div class="mb-md-4 mb-3">
+                                        <label for="firstName" class="form-label fs-6 fw-bold">
+                                            First Name <span class="text_darkOrange">*</span>
+                                        </label>
+                                        <input type="text" class="form-control py-2 text-muted fs-6" id="firstName"
+                                            placeholder="First Name" name="first_name" />
+                                    </div>
+
+                                    <!-- Last Name -->
+                                    <div class="mb-md-4 mb-3">
+                                        <label for="lastName" class="form-label fs-6 fw-bold">
+                                            Last Name <span class="text_darkOrange">*</span>
+                                        </label>
+                                        <input type="text" class="form-control py-2 text-muted fs-6" id="lastName"
+                                            placeholder="Last Name" name="last_name" />
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="mb-md-4 mb-3">
+                                        <label for="email" class="form-label fs-6 fw-bold">
+                                            Email <span class="text_darkOrange">*</span>
+                                        </label>
+                                        <input type="email" class="form-control" id="email" placeholder="Email" name="email" />
+                                    </div>
+
+                                    <!-- Phone Number -->
+                                    <div class="mb-md-4 mb-3">
+                                        <label for="phone" class="form-label fs-6 fw-bold">
+                                            Phone Number <span class="text_darkOrange">*</span>
+                                        </label>
+                                        <div class="input-group">
+                                            {{-- <select class="form-select fw-bold" aria-label="Country code">
+                                                <option value="NEP">NEP</option>
+                                                <option value="IND">IND</option>
+                                                <option value="US">US</option>
+
+                                            </select> --}}
+                                            <input type="text" id="phone" class="form-control"
+                                                placeholder="+977 12345678" name="phone"/>
+                                        </div>
+                                    </div>
+
+                                    <!-- Message -->
+                                    <div class="mb-md-4 mb-3">
+                                        <label for="message" class="form-label fs-6 fw-bold">
+                                            Message
+                                        </label>
+                                        <textarea id="message" rows="5" class="form-control"
+                                            placeholder="Write your message here..." name="message"></textarea>
+                                    </div>
+
+                                    <!-- Privacy Policy Checkbox -->
+                                    <div class="mb-md-4 mb-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input rounded-0" type="checkbox"
+                                                id="privacyCheck" />
+                                            <label class="form-check-label small font_montserrat" for="privacyCheck">
+                                                You agree to our friendly
+                                                <a target="_blank" href="/privacy-policy"
+                                                    class="text-decoration-underline text_darkOrange">
+                                                    privacy policy.
+                                                </a>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div>
+                                        <button class="btn btn_darkprimary fs-6 font_montserrat w-100 py-3 rounded-0">
+                                            SEND MESSAGE
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </section>
-            @endif
-        </main>
 
-        {{-- video Model  --}}
-        <!-- Modal -->
-        <div class="modal fade border-0" id="video" tabindex="-1" aria-labelledby="videoy" aria-hidden="true">
-            <div class="modal-dialog modal-md border-0">
-                <div class="modal-content bg-transparent border-0">
-                    <div class="modal-header bg-transparent border-0">
-                        <button type="button" class="btn-close text-light  text-white" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body bg-transparent">
 
-                        {{-- <div style="width:200px!important;">
-                            {!! $package->video !!}
-                        </div> --}}
+                </div>
+            </div>
+
+        </div>
+
+        </div>
+    </section>
+
+    <!-- SPECIAL OFFERS -->
+    <section class="position-relative" style="
+        background-image: url('{{asset('frontend/images/specialoffer_banner.png')}}');
+        background-size: cover;
+        background-position: center;
+        min-height: 550px;
+    ">
+        <!-- Dark overlay -->
+        <div class="position-absolute top-0 start-0 w-100 h-100 z-1" style="background-color: #151515; opacity: 75%;">
+        </div>
+
+        <div class="position-absolute top-0 start-0 w-100 h-100 z-3">
+            <div class="container h-100">
+                <div class="d-flex flex-column justify-content-center h-100">
+                    <div class="text-center text-md-start">
+                        <!-- Header section -->
+                        <div class="d-flex column justify-content-start">
+                            <div class="travel-header mb-md-2">
+                                <hr class="travel-line py-2" />
+                                <p class="travel-subtitle">HOLIDAY PACKAGE OFFER</p>
+                            </div>
+                        </div>
+
+                        <!-- Title & description -->
+                        <h4 class="head_title text-white mb-3">GET SPECIAL OFFERS</h4>
+                        <p class="text-white fs-6 mb-4 fw-bold mx-auto mx-md-0" style="max-width: 580px;">
+                            Sign up now to receive hot special offers and information about the
+                            best tour packages, updates, and discounts!
+                        </p>
+
+                        <!-- Email input -->
+                        <div class="email_input mb-4 mx-auto mx-md-0" style="max-width: 650px;">
+                            <div class="input-group">
+                                <input type="email"
+                                    class="form-control bg-transparent border border-white text-white py-md-3 rounded-0"
+                                    placeholder="Your Email Address..." aria-label="Recipient's email" />
+                                <button class="btn btn_darkprimary rounded-0 px-md-3 py-md-3 fw-semibold email_signup_btn"
+                                    type="button">
+                                    SIGN UP NOW
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <p class="text_lightwhite mb-0 fw-medium font_montserrat mx-auto mx-md-0"
+                            style="max-width: 700px;">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+                            tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        {{-- Enquery Model  --}}
-        <!-- Modal -->
-        <div class="modal fade " id="enquery" tabindex="-1" aria-labelledby="enquery" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="modal-title">
-                            <p class="custom-text-18 custom-fw-700 my-0 py-0">Enquire Us</p>
-                            <small>
-                                Required Field <span class="text-danger">*</span>
-                            </small>
-                        </div>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+    <!-- recent tripes -->
+    <section class="mb-5 py-md-5">
+        <div class="container">
+            <div class="d-flex justify-content-center text-center mb-md-5 mb-4">
+                <div>
+                    <div class="section-header mb-md-1 d-flex justify-content-center">
+                        <hr class="section-line py-2">
+                        <p class="section-subtitle">EXOLORE GREAT PLACES</p>
                     </div>
-                    <div class="modal-body ">
-                        @php
-                            $agents = DB::connection('mysql2')
-                                ->table('users')
-                                ->where('email_verified_at', '!=', null)
-                                ->get();
-                        @endphp
-                        <div class="card-body">
-                            <form action="{{ route('enquery.post') }}" method="POST">
-                                @csrf
-                                <input type="hidden" value="{{ $package->id }}" name="booking">
-                                <div class="form-group row my-3">
-                                    <div for="tripName" class="col-md-4  custom-text-primary custom-fs-18 custom-fw-500">
-                                        Full Name<span class="text-danger">*</span>: </div>
-                                    <div class="col-md-8">
-                                        <input type="text" name="name" class="form-control"
-                                            placeholder="Enter you full name" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row my-3">
-                                    <div for="tripName" class="col-md-4  custom-text-primary custom-fs-18 custom-fw-500">
-                                        Email<span class="text-danger">*</span>: </div>
-                                    <div class="col-md-8">
-                                        <input type="text" name="email" class="form-control"
-                                            placeholder="Enter your email address" required>
-                                    </div>
-                                </div>
-                                <div class="form-group row my-3">
-                                    <div for="tripName" class="col-md-4  custom-text-primary custom-fs-18 custom-fw-500">
-                                        Phone: </div>
-                                    <div class="col-md-8">
-                                        <input type="number" name="phone" class="form-control"
-                                            placeholder="Mobile Number">
-                                    </div>
-                                </div>
-                                <div class="form-group row my-3">
-                                    <div for="tripdate" class="col-md-4  custom-text-primary custom-fs-18 custom-fw-500">
-                                        Expected Date:</div>
-                                    <div class="col-md-8">
-
-                                        <input type="text" class="form-control" id="datepicker" name="expected_date"
-                                            placeholder="Enter date"
-                                            @if (!empty($data)) value="{{ $date }}" @endif
-                                            autocomplete="off">
-                                    </div>
-                                </div>
-                                <div class="form-group row my-3">
-                                    <div for="travellers"
-                                        class="col-md-4  custom-text-primary custom-fs-18 custom-fw-500">Number Of
-                                        Travellers<span class="text-danger">*</span>:</div>
-                                    <div class="col-md-8">
-
-                                        <select name="no_participants" class="form-select form-control" required>
-                                            <?php for($i=1; $i<=20; $i++){ ?>
-                                            <option value="<?= $i ?>"><?= $i ?></option>
-                                            <?php } ?>
-                                        </select>
-
-                                    </div>
-                                </div>
-                                <div class="form-group row my-3">
-                                    <div for="travellers"
-                                        class="col-md-4  custom-text-primary custom-fs-18 custom-fw-500">How did you find
-                                        us?<span class="text-danger">*</span>:</div>
-                                    <div class="col-md-8">
-
-                                        <select name="agent" class="form-select form-control" required>
-                                            @foreach ($agents as $agent)
-                                                <option value="{{ $agent->id }}">{{ $agent->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row my-3">
-                                    <div for="travellers"
-                                        class="col-md-4  custom-text-primary custom-fs-18 custom-fw-500">Your Mesage<span
-                                            class="text-danger">*</span>:</div>
-                                    <div class="col-md-8">
-
-                                        <textarea name="comment" class="form-control" placeholder="Enter your message" id="message" required></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="mt-2 text-center">
-                                    <button type="submit" class="btn btn-primary btn-block">Enquire now</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
+                    <h2 class='head_title mb-md-3'>RELATED TRIPS</h2>
+                    <p class='text_lightDark font_montserrat mb-0' style="max-width: 800px;">
+                        Explore our curated list of the best countries to visit in 2024 and discover incredible
+                        destinations waiting to be explored
+                    </p>
                 </div>
             </div>
-        </div>
 
+            <!-- Splide Slider -->
+            <div class="recent_posts_slider position-relative mb-md-5 mb-4">
+                <div class="splide" id="recentPostsSlider">
+                    <div class="splide__track">
+                        <ul class="splide__list">
 
-        {{-- Customization  Model  --}}
-        <!-- Modal -->
-        <div class="modal fade " id="customize" tabindex="-1" aria-labelledby="customize" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <div class="modal-title">
-                            <p class="custom-text-18 custom-fw-700 my-0 py-0">Customize Package</p>
-                            <small>
-                                Required Field <span class="text-danger">*</span>
-                            </small>
-                        </div>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            @foreach ($package->feature_packages()->limit(5)->get() as $package)
+            <li class="splide__slide my-4">
+                <div class="mx-md-3">
+               @include('frontend.inc.package-card',['package'=>$package])
+            </div>
+            </li>
+            @endforeach
+                        </ul>
                     </div>
-                    <div class="modal-body ">
-                        @php
-                            $agents = DB::connection('mysql2')
-                                ->table('users')
-                                ->where('email_verified_at', '!=', null)
-                                ->get();
-                        @endphp
-                        <div class="card-body">
-                            <form method="post" action="{{ route('enquery.post') }}" class="non-rounded-form">
+                </div>
 
-                                {{ csrf_field() }}
-
-                                <div class="row">
-                                    <div class="col-12 col-sm-6 col-md-12 col-lg-6 my-2">
-
-                                        <div class="form-group">
-
-                                            <label for="name">Full Name<span class="text-danger">*</span></label>
-
-                                            <input type="text" name="name" class="form-control"
-                                                placeholder="Enter your full name" id="name" required>
-
-                                        </div>
-
-                                    </div>
-                                    <div class="col-12 col-sm-6 col-md-12 col-lg-6 my-2">
-                                        <div class="form-group">
-                                            <label for="email">Email<span class="text-danger">*</span></label>
-                                            <input type="text" name="email" class="form-control"
-                                                placeholder="Enter your email address" id="email" required>
-                                        </div>
-                                    </div>
-
-                                    @if ($package)
-                                        <input type="hidden" name="subject" class="form-control"
-                                            placeholder="Enter your subject" id="subject" value="Customize Trip">
-                                        <input type="hidden" name="package_name" class="form-control"
-                                            placeholder="Enter your subject" id="subject"
-                                            value="{{ $package->country($country) != null ? $package->country($country)->pivot->name : $package->name }}">
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6 my-2 {{-- swapped-element --}}">
-                                            <div class="form-group">
-                                                <label for="country">Select Country<span
-                                                        class="text-danger">*</span></label>
-                                                <select class="form-control" id="country" name="country" required>
-                                                    <option disabled="disabled" selected="selected"> Select your country
-                                                    </option>
-                                                    <option value="Afghanistan">Afghanistan</option>
-                                                    <option value="Albania">Albania</option>
-                                                    <option value="Algeria">Algeria</option>
-                                                    <option value="Argentina">Argentina</option>
-                                                    <option value="Australia">Australia</option>
-                                                    <option value="Austria">Austria</option>
-                                                    <option value="Azerbaijan">Azerbaijan</option>
-                                                    <option value="Bahamas">Bahamas</option>
-                                                    <option value="Bahrain">Bahrain</option>
-                                                    <option value="Bangladesh">Bangladesh</option>
-                                                    <option value="Belarus">Belarus</option>
-                                                    <option value="Belgium">Belgium</option>
-                                                    <option value="Belize">Belize</option>
-                                                    <option value="Benin">Benin</option>
-                                                    <option value="Bermuda">Bermuda</option>
-                                                    <option value="Bhutan">Bhutan</option>
-                                                    <option value="Bolivia">Bolivia</option>
-                                                    <option value="Botswana">Botswana</option>
-                                                    <option value="Brazil">Brazil</option>
-                                                    <option value="Bulgaria">Bulgaria</option>
-                                                    <option value="Burkina Faso">Burkina Faso</option>
-                                                    <option value="Burundi">Burundi</option>
-                                                    <option value="Cambodia">Cambodia</option>
-                                                    <option value="Cameroon">Cameroon</option>
-                                                    <option value="Canada">Canada</option>
-                                                    <option value="Chad">Chad</option>
-                                                    <option value="Chile">Chile</option>
-                                                    <option value="China">China</option>
-                                                    <option value="Colombia">Colombia</option>
-                                                    <option value="Comoros">Comoros</option>
-                                                    <option value="Costa Rica">Costa Rica</option>
-                                                    <option value="Cote D'Ivoire">Cote D'Ivoire</option>
-                                                    <option value="Cyprus">Cyprus</option>
-                                                    <option value="Czech Republic">Czech Republic</option>
-                                                    <option value="Denmark">Denmark</option>
-                                                    <option value="Djibouti">Djibouti</option>
-                                                    <option value="Dominican Republic">Dominican Republic</option>
-                                                    <option value="Ecuador">Ecuador</option>
-                                                    <option value="Egypt">Egypt</option>
-                                                    <option value="El Salvador">El Salvador</option>
-                                                    <option value="Estonia">Estonia</option>
-                                                    <option value="Fiji">Fiji</option>
-                                                    <option value="Finland">Finland</option>
-                                                    <option value="France">France</option>
-                                                    <option value="Gabon">Gabon</option>
-                                                    <option value="Gambia">Gambia</option>
-                                                    <option value="Georgia">Georgia</option>
-                                                    <option value="Germany">Germany</option>
-                                                    <option value="Ghana">Ghana</option>
-                                                    <option value="Gibraltar">Gibraltar</option>
-                                                    <option value="Greece">Greece</option>
-                                                    <option value="Greenland">Greenland</option>
-                                                    <option value="Grenada">Grenada</option>
-                                                    <option value="Guatemala">Guatemala</option>
-                                                    <option value="Guinea">Guinea</option>
-                                                    <option value="Guinea-Bissau">Guinea-Bissau</option>
-                                                    <option value="Guyana">Guyana</option>
-                                                    <option value="Haiti">Haiti</option>
-                                                    <option value="Honduras">Honduras</option>
-                                                    <option value="Hong Kong">Hong Kong</option>
-                                                    <option value="Hungary">Hungary</option>
-                                                    <option value="Iceland">Iceland</option>
-                                                    <option value="India">India</option>
-                                                    <option value="Indonesia">Indonesia</option>
-                                                    <option value="Iran (Islamic Republic)">Iran (Islamic Republic)
-                                                    </option>
-                                                    <option value="Iraq">Iraq</option>
-                                                    <option value="Ireland">Ireland</option>
-                                                    <option value="Israel">Israel</option>
-                                                    <option value="Italy">Italy</option>
-                                                    <option value="Jamaica">Jamaica</option>
-                                                    <option value="Japan">Japan</option>
-                                                    <option value="Jordan">Jordan</option>
-                                                    <option value="Kazakhstan">Kazakhstan</option>
-                                                    <option value="Kenya">Kenya</option>
-                                                    <option value="Korea (South)">Korea (South)</option>
-                                                    <option value="Kuwait">Kuwait</option>
-                                                    <option value="Latvia">Latvia</option>
-                                                    <option value="Lebanon">Lebanon</option>
-                                                    <option value="Lesotho">Lesotho</option>
-                                                    <option value="Liberia">Liberia</option>
-                                                    <option value="Libyan Arab Jamahiriy">Libyan Arab Jamahiriy</option>
-                                                    <option value="Lithuania">Lithuania</option>
-                                                    <option value="Luxembourg">Luxembourg</option>
-                                                    <option value="Madagascar">Madagascar</option>
-                                                    <option value="Malawi">Malawi</option>
-                                                    <option value="Malaysia">Malaysia</option>
-                                                    <option value="Mali">Mali</option>
-                                                    <option value="Mauritania">Mauritania</option>
-                                                    <option value="Mauritius">Mauritius</option>
-                                                    <option value="Mexico">Mexico</option>
-                                                    <option value="Mongolia">Mongolia</option>
-                                                    <option value="Morocco">Morocco</option>
-                                                    <option value="Mozambique">Mozambique</option>
-                                                    <option value="Myanmar">Myanmar</option>
-                                                    <option value="Namibia">Namibia</option>
-                                                    <option value="Nauru">Nauru</option>
-                                                    <option value="Nepal">Nepal</option>
-                                                    <option value="Netherlands">Netherlands</option>
-                                                    <option value="New Zealand">New Zealand</option>
-                                                    <option value="Nicaragua">Nicaragua</option>
-                                                    <option value="Niger">Niger</option>
-                                                    <option value="Nigeria">Nigeria</option>
-                                                    <option value="Norway">Norway</option>
-                                                    <option value="Oman">Oman</option>
-                                                    <option value="Pakistan">Pakistan</option>
-                                                    <option value="Panama">Panama</option>
-                                                    <option value="Papua New Guinea">Papua New Guinea</option>
-                                                    <option value="Paraguay">Paraguay</option>
-                                                    <option value="Peru">Peru</option>
-                                                    <option value="Philippines">Philippines</option>
-                                                    <option value="Poland">Poland</option>
-                                                    <option value="Portugal">Portugal</option>
-                                                    <option value="Qatar">Qatar</option>
-                                                    <option value="Saudi Arabia">Saudi Arabia</option>
-                                                    <option value="Senegal">Senegal</option>
-                                                    <option value="Sierra Leone">Sierra Leone</option>
-                                                    <option value="Singapore">Singapore</option>
-                                                    <option value="Somalia">Somalia</option>
-                                                    <option value="South Africa">South Africa</option>
-                                                    <option value="Spain">Spain</option>
-                                                    <option value="Sri Lanka">Sri Lanka</option>
-                                                    <option value="Sudan">Sudan</option>
-                                                    <option value="Suriname">Suriname</option>
-                                                    <option value="Swaziland">Swaziland</option>
-                                                    <option value="Sweden">Sweden</option>
-                                                    <option value="Switzerland">Switzerland</option>
-                                                    <option value="Syrian Arab Republic">Syrian Arab Republic</option>
-                                                    <option value="Taiwan">Taiwan</option>
-                                                    <option value="Tajikistan">Tajikistan</option>
-                                                    <option value="Thailand">Thailand</option>
-                                                    <option value="Togo">Togo</option>
-                                                    <option value="Trinidad And Tobago">Trinidad And Tobago</option>
-                                                    <option value="Tunisia">Tunisia</option>
-                                                    <option value="Turkey">Turkey</option>
-                                                    <option value="Turkmenistan">Turkmenistan</option>
-                                                    <option value="Uganda">Uganda</option>
-                                                    <option value="Ukraine">Ukraine</option>
-                                                    <option value="United Arab Emirates">United Arab Emirates</option>
-                                                    <option value="United Kingdom">United Kingdom</option>
-                                                    <option value="United States">United States</option>
-                                                    <option value="Uruguay">Uruguay</option>
-                                                    <option value="Uzbekistan">Uzbekistan</option>
-                                                    <option value="Venezuela">Venezuela</option>
-                                                    <option value="VietNam">VietNam</option>
-                                                    <option value="Yemen">Yemen</option>
-                                                    <option value="Yugoslavia">Yugoslavia</option>
-                                                    <option value="Zambia">Zambia</option>
-                                                    <option value="Zimbabwe">Zimbabwe</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6 my-2 {{-- swapped-element --}}">
-
-                                            <div class="form-group">
-
-                                                <label for="participants">No Of Participants</label>
-
-                                                <input type="number" name="no_participants" class="form-control"
-                                                    placeholder="Enter number of participants" id="participants">
-
-                                            </div>
-
-                                        </div>
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6 my-2 {{-- swapped-element --}}">
-
-                                            <div class="form-group">
-
-                                                <label for="travelDate">Expected Travel Date<span
-                                                        class="text-danger">*</span></label>
-
-                                                <input type="text" name="expected_date"
-                                                    class="form-control date-picker"
-                                                    placeholder="Enter your expected travel date" id="travelDate"
-                                                    required>
-
-                                            </div>
-
-                                        </div>
-                                        <div class="col-12 col-sm-6 col-md-12 col-lg-6 my-2 {{-- swapped-element --}}">
-
-                                            <div class="form-group">
-
-                                                <label for="contactNumber">Contact Number<span
-                                                        class="text-danger">*</span></label>
-
-                                                <input type="text" name="phone" class="form-control"
-                                                    placeholder="Enter your contact address" id="contactNumber" required>
-
-                                            </div>
-
-                                        </div>
-                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 my-2 {{-- swapped-element --}}">
-
-
-                                            <div class="form-group">
-                                                <label for="How did you find us?">How did you find us?<span
-                                                        class="text-danger">*</span></label>
-                                                <select name="agent" class="form-control" required>
-                                                    {{--  <option value="Past Traveller">Past Traveller</option>
-                <option value="Search Engine">Search Engine</option> --}}
-                                                    {{-- <option value="Agent">Agent</option> --}}
-                                                    @foreach ($agents as $agent)
-                                                        <option value="{{ $agent->id }}">{{ $agent->name }}
-                                                        </option>
-                                                    @endforeach
-                                                    {{-- <option value="Anjan Shrestha">Anjan Shrestha</option> --}}
-                                                </select>
-
-                                            </div>
-
-                                        </div>
-                                    @endif
-
-
-
-                                    <div class="col-12">
-
-                                        <div class="form-group">
-
-                                            <label for="message">Your Message<span class="text-danger">*</span></label>
-
-                                            <textarea name="comment" class="form-control" placeholder="Enter your message" id="message" required></textarea>
-
-                                        </div>
-
-                                    </div>
-                                    <input type="hidden" name="booking" value="{{ $package->id }}">
-                                    <div class="col-12">
-
-                                        <div class="form-group">
-
-                                            <button type="submit" class="btn btn-primary mt-2">Submit <i
-                                                    class="fa fa-paper-plane"></i></button>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-                            </form>
-                        </div>
+                <!-- Custom Navigation Buttons -->
+                <div class="splide_btn_section text-center mt-3">
+                    <div class='splide_btn_prev splide_btn'>
+                        <button id="custom-prev" class="splide_btn">
+                            <img src="{{asset('frontend/images/pervArrow.png')}}" alt="prev" width="24" height="20"
+                                style="object-fit:contain;">
+                        </button>
                     </div>
-
+                    <div class='splide_btn_next splide_btn'>
+                        <button id="custom-next" class="splide_btn">
+                            <img src="{{asset('frontend/images/nextArrow.png')}}" alt="next" width="24" height="20"
+                                style="object-fit:contain;">
+                        </button>
+                    </div>
                 </div>
             </div>
+
+            <div class="text-center">
+                <a href="{{route('destination',['url'=>'nepal'])}}" class="btn btn_darkprimary destination-button">VIEW ALL POSTS</a>
+            </div>
         </div>
-        <input id="current_url" type="hidden" value="{{ url()->current() }}">
+    </section>
+</section>
+@include('frontend.inc.contactus')
 
 
 
-    @endsection
+@endsection
+@push('style')
+<link rel="stylesheet" href="{{asset('frontend/style/listDetail.css')}}">
+<style>
+    .table th,.table td{
+    background: transparent!important;
+}
+.table th{
+    text-transform: uppercase;
+}
+</style>
+@endpush
 
-    @push('scripts')
-        <script type="application/ld+json">
-  {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": "Nepal Vision Treks",
-    "image": " {{ getImageurl($package->image) }}",
-    "description": " {{ $package->descr }}",
-    "brand": {
-      "@type": "Brand",
-      "name": "{{ $package->country($country)!=null ? $package->country($country)->pivot->name: $package->name}}"
-    },
-    "offers": {
-      "@type": "Offer",
-      "url": "{{url()->current()}}",
-      "priceCurrency": "USD",
-      "price": "{{$package->discounted_price?$package->discounted_price:$package->price}}",
-      "priceValidUntil": "{{today()->addDay(45)}}",
-      "availability": "https://schema.org/InStock",
-      "itemCondition": "https://schema.org/NewCondition"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "bestRating": "5",
-      "worstRating": "4",
-      "ratingCount": "8",
-      "reviewCount": "12"
-    },
-    "review": {
-      "@type": "Review",
-      "name": "Amazing Experience",
-      "reviewBody": "The moment our guides met us at the airport, we knew we made the right choice in choosing Nepal Visions. Everything that happened after that reinforced that Nepal Visions was the best choice, from our first meeting with Chet to the departure dinner at the end. As you can see by this photo above, we became a family. Our guides Kashar and Giri helped us realize a lifelong dream of trekking in the shadow of Mt. Everest. Their expertise in trekking kept us all very healthy so we could enjoy every step. At Nepal Visions – you are treated like family! Albert Lepore EBC Trek - 20 Days: April - May, 2012 7868 S. Hill Drive Littleton, USA Email - al.lepore@aeroastro.com",
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": "5",
-        "bestRating": "5",
-        "worstRating": "4"
-      },
-      "datePublished": "{{today()->subDay(10)}}",
-      "author": {"@type": "Person", "name": "Np"},
-      "publisher": {"@type": "Organization", "name": "Albert Lepore"}
-    }
-  }
-  </script>
+@push('script')
+<!-- Vue 3 CDN -->
+<script src="https://unpkg.com/vue@3.4.21/dist/vue.global.prod.js"></script>
+<!-- Axios CDN -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-toastification@2.0.0-beta.12/dist/index.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue-toastification@2.0.0-beta.12/dist/index.umd.min.js"></script>
 
+<script>
+    const { createApp } = Vue;
 
-        <script type="text/javascript" src="https://www.viralpatel.net/demo/jquery/jquery.shorten.1.0.js"></script>
+    createApp({
+        data() {
+            return {
+                // Existing
+                month: {{ $month }},
+                year: {{ $year }},
+                id: {{ $package->id }},
+                departures: [],
+                years: (() => {
+                    const y = new Date().getFullYear();
+                    return [y, y + 1, y + 2];
+                })(),
 
-        <script>
-            $(document).ready(function() {
-
-                $(".comment").shorten({
-                    "showChars": 450,
-                    "moreText": "See More",
-                    "lessText": "See Less",
-                });
-
-            });
-        </script>
-
-
-
-        <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <script type="text/javascript">
-            $(function() {
-
-                $("#datepicker").datepicker();
-                $("#travelDate").datepicker();
-
-
-            });
-        </script>
-
-        <script>
-            function adjustMonths() {
-                var thisYear = new Date().getFullYear() + "";
-                var thisMonth = new Date().getMonth() + 1 + "";
-                var selectedYear = $(".select-year").val();
-                if (thisMonth.length == 1) {
-                    thisMonth = "0" + thisMonth;
-                }
-
-                var yearAndMonth = parseInt(thisYear + thisMonth);
-
-                $('#select-month option').each(function() {
-
-                    var selectMonth = $(this).prop('value');
-
-                    if (selectMonth.length == 1) {
-                        selectMonth = "0" + selectMonth;
-                    }
-
-                    if (parseInt(selectedYear + selectMonth) < yearAndMonth) {
-                        $(this).hide();
-                    } else {
-                        $(this).show();
-                    }
-
-                });
-
-                $("#select-month option").prop(':selected', false);
-
-                $('#select-month option').each(function() {
-                    if ($(this).css('display') != 'none') {
-                        $(this).prop("selected", true);
-                        return false;
-                    }
-                });
-
+                // New - for form
+                selectedDate: '',
+                groupSize: 1,
+                basePrice: {{ $discounted ?? $price }} ,// fallback if not set
+            };
+        },
+        computed: {
+            totalPrice() {
+                return this.basePrice * this.groupSize;
             }
+        },
+        mounted() {
+            this.fetchDepartures();
+        },
+        methods: {
+            // Existing methods
+            getMonthName(month) {
+                return new Date(2000, month - 1, 1).toLocaleString('default', { month: 'long' });
+            },
+            formatDate(dateStr) {
+                const date = new Date(dateStr);
+                return `${date.getDate()} ${date.toLocaleString('default', { month: 'long' })}`;
+            },
+            formatEndDate(startDate, duration) {
+                let days = parseInt(duration.match(/\d+/)?.[0] || 0);
+                let end = new Date(startDate);
+                end.setDate(end.getDate() + days - 1);
+                return `${end.getDate()} ${end.toLocaleString('default', { month: 'long' })}, ${end.getFullYear()}`;
+            },
+            getProgress(dep) {
+                return dep.total_seats > 0 ? Math.round((dep.booked_seats / dep.total_seats) * 100) : 0;
+            },
+            fetchDepartures() {
+                axios.get(`{{ route('departure') }}?id=${this.id}&month=${this.month}&year=${this.year}`)
+                    .then(res => {
+                        this.departures = res.data.departures;
+                    })
+                    .catch(err => console.error(err));
+            },
 
-            $(document).ready(function() {
-                adjustMonths();
 
-                $('.select-year').change(function() {
-                    adjustMonths();
-                })
-
-            });
-        </script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                ajaxdate();
-                $("#select-month, .select-year").change(function(e) {
-                    e.preventDefault();
-                    $('#ajaxloader').show();
-                    // console.log('changed');
-                    ajaxdate();
-                });
-
-                function ajaxdate() {
-                    $.ajax({
-                        type: 'GET',
-                        url: '{{ route('departure') }}',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-
-                        data: {
-                            packageid: {{ $packages_id }},
-                            year: $(".select-year").val(),
-                            month: $("#select-month").val()
-                        },
-                        success: function(data) {
-                            $(".ajaxloadmoredeparture").empty();
-                            $(".ajaxloadmoredeparture").append(data);
-                            $('#ajaxloader').hide();
-
-                        }
-                    });
+            increaseGroupSize() {
+                this.groupSize++;
+            },
+            decreaseGroupSize() {
+                if (this.groupSize > 1) {
+                    this.groupSize--;
                 }
-            });
-        </script>
-    @endpush
-    @push('style')
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    @endpush
+            },
+            submitForm() {
+                const formData = {
+                    date: this.selectedDate,
+                    groupSize: this.groupSize,
+                    totalPrice: this.totalPrice
+                };
 
-    @push('scripts')
-        <script>
-            $('.copy_link').click(function(e) {
-                e.preventDefault()
+                console.log('Form submitted:', formData);
 
-                let copyText = $('#current_url').val()
-                const cb = navigator.clipboard;
-                cb.writeText(copyText).then(() => alert('Link copied'));
+                // Submit form via axios
+                axios.post('/api/book', formData)
+                    .then(response => alert("Success"))
+                    .catch(error => alert("Failed"));
+            }
+        }
+    }).mount('#departureApp');
+    </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var splide = new Splide("#recentPostsSlider", {
+            type: "loop",
+            perPage: 3,
+            perMove: 1,
+            gap: "1rem",
+            pagination: false,
+            arrows: false,
+            autoWidth: false,
+            focus: "center",
+            breakpoints: {
+                1200: { perPage: 3, gap: "1rem" },
+                992: { perPage: 2, gap: "1.5rem" },
+                768: { perPage: 1 },
+            },
+        }).mount();
 
-            })
-            //         $('.nav-tabs .nav-item').click(function(){
-            //             console.log($("#myTabContent").offset());
-            //             $([document.documentElement, document.body]).animate({
-            //     scrollTop: $("#myTabContent").offset().top
-            // }, 100);
-            //         })
-        </script>
-    @endpush
+        // Custom button navigation
+        document.getElementById("custom-prev").addEventListener("click", function () {
+            splide.go("-1");
+        });
+
+        document.getElementById("custom-next").addEventListener("click", function () {
+            splide.go("+1");
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var splide = new Splide("#testimonialSlider", {
+            type: "loop",
+            perPage: 1,
+            perMove: 1,
+            gap: "1rem",
+            pagination: true,
+            arrows: false,
+            autoWidth: false,
+            focus: "center",
+        }).mount();
+    });
+</script>
+@endpush
