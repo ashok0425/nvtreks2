@@ -21,6 +21,9 @@
                     </a>
                 </li>
 
+                <div class="dropdown-divider"></div>
+
+
                 <li class="nav-item">
                     <a href="{{ route('admin.destinations.index') }}" class="nav-link">
                         <i class=" fas fa-map-marker-alt"></i>
@@ -50,25 +53,12 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ route('admin.testimonials.index') }}" class="nav-link">
-                        <i class=" fas fa-comment-dots"></i>
-                        <p>Testimonials</p>
+                    <a href="{{ route('admin.departures.index') }}" class="nav-link">
+                        <i class="fas fa-clock"></i>
+                        <p>Departures</p>
                     </a>
                 </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.websites.index') }}" class="nav-link">
-                        <i class=" fas fa-wrench"></i>
-                        <p>Setting</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.faqs.index') }}" class="nav-link">
-                        <i class=" fas fa-question-circle"></i>
-                        <p>FAQs</p>
-                    </a>
-                </li>
+                <div class="dropdown-divider"></div>
 
                 <li class="nav-item">
                     <a href="{{ route('admin.teams.index') }}" class="nav-link">
@@ -76,35 +66,6 @@
                         <p>Teams</p>
                     </a>
                 </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.departures.index') }}" class="nav-link">
-                        <i class="fas fa-clock"></i>
-                        <p>Departures</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.blogs.index') }}" class="nav-link">
-                        <i class="fas fa-file-image"></i>
-                        <p>Blogs</p>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="{{ route('admin.events.index') }}" class="nav-link">
-                        <i class=" fas fa-calendar"></i>
-                        <p>Events</p>
-                    </a>
-                </li>
-
-                {{-- <li class="nav-item">
-                    <a href="{{ route('admin.newsletters.index') }}" class="nav-link">
-                        <i class=" fas fa-envelope"></i>
-                        <p>Newsletters</p>
-                    </a>
-                </li> --}}
-
                 <li class="nav-item">
                     <a href="{{ route('admin.contacts.index') }}" class="nav-link">
                         <i class=" fas fa-address-book"></i>
@@ -118,6 +79,60 @@
                         <p>Booking</p>
                     </a>
                 </li>
+
+                <div class="dropdown-divider"></div>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.blogs.index') }}" class="nav-link">
+                        <i class="fas fa-file-image"></i>
+                        <p>Blogs</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.testimonials.index') }}" class="nav-link">
+                        <i class=" fas fa-comment-dots"></i>
+                        <p>Testimonials</p>
+                    </a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.faqs.index') }}" class="nav-link">
+                        <i class=" fas fa-question-circle"></i>
+                        <p>FAQs</p>
+                    </a>
+                </li>
+                <div class="dropdown-divider"></div>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.banners.index') }}" class="nav-link">
+                        <i class=" fas fa-images"></i>
+                        <p>Banners/Link</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.websites.index') }}" class="nav-link">
+                        <i class=" fas fa-wrench"></i>
+                        <p>Setting</p>
+                    </a>
+                </li>
+
+                {{-- <li class="nav-item">
+                    <a href="{{ route('admin.events.index') }}" class="nav-link">
+                        <i class=" fas fa-calendar"></i>
+                        <p>Events</p>
+                    </a>
+                </li> --}}
+
+                {{-- <li class="nav-item">
+                    <a href="{{ route('admin.newsletters.index') }}" class="nav-link">
+                        <i class=" fas fa-envelope"></i>
+                        <p>Newsletters</p>
+                    </a>
+                </li> --}}
+
+
 
                 <!-- Logout -->
                 <li class="nav-item">

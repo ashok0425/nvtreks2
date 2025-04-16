@@ -56,7 +56,6 @@ Route::get('bookings', [App\Http\Controllers\BackEnd\BookingController::class, '
 
 // Banner
 Route::resource('/banners', App\Http\Controllers\BackEnd\BannerController::class);
-Route::get('banners/delete/{id}', [App\Http\Controllers\BackEnd\BannerController::class, 'destroy'])->name('banners.delete');
 
 // Setting
 Route::resource('/websites', App\Http\Controllers\BackEnd\SettingController::class);

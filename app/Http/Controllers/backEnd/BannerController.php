@@ -21,14 +21,8 @@ class BannerController extends Controller
     }
 
     public function store(Request $request){
-        $main_sliders=new MainSlider;
-        $request->validate([
-            'image'=>'required',
-            'title'=>'required',
-            'type'=>'required',
 
-            
-        ]);
+        $main_sliders=new MainSlider;
         $file=$request->file('image');
 
         if($file){
@@ -37,10 +31,8 @@ class BannerController extends Controller
         $main_sliders->title=$request->title;
         $main_sliders->details=$request->details;
         $main_sliders->type=$request->type;
-        $main_sliders->status=1;
-
-        $main_sliders->link=$request->link;
-
+        $main_sliders->link=$request->page;
+        $main_sliders->status=$request->status??1;
             $main_sliders->save();
             $notification=array(
                 'alert-type'=>'success',
@@ -63,7 +55,7 @@ class BannerController extends Controller
             'title'=>'required',
             'type'=>'required',
 
-            
+
         ]);
         $main_sliders=MainSlider::find($id);
 
@@ -78,11 +70,8 @@ class BannerController extends Controller
         $main_sliders->title=$request->title;
         $main_sliders->details=$request->details;
         $main_sliders->type=$request->type;
-        $main_sliders->status=1;
-
-        $main_sliders->link=$request->link;
-
-            $main_sliders->save();
+        $main_sliders->link=$request->page;
+        $main_sliders->status=$request->status??$main_sliders->status;
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Main Banner updated',
@@ -99,22 +88,14 @@ class BannerController extends Controller
 
 public function destroy($id)
 {
-    try {
         $main_sliders = MainSlider::findOrFail($id);
         $this->deleteFile($main_sliders->image);
         $main_sliders->delete();
         $notification=array(
             'alert-type'=>'success',
             'messege'=>'Successfully Deleted Banner.',
-           
+
          );
-    } catch (\Throwable $e) {
-        $notification=array(
-            'alert-type'=>'error',
-            'messege'=>'Failed to delete  Banner.',
-           
-         );
-    }
 
     return redirect()->route('admin.banners.index')->with($notification);
 }
