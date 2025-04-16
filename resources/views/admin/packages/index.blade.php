@@ -42,7 +42,7 @@
                                     <td>{!! $package->status == 1
                                         ? '<span class="badge bg-success">Active</span>'
                                         : '<span class="badge bg-danger">Deactive</span>' !!}</td>
-                                        <td>
+                                        <td class="d-flex">
                                             <a href="{{ route('admin.packages.edit', $package) }}" class="btn-sm btn btn-primary"><i class="fas fa-edit"></i>
                                             </a>
 
@@ -51,6 +51,12 @@
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm delete_row"><i class="fas fa-trash"></i></button>
                                             </form>
+                                            <a href="{{route('admin.package.country', ['package_id' => $package->id])}}" class="btn btn-success btn-sm " id="" >
+                                                <i class="fa fa-plus"></i>
+                                        </a>
+                                        <a href="{{
+                                        route('admin.package.gallery', ['package_id' => $package->id])}}" class="btn btn-info btn-sm " id="" ><i class="fa fa-images"></i>
+                                    </a>
                                         </td>
 
                             @endforeach
