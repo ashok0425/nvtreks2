@@ -22,9 +22,15 @@ class TestimonialsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $testimonials = Testimonial::orderBy('created_at', 'desc')->get();
+        $testimonials = Testimonial::latest()
+        ->when($request->search,function($query) use ($request){
+            $query->where('title','like','%'.$request->search.'%')
+            ->orWhere('name','like','%'.$request->search.'%')
+            ->orWhere('content','like','%'.$request->search.'%');
+        })
+        ->paginate(20);
         return view('admin.testimonials.index', compact('testimonials'));
     }
 
@@ -47,9 +53,7 @@ class TestimonialsController extends Controller
      */
     public function store(Request $request)
     {
-        DB::beginTransaction();
 
-        try {
             // Create and fill testimonial model
             $testimonial = new Testimonial();
             $testimonial->fill([
@@ -83,23 +87,11 @@ class TestimonialsController extends Controller
                 DB::table('package_testimonial')->insert($testimonialPackages);
             }
 
-            DB::commit();
-
             return redirect()->route('admin.testimonials.index')->with([
                 'alert-type' => 'success',
                 'messege'    => 'Successfully Added Testimonial.',
             ]);
 
-        } catch (QueryException $e) {
-            DB::rollBack();
-
-            report($e); // optional: log the error or send to Sentry
-
-            return redirect()->route('admin.testimonials.index')->with([
-                'alert-type' => 'error',
-                'messege'    => 'Failed to Add Testimonial.',
-            ]);
-        }
     }
 
 
@@ -120,12 +112,10 @@ class TestimonialsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Testimonial $testimonial)
     {
-        $testimonial = Testimonial::findOrFail($id);
-        // dd($testimonials->packages->pluck('id'));
         $packages = Package::where('status', 1)->get();
-        $edit_packages = DB::table('package_testimonial')->join('packages','packages.id','package_testimonial.package_id')->select('packages.name','packages.id')->where('testimonial_id',$id)->get();
+        $edit_packages = $testimonial->packages()->select('packages.id','packages.name')->get();
 
         return view('admin.testimonials.edit', compact('testimonial', 'packages','edit_packages'));
     }
@@ -137,51 +127,40 @@ class TestimonialsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Testimonial $testimonial)
     {
 
-        try {
-            DB::beginTransaction();
-            $testimonials = Testimonial::findOrFail($id);
-            $testimonials->name = $request->name;
-            $testimonials->title = $request->title;
-            $testimonials->content = $request->content;
-            $testimonials->status = 1;
-            $testimonials->rating = $request->rating;
-            $testimonials->display_home = $request->display_home;
-            $testimonials->date = $request->date;
+            $testimonial->name = $request->name;
+            $testimonial->title = $request->title;
+            $testimonial->content = $request->content;
+            $testimonial->status = $request->status??$testimonial->status;
+            $testimonial->rating = $request->rating;
+            $testimonial->display_home = $request->display_home;
+            $testimonial->date = $request->date;
 
             $banner = $request->file('file');
             if ($banner) {
-               $this->deleteFile($testimonials->image);
-                $testimonials->image =$this->uploadFile('upload/testimonial',$banner);
+               $this->deleteFile($testimonial->image);
+                $testimonial->image =$this->uploadFile('upload/testimonial',$banner);
 
             }
-            if ($testimonials->save()) {
+            if ($testimonial->save()) {
                 $length = count($request->package);
-                DB::table('package_testimonial')->where('testimonial_id',$id)->delete();
+                DB::table('package_testimonial')->where('testimonial_id',$testimonial->id)->delete();
                 for ($i = 0; $i < $length; $i++) {
                     $package_testmonial = [];
                     $package_testmonial['package_id'] = $request->package[$i];
-                    $package_testmonial['testimonial_id'] = $testimonials->id;
+                    $package_testmonial['testimonial_id'] = $testimonial->id;
                     DB::table('package_testimonial')->insert($package_testmonial);
                 }
             }
 
-DB::commit();
             $notification = array(
                 'alert-type' => 'success',
                 'messege' => 'Successfully Updated Testimonial.',
 
             );
-        } catch (QueryException $qE) {
-            DB::rollBack();
-            $notification = array(
-                'alert-type' => 'error',
-                'messege' => 'Failed to updated Testimonial.',
 
-            );
-        }
 
         return redirect()->route('admin.testimonials.index')->with($notification);
     }

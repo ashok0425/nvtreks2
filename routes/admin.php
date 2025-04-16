@@ -51,7 +51,6 @@ Route::resource('/departures', App\Http\Controllers\BackEnd\Travel\DeparturesCon
 
 // Blog
 Route::resource('/blogs', App\Http\Controllers\BackEnd\BlogController::class);
-Route::get('/blogs/delete/{id}', [App\Http\Controllers\BackEnd\BlogController::class, 'destroy'])->name('blogs.delete');
 
 // Event
 Route::resource('/events', App\Http\Controllers\BackEnd\EventController::class);

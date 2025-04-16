@@ -68,16 +68,27 @@
                 </textarea>
                     </div>
 
-                    <div class="form-group col-md-2">
-                        <label>Show on Home page</label>
-                        <input type="checkbox" class="form-control" name="display_home" value="1"
+                    <div class="form-group col-md-6 align-items-center">
+                        <label>
+                        <input type="checkbox"  name="display_home" value="1"
                             @if ($testimonial->display_home == 1) checked @endif>
+                            Show on Home page
+                        </label>
 
                     </div>
 
+                    <div class="col-md-3 ">
+                        <label class="form-label">Status</label>
+                        <select name="status" id="" class="form-select form-control">
+                            <option value="">--status--</option>
+                            <option value="1" {{$testimonial->status?'selected':''}}>Active</option>
+                            <option value="0" {{!$testimonial->status?'selected':''}}>InActive</option>
+
+                        </select>
+                    </div>
 
 
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-12 mt-4">
                         <input type="submit" class="btn btn-info btn-block">
                     </div>
                 </div>
