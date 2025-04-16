@@ -43,65 +43,28 @@ class Syncblog extends Command
     public function handle()
     {
 
-                // Retrieve all posts from the database
-                 Blog::query()->limit(2)->chunk(2,function($posts){
-                    foreach ($posts as $post) {
-                        // Get the content of the post
-                        $content = $post->post_content;
-
-                        // Parse the HTML content
-                        $dom = new DOMDocument();
-                        @$dom->loadHTML($content);
-
-                        // Create a DOMXPath instance to query the DOM
-                        $xpath = new DOMXPath($dom);
-
-                        // Find all image tags
-                        $images = $xpath->query('//img');
-                        // Loop through each image
-                        foreach ($images as $image) {
-
-                            // Get the source attribute
-                            $src = $image->getAttribute('src');
-
-                            // Check if the source starts with data:image/webp;base64
-                            if (Str::startsWith($src, 'data:image/webp;base64')) {
-                                // Extract base64 data
-                                $base64Data = substr($src, strpos($src, ',') + 1);
-
-                                // Decode base64 data
-                                $decodedData = base64_decode($base64Data);
-
-                                // Generate a unique filename
-                                $filename = uniqid() . '.webp';
-
-                                // Specify the directory where you want to store the image
-                                $directory = 'images';
-
-                                // Upload the image to S3
-                                Storage::disk('s3')->put($directory . '/' . $filename, $decodedData);
-
-
-                        // Get the URL of the uploaded image
-                        $newSrc = Storage::disk('s3')->url($directory . '/' . $filename);
-
-                        $this->info($newSrc,$post->ID);
-                                $image->setAttribute('src', $newSrc);
-                            }
-                        }
-
-                        // Get the modified HTML content
-                        $modifiedContent = $dom->saveHTML();
-
-                        DB::table('blogs')->where('ID',$post->ID)->update(
-                            [
-                                'post_content'=>$modifiedContent
-                            ]
-                            );
-                    }
-                });
-
-
+        DB::table('post')->orderBy('id')->chunk(100, function ($posts) {
+            foreach ($posts as $post) {
+                DB::table('blogs')->insert([
+                    'slug' => $post->url,
+                    'title' => $post->post_title,
+                    'short_description' => $post->short_description ?? '',
+                    'long_description' => $post->post_content ?? '',
+                    'display_homepage' => $post->display_homepage ?? false,
+                    'thumbnail' => $post->guid ?? null,
+                    'cover_image' => $post->cover_image ?? null,
+                    'meta_title' => $post->meta_title ?? null,
+                    'meta_keyword' => $post->meta_keyword ?? null,
+                    'meta_description' => $post->meta_description ?? null,
+                    'mobile_title' => $post->mobile_title ?? null,
+                    'mobile_keyword' => $post->mobile_keyword ?? null,
+                    'mobile_description' => $post->mobile_description ?? null,
+                    'status' => $post->post_status=='publish' ? 1:0,
+                    'created_at' => $post->post_date,
+                    'updated_at' => now(),
+                ]);
+            }
+        });
 
                 return 'Content processed successfully';
 
