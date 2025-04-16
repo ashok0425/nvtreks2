@@ -1,21 +1,31 @@
-@extends('admin.layouts.app') 
+@extends('admin.layouts.app')
 @section('content')
 <section class="container">
+    <div class="ml-auto" style="width: 230px;">
+        <form action="" >
+            <div class="form-group">
+                <input type="search" class="form-control" name="search" id="" placeholder="Search here..." value="{{request()->query('search')}}">
+            </div>
+        </form>
+    </div>
   <div class="card">
-      <div class="card-body">
-          
-          <!-- /. -->
-
-          <div class="d-flex justify-content-between align-items-center">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
             <div >
               <h3 class="-title">DEPARTURE'S Data</h3>
             </div>
     <div> <a class="btn btn-primary" href="{{ route('admin.departures.create') }}"><i class="fa fa-plus"></i> Add departure</a></div>
 
           </div>
+    </div>
+      <div class="card-body">
+
+          <!-- /. -->
+
+
             <!-- /.-header -->
             <div class="-body">
-              <table id="example2" class="table table-bordered table-striped">
+              <table  class="table table-bordered table-striped">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -36,25 +46,22 @@
                         <td>{{ carbon\carbon::parse($departure->start_date)->format('d M Y') }}</td>
                         <td>{!! $departure->status ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Deactive</span>' !!}</td>
                         <td>
-                           <a href="{{ route('admin.departures.edit',$departure->id) }}" class="btn btn-primary btn-sm pull-left m-r-10"><i class="fa fa-edit"></i>
+                           <a href="{{ route('admin.departures.edit',$departure) }}" class="btn btn-primary btn-sm pull-left m-r-10"><i class="fa fa-edit"></i>
                            </a>
-
-                           <a href="{{ route('admin.departures.delete',$departure->id ) }}" class="btn btn-danger btn-sm delete_row" id="" ><i class="fa fa-trash"></i>
-                           </a>
-                           @if ($departure->status==1)
-                           <a href="{{route('admin.deactive',['id'=>$departure->id,'table'=>'departures'])}}" class="btn btn-primary"><i class="fas fa-thumbs-down"></i></a>
-                           @else
-                           <a href="{{route('admin.active',['id'=>$departure->id,'table'=>'departures'])}}" class="btn btn-primary"><i class="fas fa-thumbs-up"></i></a>
-                           @endif
+                           <form action="{{route('admin.departures.destroy',$departure)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm delete_row"><i class="fas fa-trash"></i></button>
+                        </form>
 
                         </td>
                     </tr>
                     @endforeach
-                  
+
 
                 </tbody>
                 <tr>
-                  <td colspan="5">{{ $departures->links() }}</td>
+                  <td colspan="5">{{ $departures->withQueryString()->links() }}</td>
                 </tr>
               </table>
             </div>

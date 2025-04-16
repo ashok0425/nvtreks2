@@ -41,7 +41,6 @@ Route::get('/package-gallery/{id}/destroy', [App\Http\Controllers\BackEnd\Travel
 
 // Testimonials
 Route::resource('/testimonials', App\Http\Controllers\BackEnd\Testimonials\TestimonialsController::class);
-Route::get('/testimonials/delete/{id}', [App\Http\Controllers\BackEnd\Testimonials\TestimonialsController::class, 'destroy'])->name('testimonials.delete');
 
 // Faq
 Route::resource('faqs', App\Http\Controllers\BackEnd\Travel\FaqsController::class);
@@ -49,7 +48,6 @@ Route::get('faq/delete/{id}', [App\Http\Controllers\BackEnd\Travel\FaqsControlle
 
 // Departures
 Route::resource('/departures', App\Http\Controllers\BackEnd\Travel\DeparturesController::class);
-Route::get('/departures/delete/{id}', [App\Http\Controllers\BackEnd\Travel\DeparturesController::class, 'destroy'])->name('departures.delete');
 
 // Blog
 Route::resource('/blogs', App\Http\Controllers\BackEnd\BlogController::class);
@@ -61,8 +59,8 @@ Route::get('/events/delete/{id}', [App\Http\Controllers\BackEnd\EventController:
 
 // Contact
 Route::get('contacts', [App\Http\Controllers\BackEnd\ContactController::class, 'index'])->name('contacts.index');
-Route::get('/contacts/delete/{id}', [App\Http\Controllers\BackEnd\ContactController::class, 'destroy'])->name('contacts.delete');
-Route::get('contacts-history', [App\Http\Controllers\BackEnd\ContactController::class, 'emailHistory'])->name('contact.history');
+Route::get('bookings', [App\Http\Controllers\BackEnd\BookingController::class, 'index'])->name('bookings');
+
 
 // Banner
 Route::resource('/banners', App\Http\Controllers\BackEnd\BannerController::class);

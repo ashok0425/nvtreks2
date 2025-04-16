@@ -16,9 +16,15 @@ class DeparturesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $departures = Departure::orderBy('created_at', 'desc')->paginate(500);
+        $departures = Departure::with('package')
+        ->when($request->search,function($query) use($request){
+            $query->WhereHas('package',function($q) use ($request){
+            return $q->where('name','like','%'.$request->search.'%');
+        });
+        })
+        ->latest()->paginate(20);
         return view('admin.departure.index',compact('departures'));
     }
 
@@ -48,31 +54,22 @@ class DeparturesController extends Controller
 
         ]);
             //code...
-        try {
             foreach ($request->start_date as $key => $date) {
-                $Departure = new Departure;
-                $Departure->start_date=$date;
-                $Departure->package_id=$request->package_id;
-                $Departure->status=1;
-                $Departure->save();
+                $departure = new Departure();
+                $departure->start_date = $date;
+                $departure->end_date = $request->end_date[$key] ?? null;
+                $departure->total_seats = $request->total_seats[$key] ?? 0;
+                $departure->show_on_home_page = $request->show_on_home_page[$key] ?? 0;
+                $departure->package_id = $request->package_id;
+                $departure->status = 1;
+                $departure->save();
             }
-
 
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Departure Added Successfully',
 
              );
-            } catch (\Throwable $th) {
-                //throw $th;
-
-            $notification=array(
-                'alert-type'=>'error',
-                'messege'=>'Failed to Add Departure, Try again.',
-
-             );
-        }
-
         return redirect()->route('admin.departures.index')->with($notification);
     }
 
@@ -93,9 +90,8 @@ class DeparturesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Departure $departure)
     {
-        $departure = Departure::findOrFail($id);
         $packages=Package::where('status',1)->orderBy('name')->get();
         return view('admin.departure.edit', compact('departure','packages'));
     }
@@ -107,25 +103,21 @@ class DeparturesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Departure $departure)
     {
 
-        try {
-            $Departure = Departure::findOrFail($id);
-            $Departure->start_date=$request->start_date;
-            $Departure->package_id=$request->package_id;
-            $Departure->save();
+            $departure->start_date=$request->start_date;
+            $departure->package_id=$request->package_id;
+            $departure->end_date = $request->end_date ?? null;
+            $departure->total_seats = $request->total_seats ?? $departure->total_seats;
+            $departure->show_on_home_page = $request->show_on_home_page ?? $departure->show_on_home_page;
+            $departure->status=$request->status??1;
+            $departure->save();
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Departure updated',
              );
-        } catch(\Throwable $e) {
-            $notification=array(
-                'alert-type'=>'error',
-                'messege'=>'Failed to update Departure, Try again.',
 
-             );
-        }
 
         return redirect()->route('admin.departures.index')->with($notification);
     }
@@ -136,25 +128,15 @@ class DeparturesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Departure $departure)
     {
 
-        try {
-            $Departure = Departure::findOrFail($id);
-            // $Departure->packages()->detach();
-            $Departure->delete();
+            $departure->delete();
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>' Departure Deleted',
 
              );
-        } catch (\Throwable $e) {
-            $notification=array(
-                'alert-type'=>'error',
-                'messege'=>'Failed to delete Departure, Try again.',
-             );
-
-    }
     return redirect()->route('admin.departures.index')->with($notification);
 
 }

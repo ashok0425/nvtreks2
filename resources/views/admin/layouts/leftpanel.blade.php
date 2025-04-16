@@ -112,6 +112,13 @@
                     </a>
                 </li>
 
+                <li class="nav-item">
+                    <a href="{{ route('admin.bookings') }}" class="nav-link">
+                        <i class=" fas fa-users"></i>
+                        <p>Booking</p>
+                    </a>
+                </li>
+
                 <!-- Logout -->
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" class="nav-link"
