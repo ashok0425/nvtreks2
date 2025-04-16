@@ -60,18 +60,18 @@ public function filter(Request $request)
 
 
     // 📅 Days Filter (assumed to be mapped with `duration`)
-    if (
-        $request->filled('days.min') &&
-        $request->filled('days.max')
-    ) {
-        $minDays = (int) $request->input('days.min');
-        $maxDays = (int) $request->input('days.max');
+    // if (
+    //     $request->filled('days.min') &&
+    //     $request->filled('days.max')
+    // ) {
+    //     $minDays = (int) $request->input('days.min');
+    //     $maxDays = (int) $request->input('days.max');
 
-        $query->whereRaw("CAST(REGEXP_REPLACE(duration, '[^0-9]', '') AS UNSIGNED) BETWEEN ? AND ?", [
-            $minDays,
-            $maxDays
-        ]);
-    }
+    //     $query->whereRaw("CAST(REGEXP_REPLACE(duration, '[^0-9]', '') AS UNSIGNED) BETWEEN ? AND ?", [
+    //         $minDays,
+    //         $maxDays
+    //     ]);
+    // }
 
 
     // ⛰ Difficulty Filter
