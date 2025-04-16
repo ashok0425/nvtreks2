@@ -11,7 +11,7 @@
         <x-errormsg/>
 
 
-        <form action="{{ route('admin.faqs.update',$faq->id) }}" enctype="multipart/form-data" method="POST">
+        <form action="{{ route('admin.faqs.update',$faq) }}" enctype="multipart/form-data" method="POST">
             @method('PATCH')
             @csrf
             <div class="row alugn-items-center">
@@ -42,13 +42,19 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <label><input type="checkbox" {{$faq->show_on_home_page==1?'checked':''}} name="show_on_home_page" value="1"> Show on Home page</label>
                 </div>
+                <div class="col-md-3">
+                    <label class="form-label"> Status</label>
+                    <select name="status" id="" class="form-select form-control">
+                        <option value="">--status--</option>
+                        <option value="1" {{$faq->status?'selected':''}}>Active</option>
+                        <option value="0" {{!$faq->status?'selected':''}}>InActive</option>
+
+                    </select>
+                </div>
             </div>
-
-
-
 
             <div class="form-group col-md-12">
                 <input type="submit" class="btn btn-info btn-block">

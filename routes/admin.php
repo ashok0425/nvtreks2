@@ -41,15 +41,8 @@ Route::get('/package-gallery/{id}/destroy', [App\Http\Controllers\BackEnd\Travel
 
 // Testimonials
 Route::resource('/testimonials', App\Http\Controllers\BackEnd\Testimonials\TestimonialsController::class);
-
-// Faq
 Route::resource('faqs', App\Http\Controllers\BackEnd\Travel\FaqsController::class);
-Route::get('faq/delete/{id}', [App\Http\Controllers\BackEnd\Travel\FaqsController::class, 'destroy'])->name('faqs.delete');
-
-// Departures
 Route::resource('/departures', App\Http\Controllers\BackEnd\Travel\DeparturesController::class);
-
-// Blog
 Route::resource('/blogs', App\Http\Controllers\BackEnd\BlogController::class);
 
 // Event

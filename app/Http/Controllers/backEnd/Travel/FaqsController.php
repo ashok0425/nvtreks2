@@ -29,7 +29,7 @@ class FaqsController extends Controller
      */
     public function create()
     {
-        $packages=Package::orderBy('name')->where('status',1)->get();
+        $packages=Package::orderBy('name')->where('status',1)->paginate(20);
 
         return view('admin.faq.create', compact('packages'));
     }
@@ -42,9 +42,6 @@ class FaqsController extends Controller
      */
     public function store(Request $request)
     {
-            //code...
-
-        try {
             $faq = new Faq;
             $faq->question=$request->question;
             $faq->answer=$request->answer;
@@ -59,15 +56,7 @@ class FaqsController extends Controller
                 'messege'=>'FAQ Added Successfully',
 
              );
-            } catch (\Throwable $th) {
-                //throw $th;
 
-            $notification=array(
-                'alert-type'=>'error',
-                'messege'=>'Failed to Add FAQ, Try again.',
-
-             );
-        }
 
         return redirect()->route('admin.faqs.index')->with($notification);
     }
@@ -89,9 +78,8 @@ class FaqsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Faq $faq)
     {
-        $faq = Faq::findOrFail($id);
         $packages=Package::where('status',1)->orderBy('name')->get();
         return view('admin.faq.edit', compact('faq','packages'));
     }
@@ -103,15 +91,12 @@ class FaqsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Faq $faq)
     {
-
-        try {
-            $faq = Faq::findOrFail($id);
             $faq->question=$request->question;
             $faq->answer=$request->answer;
             $faq->package_id=$request->package_id;
-            $faq->status=1;
+            $faq->status=$request->status??$faq->status;
             $faq->show_on_home_page=$request->show_on_home_page??0;
             $faq->save();
             $notification=array(
@@ -119,13 +104,6 @@ class FaqsController extends Controller
                 'messege'=>'Faq updated',
 
              );
-        } catch(\Throwable $e) {
-            $notification=array(
-                'alert-type'=>'error',
-                'messege'=>'Failed to pdate FAQ, Try again.',
-
-             );
-        }
 
         return redirect()->route('admin.faqs.index')->with($notification);
     }
