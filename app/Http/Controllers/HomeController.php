@@ -8,6 +8,7 @@ use App\Models\Destination;
 use App\Models\Cms;
 use App\Models\Departure;
 use App\Models\Faq;
+use App\Models\MainSlider;
 use App\Models\Package;
 use App\Models\PackageImage;
 use App\Models\Team;
@@ -25,6 +26,7 @@ public function home(Request $request) {
     $destination_categories=CategoryDestination::where('status',1)->select('id','name','url','image')->limit(6)->get();
     $discounted_packages=Package::where('status',1)->whereNotNull('discounted_price')->limit(3)->get();
 
+        $video=MainSlider::where('status',1)->where('type',2)->first()?->details;
         $month = $request->get('month', Carbon::now()->month);
         $year = $request->get('year', Carbon::now()->year);
         $departures = Departure::whereMonth('start_date', $month)
@@ -40,7 +42,9 @@ public function home(Request $request) {
         ->limit(10)
         ->get();
         $blogs=Blog::where('display_homepage',1)->limit(5)->get();
-      return view('frontend.index',compact('destinations','popular_package','destination_categories','discounted_packages','departures','month','year','blogs'));
+        $galleries=PackageImage::limit(8)->inRandomOrder()->get();
+
+      return view('frontend.index',compact('destinations','popular_package','destination_categories','discounted_packages','departures','month','year','blogs','video','galleries'));
 }
 
 public function about() {

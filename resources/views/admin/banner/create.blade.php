@@ -27,9 +27,9 @@
                 <div class="col-md-4">
                     <label class="form-label">Status</label>
                     <select name="status" id="" class="form-select form-control">
-                        <option value="">--status--</option>
+                        <option value="" selected>--status--</option>
                         <option value="1" {{old('status')?'selected':''}}>Active</option>
-                        <option value="0" {{!old('status')?'selected':''}}>InActive</option>
+                        <option value="0" >InActive</option>
 
                     </select>
                 </div>

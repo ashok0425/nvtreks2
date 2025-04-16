@@ -553,15 +553,15 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
         <div class="row align-items-center">
             <div class="col-12 col-md mb-3 mb-md-0">
                 <div class="">
-                    <img src="{{asset('frontend/images/travelphotogallerImg8.png')}}" alt="travelphotogallerImg1" class='img-fluid'  loading='lazy' />
+                    <img src="{{getImageUrl($galleries[0]->image)??asset('frontend/images/travelphotogallerImg8.png')}}" alt="travelphotogallerImg1" class='img-fluid'  loading='lazy' />
                 </div>
             </div>
             <div class="col-12 col-md mb-3 mb-md-0">
                 <div class="mb-3 mb-md-4">
-                    <img src="{{asset('frontend/images/travelphotogallerImg7.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
+                    <img src="{{getImageUrl($galleries[2]->image)??asset('frontend/images/travelphotogallerImg7.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
                 </div>
                 <div class="">
-                    <img src="{{asset('frontend/images/travelphotogallerImg6.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
+                    <img src="{{getImageUrl($galleries[5]->image)??asset('frontend/images/travelphotogallerImg6.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
                 </div>
             </div>
             <div class="col-12 col-md mb-3 mb-md-0">
@@ -570,31 +570,31 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                         <div class="splide__track">
                             <ul class="splide__list">
                                 <li class="splide__slide">
-                                    <img src="{{asset('frontend/images/travelphotogallerImg1.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
+                                    <img src="{{getImageUrl($galleries[1]->image)??asset('frontend/images/travelphotogallerImg1.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
                                 </li>
                                 <li class="splide__slide">
-                                    <img src="{{asset('frontend/images/travelphotogallerImg4.png')}}" alt="travelphotogallerImg4" class='img-fluid' loading='lazy' />
+                                    <img src="{{getImageUrl($galleries[4]->image)??asset('frontend/images/travelphotogallerImg4.png')}}" alt="travelphotogallerImg4" class='img-fluid' loading='lazy' />
                                 </li>
                                 <li class="splide__slide">
-                                    <img src="{{asset('frontend/images/travelphotogallerImg3.png')}}" alt="travelphotogallerImg3" class='img-fluid' loading='lazy' />
+                                    <img src="{{getImageUrl($galleries[3]->image)??asset('frontend/images/travelphotogallerImg3.png')}}" alt="travelphotogallerImg3" class='img-fluid' loading='lazy' />
                                 </li>
                                 <li class="splide__slide">
-                                    <img src="{{asset('frontend/images/travelphotogallerImg8.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
+                                    <img src="{{getImageUrl($galleries[2]->image)??asset('frontend/images/travelphotogallerImg8.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="">
-                    <img src="{{asset('frontend/images/travelphotogallerImg2.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
+                    <img src="{{getImageUrl($galleries[7]->image)??asset('frontend/images/travelphotogallerImg2.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
                 </div>
             </div>
             <div class="col-12 col-md mb-3 mb-md-0">
                 <div class="mb-3 mb-md-4">
-                    <img src="{{asset('frontend/images/travelphotogallerImg3.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
+                    <img src="{{getImageUrl($galleries[3]->image)??asset('frontend/images/travelphotogallerImg3.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
                 </div>
                 <div class="">
-                    <img src="{{asset('frontend/images/travelphotogallerImg4.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
+                    <img src="{{asset(getImageUrl($galleries[5]->image)??'frontend/images/travelphotogallerImg4.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
                 </div>
             </div>
             <div class="col-12 col-md">

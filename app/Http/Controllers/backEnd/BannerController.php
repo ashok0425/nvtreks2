@@ -44,34 +44,24 @@ class BannerController extends Controller
 
 
 
-    public function edit($id){
-        $banner=MainSlider::find($id);
+    public function edit(MainSlider $banner){
         return view('admin.banner.edit',compact('banner'));
     }
 
 
-    public function update(Request $request,$id){
-        $request->validate([
-            'title'=>'required',
-            'type'=>'required',
-
-
-        ]);
-        $main_sliders=MainSlider::find($id);
-
-        $file=$request->file('file');
+    public function update(Request $request,MainSlider $banner){
 
         $file=$request->file('image');
-
         if($file){
-            $this->deleteFile($main_sliders->image);
-            $main_sliders->image=$this->uploadFile('upload/mainslider',$file);
+            $this->deleteFile($banner->image);
+            $banner->image=$this->uploadFile('upload/mainslider',$file);
                 }
-        $main_sliders->title=$request->title;
-        $main_sliders->details=$request->details;
-        $main_sliders->type=$request->type;
-        $main_sliders->link=$request->page;
-        $main_sliders->status=$request->status??$main_sliders->status;
+        $banner->title=$request->title;
+        $banner->details=$request->details;
+        $banner->type=$request->type;
+        $banner->link=$request->page;
+        $banner->status=$request->status??1;
+        $banner->save();
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Main Banner updated',

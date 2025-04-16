@@ -8,7 +8,6 @@
         @php
             $defaultImage = asset('/frontend/images/about_banner.png'); // fallback image
             $finalImage = $defaultImage;
-
         @endphp
         <div class="position-absolute top-0 start-0 w-100 h-100">
             <div class="banner-container"

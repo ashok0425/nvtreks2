@@ -5,11 +5,7 @@
     <section class="video_section mb-md-5 mb-4">
         <!-- navbar -->
         @include('frontend.layout.header')
-        @php
-            $defaultImage = asset('/frontend/images/everestbaseBanner.png'); // fallback image
-            $finalImage = getImageUrl($blog->thumbnail) ?? $defaultImage;
 
-        @endphp
         <div class="position-absolute top-0 start-0 w-100 h-100">
             <div class="banner-container"
                 style="background-image: url({{ $finalImage }});background-size: cover;background-position: center;">
