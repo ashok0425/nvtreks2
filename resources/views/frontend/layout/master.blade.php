@@ -59,6 +59,7 @@
 
 <body>
 
+    @include('frontend.inc.banner')
     @yield('content')
     <footer class="footer bg-dark text-white">
         <div class="bg-black py-md-5 py-5">

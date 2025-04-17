@@ -18,8 +18,7 @@
                 <div class="col-md-4">
                     <label class="form-label">Type</label>
                     <select name="type" id="bannerType" class="form-control">
-                        <option value="1" {{ old('type') == 1 ? 'selected' : '' }}>Banner</option>
-                        <option value="2" {{ old('type') == 2 ? 'selected' : '' }}>Youtube Link</option>
+                        <option value="1" {{ old('type') == 1 ? 'selected' : '' }}>Banner/Video</option>
                         <option value="3" {{ old('type') == 3 ? 'selected' : '' }}>Instagram Link</option>
 
                     </select>
@@ -39,7 +38,7 @@
                 </div>
 
                 {{-- Banner Fields --}}
-                <div id="bannerFields" class="w-100 row" style="display: none;">
+                <div id="bannerFields" class="w-100 row">
                     <div class="col-md-6">
                         <label class="form-label">Banner Title</label>
                         <input name="title" class='form-control' value="{{ old('title') }}" type='text' placeholder="Enter Banner Title">
@@ -119,23 +118,10 @@
 
 @push('scripts')
 <script>
-function toggleBannerFields() {
-    const type = $('#bannerType').val();
-    if (type == '1') {
-        $('#bannerFields').show();
-        $('#linkField').hide();
-    } else {
-        $('#bannerFields').hide();
-        $('#linkField').show();
-    }
-}
+
 
 $(document).ready(function () {
-    toggleBannerFields(); // Load on start
 
-    $('#bannerType').on('change', function () {
-        toggleBannerFields();
-    });
 
     // Image preview
     $('#imageInput1').on('change', function () {
