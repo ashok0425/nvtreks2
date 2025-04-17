@@ -47,7 +47,7 @@
                     <div class="col-md-6">
                         <label class="form-label">Banner Image (900 x 200)</label>
                         <div class="image-input">
-                            <input type="file" accept="image/*" id="imageInput1" name="image">
+                            <input type="file" id="imageInput1" name="image">
                             <label for="imageInput1" class="image-button"><i class="far fa-image"></i> Choose image</label>
                             <img src="" class="image-preview1">
                         </div>
@@ -55,7 +55,7 @@
                 </div>
 
                 {{-- Link Field --}}
-                <div id="linkField" style="display: none;" class="col-md-12 mt-3">
+                <div id="linkField" class="col-md-12 mt-3">
                     <label class="form-label">External Link</label>
                     <textarea name="details" class="form-control" rows="3" placeholder="Paste your link here">{{ old('details') }}</textarea>
                 </div>

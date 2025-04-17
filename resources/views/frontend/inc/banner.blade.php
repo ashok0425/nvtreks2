@@ -4,11 +4,11 @@
     <div class="video_banner_container ">
 
         @php
-            $banner = App\Models\MainSlider::where('link', request()->path())->first();
+            $banner = App\Models\MainSlider::where('status',1)->where('link', request()->path())->first();
         @endphp
 
-        @if (str_starts_with($banner?->image->getMimeType(), 'image/'))
-        <video loop muted autoPlay playsInline poster='./images/herobgvideo.mp4' class="video-banner">
+        @if (!Str::endsWith($banner->image, ['.jpeg', '.webp', '.gif','jpg','png']))
+        <video loop muted autoPlay playsInline poster='{{getImageUrl($banner->image)??asset('frontend/images/herobgvideo.mp4')}}' class="video-banner">
             <source src='{{getImageUrl($banner->image)??asset('frontend/images/herobgvideo.mp4')}}' type="video/mp4" />
         </video>
         <div class="position-absolute top-0 start-0 w-100 h-100">
