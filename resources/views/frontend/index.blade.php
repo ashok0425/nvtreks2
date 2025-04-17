@@ -5,6 +5,8 @@
 @endphp
 
 @section('content')
+
+@include('frontend.inc.banner')
 <section class="container my-5">
     <!-- Section Heading -->
     <div class="row align-items-center mb-md-5 mb-3">

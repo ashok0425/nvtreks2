@@ -7,19 +7,19 @@
             $banner = App\Models\MainSlider::where('status',1)->where('link', request()->path())->first();
         @endphp
 
-        @if (!Str::endsWith($banner->image, ['.jpeg', '.webp', '.gif','jpg','png']))
-        <video loop muted autoPlay playsInline poster='{{getImageUrl($banner->image)??asset('frontend/images/herobgvideo.mp4')}}' class="video-banner">
-            <source src='{{getImageUrl($banner->image)??asset('frontend/images/herobgvideo.mp4')}}' type="video/mp4" />
+        @if (isset($banner)&&!Str::endsWith($banner?->image, ['.jpeg', '.webp', '.gif','jpg','png']))
+        <video loop muted autoPlay playsInline poster='{{getImageUrl($banner?->image)??asset('frontend/images/herobgvideo.mp4')}}' class="video-banner">
+            <source src='{{getImageUrl($banner?->image)??asset('frontend/images/herobgvideo.mp4')}}' type="video/mp4" />
         </video>
         <div class="position-absolute top-0 start-0 w-100 h-100">
             <div class="banner-container">
                 <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
                     style='background-color: #000000;opacity: 20%'></div>
                 <div class="banner-content">
-                    @if ($banner->details)
+                    @if (isset($banner)&&$banner->details)
                     <p class="home_banner_subtitle mb-0">{{$banner->details}}</p>
                     @endif
-                    @if ($banner->title)
+                    @if (isset($banner)&&$banner->title)
                     <h1 class="home_banner_title mb-md-4">{{$banner->title}}</h1>
                     </h1>
                     @endif

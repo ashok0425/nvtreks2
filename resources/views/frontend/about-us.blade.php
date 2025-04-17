@@ -3,6 +3,7 @@
 
 @section('content')
 
+@include('frontend.inc.banner')
  <!-- ultimate guide -->
  <section class="">
     <div class="container py-5">

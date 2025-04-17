@@ -1,27 +1,8 @@
 @extends('frontend.layout.master')
 
 @section('content')
-<section class="video_section mb-md-5 mb-4">
-    <!-- navbar -->
-    @include('frontend.layout.header')
-    @php
-    $imagePath = $data->cover_image ?? $data->image;
-    $defaultImage = asset('/frontend/images/everestbaseBanner.png'); // fallback image
-    $finalImage = $imagePath&&getImageUrl($imagePath) ? getImageUrl($imagePath) : $defaultImage;
 
-@endphp
-    <div class="position-absolute top-0 start-0 w-100 h-100">
-        <div class="banner-container"
-            style="background-image: url({{$finalImage}});background-size: cover;background-position: center;">
-            <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
-                style='background-color: #000000;opacity: 20%'></div>
-            <div class="banner-content">
-                <h1 class="banner-title">{{$data->name}}</h1>
-            </div>
-        </div>
-    </div>
-
-</section>
+@include('frontend.inc.banner')
 
 <section class='mb-5' id="app">
     <div class="container py-md-5 py-4">
