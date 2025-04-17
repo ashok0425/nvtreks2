@@ -23,7 +23,7 @@ public function home(Request $request) {
 
     $destinations=Destination::whereIn('id',['8','9','10','11'])->get();
     $popular_package=Package::where('status',1)->where('hot_deal_package',1)->whereNotNull('discounted_price')->limit(3)->get();
-    $destination_categories=CategoryDestination::where('status',1)->select('id','name','url','image')->limit(6)->get();
+    $destination_categories=CategoryDestination::where('status',1)->select('id','name','url','image','icon')->limit(6)->get();
     $discounted_packages=Package::where('status',1)->whereNotNull('discounted_price')->limit(3)->get();
 
         $video=MainSlider::where('status',1)->where('type',2)->first()?->details;

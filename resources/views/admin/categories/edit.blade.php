@@ -60,6 +60,17 @@
                         </a>
                     </div>
 
+                    <div class="form-group col-md-6">
+                        <label>Select Icon</label>
+                        <input type="file" class="form-control" name="icon" placeholder="Destination Image">
+                        <a href="{{ getImageurl($category->icon) }}" download="destination" rel="noreferrer"
+                            target="_blank">
+                            <img src="{{ getImageurl($category->icon) }}" alt="{{ getImageurl($category->name) }}"
+                                width="100">
+
+                        </a>
+                    </div>
+
                     <div class="col-md-6">
                         <label class="form-label">Status</label>
                         <select name="status" id="" class="form-select form-control">

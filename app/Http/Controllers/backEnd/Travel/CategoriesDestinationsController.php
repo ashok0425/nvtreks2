@@ -68,9 +68,13 @@ class CategoriesDestinationsController extends Controller
             $category->meta_description = $request->meta_description;
 
             $file=$request->file('file');
-
             if($file){
                 $category->image=$this->uploadFile('upload/category',$file);
+            }
+
+            $icon=$request->file('icon');
+            if($icon){
+                $category->icon=$this->uploadFile('upload/icon',$icon);
             }
             $category->save();
 
@@ -154,6 +158,12 @@ class CategoriesDestinationsController extends Controller
                  $this->deleteFile($category->image);
                  $category->image=$this->uploadFile('upload/category',$file);
 
+            }
+
+            $icon=$request->file('icon');
+            if($icon){
+                $this->deleteFile($category->icon);
+                $category->icon=$this->uploadFile('upload/icon',$icon);
             }
             $category->save();
 
