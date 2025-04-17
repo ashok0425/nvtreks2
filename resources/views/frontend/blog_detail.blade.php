@@ -2,6 +2,11 @@
 
 
 @section('content')
+@php
+    $defaultImage = asset('/frontend/images/everestbaseBanner.png'); // fallback image
+    $finalImage = getImageUrl($blog->cover_image)??$defaultImage;
+
+@endphp
     <section class="video_section mb-md-5 mb-4">
         <!-- navbar -->
         @include('frontend.layout.header')
