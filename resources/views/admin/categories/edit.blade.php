@@ -63,9 +63,9 @@
                     <div class="form-group col-md-6">
                         <label>Select Icon</label>
                         <input type="file" class="form-control" name="icon" placeholder="Destination Image">
-                        <a href="{{ getImageurl($category->icon) }}" download="destination" rel="noreferrer"
-                            target="_blank">
-                            <img src="{{ getImageurl($category->icon) }}" alt="{{ getImageurl($category->name) }}"
+                        <a href="{{ getImageUrl($category->icon) }}" download="destination" rel="noreferrer"
+                            target="_blank" class="bg-primary p-4">
+                            <img src="{{ getImageUrl($category->icon) }}" alt="{{ $category->name}}"
                                 width="100">
 
                         </a>

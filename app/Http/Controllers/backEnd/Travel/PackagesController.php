@@ -332,7 +332,7 @@ class PackagesController extends Controller
                     'package_id' => $package->id,
                     'title' => $itinerary['title'] ?? '',
                     'content' => $itinerary['content'] ?? '',
-                    'thumbnail' => $itinerary['pre_file']?? $this->uploadFile('upload/package/iternary', $itinerary['file']),
+                    'thumbnail' => $itinerary['pre_file']?? $this->uploadFile('upload/package/iternary', $itinerary['file']??null),
                     'car' => $itinerary['car'] ?? '',
                     'walk' => $itinerary['walk'] ?? '',
                     'flight' => $itinerary['flight'] ?? '',

@@ -486,7 +486,7 @@
                                                                 </div>
                                                                 <div class="form-group mb-2 col-md-6">
                                                                     <input name="itineraries[{{ $index }}][file]" class="form-control" type="file">
-                                                                    <input name="itineraries[{{ $index }}][pre_file]" class="form-control" hidden="file" value="{{$itinerary->thumbnail}}">
+                                                                    <input name="itineraries[{{ $index }}][pre_file]" class="form-control" type="hidden" value="{{$itinerary->thumbnail}}">
 
                                                                     @if($itinerary->thumbnail)
                                                                         <small>Current File: <a href="{{getImageUrl($itinerary->thumbnail)}}" target="_blank">Click</a></small>
