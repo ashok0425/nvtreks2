@@ -40,7 +40,20 @@ if ($s3) {
       $countries=Country::where('slug','!=','np')->select('slug')->get();
       $month = $request->get('month', Carbon::now()->month);
       $year = $request->get('year', Carbon::now()->year);
-      return view('frontend.package_detail',compact('package','reviews','features','before','country','countries','url','year','month'));
+
+      $countryData = $package->country($country);
+
+      $seo = [
+          'meta_title' => $countryData ? ($countryData->pivot->page_title ?? $package->page_title) : $package->page_title,
+          'meta_description' => $countryData ? ($countryData->pivot->meta_description ?? $package->meta_description) : $package->meta_description,
+          'meta_keyword' => $countryData ? ($countryData->pivot->meta_keywords ?? $package->meta_keywords) : $package->meta_keywords,
+         'image'=>$package->thumbnail,
+          'mobile_meta_title' => $countryData ? ($countryData->pivot->mobile_meta_title ?? $package->mobile_meta_title ?? $package->page_title) : ($package->mobile_meta_title ?? $package->page_title),
+          'mobile_meta_description' => $countryData ? ($countryData->pivot->mobile_meta_description ?? $package->mobile_meta_description ?? $package->meta_description) : ($package->mobile_meta_description ?? $package->meta_description),
+          'mobile_meta_keyword' => $countryData ? ($countryData->pivot->mobile_meta_keyword ?? $package->mobile_meta_keyword ?? $package->meta_keywords) : ($package->mobile_meta_keyword ?? $package->meta_keywords),
+      ];
+
+      return view('frontend.package_detail',compact('package','reviews','features','before','country','countries','url','year','month','seo'));
 }
 
 public function printpackage($id){

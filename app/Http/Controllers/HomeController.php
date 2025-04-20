@@ -44,30 +44,84 @@ public function home(Request $request) {
         $blogs=Blog::where('display_homepage',1)->limit(5)->get();
         $galleries=PackageImage::limit(8)->inRandomOrder()->get();
 
-      return view('frontend.index',compact('destinations','popular_package','destination_categories','discounted_packages','departures','month','year','blogs','video','galleries'));
+        $seo=[
+            'meta_title' => setting()->title,
+            'meta_keyword' => setting()->keyword,
+            'meta_description' => setting()->descr,
+            'mobile_meta_title' => setting()->mobile_meta_title??setting()->title,
+            'mobile_meta_description' => setting()->mobile_meta_description??setting()->keyword,
+            'mobile_meta_keyword' => setting()->mobile_meta_keyword??setting()->descr,
+        ];
+
+      return view('frontend.index',compact('destinations','popular_package','destination_categories','discounted_packages','departures','month','year','blogs','video','galleries','seo'));
 }
 
 public function about() {
-    return view('frontend.about-us');
+    $seo=[
+        'meta_title' => setting()->title,
+        'meta_keyword' => setting()->keyword,
+        'meta_description' => setting()->descr,
+        'mobile_meta_title' => setting()->mobile_meta_title??setting()->title,
+        'mobile_meta_description' => setting()->mobile_meta_description??setting()->keyword,
+        'mobile_meta_keyword' => setting()->mobile_meta_keyword??setting()->descr,
+    ];
+
+    return view('frontend.about-us',compact('seo'));
 }
 
 public function privacy() {
-    return view('frontend.privacy-policy');
+    $seo=[
+        'meta_title' => setting()->title,
+        'meta_keyword' => setting()->keyword,
+        'meta_description' => setting()->descr,
+        'mobile_meta_title' => setting()->mobile_meta_title??setting()->title,
+        'mobile_meta_description' => setting()->mobile_meta_description??setting()->keyword,
+        'mobile_meta_keyword' => setting()->mobile_meta_keyword??setting()->descr,
+    ];
+
+    return view('frontend.privacy-policy',compact('seo'));
 }
 
 public function term() {
-    return view('frontend.term-condition');
+    $seo=[
+        'meta_title' => setting()->title,
+        'meta_keyword' => setting()->keyword,
+        'meta_description' => setting()->descr,
+        'mobile_meta_title' => setting()->mobile_meta_title??setting()->title,
+        'mobile_meta_description' => setting()->mobile_meta_description??setting()->keyword,
+        'mobile_meta_keyword' => setting()->mobile_meta_keyword??setting()->descr,
+    ];
+
+    return view('frontend.term-condition',compact('seo'));
 }
 
 
 public function gallery() {
+    $seo=[
+        'meta_title' => setting()->title,
+        'meta_keyword' => setting()->keyword,
+        'meta_description' => setting()->descr,
+        'mobile_meta_title' => setting()->mobile_meta_title??setting()->title,
+        'mobile_meta_description' => setting()->mobile_meta_description??setting()->keyword,
+        'mobile_meta_keyword' => setting()->mobile_meta_keyword??setting()->descr,
+    ];
+
     $packages=Package::with('package_images:image,id')->whereHas('package_images')->paginate(3);
-    return view('frontend.gallery',compact('packages'));
+    return view('frontend.gallery',compact('packages','seo'));
 }
 
 public function team() {
+    $seo=[
+        'meta_title' => setting()->title,
+        'meta_keyword' => setting()->keyword,
+        'meta_description' => setting()->descr,
+        'mobile_meta_title' => setting()->mobile_meta_title??setting()->title,
+        'mobile_meta_description' => setting()->mobile_meta_description??setting()->keyword,
+        'mobile_meta_keyword' => setting()->mobile_meta_keyword??setting()->descr,
+    ];
+
     $teams=Team::latest()->paginate(10);
-    return view('frontend.team',compact('teams'));
+    return view('frontend.team',compact('teams','seo'));
 }
 
 

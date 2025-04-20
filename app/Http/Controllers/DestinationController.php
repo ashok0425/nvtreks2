@@ -17,14 +17,31 @@ class DestinationController extends Controller
 {
 
 public function index(Request $request,$url=null) {
+    $seo=[];
     if(Route::is('package.place')){
         $data = CategoryPlace::where('url',$url)->orwhere('id',$url)->firstOrFail();
         $categories = CategoryDestination::where('status',1)->limit(10)->get();
         $type=null;
+        $seo=[
+            'meta_title' => $data->meta_title,
+            'meta_keyword' => $data->meta_keyword,
+            'meta_description' => $data->meta_description,
+            'mobile_meta_title' => $data->mobile_meta_title??$data->meta_title,
+            'mobile_meta_description' => $data->mobile_meta_description??$data->meta_keyword,
+            'mobile_meta_keyword' => $data->mobile_meta_keyword??$data->meta_description,
+        ];
     }elseif(Route::is('package.category')){
         $data = CategoryDestination::where('url',$url)->orwhere('id',$url)->firstOrFail();
 	   $categories = CategoryDestination::where('status',1)->limit(10)->get();
        $type=null;
+       $seo=[
+        'meta_title' => $data->meta_title,
+        'meta_keyword' => $data->meta_keyword,
+        'meta_description' => $data->meta_description,
+        'mobile_meta_title' => $data->mobile_meta_title??$data->meta_title,
+        'mobile_meta_description' => $data->mobile_meta_description??$data->meta_keyword,
+        'mobile_meta_keyword' => $data->mobile_meta_keyword??$data->meta_description,
+    ];
     }
     elseif(Route::is('deals')){
         $data = (object)['name'=>'Special Deals','cover_image'=>null,'image'=>null,'id'=>1];
@@ -34,10 +51,18 @@ public function index(Request $request,$url=null) {
         $data = Destination::where('url',$url)->orwhere('id',$url)->firstOrFail();
 	   $categories = CategoryDestination::where('destination_id',$data->id)->where('status',1)->get();
        $type='destination';
+       $seo=[
+        'meta_title' => $data->meta_title,
+        'meta_keyword' => $data->meta_keyword,
+        'meta_description' => $data->meta_description,
+        'mobile_meta_title' => $data->mobile_meta_title??$data->meta_title,
+        'mobile_meta_description' => $data->mobile_meta_description??$data->meta_keyword,
+        'mobile_meta_keyword' => $data->mobile_meta_keyword??$data->meta_description,
+    ];
     }
 
 
-      return view('frontend.destination',compact('categories','data','type'));
+      return view('frontend.destination',compact('categories','data','type','seo'));
 }
 
 
