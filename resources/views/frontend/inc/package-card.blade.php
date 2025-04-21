@@ -10,12 +10,12 @@
             </div>
             @elseif($package->is_group)
             <div class="badge-arrow bg-danger">
-                <i class="fas fa-crown"></i>
+                <i class="fas fa-users"></i>
                 GROUP JOINING
             </div>
             @elseif($package->discounted_price!=null)
             <div class="badge-arrow bg_lightGreen">
-                <i class="fas fa-crown"></i>
+                <img src="{{asset('frontend/images/discounted-icon.png')}}" alt="NVtreks package" width="22">
                 DISCOUNTED PRICE
             </div>
             @endif
@@ -35,8 +35,19 @@
                 <p class="mb-0 small">{{$package->category?->name}}</p>
             </div>
             <div class="d-flex align-items-center text_darkGray font_montserrat gap-2">
+                @if ($package->difficulty=='easy'||$package->difficulty=='Easy'||$package->difficulty=='EASY')
                 <img src="{{asset('frontend/images/speedmetereasyImg.png')}}" alt="Speed Meter Easy" width="32"
-                    height="32" loading='lazy'>
+                height="32" loading='lazy'>
+                @endif
+                @if ($package->difficulty=='medium'||$package->difficulty=='Medium'||$package->difficulty=='MEDIUM')
+                <img src="{{asset('frontend/images/speedmetermediumImg.png')}}" alt="Speed Meter Easy" width="32"
+                height="32" loading='lazy'>
+                @endif
+                @if ($package->difficulty=='hard'||$package->difficulty=='Hard'||$package->difficulty=='HARD')
+                <img src="{{asset('frontend/images/speedmetermediumImg.png')}}" alt="Speed Meter Easy" width="32"
+                height="32" loading='lazy'>
+                @endif
+
                 <p class="mb-0 small">{{$package->difficulty}}</p>
             </div>
         </div>

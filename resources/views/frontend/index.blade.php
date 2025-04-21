@@ -145,7 +145,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
             <div class="d-flex flex-wrap justify-content-md-between justify-content-center gap-2">
                 @foreach ($destination_categories as $item)
                 <div class="text-white fs-5 fw-bold text-center">
-                    <div><img src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" width="60"></div>
+                    <div><img src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" width="140"></div>
                     {{$item->name}}
                 </div>
                 @endforeach

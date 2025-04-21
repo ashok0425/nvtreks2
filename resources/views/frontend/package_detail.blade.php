@@ -567,7 +567,11 @@
 
                             <div class="card boxShadow mb-md-5 mb-4">
                                 @include('frontend.inc.testimonial', [
-                                    'testimonials' => $package->testimonials,
+                                    'testimonials' => $package->testimonials()->where('status', 1)
+    ->whereRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) < 60')
+    ->orderByRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) DESC')
+     ->limit(5)
+      ->get(),
                                 ])
                             </div>
 
