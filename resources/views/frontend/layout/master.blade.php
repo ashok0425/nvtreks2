@@ -21,6 +21,24 @@
    <link defer rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style>
+        .splide__arrow{
+            background:none!important;
+            font-size: 30px;
+            color: #fff!important;
+        }
+
+        .splide__arrow svg{
+            fill: #fff!important;
+        }
+        .splide__arrow.splide__arrow--next{
+            right:-70px;
+
+        }
+
+        .splide__arrow.splide__arrow--prev{
+            left:-70px;
+
+        }
         /* Ensure that the dropdown menu shows on hover */
 .nav-item.dropdown:hover > .dropdown-menu {
     display: block; /* Show the menu on hover */
@@ -212,7 +230,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
-            let testimonial_slider=document.getElementById('testimonial-slider');
+            let testimonial_slider=document.getElementById('image-slider');
             if (testimonial_slider) {
             new Splide('#image-slider', {
                 type: 'loop',
@@ -272,6 +290,29 @@
             document.getElementById("custom-next").addEventListener("click", function () {
                 splide.go("+1");
             });
+        }
+        });
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let contact_info_container=document.getElementById('contact_info_container');
+            if (contact_info_container) {
+            var splide = new Splide("#contact_info_container", {
+                type: "loop",
+                perPage: 3,
+                perMove: 1,
+                gap: "1rem",
+                pagination: false,
+                arrows: true,
+                autoWidth: false,
+                focus: "center",
+                breakpoints: {
+                    1200: { perPage: 3, gap: "1rem" },
+                    992: { perPage: 2, gap: "1.5rem" },
+                    768: { perPage: 1 },
+                },
+            }).mount();
+
         }
         });
 

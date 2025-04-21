@@ -51,8 +51,8 @@
                                             $packages = $place->packages()->where('status',1)->get();
                                         @endphp
 
-                                        <li class="dropdown-item">
-                                            <a class="dropdown-item d-flex justify-content-between align-items-center" href="{{ route('package.place', ['url' => $place->url]) }}">
+                                        <li class="dropdown-item  pl-0">
+                                            <a class="dropdown-item ps-0  pl-0 d-flex justify-content-between align-items-center" href="{{ route('package.place', ['url' => $place->url]) }}">
                                                 {{ $place->name }}
                                                 @if (count($packages))
                                                 &nbsp;  &nbsp;  <i class="fas fa-caret-right"></i>
@@ -76,8 +76,8 @@
                                             $packages =$category->packages()->where('status',1)->get();
                                         @endphp
 
-                                        <li class="dropdown-item">
-                                            <a class="dropdown-item dropdown-item d-flex justify-content-between align-items-center" href="{{ route('package.category', ['url' => $category->url]) }}">
+                                        <li class="dropdown-item  pl-0">
+                                            <a class="dropdown-item ps-0  pl-0 dropdown-item d-flex justify-content-between align-items-center" href="{{ route('package.category', ['url' => $category->url]) }}">
                                                 {{ $category->name }}
                                                 @if (count($packages) > 0)
                                                   &nbsp;  <i class="fas fa-caret-right"></i>

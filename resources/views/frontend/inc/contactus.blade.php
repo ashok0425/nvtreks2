@@ -4,7 +4,9 @@
 
     <!-- Dark overlay -->
     <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
-        style='background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 24%, rgba(0,0,0,0.9019257361147583) 83%)'>
+
+        {{-- style='background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 24%, rgba(0,0,0,0.9019257361147583) 5%)' --}}
+        >
     </div>
     <div class="position-absolute top-0 start-0 w-100 h-100  z-3">
         <div class="container py-md-5 py-4">
@@ -15,9 +17,13 @@
 
             <!-- Contact Cards -->
             <div class="p-md-3 p-2 mb-md-5 mb-4" style="background-color: #4690BF33;">
-                <div class="row g-4 contact_info_container">
+                <div class="splide g-4 contact_info_container" id="contact_info_container">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+
+                     <li class="splide__slide ">
                     <!-- Location 1 -->
-                    <div class="col-12 col-md-4 px-md-4 contact_info_card contact_info_card_broder">
+                    <div class=" px-md-4 contact_info_card contact_info_card_broder">
                         <div class="text-center text-md-start">
                             <img src="{{asset('frontend/images/thamel_location.png')}}" alt="location" class="mb-md-3 mb-1" width="50"
                                 height="50">
@@ -36,9 +42,11 @@
                             </div>
                         </div>
                     </div>
+                    </li>
 
+                    <li class="splide__slide ">
                     <!-- Location 2 -->
-                    <div class="col-12 col-md-4 px-md-4 contact_info_card contact_info_card_broder">
+                    <div class="px-md-4 contact_info_card contact_info_card_broder">
                         <div class="text-center text-md-start">
                             <img src="{{asset('frontend/images/usa_location.png')}}" alt="location" class="mb-md-3 mb-1" width="50"
                                 height="50">
@@ -55,9 +63,11 @@
                             </div>
                         </div>
                     </div>
+                </li>
 
+                <li class="splide__slide ">
                     <!-- Location 3 -->
-                    <div class="col-12 col-md-4 px-md-4 contact_info_card">
+                    <div class="px-md-4 contact_info_card contact_info_card_broder">
                         <div class="text-center text-md-start">
                             <img src="{{asset('frontend/images/australia_location.png')}}" alt="location" class="mb-md-3 mb-1"
                                 width="50" height="50">
@@ -74,7 +84,55 @@
                             </div>
                         </div>
                     </div>
+                </li>
+
+                <li class="splide__slide ">
+                    <!-- Location 3 -->
+                    <div class="px-md-4 contact_info_card contact_info_card_broder">
+                        <div class="text-center text-md-start">
+                            <img src="{{asset('frontend/images/location_canada.webp')}}" alt="location" class="mb-md-3 mb-1"
+                                width="50" height="50">
+                            <div>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">{{setting()->address4}}</p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Whatsapp: {{setting()->phone4}}
+
+                                </p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Ashim Wagle
+                                    (Marketing
+                                    Director)</p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">
+                                    {{setting()->phone4}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li class="splide__slide ">
+                    <!-- Location 3 -->
+                    <div class="px-md-4 contact_info_card contact_info_card_broder">
+                        <div class="text-center text-md-start">
+                            <img src="{{asset('frontend/images/china.svg')}}" alt="location" class="mb-md-3 mb-1"
+                                width="50" height="50">
+                            <div>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">{{setting()->address5}}</p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Whatsapp: {{setting()->phone5}}
+
+                                </p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Ashim Wagle
+                                    (Marketing
+                                    Director)</p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">
+                                    {{setting()->phone5}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                        </ul>
+                    </div>
+
                 </div>
+
             </div>
             <div class="contact_imgs">
                 <div class="splide" id="image-slider">
