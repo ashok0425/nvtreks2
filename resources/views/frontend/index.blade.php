@@ -46,7 +46,7 @@
                     style="height: 455px;object-fit: cover;">
                 <div class="card-img-overlay destination-overlay">
                     <h5 class="destination-title bg_darkOrange">{{$destinations[3]['name']}}</h5>
-                    <p class="destination-description">{{count($destinations[0]->packages)}} Destinations</p>
+                    <p class="destination-description">{{count($destinations[3]->packages)}} Destinations</p>
                 </div>
             </div>
         </div>
