@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\backEnd;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -37,13 +37,13 @@ class AssignroleController extends Controller
           $notification=array(
             'alert-type'=>'success',
             'messege'=>'New Admin created',
-             
+
          );
          }else{
             $notification=array(
                 'alert-type'=>'info',
                 'messege'=>'something went wrong please try again later !',
-                 
+
              );
          }
          return redirect()->back()->with($notification);

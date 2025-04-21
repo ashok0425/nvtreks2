@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\backEnd;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use Illuminate\Support\Facades\DB;

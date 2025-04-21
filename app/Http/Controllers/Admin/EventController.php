@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
@@ -45,8 +45,8 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-   
- 
+
+
     public function store(Request $request)
     {
         $request->validate([
@@ -82,14 +82,14 @@ class EventController extends Controller
 
             $blog['content']=$request->content;
            DB::table('events')->insert($blog);
-          
+
                 $notification=array(
                     'alert-type'=>'success',
                     'messege'=>'Event  Added',
 
                  );
                  return redirect()->route('admin.events.index')->with($notification);
-            
+
 
 
         } catch (\Throwable $th) {
@@ -128,33 +128,33 @@ class EventController extends Controller
                 $blog['image']=$this->uploadFile('upload/event/',$file);
 
             }
-          
+
             $cover=$request->file('cover');
             if($cover){
                 $this->deleteFile($event->cover);
                 $blog['cover']=$this->uploadFile('upload/event/cover',$cover);
             }
-           
+
             $blog['title']=$request->title;
             if ($request->date) {
                 $blog['date']=$request->date;
 
             }
-           
+
             if ($request->end_date) {
                 $blog['end_date']=$request->end_date;
 
             }
             $blog['content']=$request->content;
            DB::table('events')->where('id',$id)->update($blog);
-          
+
                 $notification=array(
                     'alert-type'=>'success',
                     'messege'=>'Event  updated',
 
                  );
                  return redirect()->route('admin.events.index')->with($notification);
-            
+
 
 
         } catch (\Throwable $th) {
@@ -182,14 +182,14 @@ class EventController extends Controller
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'Successfully deleted .',
-               
+
              );
-        
+
         } catch (Throwable $e) {
             $notification=array(
                 'alert-type'=>'error',
                 'messege'=>'Failed to delete , Try again.',
-               
+
              );
         }
 

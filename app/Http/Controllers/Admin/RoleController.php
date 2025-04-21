@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\backend;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // use App\Http\Traits\status;
@@ -15,7 +15,7 @@ class RoleController extends Controller
 
 
     // use status;
-  
+
 
     public function index()
     {
@@ -26,7 +26,7 @@ class RoleController extends Controller
     public function create(){
         return view('admin.role.create');
     }
-  
+
 
     public function store(Request $request){
         $request->validate([
@@ -55,11 +55,11 @@ class RoleController extends Controller
         $role->contact=$request->contact;
 
         $role->save();
-        
+
         $notification=array(
             'alert-type'=>'success',
             'messege'=>'Role permission Created',
-             
+
          );
          return redirect()->back()->with($notification);
     }
@@ -101,7 +101,7 @@ class RoleController extends Controller
         $notification=array(
             'alert-type'=>'success',
             'messege'=>'Role permission Updated',
-             
+
          );
          return redirect()->back()->with($notification);
     }

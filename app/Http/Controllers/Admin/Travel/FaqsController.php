@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\BackEnd\Travel;
+namespace App\Http\Controllers\Admin\Travel;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;

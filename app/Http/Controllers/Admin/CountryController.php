@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\backEnd;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Country;
 use Illuminate\Http\Request;
@@ -26,7 +26,7 @@ class CountryController extends Controller
     public function create()
     {
      return view('admin.country.create');
-        
+
     }
 
     /**
@@ -44,7 +44,7 @@ class CountryController extends Controller
         $notification=array(
             'alert-type'=>'success',
             'messege'=>'Successfully created.',
-           
+
          );
     return redirect()->back()->with($notification);
 
@@ -88,7 +88,7 @@ class CountryController extends Controller
         $notification=array(
             'alert-type'=>'success',
             'messege'=>'Successfully update .',
-           
+
          );
     return redirect()->back()->with($notification);
 

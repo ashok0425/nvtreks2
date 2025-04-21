@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\BackEnd\Testimonials;
+namespace App\Http\Controllers\Admin\Testimonials;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;

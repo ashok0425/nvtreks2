@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\BackEnd\Travel;
+namespace App\Http\Controllers\Admin\Travel;
 
 use App\Models\Category;
 use App\Models\CategoryDestination;
