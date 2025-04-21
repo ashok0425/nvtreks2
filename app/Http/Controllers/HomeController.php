@@ -41,7 +41,7 @@ public function home(Request $request) {
         ->orderBy('start_date')
         ->limit(5)
         ->get();
-        $blogs=Blog::where('display_homepage',1)->limit(5)->whereNotNull('title')->get();
+        $blogs=Blog::where('display_homepage',1)->latest()->limit(5)->whereNotNull('title')->get();
         $galleries=PackageImage::limit(8)->inRandomOrder()->get();
 
         $seo=[
