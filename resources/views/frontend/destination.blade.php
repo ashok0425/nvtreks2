@@ -160,8 +160,32 @@
                                     <p class='mb-0 small'>@{{ package.departure_from || 'Nepal' }}</p>
                                 </div>
                                 <div class="d-flex align-items-center text_darkGray font_montserrat gap-2">
-                                    <img src="{{asset('frontend/images/speedmetereasyImg.png')}}" alt="Speed Meter Easy" width="32" height="32" loading='lazy'/>
-                                    <p class='mb-0 small'>@{{ package.difficulty }}</p>
+                                    <img
+                                    v-if="package.difficulty && (package.difficulty.toLowerCase() === 'easy')"
+                                    src="/frontend/images/speedmetereasyImg.png"
+                                    alt="Speed Meter Easy"
+                                    width="32"
+                                    height="32"
+                                    loading="lazy"
+                                  />
+                                  <img
+                                    v-else-if="package.difficulty && (package.difficulty.toLowerCase() === 'medium')"
+                                    src="/frontend/images/speedmetermediumImg.png"
+                                    alt="Speed Meter Medium"
+                                    width="32"
+                                    height="32"
+                                    loading="lazy"
+                                  />
+                                  <img
+                                    v-else-if="package.difficulty && (package.difficulty.toLowerCase() === 'hard')"
+                                    src="/frontend/images/speedmetermediumImg.png"
+                                    alt="Speed Meter Hard"
+                                    width="32"
+                                    height="32"
+                                    loading="lazy"
+                                  />
+                                  <p class="mb-0 small">@{{ package.difficulty }}</p>
+
                                 </div>
                             </div>
 
