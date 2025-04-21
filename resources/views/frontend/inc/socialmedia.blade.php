@@ -11,8 +11,7 @@
                     </div>
                     <h2 class="head_title mb-md-3">FOLLOW US ON INSTAGRAM</h2>
                     <p class="text_lightDark font_montserrat mb-0" style="max-width: 800px;">
-                        Explore our curated list of the best countries to visit and discover incredible destinations
-                        waiting to be explored
+                        Experience the adventure in real time—follow us for daily photos, travel inspiration, and behind-the-scenes moments.
                     </p>
                 </div>
             </div>

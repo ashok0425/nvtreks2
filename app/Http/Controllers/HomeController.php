@@ -39,7 +39,7 @@ public function home(Request $request) {
         })
         ->select('id', 'package_id', 'start_date', 'end_date', 'total_seats', 'booked_seats')
         ->orderBy('start_date')
-        ->limit(10)
+        ->limit(5)
         ->get();
         $blogs=Blog::where('display_homepage',1)->limit(5)->get();
         $galleries=PackageImage::limit(8)->inRandomOrder()->get();

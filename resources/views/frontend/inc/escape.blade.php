@@ -25,8 +25,7 @@
                         <h4 class="head_title text-white mb-3 text-center">ESCAPE THE CITY</h4>
                         <div class="d-flex justify-content-center mb-4">
                             <p class="text-center text-white fs-6" style="max-width: 750px;">
-                                Explore our curated list of the best countries to visit in 2024 and discover incredible
-                                destinations waiting to be explored.
+                                Leave the noise behind and reconnect with nature. Our treks offer peace, purpose, and unforgettable mountain moments.
                             </p>
                         </div>
                         <div class="text-center">

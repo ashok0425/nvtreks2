@@ -19,8 +19,7 @@
         </div>
         <div class="col-md-5">
             <p class="section-description">
-                Explore our curated list of the best countries to visit in 2024 and discover incredible destinations
-                waiting to be explored.
+                Discover the top places to visit with Nepal Vision <br> —handpicked destinations full of beauty, culture, <br> and adventure.
             </p>
         </div>
     </div>
@@ -90,8 +89,7 @@
                 </div>
                 <h2 class="head_title mb-md-3">POPULAR PACKAGES</h2>
                 <p class="text_lightDark font_montserrat mb-0" style="max-width: 800px;">
-                    Explore our curated list of the best countries to visit in 2024 and discover incredible
-                    destinations waiting to be explored.
+                    Explore handpicked trekking and tour packages across destinations—designed for <br> unforgettable experiences and meaningful adventures.
                 </p>
             </div>
         </div>
@@ -168,8 +166,8 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                     <p class="section-subtitle">TRAVEL OFFERS & DISCOUNTS</p>
                 </div>
                 <h2 class='head_title mb-md-3'>SPECIAL TRAVEL OFFER</h2>
-                <p class='text_lightDark font_montserrat mb-0' style='max-width: 800px;'>Explore our curated list of
-                    the best countries to visit in 2024 and discover incredible destinations waiting to be explored
+                <p class='text_lightDark font_montserrat mb-0' style='max-width: 800px;'>
+                    Take advantage of our limited-time travel offers and explore the Himalayas with unbeatable <br> value—crafted just for you.
                 </p>
             </div>
         </div>
@@ -196,8 +194,8 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                         <p class="mb-2 fw-bolder text_darkprimary">{{$package->destination->name}}</p>
                         <p class="mb-2 fs-5 fw-bold">{{$package->slogan??'Experience the natural beauty of glacier'}}</p>
                         <p class="text_lightprimary fw-bold font_montserrat mb-0">
-                            Price: <span class="text-decoration-line-through">{{$package->price}}</span>
-                            <span class="text_lightGreen">{{$package->discounted_price}}</span>
+                            Price: <span class="fs-5 text-decoration-line-through text-secondary"><i>{{$package->price}}</i></span>
+                            <span class="text_lightprimary fs-4">{{$package->discounted_price}}</span>
                         </p>
                     </div>
 
@@ -366,8 +364,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                         <span class="fs-4 fw-bold text_darkOrange">&#8226;</span>
                     </div>
                     <p class="fs-6 mb-4 font_montserrat text_lightDark text-center text-lg-start">
-                        Explore our curated list of the best countries to visit in 2024 and discover incredible
-                        destinations waiting to be explored.
+                        Discover the top places to visit with Nepal Vision <br> —handpicked destinations full of beauty, culture, and <br> adventure.
                     </p>
                     <div class="d-flex align-items-center gap-3 mb-4 flex-column flex-sm-row text-center text-sm-start">
                         <div class="bg_darkprimary p-3 d-flex justify-content-center align-items-center">
@@ -375,8 +372,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                         </div>
                         <div>
                             <p class="fs-6 fw-bold font_montserrat mb-1">BEST PRICE GUARANTEED</p>
-                            <p class="mb-0" style="max-width: 300px;">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Ut elit tellus, luctus nec.</p>
+                            <p class="mb-0" style="max-width: 300px;">We offer the best value, with no hidden fees.Your adventure, fairly priced, always.</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3 mb-4 flex-column flex-sm-row text-center text-sm-start">
@@ -385,8 +381,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                         </div>
                         <div>
                             <p class="fs-6 fw-bold font_montserrat mb-1">AMAZING DESTINATION</p>
-                            <p class="mb-0" style="max-width: 300px;">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Ut elit tellus, luctus nec.</p>
+                            <p class="mb-0" style="max-width: 300px;">Explore breathtaking views and culture. Each trip, a story worth remembering.</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center gap-3 mb-4 flex-column flex-sm-row text-center text-sm-start">
@@ -395,8 +390,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                         </div>
                         <div>
                             <p class="fs-6 fw-bold font_montserrat mb-1">PERSONAL SERVICES</p>
-                            <p class="mb-0" style="max-width: 300px;">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit. Ut elit tellus, luctus nec.</p>
+                            <p class="mb-0" style="max-width: 300px;">Tailored trips to fit your travel dreams. Your journey, made just for you.</p>
                         </div>
                     </div>
                 </div>
@@ -493,8 +487,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                     <!-- Description -->
                     <p class="text_lightwhite mb-0 fw-medium font_montserrat mx-auto mx-md-0"
                         style="max-width: 700px;">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-                        tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                        Subscribe to receive exclusive deals, destination highlights, and insider travel tips delivered straight to your inbox.
                     </p>
                 </div>
             </div>
@@ -513,8 +506,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
             </div>
             <h2 class='head_title mb-md-3'>Traveler's Photo Gallery</h2>
             <p class='text_lightDark font_montserrat mb-0' style="max-width: 800px;">
-                Explore our curated list of the best countries to visit in 2024 and discover incredible destinations
-                waiting to be explored
+                See the Himalayas through the eyes of our travelers—authentic moments, epic landscapes, and unforgettable memories.
             </p>
         </div>
     </div>
@@ -587,8 +579,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                 </div>
                 <h2 class='head_title mb-md-3'>OUR RECENT POSTS</h2>
                 <p class='text_lightDark font_montserrat mb-0' style="max-width: 800px;">
-                    Explore our curated list of the best countries to visit in 2024 and discover incredible
-                    destinations waiting to be explored
+                    From expert tips to inspiring stories, explore our latest blog posts and dive deeper into your next adventure.
                 </p>
             </div>
         </div>

@@ -88,8 +88,7 @@
                             <h5 class="footer_border_start ps-2">ABOUT NEPAL VISION</h5>
                         </div>
                         <p class="py-md-3 py-2 mb-0 text_lightgray font_montserrat">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
-                            ullamcorper mattis, pulvinar dapibus leo.
+                            At Nepal Vision, we craft life-changing journeys with heart.  From the Himalayas to hidden valleys, every trek is personal,  guided by passion, trust, and years of experience.
                         </p>
                         <div class="d-flex flex-wrap justify-content-between py-md-3 py-2 gap-3">
                             <img src="{{asset('frontend/images/tripadvisorimg.png')}}" alt="Tripadvisor" class="img-fluid" width="95">

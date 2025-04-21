@@ -9,8 +9,7 @@
                 </div>
                 <h2 class="head_title mb-md-3">FAQs</h2>
                 <p class="text_lightDark font_montserrat mb-0" style="max-width: 800px;">
-                    Explore our curated list of the best countries to visit in 2024 and discover incredible
-                    destinations waiting to be explored.
+                    Wondering what to pack or how to prepare? Our FAQ section has answers to all your trekking and travel questions.
                 </p>
             </div>
         </div>
