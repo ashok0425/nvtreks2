@@ -80,10 +80,10 @@
     @yield('content')
     <footer class="footer bg-dark text-white">
         <div class="bg-black py-md-5 py-5">
-            <div class="container py-md-5 my-md-4">
+            <div class="container-fluid py-md-5 my-md-4">
                 <div class="row">
                     <!-- About Nepal Vision -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="d-flex justify-content-md-start justify-content-center">
                             <h5 class="footer_border_start ps-2">ABOUT NEPAL VISION</h5>
                         </div>
@@ -129,7 +129,7 @@
                     </div>
 
                     <!-- Recent Posts -->
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <div class="d-flex justify-content-md-start justify-content-center">
                             <h5 class="footer_border_start ps-2">RECENT POSTS</h5>
                         </div>
