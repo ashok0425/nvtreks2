@@ -145,7 +145,7 @@
                             <div class="position-absolute bottom-0 w-100 py-2" style="background-color: #0791BE4D;">
                                 <div class="d-flex justify-content-center align-items-center gap-2 text-white fw-bold mb-0">
                                     <i></i>
-                                    @{{ package.duration.toLowerCase().includes('day') ? package.duration : package.duration + ' DAYS' }}
+                                    @{{ package.duration && package.duration.toLowerCase().includes('day') ? package.duration : package.duration + ' DAYS' }}
 
                                 </div>
                             </div>
@@ -159,7 +159,7 @@
                                 </div>
                                 <div class="d-flex align-items-center text_darkGray font_montserrat gap-2">
                                     <img
-                                    v-if="package.difficulty && (package.difficulty.toLowerCase() === 'easy')"
+                                    v-if="package.difficulty!=null && (package.difficulty.toLowerCase() === 'easy')"
                                     src="/frontend/images/speedmetereasyImg.png"
                                     alt="Speed Meter Easy"
                                     width="32"
@@ -167,7 +167,7 @@
                                     loading="lazy"
                                   />
                                   <img
-                                    v-else-if="package.difficulty && (package.difficulty.toLowerCase() === 'medium')"
+                                    v-else-if="package.difficulty!=null && (package.difficulty.toLowerCase() === 'medium')"
                                     src="/frontend/images/speedmetermediumImg.png"
                                     alt="Speed Meter Medium"
                                     width="32"
@@ -175,7 +175,7 @@
                                     loading="lazy"
                                   />
                                   <img
-                                    v-else-if="package.difficulty && (package.difficulty.toLowerCase() === 'hard')"
+                                    v-else-if="package.difficulty!=null && (package.difficulty.toLowerCase() === 'hard')"
                                     src="/frontend/images/speedmetermediumImg.png"
                                     alt="Speed Meter Hard"
                                     width="32"
