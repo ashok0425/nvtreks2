@@ -39,6 +39,7 @@
             </div>
         </a>
         </div>
+@if (isset($destinations[3]))
 
         <div class="col-12 col-md">
             <div class="card destination-card  p-0 border-0 rounded-3">
@@ -50,6 +51,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <!-- Third Column with Stacked Cards -->
         <div class="col-12 col-md-5 d-flex flex-column">

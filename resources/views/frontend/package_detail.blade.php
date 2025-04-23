@@ -1,13 +1,14 @@
 @extends('frontend.layout.master')
 
-
+{!! NoCaptcha::renderJs() !!}
 @section('content')
     <section id="departureApp">
         <section class="video_section">
             <!-- navbar -->
             @include('frontend.layout.header')
             @php
-                $defaultImage = getImageUrl($package->cover_image) ?? asset('/frontend/images/galleyBanner.png'); // fallback image
+            // dd($package);
+                $defaultImage = getImageUrl($package->thumbnail) ?? asset('/frontend/images/galleyBanner.png'); // fallback image
                 $finalImage = $defaultImage;
 
             @endphp
@@ -106,12 +107,24 @@
                                         alt="{{ $package->name }}" class="img-fluid w-100 h-50 object-fit-cover">
                                 </div>
                                 <div class="col-md-3 d-flex">
+                                    <div class="position-relative">
                                     <img loading='lazy'
                                         src="{{ getImageUrl($package->package_images()->skip(3)->first()?->image) ?? $finalImage }}"
                                         alt="{{ $package->name }}" class="img-fluid w-100 h-100 object-fit-cover">
+
+                                        <div style="position: absolute;top:85%;right:7%">
+                                            <a href="{{route('gallery')}}" class="btn btn_white d-flex align-items-center boxShadow gap-2 px-3 py-2 rounded-3">
+                                                <p class='mb-0'>
+                                                    <i class="bi bi-grid-3x3-gap-fill fs-6 fw-bold"></i>
+                                                </p>
+                                                <p class='mb-0 small fw-bold'>View All Gallery</p>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-8 pe-md-4">
@@ -262,7 +275,7 @@
                                 id="itinerary">
                                 <h5 class="mb-md-4 mb-3">Outline Itinerary</h5>
                                 <div>
-                                    @foreach ($package->itenaries as $itenary)
+                                    {{-- @foreach ($package->itenaries as $itenary)
                                         <div
                                             class="d-flex flex-md-row flex-column align-items-center justify-content-md-start justify-content-center text-md-start text-center gap-md-2 gap-1 border-bottom font_montserrat py-md-3 py-2 outline_itinerary_content">
 
@@ -277,8 +290,8 @@
                                                 {{ $day_text }}
                                             @endif
                                         </div>
-                                    @endforeach
-
+                                    @endforeach --}}
+                                     {{$package->outline_itinerary}}
 
                                     <!-- Add more itinerary days as per the requirements -->
                                 </div>
@@ -302,7 +315,7 @@
                                     <div>
                                         <div class="d-flex align-items-center gap-3 mb-md-4 mb-3">
                                             <div class="position-relative">
-                                                <img src="{{ asset("frontend/images/$loop->iteration.webp") }}"
+                                                <img src="{{ asset("frontend/images/$loop->iteration.jpg") }}"
                                                     alt="{{ $itenary->title }}" loading='lazy' width="40">
 
                                             </div>
@@ -695,7 +708,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="position-sticky mb-md-5 mb-4" style="top: 15px;">
+                                <div class="position-sticky mb-md-5 mb-4" style="top: -40px;">
                                 <div class="card position-relative text-white  boxShadow"
                                     style=" background-image: url('./images/touchformBanner.png'); background-size: cover; background-position: center; min-height: auto; ">
                                     <!-- Background Overlay -->
@@ -712,13 +725,17 @@
                                         <form action="{{ route('contactus.store') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="page" value="package-detail">
+
                                             <!-- First Name -->
                                             <div class="mb-md-3 mb-3">
                                                 <label for="firstName" class="form-label fs-6 fw-bold">
                                                     First Name <span class="text_darkOrange">*</span>
                                                 </label>
                                                 <input type="text" class="form-control py-2 text-muted fs-6"
-                                                    id="firstName" placeholder="First Name" name="first_name" />
+                                                    id="firstName" placeholder="First Name" name="first_name" required />
+                                                @error('first_name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <!-- Last Name -->
@@ -727,7 +744,10 @@
                                                     Last Name <span class="text_darkOrange">*</span>
                                                 </label>
                                                 <input type="text" class="form-control py-2 text-muted fs-6"
-                                                    id="lastName" placeholder="Last Name" name="last_name" />
+                                                    id="lastName" placeholder="Last Name" name="last_name" required />
+                                                @error('last_name')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <!-- Email -->
@@ -736,7 +756,10 @@
                                                     Email <span class="text_darkOrange">*</span>
                                                 </label>
                                                 <input type="email" class="form-control" id="email"
-                                                    placeholder="Email" name="email" />
+                                                    placeholder="Email" name="email" required />
+                                                @error('email')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <!-- Phone Number -->
@@ -745,33 +768,32 @@
                                                     Phone Number <span class="text_darkOrange">*</span>
                                                 </label>
                                                 <div class="input-group">
-                                                    {{-- <select class="form-select fw-bold" aria-label="Country code">
-                                                <option value="NEP">NEP</option>
-                                                <option value="IND">IND</option>
-                                                <option value="US">US</option>
-
-                                            </select> --}}
                                                     <input type="text" id="phone" class="form-control"
-                                                        placeholder="+977 12345678" name="phone" />
+                                                        placeholder="+977 12345678" name="phone" required />
                                                 </div>
+                                                @error('phone')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <!-- Message -->
                                             <div class="mb-md-3 mb-3">
                                                 <label for="message" class="form-label fs-6 fw-bold">
-                                                    Message
+                                                    Message <span class="text_darkOrange">*</span>
                                                 </label>
-                                                <textarea id="message" rows="1" class="form-control" placeholder="Write your message here..."
-                                                    name="message"></textarea>
+                                                <textarea id="message" rows="1" class="form-control"
+                                                    placeholder="Write your message here..." name="message" required></textarea>
+                                                @error('message')
+                                                    <small class="text-danger">{{ $message }}</small>
+                                                @enderror
                                             </div>
 
                                             <!-- Privacy Policy Checkbox -->
-                                            <div class="mb-md-4 mb-3">
+                                            <div class="mb-md-2 mb-3">
                                                 <div class="form-check">
                                                     <input class="form-check-input rounded-0" type="checkbox"
                                                         id="privacyCheck" />
-                                                    <label class="form-check-label small font_montserrat"
-                                                        for="privacyCheck">
+                                                    <label class="form-check-label small font_montserrat" for="privacyCheck">
                                                         You agree to our friendly
                                                         <a target="_blank" href="/privacy-policy"
                                                             class="text-decoration-underline text_darkOrange">
@@ -779,16 +801,23 @@
                                                         </a>
                                                     </label>
                                                 </div>
+
+                                                {!! app('captcha')->display() !!}
+                                                @if ($errors->has('g-recaptcha-response'))
+                                                    <span class="help-block text-danger">
+                                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                                    </span>
+                                                @endif
                                             </div>
 
                                             <!-- Submit Button -->
                                             <div>
-                                                <button
-                                                    class="btn btn_darkprimary fs-6 font_montserrat w-100 py-3 rounded-0">
+                                                <button class="btn btn_darkprimary fs-6 font_montserrat w-100 py-3 rounded-0">
                                                     SEND MESSAGE
                                                 </button>
                                             </div>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -918,6 +947,7 @@
             </div>
         </section>
     </section>
+
     @include('frontend.inc.contactus')
 @endsection
 @push('style')
@@ -1065,17 +1095,5 @@
             });
         });
 
-        document.addEventListener("DOMContentLoaded", function() {
-            var splide = new Splide("#testimonialSlider", {
-                type: "loop",
-                perPage: 1,
-                perMove: 1,
-                gap: "1rem",
-                pagination: true,
-                arrows: false,
-                autoWidth: false,
-                focus: "center",
-            }).mount();
-        });
     </script>
 @endpush

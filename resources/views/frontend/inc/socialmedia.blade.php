@@ -16,17 +16,15 @@
                 </div>
             </div>
 
-            <div class="row gap-md-3 gap-3">
+            <div class="row">
                 @foreach (App\Models\MainSlider::where('status',1)->where('type',3)->get() as $social)
                      <!-- Instagram Post 1 -->
-                <div class="col-12 col-md-4 ">
+                <div class="col-12 col-md-4 g-3">
                     {!! $social->details !!}
                 </div>
                 @endforeach
-
-
-
                 <!-- Repeat the above block for more Instagram posts (change images & likes) -->
 
+        </div>
         </div>
     </section>

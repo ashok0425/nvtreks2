@@ -37,8 +37,7 @@
                     </div>
                     <div>
                         <p class="fs-6 fw-bold font_montserrat mb-1">BEST PRICE GUARANTEED</p>
-                        <p class="mb-0" style="max-width: 300px;">Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Ut elit tellus, luctus nec.</p>
+                        <p class="mb-0" style="max-width: 300px;">Discover the top places to visit with Nepal Vision—handpicked destinations full of beauty, culture, and adventure.</p>
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-3 mb-4 flex-column flex-sm-row text-center text-sm-start">
@@ -47,8 +46,7 @@
                     </div>
                     <div>
                         <p class="fs-6 fw-bold font_montserrat mb-1">AMAZING DESTINATION</p>
-                        <p class="mb-0" style="max-width: 300px;">Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Ut elit tellus, luctus nec.</p>
+                        <p class="mb-0" style="max-width: 300px;">We offer the best value, with no hidden fees.Your adventure, fairly priced, always.</p>
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-3 mb-4 flex-column flex-sm-row text-center text-sm-start">
@@ -57,8 +55,7 @@
                     </div>
                     <div>
                         <p class="fs-6 fw-bold font_montserrat mb-1">PERSONAL SERVICES</p>
-                        <p class="mb-0" style="max-width: 300px;">Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Ut elit tellus, luctus nec.</p>
+                        <p class="mb-0" style="max-width: 300px;">Tailored trips to fit your travel dreams. Your journey, made just for you.</p>
                     </div>
                 </div>
             </div>
@@ -136,20 +133,24 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-between align-items-center gap-3">
-            <div>
-                <img src="{{asset('frontend//images/companylogo1.png')}}" alt="company logo" class="img-fluid" width="340" height="85">
-            </div>
-            <div>
-                <img src="{{asset('frontend/images/companylogo2.png')}}" alt="company logo" class="img-fluid" width="205" height="85">
-            </div>
-            <div>
-                <img src="{{asset('frontend/images/companylogo3.png')}}" alt="company logo" class="img-fluid" width="88" height="85">
-            </div>
-            <div>
-                <img src="{{asset('frontend/images/companylogo4.png')}}" alt="company logo" class="img-fluid" width="370" height="85">
+       <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="d-flex justify-content-between align-items-center gap-3">
+                <div>
+                    <img src="{{asset('frontend/images/han.webp')}}" alt="company logo" class="img-fluid" width="140" height="85">
+                </div>
+                <div>
+                    <img src="{{asset('frontend/images/taang.webp')}}" alt="company logo" class="img-fluid" width="140" height="85">
+                </div>
+                <div>
+                    <img src="{{asset('frontend/images/nma.webp')}}" alt="company logo" class="img-fluid" width="140" height="85">
+                </div>
+                {{-- <div>
+                    <img src="{{asset('frontend/images/companylogo4.png')}}" alt="company logo" class="img-fluid" width="370" height="85">
+                </div> --}}
             </div>
         </div>
+       </div>
     </div>
 </section>
 

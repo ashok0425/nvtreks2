@@ -16,7 +16,7 @@
                 <h2 class="head_title mb-3 text-md-start text-center">CONTACT US TO GET MORE INFO</h2>
                 <p class='section-description mb-4'>Explore our curated list of the best countries to visit in 2024
                     and discover incredible destinations waiting to be explored</p>
-                <form action="{{route('contactus')}}" method="POST">
+                <form >
                     <input type="hidden" name="page" value="contact">
                     @csrf
                     <input type="hidden" name="source" value="{{request()->query('utm_source')}}">

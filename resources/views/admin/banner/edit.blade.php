@@ -55,8 +55,9 @@
                 {{-- Link Field --}}
                 <div id="linkField"  class="col-md-12 mt-3">
                     <label class="form-label">External Link</label>
-                    <textarea name="details" class="form-control" rows="3" placeholder="Paste your link here">{!! old('details',$banner->details) !!}</textarea>
+                    <textarea name="details" id="embedBody" class="form-control" rows="3" placeholder="Paste your link here">{!! old('details',$banner->details) !!}</textarea>
                 </div>
+                <div id="embedPreview"></div>
 
                 <div class="col-md-12 mt-4">
                     <button type="submit" class="btn btn-primary btn-block">Save</button>
@@ -132,5 +133,48 @@ $(document).ready(function () {
         }
     });
 });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const embedBodyTextarea = document.getElementById('embedBody');
+        const embedPreview = document.getElementById('embedPreview');
+
+        // Initial preview
+        updatePreview();
+
+        // Add event listener for real-time preview
+        embedBodyTextarea.addEventListener('input', updatePreview);
+        embedBodyTextarea.addEventListener('change', updatePreview);
+        embedBodyTextarea.addEventListener('keyup', updatePreview);
+        embedBodyTextarea.addEventListener('paste', updatePreview);
+
+        function updatePreview() {
+            const embedCode = embedBodyTextarea.value.trim();
+
+            if (embedCode) {
+                // Render the embed code directly
+                embedPreview.innerHTML = embedCode;
+
+                // Reload Instagram embed script to render the embed
+                if (window.instgrm) {
+                    window.instgrm.Embeds.process();
+                } else {
+                    // If script is not loaded, dynamically load it
+                    const script = document.createElement('script');
+                    script.src = '//www.instagram.com/embed.js';
+                    script.async = true;
+                    script.onload = function() {
+                        if (window.instgrm) {
+                            window.instgrm.Embeds.process();
+                        }
+                    };
+                    document.body.appendChild(script);
+                }
+            } else {
+                embedPreview.innerHTML = 'No preview available';
+            }
+        }
+    });
 </script>
 @endpush

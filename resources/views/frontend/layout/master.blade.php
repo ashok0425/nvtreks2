@@ -88,7 +88,7 @@
                             <h5 class="footer_border_start ps-2">ABOUT NEPAL VISION</h5>
                         </div>
                         <p class="py-md-3 py-2 mb-0 text_lightgray font_montserrat">
-                            At Nepal Vision, we craft life-changing journeys with heart.  From the Himalayas to hidden valleys, every trek is personal,  guided by passion, trust, and years of experience.
+                            At Nepal Vision, we craft life-changing journeys with heart.From the Himalayas to hidden valleys, every trek is personal,guided by passion, trust, and years of experience.
                         </p>
                         <div class="d-flex flex-wrap justify-content-between py-md-3 py-2 gap-3">
                             <img src="{{asset('frontend/images/tripadvisorimg.png')}}" alt="Tripadvisor" class="img-fluid" width="95">
@@ -118,7 +118,7 @@
                             <h5 class="footer_border_start ps-2">CONTACT US</h5>
                         </div>
                         <p class="py-md-3 py-2 text_lightgray font_montserrat">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Get in touch with Nepal Vision— your next adventure starts here.
                         </p>
                         <p class="contact_info mb-2"><span class="pe-2"><img src="{{asset('frontend/images/phoneIcon.png')}}" alt="location"
                                     width="14" height="14"></span>{{setting()->phone}}</p>
@@ -148,7 +148,7 @@
                             <h5 class="footer_border_start ps-2">SUBSCRIBE US</h5>
                         </div>
                         <p class="py-md-3 py-2 mb-0 text_lightgray font_montserrat">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Subscribe to Nepal Vision – stay inspired for your next journey.
                         </p>
                         <form>
                             <input type="email" class="form-control mb-4 rounded-0 py-md-3 py-2"
@@ -185,6 +185,7 @@
     <!-- Splide.js JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     {{-- toastr --}}
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
     {{-- toastr --}}
@@ -229,8 +230,8 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
-            let testimonial_slider=document.getElementById('image-slider');
-            if (testimonial_slider) {
+            let image_slider=document.getElementById('image-slider');
+            if (image_slider) {
             new Splide('#image-slider', {
                 type: 'loop',
                 perPage: 5,
@@ -317,8 +318,8 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-            let recentPostsSlider=document.getElementById('testimonialSlider');
-            if (recentPostsSlider) {
+            let testimonialSlider=document.getElementById('testimonialSlider');
+            if (testimonialSlider) {
             var splide = new Splide("#testimonialSlider", {
                 type: "loop",
                 perPage: 1,

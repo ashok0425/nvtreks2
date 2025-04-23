@@ -25,12 +25,18 @@ class EnquiryReceived extends Notification
 
     public function toMail($notifiable)
     {
+        dd($this->data);
         return (new MailMessage)
             ->from('info@nepalvisiontreks.com', 'Nepal Vision')
             ->subject($this->data['subject'])
-            // ->bcc('yubraj.misfit@gmail.com')
+            ->bcc('yubraj.misfit@gmail.com')
             ->line('Hello')
             ->line('New Enquiry Request Received')
-            ->line("Name: ".$this->data['name']);
+            ->line("Name: ".$this->data['name'])
+            ->line("Email: ".$this->data['email'])
+            ->line("Phone: ".$this->data['phone'])
+            ->line("Message: ".$this->data['comment'])
+            ->line("Ip: ".$this->data['user_info']);
+
     }
 }

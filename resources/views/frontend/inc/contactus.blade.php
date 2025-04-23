@@ -3,11 +3,11 @@
 )}}');background-size: cover;background-position: center;min-height: 100vh;">
 
     <!-- Dark overlay -->
-    <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
+    {{-- <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
 
-        {{-- style='background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 24%, rgba(0,0,0,0.9019257361147583) 5%)' --}}
+        style='background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 24%, rgba(0,0,0,0.9019257361147583) 5%)'
         >
-    </div>
+    </div> --}}
     <div class="position-absolute top-0 start-0 w-100 h-100  z-3">
         <div class="container py-md-5 py-4">
             <!-- Section Title -->
