@@ -723,7 +723,7 @@
             <div class="wave-2"></div>
             <div class="wave-1"></div>
             <div class="wave-message">
-               <a href="{{route('/')}}" class="btn btn-primary">⬅ Back to Home</a>            <p>You're lost</p>
+               <a href="{{route('home')}}" class="btn btn-primary">⬅ Back to Home</a>            <p>You're lost</p>
                 <p>Click on the island to return</p>
             </div>
         </div>
