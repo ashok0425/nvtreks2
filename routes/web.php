@@ -16,6 +16,7 @@ Route::get('contact', [ContactController::class, 'index'])->name('contactus');
 Route::post('contact', [ContactController::class, 'store'])->name('contactus.store');
 
 Route::get('destination/{url}', [DestinationController::class, 'index'])->name('destination');
+Route::get('search', [DestinationController::class, 'index'])->name('search');
 Route::get('package-destination/{url}', [DestinationController::class, 'index'])->name('package.destination');
 Route::get('filter-package', [DestinationController::class, 'filter']);
 Route::get('package-category/{url}', [DestinationController::class, 'index'])->name('package.category');

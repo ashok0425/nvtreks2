@@ -42,7 +42,7 @@
                                     </li>
                                 @endif
 
-                                @if (!empty($package->itinerary))
+                                @if (!empty($package->itenaries))
                                     <li class="nav-item">
                                         <a class="nav-link" href="#itinerary">Itinerary</a>
                                     </li>
@@ -911,8 +911,7 @@
                     <div class="splide" id="recentPostsSlider">
                         <div class="splide__track">
                             <ul class="splide__list">
-
-                                @foreach ($package->feature_packages()->limit(5)->get() as $package)
+                                @foreach ($package->featuredPackage()->limit(5)->get() as $package)
                                     <li class="splide__slide my-4">
                                         <div class="mx-md-3">
                                             @include('frontend.inc.package-card', ['package' => $package])

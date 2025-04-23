@@ -22,45 +22,38 @@ public function index(Request $request,$url=null) {
         $data = CategoryPlace::where('url',$url)->orwhere('id',$url)->firstOrFail();
         $categories = CategoryDestination::where('status',1)->limit(10)->get();
         $type=null;
-        $seo=[
-            'meta_title' => $data->meta_title,
-            'meta_keyword' => $data->meta_keyword,
-            'meta_description' => $data->meta_description,
-            'mobile_meta_title' => $data->mobile_meta_title??$data->meta_title,
-            'mobile_meta_description' => $data->mobile_meta_description??$data->meta_keyword,
-            'mobile_meta_keyword' => $data->mobile_meta_keyword??$data->meta_description,
-        ];
+
     }elseif(Route::is('package.category')){
         $data = CategoryDestination::where('url',$url)->orwhere('id',$url)->firstOrFail();
 	   $categories = CategoryDestination::where('status',1)->limit(10)->get();
        $type=null;
-       $seo=[
-        'meta_title' => $data->meta_title,
-        'meta_keyword' => $data->meta_keyword,
-        'meta_description' => $data->meta_description,
-        'mobile_meta_title' => $data->mobile_meta_title??$data->meta_title,
-        'mobile_meta_description' => $data->mobile_meta_description??$data->meta_keyword,
-        'mobile_meta_keyword' => $data->mobile_meta_keyword??$data->meta_description,
-    ];
+
     }
     elseif(Route::is('deals')){
         $data = (object)['name'=>'Special Deals','cover_image'=>null,'image'=>null,'id'=>1];
 	   $categories = CategoryDestination::where('status',1)->limit(10)->get();
+       $type=null;
+    }
+    elseif(Route::is('search')){
+        $data = (object)['name'=>'Special Deals','cover_image'=>null,'image'=>null,'id'=>1,'keyword'=>$request->keyword];
+	   $categories = CategoryDestination::where('status',1)->limit(10)->get();
        $type='deal';
-    }else{
+    }
+    else{
         $data = Destination::where('url',$url)->orwhere('id',$url)->firstOrFail();
 	   $categories = CategoryDestination::where('destination_id',$data->id)->where('status',1)->get();
        $type='destination';
-       $seo=[
-        'meta_title' => $data->meta_title,
-        'meta_keyword' => $data->meta_keyword,
-        'meta_description' => $data->meta_description,
-        'mobile_meta_title' => $data->mobile_meta_title??$data->meta_title,
-        'mobile_meta_description' => $data->mobile_meta_description??$data->meta_keyword,
-        'mobile_meta_keyword' => $data->mobile_meta_keyword??$data->meta_description,
-    ];
+
     }
 
+    $seo=[
+        'meta_title' => $data?->meta_title??null,
+        'meta_keyword' => $data?->meta_keyword??null,
+        'meta_description' => $data?->meta_description??null,
+        'mobile_meta_title' => $data?->mobile_meta_title??$data?->meta_title??null,
+        'mobile_meta_description' => $data?->mobile_meta_description??$data?->meta_keyword??null,
+        'mobile_meta_keyword' => $data?->mobile_meta_keyword??$data?->meta_description??null,
+    ];
 
       return view('frontend.destination',compact('categories','data','type','seo'));
 }
@@ -72,7 +65,10 @@ public function filter(Request $request)
 
     // 🔍 Search Filter
     if ($request->filled('search')) {
-        $query->where('name', 'like', '%' . $request->search . '%');
+        $query->where('name', 'like', '%' . $request->search . '%')
+        ->orWhere('overview', 'like', '%' . $request->search . '%')
+        ->orWhere('faq', 'like', '%' . $request->search . '%')
+        ->orWhere('outline_itinerary', 'like', '%' . $request->search . '%');
     }
 
     // 💰 Price Range Filter

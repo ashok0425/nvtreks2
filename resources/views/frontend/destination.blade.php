@@ -3,14 +3,12 @@
 @section('content')
 
 @include('frontend.inc.banner')
-
 <section class='mb-5' id="app">
     <div class="container py-md-5 py-4">
         <div class="row">
             <div  class="col-md-4">
                 <div class="pe-md-5 listing_Card position-sticky" style="top: 20px;">
                   <h4 class="fw-bolder fs-5 text-decoration-underline mb-4" @click="clearAll">Clear All Filters</h4>
-
                   <!-- Search -->
                   <div class="mb-md-5 mb-3 pb-md-5 pb-3 border-bottom border-dark-subtle">
                     <div class="input-group search_input">
@@ -18,7 +16,7 @@
                         <i class="bi bi-search fs-4"></i>
                       </span>
                       <input v-model="filters.search" type="text" class="form-control border border-start-0 ps-2 py-3 rounded-0"
-                             placeholder="Find your trip.." />
+                             placeholder="Find your trip.." value="" />
                     </div>
                   </div>
 
@@ -318,7 +316,7 @@
           currentPage: 1,
           totalPages: 1, // You will update this based on the response
           filters: {
-            search: '',
+            search: "{{isset($data->keyword)?$data->keyword:''}}",
             price: { min: 0, max: 8000 },
             days: { min: 1, max: 30 },
             difficulty: '',
