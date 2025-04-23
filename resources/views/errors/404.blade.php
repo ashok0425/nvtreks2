@@ -699,14 +699,14 @@
 		 transform: translate3d(0, 0, 0);
 	}
 }
- 
+
 </style>
 
 <div class="not-found parallax">
             <div class="sky-bg"></div>
             <div class="wave-7"></div>
             <div class="wave-6">Hello</div>
-            <a class="wave-island" href="{{route('/')}}">
+            <a class="wave-island" href="{{route('home')}}">
                     <img src="http://res.cloudinary.com/andrewhani/image/upload/v1524501929/404/island.svg" alt="Island">
                 </a>
             <div class="wave-5"></div>
@@ -727,7 +727,7 @@
                 <p>Click on the island to return</p>
             </div>
         </div>
-        
+
         <script>
             var parallax = function(e) {
     var windowWidth = $(window).width();

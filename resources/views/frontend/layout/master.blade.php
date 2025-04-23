@@ -172,7 +172,7 @@
                         </a>
                     </div>
                     <div>
-                        <p class="mb-0">Copyright © 2025 Nepal Vision Treks.</p>
+                        <p class="mb-0">Copyright © {{date('Y')}} Nepal Vision Treks.</p>
                     </div>
                 </div>
             </div>

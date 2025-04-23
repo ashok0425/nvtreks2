@@ -112,7 +112,7 @@
                     <!-- Location 3 -->
                     <div class="px-md-4 contact_info_card contact_info_card_broder">
                         <div class="text-center text-md-start">
-                            <img src="{{asset('frontend/images/china.svg')}}" alt="location" class="mb-md-3 mb-1"
+                            <img src="{{asset('frontend/images/China.svg')}}" alt="location" class="mb-md-3 mb-1"
                                 width="50" height="50">
                             <div>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">{{setting()->address5}}</p>
