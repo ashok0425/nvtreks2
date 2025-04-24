@@ -6,9 +6,8 @@
 
 @section('content')
 <section class="video_section mb-md-5 mb-4">
+    @include('frontend.layout.header')
 <div class="video_banner_container ">
-
-
     @php
     $banner = App\Models\MainSlider::where('status',1)->where('link', request()->path())->first();
 @endphp
