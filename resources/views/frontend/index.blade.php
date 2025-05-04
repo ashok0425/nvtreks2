@@ -1,9 +1,4 @@
 @extends('frontend.layout.master')
-@php
-    define('PAGE','home');
-
-@endphp
-
 @section('content')
 <section class="video_section mb-md-5 mb-4">
     @include('frontend.layout.header')
@@ -113,9 +108,9 @@
     </div>
 
     <!-- Button -->
-    <div class="text-center mt-4">
+    {{-- <div class="text-center mt-4">
         <button class="btn btn_darkprimary destination-button">MORE DESTINATIONS</button>
-    </div>
+    </div> --}}
 </section>
 
 <section class="bg_lightwhite">
@@ -135,7 +130,7 @@
 
         <div class="row g-4 mb-4 pb-md-5">
 
-            @foreach ($popular_package as $package)
+            @foreach ($popular_packages as $package)
             <div class="col-12 col-sm-6 col-md-4">
                @include('frontend.inc.package-card',['package'=>$package])
             </div>
@@ -146,7 +141,7 @@
 
         <!-- Button -->
         <div class="text-center mt-4">
-            <button class="btn btn_darkprimary destination-button">VIEW ALL PACKAGES</button>
+            <a href="{{route('search')}}" class="btn btn_darkprimary destination-button">VIEW ALL PACKAGES</a>
         </div>
     </div>
 </section>
@@ -247,6 +242,28 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
             <a href="{{route('deals')}}" class="btn btn_darkprimary destination-button">VIEW ALL OFFERS</a>
         </div>
     </div>
+</section>
+
+<section class="video_section mb-md-5 mb-4">
+<div class="video_banner_container ">
+    @php
+    $banner = App\Models\MainSlider::where('status',1)->where('link', request()->path())->first();
+@endphp
+
+<video loop muted autoPlay playsInline poster='{{asset('frontend/images/herobgvideo.mp4')}}' class="video-banner">
+    <source src='{{asset('frontend/images/herobgvideo.mp4')}}' type="video/mp4" />
+</video>
+<div class="position-absolute top-0 start-0 w-100 h-100">
+    <div class="banner-container">
+        <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
+            style='background-color: #000000;opacity: 70%'></div>
+        <div class="banner-content">
+           <img src="{{asset('frontend/images/play-icon.webp')}}" alt="Nepalvision play" width="80">
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 </section>
 
 
@@ -543,7 +560,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                 <hr class="section-line py-2" />
                 <p class="section-subtitle">OUR TOUR GALLERY</p>
             </div>
-            <h2 class='head_title mb-md-3'>Traveler's Photo Gallery</h2>
+            <h2 class='head_title mb-md-3 text-uppercase'>Traveler's Photo Gallery</h2>
             <p class='text_lightDark font_montserrat mb-0' style="max-width: 800px;">
                 See the Himalayas through the eyes of our travelers—authentic moments, epic landscapes, and unforgettable memories.
             </p>
@@ -607,6 +624,47 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
 </section>
 
 
+<section class="splide position-relative" aria-label="Special Offers Carousel" style="min-height: 550px;" id="splideMissed">
+    <div class="splide__track h-100">
+        <ul class="splide__list h-100">
+
+            @foreach ($missed_packages as $package)
+
+            <!-- Slide 1 -->
+            <li class="splide__slide position-relative h-100" style="
+                background-image: url('{{ getImageUrl($package->thumbnail) }}');
+                background-size: cover;
+                background-position: center;
+                min-height: 550px;
+            ">
+                <!-- Dark overlay -->
+                <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: #151515; opacity: 75%; z-index: 1;"></div>
+
+                <div class="position-relative z-3 h-100">
+                    <div class="container h-100">
+                        <div class="d-flex flex-column justify-content-center h-100 py-5">
+                            <div class="text-center text-md-start">
+                                <h2 class="head_title text-white mb-5 mx-md-5 mx-md-0">THE ONES YOU ALMOST MISSED</h2>
+                                <p class="text-white fs-6 mb-4 fw-bold mx-auto mx-md-0 mt-5 pt-4" style="max-width: 900px;">
+                                    Tired of same suggestions? Here are some very underrated trips for you.
+                                </p>
+                                <h2 class="fw-bold text-white my-4">{{$package->name}}</h2>
+                                <p class="text_lightwhite mb-0 font_montserrat mx-auto mx-md-0" style="max-width: 1000px;">
+                                    {{$package->short_description}}
+                                </p>
+                            </div>
+                        </div>
+                        <a href="{{route('package.detail',['url'=>$package->url])}}" class="btn btn_darkprimary destination-button">VIEW DETAILS</a>
+                    </div>
+                </div>
+            </li>
+            @endforeach
+        </ul>
+    </div>
+
+</section>
+
+
   <!-- recent posts -->
   <section class="mb-5 py-md-5">
     <div class="container">
@@ -667,7 +725,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
         </div>
 
         <div class="text-center">
-            <button class="btn btn_darkprimary destination-button">VIEW ALL POSTS</button>
+            <a href="{{route('blog')}}" class="btn btn_darkprimary destination-button">VIEW ALL POSTS</a>
         </div>
     </div>
 </section>
@@ -679,14 +737,45 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
     @include('frontend.inc.contactus')
 
 @endsection
-@push('scripts')
+@push('style')
+<style>
+   #splideMissed .splide__pagination {
+        position: absolute;
+        bottom: 10px;
+        right: 100px;
+        justify-content: flex-end;
+    }
+
+    #splideMissed .splide__pagination__page {
+      width: 40px;
+      height: 14px;
+      margin: 0 6px;
+      border-radius: 20px;
+      background: #999;
+      opacity: 0.6;
+      transition: all 0.3s ease;
+    }
+
+    /* Active dot - make it blue */
+    #splideMissed .splide__pagination__page.is-active {
+      background: #007BFF; /* Bootstrap Blue */
+      transform: scale(1.2);
+      opacity: 1;
+    }
+
+    </style>
+
+@endpush
+@push('script')
 <script>
-    $(document).ready(function(){
-
-    $(window).on('load',function(){
-        $('.page_loader').addClass('d-none')
-    })
-})
-
+    document.addEventListener('DOMContentLoaded', function () {
+        new Splide('#splideMissed', {
+            type: 'loop',
+            autoplay: true,
+            interval: 5000,
+            pagination: true,
+            arrows: false,
+        }).mount();
+    });
 </script>
 @endpush

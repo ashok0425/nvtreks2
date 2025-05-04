@@ -178,7 +178,7 @@
                                                 <div class="form-group">
                                                     <label class="ckbox ckbox-success">
                                                         <input type="checkbox" name="deal_package" value="1" id="deal">
-                                                        <span>Deal/discount Package</span>
+                                                        <span>Discount Package</span>
                                                     </label>
                                                     <label class="ckbox ckbox-success">
                                                         <input type="checkbox" name="popular_package" value="1">
@@ -193,9 +193,18 @@
                                                         <input type="checkbox" name="is_group" value="1">
                                                         <span>Group  Package</span>
                                                     </label>
+
+                                                    <label class="ckbox ckbox-success">
+                                                        <input type="checkbox" name="is_missed_package" value="1" id="toogleshortDescription">
+                                                        <span>Missed Package</span>
+                                                    </label>
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="form-group" id="showshortDescription" style="display: none;">
+                                            <input type="text" name="short_description" class="form-control"  placeholder="Enter Short Description">
+                                        </div>
+
                                         <div class="form-group" id="show" style="display: none;">
                                             <input type="number" name="discounted_price" class="form-control"  placeholder="Enter Discounted Price">
                                         </div>
@@ -628,6 +637,14 @@ if($input.val().length > 0) {
 
             })
 
+            if($("#toogleshortDescription").attr("checked")){
+                 $('#showshortDescription').show();
+            }
+            $("#toogleshortDescription").click(function(){
+                 $('#showshortDescription').slideToggle();
+                 $('#showshortDescription').show();
+
+            })
 
 
             function ajaxCategory() {

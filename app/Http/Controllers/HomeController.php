@@ -22,7 +22,8 @@ class HomeController extends Controller
 public function home(Request $request) {
 
     $destinations=Destination::whereIn('id',['8','9','10','11'])->get();
-    $popular_package=Package::where('status',1)->where('hot_deal_package',1)->whereNotNull('discounted_price')->limit(3)->get();
+    $popular_packages=Package::where('status',1)->where('hot_deal_package',1)->limit(3)->get();
+    $missed_packages=Package::where('status',1)->where('is_missed_package',1)->limit(6)->get();
     $destination_categories=CategoryDestination::where('status',1)->select('id','name','url','image','icon')->limit(6)->get();
     $discounted_packages=Package::where('status',1)->whereNotNull('discounted_price')->limit(3)->get();
 
@@ -52,8 +53,7 @@ public function home(Request $request) {
             'mobile_meta_description' => setting()->mobile_meta_description??setting()->keyword,
             'mobile_meta_keyword' => setting()->mobile_meta_keyword??setting()->descr,
         ];
-
-      return view('frontend.index',compact('destinations','popular_package','destination_categories','discounted_packages','departures','month','year','blogs','video','galleries','seo'));
+      return view('frontend.index',compact('missed_packages','destinations','popular_packages','destination_categories','discounted_packages','departures','month','year','blogs','video','galleries','seo'));
 }
 
 public function about() {

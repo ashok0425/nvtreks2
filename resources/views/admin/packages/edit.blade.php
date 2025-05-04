@@ -215,7 +215,7 @@
                                                                         <input type="checkbox" name="deal_package"
                                                                             value="1" id="deal"
                                                                             @if ($package->discounted_price) checked @endif>
-                                                                        <span>Deal/discount Package</span>
+                                                                        <span>Discount Package</span>
                                                                     </label>
                                                                     <label class="ckbox ckbox-success">
                                                                         <input type="checkbox" name="popular_package"
@@ -236,8 +236,16 @@
                                                                             @if ($package->is_group == 1) checked @endif>
                                                                         <span>Group Package</span>
                                                                     </label>
+
+                                                                    <label class="ckbox ckbox-success">
+                                                                        <input type="checkbox" @if ($package->is_missed_package == 1) checked @endif name="is_missed_package" value="1" id="toogleshortDescription">
+                                                                        <span>Missed Package</span>
+                                                                    </label>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                        <div class="form-group" id="showshortDescription" @if ($package->is_missed_package == null) style="display: none;" @endif>
+                                                            <input type="text" name="short_description" class="form-control"  placeholder="Enter Short Description">
                                                         </div>
                                                         <div class="form-group"
                                                             id="show"@if ($package->discounted_price == null) style="display: none;" @endif>
@@ -791,6 +799,15 @@
             $('#show').show();
 
         })
+
+        if($("#toogleshortDescription").attr("checked")){
+                 $('#showshortDescription').show();
+            }
+            $("#toogleshortDescription").click(function(){
+                 $('#showshortDescription').slideToggle();
+                 $('#showshortDescription').show();
+
+            })
 
 // Add the following code if you want the name of the file appear on select
 $('#imageInput4').on('change', function() {

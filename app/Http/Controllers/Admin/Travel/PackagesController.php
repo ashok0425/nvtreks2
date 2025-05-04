@@ -244,6 +244,8 @@ class PackagesController extends Controller
             $package->name = $request->name;
             $package->trip_id = $request->trip_id;
             $package->hot_deal_package = $request->popular_package;
+            $package->short_description = $request->short_description;
+            $package->is_missed_package = $request->is_missed_package;
             $package->destination_id = $request->destination_id;
             $package->category_place_id = $request->category_place_id ? $request->category_place_id : null;
             $package->category_destination_id = $request->category_destination_id;
@@ -295,7 +297,8 @@ class PackagesController extends Controller
             $package->circuit_title = $request->circuit_title;
             $package->is_luxury = $request->is_luxury??$package->is_luxury;
             $package->is_group = $request->is_group??$package->is_group;
-
+            $package->short_description = $request->short_description;
+            $package->is_missed_package = $request->is_missed_package;
             $banner = $request->file('thumbnail');
             if ($banner) {
                 $this->deleteFile($package->banner);
