@@ -1,6 +1,6 @@
 
 <section class="position-relative contact_info_section" style="background-image: url('{{('/frontend/images/contactus_banner.png'
-)}}');background-size: cover;background-position: center;height: 100vh;">
+)}}');background-size: cover;background-position: center;">
 
     <!-- Dark overlay -->
     {{-- <div class="position-absolute top-0 start-0 w-100 h-100 z-1"

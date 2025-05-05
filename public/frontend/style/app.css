@@ -478,6 +478,9 @@ input[type="date"]:focus {
 .contact_cards{
     height: 280px;
 }
+.contact_info_section{
+    height: 100vh!important;
+  }
 @media (max-width: 768px) {
     .contact_cards{
         height: 210px;
