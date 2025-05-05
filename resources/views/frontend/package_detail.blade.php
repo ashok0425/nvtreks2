@@ -93,12 +93,12 @@
                     <div class="row align-items-end mb-md-5 mb-4">
                         <div class="mb-md-5">
                             <div class="row gap-3 gap-md-0">
-                                <div class="col-md-6 d-flex">
+                                <div class="col-md-6 d-flex d-none d-md-block">
                                     <img loading='lazy'
                                         src="{{ getImageUrl($package->package_images()->first()?->image) ?? $finalImage }}"
                                         alt="{{ $package->name }}" class="img-fluid w-100 h-100 object-fit-cover">
                                 </div>
-                                <div class="col-md-3 d-flex flex-column">
+                                <div class="col-md-3 d-flex flex-column d-none d-md-block">
                                     <img loading='lazy'
                                         src="{{ getImageUrl($package->package_images()->skip(1)->first()?->image) ?? $finalImage }}"
                                         alt="{{ $package->name }}" class="img-fluid w-100 h-50 object-fit-cover mb-4">
@@ -291,7 +291,7 @@
                                             @endif
                                         </div>
                                     @endforeach --}}
-                                     {{$package->outline_itinerary}}
+                                     {!!$package->outline_itinerary!!}
 
                                     <!-- Add more itinerary days as per the requirements -->
                                 </div>
@@ -313,9 +313,12 @@
                                 <p class="mb-3">{!! $package->detailed_itinerary !!}</p>
                                 @foreach ($package->itenaries as $itenary)
                                     <div>
-                                        <div class="d-flex align-items-center gap-3 mb-md-4 mb-3">
+                                        @php
+                                            $iteration=$loop->iteration+1
+                                        @endphp
+                                        <div class="d-flex align-items-center gap-3 my-md-4 my-3">
                                             <div class="position-relative">
-                                                <img src="{{ asset("frontend/images/$loop->iteration.jpg") }}"
+                                                <img src="{{ asset("frontend/images/spiral-calendar-pad $iteration.png") }}"
                                                     alt="{{ $itenary->title }}" loading='lazy' width="40">
 
                                             </div>

@@ -224,6 +224,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
             @foreach ($discounted_packages as $package)
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="card border-0 bg-white shadow rounded-3 hover_effect position-relative">
+                    <a href="{{route('package.detail',['url'=>$package->url])}}" class="text-decoration-none text-dark">
                     <img src="{{getImageUrl($package->thumbnail)}}" class="img-fluid w-100 rounded-top"
                         alt="{{$package->price}}" style="height: 400px;object-fit:cover">
                         <div class="discount-badge">
@@ -241,11 +242,11 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                         <p class="mb-2 fw-bolder text_darkprimary">{{$package->destination->name}}</p>
                         <p class="mb-2 fs-5 fw-bold">{{$package->slogan??'Experience the natural beauty of glacier'}}</p>
                         <p class="text_lightprimary fw-bold font_montserrat mb-0">
-                            Price: <span class="fs-5 text-decoration-line-through text-secondary"><i>{{$package->price}}</i></span>
+                            Price: <span class="fs-6 text-decoration-line-through text-danger"><i>{{$package->price}}</i></span>
                             <span class="text_lightprimary fs-4">{{$package->discounted_price}}</span>
                         </p>
                     </div>
-
+                    </a>
                 </div>
             </div>
             @endforeach
