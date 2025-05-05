@@ -223,17 +223,41 @@ input[type="date"]:focus {
   color: #2169A7;
 }
 
-.video_section {
-  position: relative !important;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-
+.video_section,.video_section_2 {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+.video_section_2{
+    overflow: hidden;
 }
+  .hero_video_wrapper {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .hero_video_wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+/*
+  .content_overlay {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  } */
+
 
 .navbar_overlay {
   position: absolute;

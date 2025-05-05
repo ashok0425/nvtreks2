@@ -44,7 +44,7 @@
                                     &nbsp;<i class="fas fa-caret-down"></i>
                                 @endif
                                 </a>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu" style="z-index: 999">
                                     @foreach ($places as $place)
                                         @php
                                             // Fetch packages for each place
@@ -129,38 +129,48 @@
             @foreach ($destinations as $destination)
                 @if ($destination->id != 12)
                     @php
-                        // Fetch categories and places for each destination
-                        $categories = $destination->categories()->where('status',1)->get();
-
-                        $places = $destination->places()->where('status',1)->get();
+                        $categories = $destination->categories()->where('status', 1)->get();
+                        $places = $destination->places()->where('status', 1)->get();
                     @endphp
 
-                    <li class="nav-item mx-1 mx-xl-4 dropdown">
-                        <a class="nav-link text-white dropdown-item d-flex  align-items-center" href="#">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" data-bs-toggle="collapse" data-bs-target="#dest-{{ $destination->id }}">
                             {{ $destination->name }}
-                            @if (count($categories))
-                            &nbsp;<i class="fas fa-caret-down"></i>
-                        @endif
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="collapse  bg-white list-unstyled ps-3" id="dest-{{ $destination->id }}">
                             @foreach ($places as $place)
-
-                                <li class="dropdown-item">
-                                    <a class="dropdown-item d-flex justify-content-between align-items-center" href="{{ route('package.place', ['url' => $place->url]) }}">
+                                @php $packages = $place->packages()->where('status',1)->get(); @endphp
+                                <li>
+                                    <a class="nav-link text-dark dropdown-toggle " data-bs-toggle="collapse" data-bs-target="#place-{{ $place->id }}" href="#">
                                         {{ $place->name }}
-
                                     </a>
-
+                                    @if(count($packages))
+                                        <ul class="collapse  bg-white list-unstyled ps-3" id="place-{{ $place->id }}">
+                                            @foreach ($packages as $package)
+                                                <li>
+                                                    <a class="nav-link text-dark" href="{{ route('package.detail', ['url' => $package->url]) }}">{{ $package->name }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </li>
                             @endforeach
 
                             @foreach ($categories as $category)
-                                <li class="dropdown-item">
-                                    <a class="dropdown-item dropdown-item d-flex justify-content-between align-items-center" href="{{ route('package.category', ['url' => $category->url]) }}">
+                                @php $packages = $category->packages()->where('status',1)->get(); @endphp
+                                <li>
+                                    <a class="nav-link dropdown-toggle text-dark  bg-white" data-bs-toggle="collapse" data-bs-target="#cat-{{ $category->id }}" href="#">
                                         {{ $category->name }}
-
                                     </a>
-
+                                    @if(count($packages))
+                                        <ul class="collapse list-unstyled ps-3" id="cat-{{ $category->id }}">
+                                            @foreach ($packages as $package)
+                                                <li>
+                                                    <a class="nav-link text-dark  bg-white" href="{{ route('package.detail', ['url' => $package->url]) }}">{{ $package->name }}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>
@@ -172,5 +182,6 @@
                 <a class="nav-link font_mulish text-white" href="/deals">Deals</a>
             </li>
         </ul>
+
     </div>
 </div>

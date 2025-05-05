@@ -2,14 +2,16 @@
 @section('content')
 <section class="video_section mb-md-5 mb-4">
     @include('frontend.layout.header')
-<div class="video_banner_container ">
+<div class="video_banner_container">
     @php
     $banner = App\Models\MainSlider::where('status',1)->where('link', request()->path())->first();
 @endphp
 
+<div class="hero_video_wrapper">
 <video loop muted autoPlay playsInline poster='{{asset('frontend/images/herobgvideo.mp4')}}' class="video-banner">
     <source src='{{asset('frontend/images/herobgvideo.mp4')}}' type="video/mp4" />
 </video>
+</div>
 <div class="position-absolute top-0 start-0 w-100 h-100">
     <div class="banner-container">
         <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
@@ -244,7 +246,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
     </div>
 </section>
 
-<section class="video_section mb-md-5 mb-4">
+<section class="video_section_2 mb-md-5 mb-4">
 <div class="video_banner_container ">
     @php
     $banner = App\Models\MainSlider::where('status',1)->where('link', request()->path())->first();

@@ -106,7 +106,9 @@ public function gallery() {
         'mobile_meta_keyword' => setting()->mobile_meta_keyword??setting()->descr,
     ];
 
-    $packages=Package::with('package_images:image,id')->whereHas('package_images')->paginate(3);
+    $packages=Package::with('package_images:image,id,package_id')->withCount('package_images')
+    ->having('package_images_count', '>', 1)
+    ->paginate(3);
     return view('frontend.gallery',compact('packages','seo'));
 }
 
