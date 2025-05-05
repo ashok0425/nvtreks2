@@ -15,6 +15,8 @@ use App\Models\Team;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Cache\RateLimiting\Limit;
+
 class HomeController extends Controller
 {
 
@@ -40,10 +42,13 @@ public function home(Request $request) {
         })
         ->select('id', 'package_id', 'start_date', 'end_date', 'total_seats', 'booked_seats')
         ->orderBy('start_date')
-        ->limit(5)
-        ->get();
+        // ->limit(5)
+        ->paginate(5);
         $blogs=Blog::where('display_homepage',1)->latest()->limit(5)->whereNotNull('title')->get();
-        $galleries=PackageImage::limit(8)->inRandomOrder()->get();
+        $gallery_packages= Package::with('package_images')
+        ->inRandomOrder()
+        ->limit(4)
+        ->get();
 
         $seo=[
             'meta_title' => setting()->title,
@@ -53,7 +58,7 @@ public function home(Request $request) {
             'mobile_meta_description' => setting()->mobile_meta_description??setting()->keyword,
             'mobile_meta_keyword' => setting()->mobile_meta_keyword??setting()->descr,
         ];
-      return view('frontend.index',compact('missed_packages','destinations','popular_packages','destination_categories','discounted_packages','departures','month','year','blogs','video','galleries','seo'));
+      return view('frontend.index',compact('missed_packages','destinations','popular_packages','destination_categories','discounted_packages','departures','month','year','blogs','video','seo','gallery_packages'));
 }
 
 public function about() {
