@@ -21,6 +21,30 @@
    <link defer rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style>
+    .ribbon {
+        position: absolute;
+        top: -15px;
+        right: -50px;
+        background-color: #e63946;
+        color: white;
+        padding: 4px 8px 4px 12px;
+        font-size: 10px;
+        font-weight: bold;
+        animation: blink 1s infinite;
+        z-index: 10;
+
+        /* Left arrow shape */
+        clip-path: polygon(10% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 10% 50%);
+    }
+
+    /* Blink animation */
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+    }
+
+
+
         .splide__arrow{
             background:none!important;
             font-size: 30px;
@@ -100,7 +124,7 @@
                                 class="text-decoration-none font_mulish px-2 footer_border_end footer-link">About Us</a>
                             <a href="/blogs"
                                 class="text-decoration-none font_mulish px-2 footer_border_end footer-link">Blogs</a>
-                            <a href="/usefulinfo"
+                            <a href="/useful-info"
                                 class="text-decoration-none font_mulish px-2 footer-link">Information</a>
                         </p>
                         <p>
@@ -309,7 +333,7 @@
                 breakpoints: {
                     1200: { perPage: 3, gap: "1rem" },
                     992: { perPage: 2, gap: "1.5rem" },
-                    768: { perPage: 1 },
+                    768: { perPage: 1, arrows: false,},
                 },
             }).mount();
 

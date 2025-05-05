@@ -99,8 +99,11 @@
                         @endif
                     @endforeach
 
-                    <li class="nav-item mx-1 mx-xl-4">
-                        <a class="nav-link font_mulish text-white" href="/deals">Deals</a>
+                    <li class="nav-item mx-1 mx-xl-4 position-relative">
+                        <a class="nav-link font_mulish text-white" href="/deals">
+                            Deals
+                            <span class="ribbon">Bestseller</span>
+                        </a>
                     </li>
                 </ul>
                 <div class="ml-auto">

@@ -260,22 +260,11 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
 
 <section class="video_section_2 mb-md-5 mb-4">
 <div class="video_banner_container ">
-    @php
-    $banner = App\Models\MainSlider::where('status',1)->where('link', request()->path())->first();
-@endphp
+
 
 <video loop muted autoPlay playsInline poster='{{asset('frontend/images/herobgvideo.mp4')}}' class="video-banner">
     <source src='{{asset('frontend/images/herobgvideo.mp4')}}' type="video/mp4" />
 </video>
-<div class="position-absolute top-0 start-0 w-100 h-100">
-    <div class="banner-container">
-        <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
-            style='background-color: #000000;opacity: 70%'></div>
-        <div class="banner-content">
-           <img src="{{asset('frontend/images/play-icon.webp')}}" alt="Nepalvision play" width="80">
-            </div>
-        </div>
-    </div>
 </div>
 </div>
 </section>
@@ -405,6 +394,11 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                 </tbody>
             </table>
         </div>
+
+    </div>
+    <div class="text-center mb-3">
+        <a href="{{route('home',['page'=>request()->query('page')?request()->query('page')+1:2])}}" class="btn btn_darkprimary destination-button">LOAD MORE</a>
+
     </div>
 </section>
 
@@ -581,57 +575,55 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
         </div>
     </div>
     <div class="mx-md-5 mx-3">
-        <div class="row align-items-center">
-            <div class="col-12 col-md mb-3 mb-md-0">
-                <div class="">
-                    <img src="{{getImageUrl($galleries[0]->image)??asset('frontend/images/travelphotogallerImg8.png')}}" alt="travelphotogallerImg1" class='img-fluid'  loading='lazy' />
-                </div>
-            </div>
-            <div class="col-12 col-md mb-3 mb-md-0">
-                <div class="mb-3 mb-md-4">
-                    <img src="{{getImageUrl($galleries[2]->image)??asset('frontend/images/travelphotogallerImg7.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
-                </div>
-                <div class="">
-                    <img src="{{getImageUrl($galleries[5]->image)??asset('frontend/images/travelphotogallerImg6.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
-                </div>
-            </div>
-            <div class="col-12 col-md mb-3 mb-md-0">
-                <div class="mb-3 mb-md-4">
-                    <div class="splide" id="traveler-slider">
-                        <div class="splide__track">
-                            <ul class="splide__list">
-                                <li class="splide__slide">
-                                    <img src="{{getImageUrl($galleries[1]->image)??asset('frontend/images/travelphotogallerImg1.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
-                                </li>
-                                <li class="splide__slide">
-                                    <img src="{{getImageUrl($galleries[4]->image)??asset('frontend/images/travelphotogallerImg4.png')}}" alt="travelphotogallerImg4" class='img-fluid' loading='lazy' />
-                                </li>
-                                <li class="splide__slide">
-                                    <img src="{{getImageUrl($galleries[3]->image)??asset('frontend/images/travelphotogallerImg3.png')}}" alt="travelphotogallerImg3" class='img-fluid' loading='lazy' />
-                                </li>
-                                <li class="splide__slide">
-                                    <img src="{{getImageUrl($galleries[2]->image)??asset('frontend/images/travelphotogallerImg8.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
-                                </li>
-                            </ul>
+        <div class="splide" id="traveler-slider">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    @foreach ($gallery_packages as $package)
+                    @php
+                        $galleries = $package->package_images;
+                    @endphp
+                    <li class="splide__slide">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-md mb-3 mb-md-0">
+                                <div class="">
+                                    <img src="{{ isset($galleries[0]) ? getImageUrl($galleries[0]->image) : asset('frontend/images/travelphotogallerImg8.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-md mb-3 mb-md-0">
+                                <div class="mb-3 mb-md-4">
+                                    <img src="{{ isset($galleries[2]) ? getImageUrl($galleries[2]->image) : asset('frontend/images/travelphotogallerImg7.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
+                                </div>
+                                <div class="">
+                                    <img src="{{ isset($galleries[5]) ? getImageUrl($galleries[5]->image) : asset('frontend/images/travelphotogallerImg6.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-md mb-3 mb-md-0">
+                                <div class="mb-3 mb-md-4">
+                                    <img src="{{ isset($galleries[1]) ? getImageUrl($galleries[1]->image) : asset('frontend/images/travelphotogallerImg1.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
+                                </div>
+                                <div class="">
+                                    <img src="{{ isset($galleries[7]) ? getImageUrl($galleries[7]->image) : asset('frontend/images/travelphotogallerImg2.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-md mb-3 mb-md-0">
+                                <div class="mb-3 mb-md-4">
+                                    <img src="{{ isset($galleries[3]) ? getImageUrl($galleries[3]->image) : asset('frontend/images/travelphotogallerImg3.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
+                                </div>
+                                <div class="">
+                                    <img src="{{ isset($galleries[5]) ? getImageUrl($galleries[5]->image) : asset('frontend/images/travelphotogallerImg4.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
+                                </div>
+                            </div>
+                            <div class="col-12 col-md">
+                                <div class="">
+                                    <img src="{{ asset('frontend/images/travelphotogallerImg5.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="">
-                    <img src="{{getImageUrl($galleries[7]->image)??asset('frontend/images/travelphotogallerImg2.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
-                </div>
-            </div>
-            <div class="col-12 col-md mb-3 mb-md-0">
-                <div class="mb-3 mb-md-4">
-                    <img src="{{getImageUrl($galleries[3]->image)??asset('frontend/images/travelphotogallerImg3.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
-                </div>
-                <div class="">
-                    <img src="{{asset(getImageUrl($galleries[5]->image)??'frontend/images/travelphotogallerImg4.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
-                </div>
-            </div>
-            <div class="col-12 col-md">
-                <div class="">
-                    <img src="{{asset('frontend/images/travelphotogallerImg5.png')}}" alt="travelphotogallerImg1" class='img-fluid' loading='lazy' />
-                </div>
+                    </li>
+                @endforeach
+
+
+                </ul>
             </div>
         </div>
     </div>
@@ -658,11 +650,11 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                     <div class="container h-100">
                         <div class="d-flex flex-column justify-content-center h-100 py-5">
                             <div class="text-center text-md-start">
-                                <h2 class="head_title text-white mb-5 mx-md-5 mx-md-0">THE ONES YOU ALMOST MISSED</h2>
-                                <p class="text-white fs-6 mb-4 fw-bold mx-auto mx-md-0 mt-5 pt-4" style="max-width: 900px;">
+                                <h2 class="head_title text-white  text-center">THE ONES YOU ALMOST MISSED</h2>
+                                <p class="text-white fs-6 mb-4 fw-bold text-center">
                                     Tired of same suggestions? Here are some very underrated trips for you.
                                 </p>
-                                <h2 class="fw-bold text-white my-4">{{$package->name}}</h2>
+                                <h2 class="fw-bold text-white my-4 pt-5">{{$package->name}}</h2>
                                 <p class="text_lightwhite mb-0 font_montserrat mx-auto mx-md-0" style="max-width: 1000px;">
                                     {{$package->short_description}}
                                 </p>

@@ -2,7 +2,7 @@
 
 {!! NoCaptcha::renderJs() !!}
 @section('content')
-    <section id="departureApp">
+    <div id="departureApp">
         <section class="video_section">
             <!-- navbar -->
             @include('frontend.layout.header')
@@ -624,20 +624,25 @@
                             </div>
                         </div>
                         <div class="col-md-4 ps-md-4">
-
+                            @php
+                            $price = $package->price;
+                            $discounted = $package->discounted_price;
+                            $d_percent=(int) ($discounted/$price)*100
+                        @endphp
                                 <div class="card boxShadow border-0 p-3 p-md-4 w-100 mb-md-5 mb-4"
                                     style="max-width: 400px;">
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <p class="mb-0 fs_18 fw-bold">All Inclusive Cost</p>
+                                        @if ($d_percent>0)
+
                                         <p
                                             class="mb-0 bg-danger bg-opacity-10 text-danger rounded-3 px-3 py-2 small fw-bold">
-                                            -5%
+                                            -{{$d_percent}}%
                                         </p>
+                                        @endif
+
                                     </div>
-                                    @php
-                                        $price = $package->price;
-                                        $discounted = $package->discounted_price;
-                                    @endphp
+
 
                                     <p class="mb-md-4 mb-3 fw-bold font_montserrat text-nowrap">
                                         US
@@ -799,7 +804,7 @@
                                                     <label class="form-check-label small font_montserrat" for="privacyCheck">
                                                         You agree to our friendly
                                                         <a target="_blank" href="/privacy-policy"
-                                                            class="text-decoration-underline text_darkOrange">
+                                                            class="text-decoration-underline fw-bold" style="color: rgb(255, 190, 49)">
                                                             privacy policy.
                                                         </a>
                                                     </label>
@@ -895,7 +900,7 @@
         <!-- recent tripes -->
         <section class="mb-5 py-md-5">
             <div class="container">
-                <div class="d-flex justify-content-center text-center mb-md-5 mb-4">
+                <div class="d-flex justify-content-center text-center">
                     <div>
                         <div class="section-header mb-md-1 d-flex justify-content-center">
                             <hr class="section-line py-2">
@@ -910,8 +915,8 @@
                 </div>
 
                 <!-- Splide Slider -->
-                <div class="recent_posts_slider position-relative mb-md-5 mb-4">
-                    <div class="splide" id="recentPostsSlider">
+                <div class="recent_posts_slider position-relative ">
+                    <div class="splide" id="recentPostsSliders" style="height: 470px">
                         <div class="splide__track">
                             <ul class="splide__list">
                                 @foreach ($package->featuredPackage()->limit(5)->get() as $package)
@@ -942,13 +947,14 @@
                     </div>
                 </div>
 
-                <div class="text-center">
+                {{-- <div class="text-center">
                     <a href="{{ route('destination', ['url' => 'nepal']) }}"
                         class="btn btn_darkprimary destination-button">VIEW ALL POSTS</a>
-                </div>
+                </div> --}}
             </div>
         </section>
     </section>
+
 
     @include('frontend.inc.contactus')
 @endsection
@@ -1063,39 +1069,18 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            var splide = new Splide("#recentPostsSlider", {
+            var splide = new Splide("#recentPostsSliders", {
                 type: "loop",
                 perPage: 3,
                 perMove: 1,
                 gap: "1rem",
                 pagination: false,
                 arrows: false,
-                autoWidth: false,
                 focus: "center",
                 breakpoints: {
                     1200: {
                         perPage: 3,
-                        gap: "1rem"
                     },
                     992: {
                         perPage: 2,
-                        gap: "1.5rem"
-                    },
-                    768: {
-                        perPage: 1
-                    },
-                },
-            }).mount();
-
-            // Custom button navigation
-            document.getElementById("custom-prev").addEventListener("click", function() {
-                splide.go("-1");
-            });
-
-            document.getElementById("custom-next").addEventListener("click", function() {
-                splide.go("+1");
-            });
-        });
-
-    </script>
-@endpush
+m"
