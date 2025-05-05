@@ -115,9 +115,17 @@
                             At Nepal Vision, we craft life-changing journeys with heart.From the Himalayas to hidden valleys, every trek is personal,guided by passion, trust, and years of experience.
                         </p>
                         <div class="d-flex flex-wrap justify-content-between py-md-3 py-2 gap-3">
+                         <div>
                             <img src="{{asset('frontend/images/tripadvisorimg.png')}}" alt="Tripadvisor" class="img-fluid" width="95">
+                         </div>
+<div>
+    <img src="{{asset('frontend/images/afar.jpg')}}" alt="Tripadvisor" class="img-fluid" width="70">
+
+</div>
+                           <div>
                             <img src="{{asset('frontend/images/thenewyorktimesimg.png')}}" alt="The New York Times" class="img-fluid"
-                                width="160">
+                            width="160">
+                           </div>
                         </div>
                         <p class="py-md-3 py-2">
                             <a href="/about-us"
