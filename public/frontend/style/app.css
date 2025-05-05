@@ -475,11 +475,15 @@ input[type="date"]:focus {
   background-color: #FFFFFF;
   opacity: 40%;
 }
-
+.contact_cards{
+    height: 280px;
+}
 @media (max-width: 768px) {
-
+    .contact_cards{
+        height: 210px;
+    }
   .contact_info_section{
-    height: 850px;
+    height: 500px!important;
   }
 .home_banner_subtitle {
   font-size: 12px;

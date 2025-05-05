@@ -1,6 +1,6 @@
 
 <section class="position-relative contact_info_section" style="background-image: url('{{('/frontend/images/contactus_banner.png'
-)}}');background-size: cover;background-position: center;min-height: 100vh;">
+)}}');background-size: cover;background-position: center;height: 100vh;">
 
     <!-- Dark overlay -->
     {{-- <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
@@ -16,7 +16,7 @@
             </div>
 
             <!-- Contact Cards -->
-            <div class="p-md-3 p-2 mb-md-5 mb-4" style="background-color: #4690BF33;">
+            <div class="p-md-3 p-2 mb-md-5 mb-4 contact_cards" style="background-color: #4690BF33;">
                 <div class="splide g-4 contact_info_container" id="contact_info_container">
                     <div class="splide__track">
                         <ul class="splide__list">
@@ -72,15 +72,16 @@
                             <img src="{{asset('frontend/images/australia_location.png')}}" alt="location" class="mb-md-3 mb-1"
                                 width="50" height="50">
                             <div>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">{{setting()->address3}}</p>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Whatsapp: {{setting()->phone3}}
+
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Sydney, Australia</p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Phone: +61 426 730 548
                                     548
                                 </p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Ashim Wagle
                                     (Marketing
                                     Director)</p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">
-                                    {{setting()->phone3}}</p>
+                                    ashim@nepalvisiontreks.com</p>
                             </div>
                         </div>
                     </div>
@@ -93,15 +94,14 @@
                             <img src="{{asset('frontend/images/location_canada.webp')}}" alt="location" class="mb-md-3 mb-1"
                                 width="50" height="50">
                             <div>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">{{setting()->address4}}</p>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Whatsapp: {{setting()->phone4}}
+                                                               <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Regina, Canada</p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Phone: +1 (306) 250-1246
 
                                 </p>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Ashim Wagle
-                                    (Marketing
-                                    Director)</p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Shraddha Gaire</p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">
-                                    {{setting()->phone4}}</p>
+                                    shraddha@nepalvisiontreks.com
+</p>
                             </div>
                         </div>
                     </div>
@@ -115,15 +115,17 @@
                             <img src="{{asset('frontend/images/China.svg')}}" alt="location" class="mb-md-3 mb-1"
                                 width="50" height="50">
                             <div>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">{{setting()->address5}}</p>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Whatsapp: {{setting()->phone5}}
+                                ‬
+
+
+
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Beijing, China</p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Phone: +86 198 5746 8386
 
                                 </p>
-                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Ashim Wagle
-                                    (Marketing
-                                    Director)</p>
+                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Bhaba Shrestha</p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">
-                                    {{setting()->phone5}}</p>
+                                    cara@nepalvisiontreks.com</p>
                             </div>
                         </div>
                     </div>
@@ -134,7 +136,7 @@
                 </div>
 
             </div>
-            <div class="contact_imgs">
+            <div class="contact_imgs" style="height: 150px">
                 <div class="splide" id="image-slider">
                     <div class="splide__track">
                         <ul class="splide__list">

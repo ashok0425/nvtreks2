@@ -1083,4 +1083,9 @@
                     },
                     992: {
                         perPage: 2,
-m"
+                    }
+                }
+        })
+    });
+</script>
+@endpush
