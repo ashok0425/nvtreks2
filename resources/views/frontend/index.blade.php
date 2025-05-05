@@ -12,9 +12,9 @@
     <source src='{{asset('frontend/images/herobgvideo.mp4')}}' type="video/mp4" />
 </video>
 </div>
-<div class="position-absolute top-0 start-0 w-100 h-100">
+<div class="position-absolute top-0 start-0 w-100 ">
     <div class="banner-container">
-        <div class="position-absolute top-0 start-0 w-100 h-100 z-1"
+        <div class="position-absolute top-0 start-0 w-100 z-1"
             style='background-color: #000000;opacity: 20%'></div>
         <div class="banner-content">
             <p class="home_banner_subtitle mb-0">CELEBRATING 30 PLUS GLORIOUS YEARS OF SERVICE</p>
@@ -23,17 +23,28 @@
             <div class="home_banner_input">
                 <form action="{{route('search')}}" class="w-100">
 
-                <div class="input-group search_input">
-                    <span class="input-group-text bg-white ps-3 pe-0 rounded-start-2 py-md-3"
-                        id="basic-addon1">
-                        <i class="bi bi-search fs-6 text_darkprimary"></i>
 
-                    </span>
+                    <div class="d-md-block d-none">
+                        <div class="input-group search_input">
+                            <span class="input-group-text bg-white ps-3 pe-0 rounded-start-2 py-md-3"
+                                id="basic-addon1">
+                                <i class="bi bi-search fs-6 text_darkprimary"></i>
+
+                            </span>
                         <input type="text" class="form-control border border-start-0 ps-2 py-md-3 rounded-end-2"
+                    placeholder="Find your trip.." aria-label="search"
+                    aria-describedby="basic-addon1" required name="keyword"/>
+                        </div>
+                    </div>
+                        <div class="d-md-none d-block">
+                            <div class="input-group search_input">
+                            <input type="text" class="form-control border border-start-0 ps-2 py-md-3 rounded-start-5"
                         placeholder="Find your trip.." aria-label="search"
                         aria-describedby="basic-addon1" required name="keyword"/>
+                        <button class="rounded btn_darkprimary btn btn-primary rounded-end-5">Search</button>
+                            </div>
+                        </div>
 
-                </div>
                 </form>
             </div>
         </div>
