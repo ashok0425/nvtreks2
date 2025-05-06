@@ -1027,7 +1027,7 @@
                     return dep.total_seats > 0 ? Math.round((dep.booked_seats / dep.total_seats) * 100) : 0;
                 },
                 fetchDepartures() {
-                    axios.get(`{{ route('departure') }}?id=${this.id}&month=${this.month}&year=${this.year}`)
+                    axios.get(`{{ env('APP_URL') }}/departure-date?id=${this.id}&month=${this.month}&year=${this.year}`)
                         .then(res => {
                             this.departures = res.data.departures;
                         })
