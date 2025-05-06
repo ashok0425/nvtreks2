@@ -1,7 +1,8 @@
 @extends('frontend.layout.master')
 
-{!! NoCaptcha::renderJs() !!}
 @section('content')
+{!! NoCaptcha::renderJs() !!}
+
     <div id="departureApp">
         <section class="video_section">
             <!-- navbar -->
@@ -258,7 +259,7 @@
                             </div>
 
 
-                            <div class="card boxShadow bg_lightwhite p-3 p-md-4 mb-md-5 mb-4 trip_details">
+                            <div class="card boxShadow bg_lightwhite overview p-3 p-md-4 mb-md-5 mb-4 trip_details">
                                 {!! $package->overview !!}
                             </div>
 
@@ -271,7 +272,7 @@
                             @endif
 
 
-                            <div class="card boxShadow p-3 p-md-4 pb-md-5 mb-md-5 mb-4 trip_details bg_lightwhite"
+                            <div class="card boxShadow outline p-3 p-md-4 pb-md-5 mb-md-5 mb-4 trip_details bg_lightwhite"
                                 id="itinerary">
                                 <h5 class="mb-md-4 mb-3">Outline Itinerary</h5>
                                 <div>
@@ -308,7 +309,7 @@
                             @endif
 
 
-                            <div class="card boxShadow bg_lightwhite p-3 p-md-4 mb-md-5 mb-4 trip_details">
+                            <div class="card boxShadow detail_itinerary bg_lightwhite p-3 p-md-4 mb-md-5 mb-4 trip_details">
                                 <h5 class="mb-md-5 mb-4">Detailed Itinerary</h5>
                                 <p class="mb-3">{!! $package->detailed_itinerary !!}</p>
                                 @foreach ($package->itenaries as $itenary)
@@ -897,8 +898,10 @@
         </section>
 
 
+        @if (count($package->featuredPackage))
+
         <!-- recent tripes -->
-        <section class="mb-5 py-md-5">
+        <section class="mt-5 ">
             <div class="container">
                 <div class="d-flex justify-content-center text-center">
                     <div>
@@ -915,36 +918,20 @@
                 </div>
 
                 <!-- Splide Slider -->
-                <div class="recent_posts_slider position-relative ">
-                    <div class="splide" id="recentPostsSliders" style="height: 470px">
+                <div class="recent_posts_slider position-relative mt-4">
+                    <div class="splide" id="recentPostsSlider" style="height: 470px;">
                         <div class="splide__track">
                             <ul class="splide__list">
                                 @foreach ($package->featuredPackage()->limit(5)->get() as $package)
-                                    <li class="splide__slide my-4">
-                                        <div class="mx-md-3">
+                                    <li class="splide__slide">
                                             @include('frontend.inc.package-card', ['package' => $package])
-                                        </div>
                                     </li>
                                 @endforeach
                             </ul>
                         </div>
                     </div>
 
-                    <!-- Custom Navigation Buttons -->
-                    <div class="splide_btn_section text-center mt-3">
-                        <div class='splide_btn_prev splide_btn'>
-                            <button id="custom-prev" class="splide_btn">
-                                <img src="{{ asset('frontend/images/pervArrow.png') }}" alt="prev" width="24"
-                                    height="20" style="object-fit:contain;">
-                            </button>
-                        </div>
-                        <div class='splide_btn_next splide_btn'>
-                            <button id="custom-next" class="splide_btn">
-                                <img src="{{ asset('frontend/images/nextArrow.png') }}" alt="next" width="24"
-                                    height="20" style="object-fit:contain;">
-                            </button>
-                        </div>
-                    </div>
+
                 </div>
 
                 {{-- <div class="text-center">
@@ -953,6 +940,8 @@
                 </div> --}}
             </div>
         </section>
+        @endif
+
     </section>
 
 
@@ -961,6 +950,9 @@
 @push('style')
     <link rel="stylesheet" href="{{ asset('frontend/style/listDetail.css') }}">
     <style>
+        .overview img,.outline img,.detail_itinerary img{
+            max-width: 100%!important;
+        }
         .table th,
         .table td {
             background: transparent !important;
@@ -973,6 +965,8 @@
 @endpush
 
 @push('script')
+
+
     <!-- Vue 3 CDN -->
     <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.prod.js"></script>
     <!-- Axios CDN -->
@@ -1067,25 +1061,4 @@
         }).mount('#departureApp');
     </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var splide = new Splide("#recentPostsSliders", {
-                type: "loop",
-                perPage: 3,
-                perMove: 1,
-                gap: "1rem",
-                pagination: false,
-                arrows: false,
-                focus: "center",
-                breakpoints: {
-                    1200: {
-                        perPage: 3,
-                    },
-                    992: {
-                        perPage: 2,
-                    }
-                }
-        })
-    });
-</script>
 @endpush
