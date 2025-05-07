@@ -25,7 +25,6 @@ class EnquiryReceived extends Notification
 
     public function toMail($notifiable)
     {
-        dd($this->data);
         return (new MailMessage)
             ->from('info@nepalvisiontreks.com', 'Nepal Vision')
             ->subject($this->data['subject'])
