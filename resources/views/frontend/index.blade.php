@@ -240,7 +240,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
 
                     <div class="card-details">
                         <p class="mb-2 fw-bolder text_darkprimary">{{$package->destination->name}}</p>
-                        <p class="mb-2 fs-5 fw-bold">{{$package->slogan??'Experience the natural beauty of glacier'}}</p>
+                        <p class="mb-2 fs-5 fw-bold">{{$package->name??'Experience the natural beauty of glacier'}}</p>
                         <p class="text_lightprimary fw-bold font_montserrat mb-0">
                             Price: <span class="fs-6 text-decoration-line-through text-danger"><i>{{$package->price}}</i></span>
                             <span class="text_lightprimary fs-4">{{$package->discounted_price}}</span>

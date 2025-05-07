@@ -4,7 +4,7 @@ use App\Models\Website;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
-function getImageurl($path){
+function getImageUrl($path){
 
 if (!Storage::disk('s3')->exists('public/'.$path)||!$path) {
 return null;
