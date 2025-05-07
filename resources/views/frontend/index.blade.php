@@ -8,8 +8,8 @@
 @endphp
 
 <div class="hero_video_wrapper">
-<video loop muted autoPlay playsInline poster='{{asset('frontend/images/herobgvideo.mp4')}}' class="video-banner">
-    <source src='{{asset('frontend/images/herobgvideo.mp4')}}' type="video/mp4" />
+<video loop muted autoPlay playsInline poster='https://d2i9o55ouvfvau.cloudfront.net/uploads/nvtreks-video.mp4' class="video-banner">
+    <source src='https://d2i9o55ouvfvau.cloudfront.net/uploads/nvtreks-video.mp4' type="video/mp4" />
 </video>
 </div>
 <div class="position-absolute top-0 start-0 w-100 ">
@@ -75,7 +75,7 @@
         <div class="col-12 col-md">
             <a href="{{route('destination',['url'=>'nepal'])}}" >
             <div class="card destination-card  p-0 border-0 rounded-3">
-                <img src="{{getImageUrl($destinations[0]['image'])}}" alt="NEPAL" class="card-img-top rounded-3"
+                <img loading="lazy" src="{{getImageUrl($destinations[0]['image'])}}" alt="NEPAL" class="card-img-top rounded-3"
                     style="height: 455px;object-fit: cover;">
                 <div class="card-img-overlay destination-overlay">
                     <h5 class="destination-title bg_darkOrange">{{$destinations[0]['name']}}</h5>
@@ -88,7 +88,7 @@
 
         <div class="col-12 col-md">
             <div class="card destination-card  p-0 border-0 rounded-3">
-                <img src="{{getImageUrl($destinations[3]['image'])}}" alt="BHUTAN" class="card-img-top rounded-3"
+                <img loading="lazy" src="{{getImageUrl($destinations[3]['image'])}}" alt="BHUTAN" class="card-img-top rounded-3"
                     style="height: 455px;object-fit: cover;">
                 <div class="card-img-overlay destination-overlay">
                     <h5 class="destination-title bg_darkOrange">{{$destinations[3]['name']}}</h5>
@@ -101,7 +101,7 @@
         <!-- Third Column with Stacked Cards -->
         <div class="col-12 col-md-5 d-flex flex-column">
             <div class="card destination-card  p-0 border-0 rounded-3 mb-3">
-                <img src="{{getImageUrl($destinations[2]['image'])}}" alt="TIBET" class="card-img-top rounded-3"
+                <img loading="lazy" src="{{getImageUrl($destinations[2]['image'])}}" alt="TIBET" class="card-img-top rounded-3"
                     style="height: 220px;object-fit: cover;">
                 <div class="card-img-overlay destination-overlay">
                     <h5 class="destination-title bg_darkOrange">{{$destinations[2]['name']}}</h5>
@@ -110,7 +110,7 @@
             </div>
 
             <div class="card destination-card  p-0 border-0 rounded-3">
-                <img src="{{getImageUrl($destinations[1]['image'])}}" alt="INDIA" class="card-img-top rounded-3"
+                <img loading="lazy" src="{{getImageUrl($destinations[1]['image'])}}" alt="INDIA" class="card-img-top rounded-3"
                     style="height: 220px;object-fit: cover;">
                 <div class="card-img-overlay destination-overlay">
                     <h5 class="destination-title bg_darkOrange">{{$destinations[1]['name']}}</h5>
@@ -192,7 +192,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
             <div class="d-flex flex-wrap justify-content-md-between justify-content-center gap-2">
                 @foreach ($destination_categories as $item)
                 <div class="text-white fs-5 fw-bold text-center">
-                    <div><img src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" width="140"></div>
+                    <div><img loading="lazy" src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" width="140"></div>
                     {{$item->name}}
                 </div>
                 @endforeach
@@ -225,7 +225,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="card border-0 bg-white shadow rounded-3 hover_effect position-relative">
                     <a href="{{route('package.detail',['url'=>$package->url])}}" class="text-decoration-none text-dark">
-                    <img src="{{getImageUrl($package->thumbnail)}}" class="img-fluid w-100 rounded-top"
+                    <img loading="lazy" src="{{getImageUrl($package->thumbnail)}}" class="img-fluid w-100 rounded-top"
                         alt="{{$package->price}}" style="height: 400px;object-fit:cover">
                         <div class="discount-badge">
                             @php
@@ -258,12 +258,11 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
     </div>
 </section>
 
-<section class="video_section_2 mb-md-5 mb-4">
-<div class="video_banner_container ">
-
-
-<video loop muted autoPlay playsInline poster='{{asset('frontend/images/herobgvideo.mp4')}}' class="video-banner">
-    <source src='{{asset('frontend/images/herobgvideo.mp4')}}' type="video/mp4" />
+<section class="w-100 mb-md-5 mb-4" style="overflow:hidden">
+<div class=" ">
+<video     preload="none"
+loop muted autoPlay playsInline poster='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' class="video-banner" style="width: 100vw;padding:1rem 0;">
+    <source src='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' type="video/mp4" />
 </video>
 </div>
 </div>
@@ -352,7 +351,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                         </td>
                         <td>
                             <p class="d-flex align-items-center gap-1 mb-0 fw-bold trip_table_text">
-                                <img src="{{asset('frontend/images/gurantedIcon.png')}}" alt="guranted" width="24"
+                                <img loading="lazy" src="{{asset('frontend/images/gurantedIcon.png')}}" alt="guranted" width="24"
                                     height="24">Guaranteed
                             </p>
                             @php
@@ -409,7 +408,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
         <div class="container py-5">
             <div class="row my-md-5 align-items-center">
                 <div class="col-lg-6 col-12 text-center mb-4 mb-lg-0">
-                    <img src="{{asset('frontend/images/epicadventuresImg.png')}}" alt="Epic Adventures" class="img-fluid" loading='lazy'/>
+                    <img loading="lazy" src="{{asset('frontend/images/epicadventuresImg.png')}}" alt="Epic Adventures" class="img-fluid" />
                 </div>
                 <div class="col-lg-6 col-12 px-3 px-lg-5">
                     <p class="text_darkprimary mb-3 fw-bold text-center text-lg-start">INTRODUCTION ABOUT US</p>
@@ -420,7 +419,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                         <span class="fs-4 fw-bold text_darkOrange">&#8226;</span>
                         <span class="fs-4 fw-bold text_darkOrange">&#8226;</span>
                         <span class="fs-4 fw-bold text_darkOrange">&#8226;</span>
-                        <span class="mx-2"><img src="{{asset('frontend/images/epicbagIcon.png')}}" alt="price guaranted" width="15"
+                        <span class="mx-2"><img loading="lazy" src="{{asset('frontend/images/epicbagIcon.png')}}" alt="price guaranted" width="15"
                                 height="24"></span>
                         <span class="fs-4 fw-bold text_darkOrange">&#8226;</span>
                         <span class="fs-4 fw-bold text_darkOrange">&#8226;</span>
@@ -432,7 +431,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                     </p>
                     <div class="d-flex align-items-center gap-3 mb-4 flex-column flex-sm-row text-center text-sm-start">
                         <div class="bg_darkprimary p-3 d-flex justify-content-center align-items-center">
-                            <img src="{{asset('frontend/images/priceguarantedIcon.png')}}" alt="price guaranted" width="40" height="40">
+                            <img loading="lazy" src="{{asset('frontend/images/priceguarantedIcon.png')}}" alt="price guaranted" width="40" height="40">
                         </div>
                         <div>
                             <p class="fs-6 fw-bold font_montserrat mb-1">BEST PRICE GUARANTEED</p>
@@ -441,7 +440,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                     </div>
                     <div class="d-flex align-items-center gap-3 mb-4 flex-column flex-sm-row text-center text-sm-start">
                         <div class="bg_darkprimary p-3 d-flex justify-content-center align-items-center">
-                            <img src="{{asset('frontend/images/mapIcon.png')}}" alt="map" width="40" height="40">
+                            <img loading="lazy" src="{{asset('frontend/images/mapIcon.png')}}" alt="map" width="40" height="40">
                         </div>
                         <div>
                             <p class="fs-6 fw-bold font_montserrat mb-1">AMAZING DESTINATION</p>
@@ -450,7 +449,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                     </div>
                     <div class="d-flex align-items-center gap-3 mb-4 flex-column flex-sm-row text-center text-sm-start">
                         <div class="bg_darkprimary p-3 d-flex justify-content-center align-items-center">
-                            <img src="{{asset('frontend/images/personIcon.png')}}" alt="person" width="40" height="40">
+                            <img loading="lazy" src="{{asset('frontend/images/personIcon.png')}}" alt="person" width="40" height="40">
                         </div>
                         <div>
                             <p class="fs-6 fw-bold font_montserrat mb-1">PERSONAL SERVICES</p>
@@ -464,40 +463,40 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                     <div class="splide__track">
                         <ul class="splide__list">
                             <li class="splide__slide px-md-4" style="max-height: 85px">
-                                <img src="{{asset('frontend/images/pfnImg.png')}}" alt="pfn logo" class="w-100 h-100"
-                                    style="object-fit: contain;" loading='lazy'>
+                                <img loading="lazy" src="{{asset('frontend/images/pfnImg.png')}}" alt="pfn logo" class="w-100 h-100"
+                                    style="object-fit: contain;" >
                             </li>
                             <li class="splide__slide px-md-4" style="max-height: 85px">
-                                <img src="{{asset('frontend/images/astaImg.png')}}" alt="asta logo" class="w-100 h-100"
-                                    style="object-fit: contain;" loading='lazy'>
+                                <img loading="lazy" src="{{asset('frontend/images/astaImg.png')}}" alt="asta logo" class="w-100 h-100"
+                                    style="object-fit: contain;" >
                             </li>
                             <li class="splide__slide px-md-4" style="max-height: 85px">
-                                <img src="{{asset('frontend/images/sustainableImg.png')}}" alt="sustainable logo" class="w-100 h-100"
-                                    style="object-fit: contain;" loading='lazy'>
+                                <img loading="lazy" src="{{asset('frontend/images/sustainableImg.png')}}" alt="sustainable logo" class="w-100 h-100"
+                                    style="object-fit: contain;" >
                             </li>
                             <li class="splide__slide px-md-4" style="max-height: 85px">
-                                <img src="{{asset('frontend/images/ntbImg.png')}}" alt="ntb Img" class="w-100 h-100"
-                                    style="object-fit: contain;" loading='lazy'>
+                                <img loading="lazy" src="{{asset('frontend/images/ntbImg.png')}}" alt="ntb Img" class="w-100 h-100"
+                                    style="object-fit: contain;" >
                             </li>
                             <li class="splide__slide px-md-4" style="max-height: 85px">
-                                <img src="{{asset('frontend/images/earth.png')}}" alt="earth" class="w-100 h-100"
-                                    style="object-fit: contain;" loading='lazy'>
+                                <img loading="lazy" src="{{asset('frontend/images/earth.png')}}" alt="earth" class="w-100 h-100"
+                                    style="object-fit: contain;" >
                             </li>
                             <li class="splide__slide px-md-4" style="max-height: 85px">
-                                <img src="{{asset('frontend/images/taan_img.png')}}" alt="taan logo" class="w-100 h-100"
-                                    style="object-fit: contain;" loading='lazy'>
+                                <img loading="lazy" src="{{asset('frontend/images/taan_img.png')}}" alt="taan logo" class="w-100 h-100"
+                                    style="object-fit: contain;" >
                             </li>
                             <li class="splide__slide px-md-4" style="max-height: 85px">
-                                <img src="{{asset('frontend/images/adventurestravel_img.png')}}" alt="adventures travel logo" class="w-100 h-100"
-                                    style="object-fit: contain;" loading='lazy'>
+                                <img loading="lazy" src="{{asset('frontend/images/adventurestravel_img.png')}}" alt="adventures travel logo" class="w-100 h-100"
+                                    style="object-fit: contain;" >
                             </li>
                             <li class="splide__slide px-md-4" style="max-height: 85px">
-                                <img src="{{asset('frontend/images/yelp_img.png')}}" alt="yelp logo" class="w-100 h-100"
-                                    style="object-fit: contain;" loading='lazy'>
+                                <img loading="lazy" src="{{asset('frontend/images/yelp_img.png')}}" alt="yelp logo" class="w-100 h-100"
+                                    style="object-fit: contain;" >
                             </li>
                             <li class="splide__slide px-md-4" style="max-height: 85px">
-                                <img src="{{asset('frontend/images/epic_slider_img.png')}}" alt="ntb Img" class="w-100 h-100"
-                                    style="object-fit: contain;" loading='lazy'>
+                                <img loading="lazy" src="{{asset('frontend/images/epic_slider_img.png')}}" alt="ntb Img" class="w-100 h-100"
+                                    style="object-fit: contain;" >
                             </li>
                         </ul>
                     </div>
@@ -575,58 +574,28 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
         </div>
     </div>
     <div class="mx-md-5 mx-3">
-        <div class="splide" id="traveler-slider">
-            <div class="splide__track">
-                <ul class="splide__list">
-                    @foreach ($gallery_packages as $package)
-                    @php
-                        $galleries = $package->package_images;
-                    @endphp
-                    <li class="splide__slide">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-md mb-3 mb-md-0">
-                                <div class="">
-                                    <img src="{{ isset($galleries[0]) ? getImageUrl($galleries[0]->image) : asset('frontend/images/travelphotogallerImg8.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
-                                </div>
-                            </div>
-                            <div class="col-12 col-md mb-3 mb-md-0">
-                                <div class="mb-3 mb-md-4">
-                                    <img src="{{ isset($galleries[2]) ? getImageUrl($galleries[2]->image) : asset('frontend/images/travelphotogallerImg7.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
-                                </div>
-                                <div class="">
-                                    <img src="{{ isset($galleries[5]) ? getImageUrl($galleries[5]->image) : asset('frontend/images/travelphotogallerImg6.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
-                                </div>
-                            </div>
-                            <div class="col-12 col-md mb-3 mb-md-0">
-                                <div class="mb-3 mb-md-4">
-                                    <img src="{{ isset($galleries[1]) ? getImageUrl($galleries[1]->image) : asset('frontend/images/travelphotogallerImg1.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
-                                </div>
-                                <div class="">
-                                    <img src="{{ isset($galleries[7]) ? getImageUrl($galleries[7]->image) : asset('frontend/images/travelphotogallerImg2.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
-                                </div>
-                            </div>
-                            <div class="col-12 col-md mb-3 mb-md-0">
-                                <div class="mb-3 mb-md-4">
-                                    <img src="{{ isset($galleries[3]) ? getImageUrl($galleries[3]->image) : asset('frontend/images/travelphotogallerImg3.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
-                                </div>
-                                <div class="">
-                                    <img src="{{ isset($galleries[5]) ? getImageUrl($galleries[5]->image) : asset('frontend/images/travelphotogallerImg4.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
-                                </div>
-                            </div>
-                            <div class="col-12 col-md">
-                                <div class="">
-                                    <img src="{{ asset('frontend/images/travelphotogallerImg5.png') }}" alt="Gallery Image" class="img-fluid" loading="lazy" />
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                @endforeach
-
-
-                </ul>
+        <div class="row align-items-center" id="gallery-frame">
+            <div class="col-12 col-md mb-3 mb-md-0">
+                <div><img id="img-0" class="img-fluid" /></div>
+            </div>
+            <div class="col-12 col-md mb-3 mb-md-0">
+                <div class="mb-3 mb-md-4"><img id="img-1" class="img-fluid" /></div>
+                <div><img id="img-2" class="img-fluid" /></div>
+            </div>
+            <div class="col-12 col-md mb-3 mb-md-0">
+                <div class="mb-3 mb-md-4"><img id="img-3" class="img-fluid" /></div>
+                <div><img id="img-4" class="img-fluid" /></div>
+            </div>
+            <div class="col-12 col-md mb-3 mb-md-0">
+                <div class="mb-3 mb-md-4"><img id="img-5" class="img-fluid" /></div>
+                <div><img id="img-6" class="img-fluid" /></div>
+            </div>
+            <div class="col-12 col-md">
+                <div><img id="img-7" class="img-fluid" /></div>
             </div>
         </div>
     </div>
+
 </section>
 
 
@@ -697,7 +666,7 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
                             <a href="{{ route('blog.detail', ['url' => $blog->slug]) }}" class="text-decoration-none">
                             <div class="card rounded-0 border-0 hover_effect recent_post_card mx-md-2">
                                 <div class="recent_post_card_img">
-                                    <img src="{{getImageUrl($blog->thumbnail)}}" alt="{{$blog->title}}" class="img-fluid">
+                                    <img loading="lazy" src="{{getImageUrl($blog->thumbnail)}}" alt="{{$blog->title}}" class="img-fluid">
                                 </div>
                                 <div class="card-body shadow-sm px-4 py-3">
                                     <p class='fs-5 fw-bold'>{!! strip_tags(Str::limit($blog->title,400))!!}</p>
@@ -717,13 +686,13 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
             <div class="splide_btn_section text-center mt-3">
                 <div class='splide_btn_prev splide_btn'>
                     <button id="custom-prev" class="splide_btn">
-                        <img src="{{asset('frontend/images/pervArrow.png')}}" alt="prev" width="24" height="20"
+                        <img loading="lazy" src="{{asset('frontend/images/pervArrow.png')}}" alt="prev" width="24" height="20"
                             style="object-fit:contain;">
                     </button>
                 </div>
                 <div class='splide_btn_next splide_btn'>
                     <button id="custom-next" class="splide_btn">
-                        <img src="{{asset('frontend/images/nextArrow.png')}}" alt="next" width="24" height="20"
+                        <img loading="lazy" src="{{asset('frontend/images/nextArrow.png')}}" alt="next" width="24" height="20"
                             style="object-fit:contain;">
                     </button>
                 </div>
@@ -773,6 +742,56 @@ style="background-image: url({{asset('frontend/images/travelcategoriesImg.jpg')}
 
 @endpush
 @push('script')
+<script>
+    const allImages = @json($gallery_images);
+    const baseUrl = "https://d2i9o55ouvfvau.cloudfront.net/public"; // Adjust as needed
+
+    const fallbackImages = [
+        "{{ asset('frontend/images/travelphotogallerImg8.png') }}",
+        "{{ asset('frontend/images/travelphotogallerImg7.png') }}",
+        "{{ asset('frontend/images/travelphotogallerImg6.png') }}",
+        "{{ asset('frontend/images/travelphotogallerImg1.png') }}",
+        "{{ asset('frontend/images/travelphotogallerImg2.png') }}",
+        "{{ asset('frontend/images/travelphotogallerImg3.png') }}",
+        "{{ asset('frontend/images/travelphotogallerImg4.png') }}",
+        "{{ asset('frontend/images/travelphotogallerImg5.png') }}"
+    ];
+
+    const imageIds = ['img-0','img-1','img-2','img-3','img-4','img-5','img-6','img-7'];
+
+    let currentIndex = 0;
+
+    function getImageUrl(path) {
+        return baseUrl + '/' + path;
+    }
+
+    function updateImages() {
+        for (let i = 0; i < imageIds.length; i++) {
+            const imgEl = document.getElementById(imageIds[i]);
+            const image = allImages[currentIndex + i];
+            if (image) {
+                imgEl.src = getImageUrl(image);
+                imgEl.style.display = 'block';
+            } else {
+                imgEl.src = fallbackImages[i];
+                imgEl.style.display = 'none'; // Optional: hide extra slots
+            }
+        }
+
+        currentIndex += 8;
+        if (currentIndex >= allImages.length) {
+            currentIndex = 0;
+        }
+    }
+
+    // Initial load
+    updateImages();
+
+    // Rotate every 5 seconds
+    setInterval(updateImages, 5000);
+
+</script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         new Splide('#splideMissed', {

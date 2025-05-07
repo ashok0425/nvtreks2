@@ -110,6 +110,7 @@ class DeparturesController extends Controller
             $departure->package_id=$request->package_id;
             $departure->end_date = $request->end_date ?? null;
             $departure->total_seats = $request->total_seats ?? $departure->total_seats;
+            $departure->booked_seats = $request->booked_seats ?? $departure->booked_seats;
             $departure->show_on_home_page = $request->show_on_home_page ?? $departure->show_on_home_page;
             $departure->status=$request->status??1;
             $departure->save();

@@ -51,7 +51,7 @@
 
                                 @if (!empty($package->departure_dates))
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#departureDates">Departure Dates</a>
+                                        <a class="nav-link" href="#departDate">Departure Dates</a>
                                     </li>
                                 @endif
 
@@ -95,21 +95,21 @@
                         <div class="mb-md-5">
                             <div class="row gap-3 gap-md-0">
                                 <div class="col-md-6 d-flex d-none d-md-block">
-                                    <img loading='lazy'
+                                     <img loading="lazy" loading='lazy'
                                         src="{{ getImageUrl($package->package_images()->first()?->image) ?? $finalImage }}"
                                         alt="{{ $package->name }}" class="img-fluid w-100 h-100 object-fit-cover">
                                 </div>
                                 <div class="col-md-3 d-flex flex-column d-none d-md-block">
-                                    <img loading='lazy'
+                                     <img loading="lazy" loading='lazy'
                                         src="{{ getImageUrl($package->package_images()->skip(1)->first()?->image) ?? $finalImage }}"
                                         alt="{{ $package->name }}" class="img-fluid w-100 h-50 object-fit-cover mb-4">
-                                    <img loading='lazy'
+                                     <img loading="lazy" loading='lazy'
                                         src="{{ getImageUrl($package->package_images()->skip(2)->first()?->image) ?? $finalImage }}"
                                         alt="{{ $package->name }}" class="img-fluid w-100 h-50 object-fit-cover">
                                 </div>
                                 <div class="col-md-3 d-flex">
                                     <div class="position-relative">
-                                    <img loading='lazy'
+                                     <img loading="lazy" loading='lazy'
                                         src="{{ getImageUrl($package->package_images()->skip(3)->first()?->image) ?? $finalImage }}"
                                         alt="{{ $package->name }}" class="img-fluid w-100 h-100 object-fit-cover">
 
@@ -134,7 +134,7 @@
                                     @if ($package->duration)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                <img src="{{ asset('frontend/images/tripIcon.png') }}" alt="Trip Duration"
+                                                 <img loading="lazy" src="{{ asset('frontend/images/tripIcon.png') }}" alt="Trip Duration"
                                                     class="img-fluid" width="51" height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
                                                     <h4 class="mb-0 border-bottom border-light-subtle">Trip Duration</h4>
@@ -147,7 +147,7 @@
                                     @if ($package->activity)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                <img src="{{ asset('frontend/images/naturetripIcon.png') }}"
+                                                 <img loading="lazy" src="{{ asset('frontend/images/naturetripIcon.png') }}"
                                                     alt="Nature Of Trip" class="img-fluid" width="51" height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
                                                     <h4 class="mb-0 border-bottom border-light-subtle">Nature Of Trip</h4>
@@ -160,7 +160,7 @@
                                     @if ($package->altitude)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                <img src="{{ asset('frontend/images/maxaltitudeIcon.png') }}"
+                                                 <img loading="lazy" src="{{ asset('frontend/images/maxaltitudeIcon.png') }}"
                                                     alt="Maximum Altitude" class="img-fluid" width="51"
                                                     height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
@@ -174,7 +174,7 @@
                                     @if ($package->difficulty)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                <img src="{{ asset('frontend/images/gradeIcon.png') }}"
+                                                 <img loading="lazy" src="{{ asset('frontend/images/gradeIcon.png') }}"
                                                     alt="Difficulty Grade" class="img-fluid" width="51"
                                                     height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
@@ -189,7 +189,7 @@
                                     @if ($package->start_end_point)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                <img src="{{ asset('frontend/images/poinsIcon.png') }}"
+                                                 <img loading="lazy" src="{{ asset('frontend/images/poinsIcon.png') }}"
                                                     alt="Start & End Point" class="img-fluid" width="51"
                                                     height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
@@ -204,7 +204,7 @@
                                     @if ($package->best_month)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                <img src="{{ asset('frontend/images/seasonsIcon.png') }}"
+                                                 <img loading="lazy" src="{{ asset('frontend/images/seasonsIcon.png') }}"
                                                     alt="Best Seasons" class="img-fluid" width="51"
                                                     height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
@@ -218,7 +218,7 @@
                                     @if ($package->meal)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                <img src="{{ asset('frontend/images/mealsIcon.png') }}" alt="Meals"
+                                                 <img loading="lazy" src="{{ asset('frontend/images/mealsIcon.png') }}" alt="Meals"
                                                     class="img-fluid" width="51" height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
                                                     <h4 class="mb-0 border-bottom border-light-subtle">Meals</h4>
@@ -231,7 +231,7 @@
                                     @if ($package->transport)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                <img src="{{ asset('frontend/images/transportationIcon.png') }}"
+                                                 <img loading="lazy" src="{{ asset('frontend/images/transportationIcon.png') }}"
                                                     alt="Transportation" class="img-fluid" width="51"
                                                     height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
@@ -245,7 +245,7 @@
                                     @if ($package->accommodation)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                <img src="{{ asset('frontend/images/accommodationIcon.png') }}"
+                                                 <img loading="lazy" src="{{ asset('frontend/images/accommodationIcon.png') }}"
                                                     alt="Accommodation" class="img-fluid" width="51"
                                                     height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
@@ -266,7 +266,7 @@
                             @if ($package->routemap)
                                 <div class="card boxShadow p-3 p-md-4 pb-md-5 mb-md-5 mb-4 trip_details">
                                     <h5 class="mb-md-4 mb-3">{{ $package->name }} Route</h5>
-                                    <img src="{{ getImageUrl($package->routemap) }}" alt="Everest camp"
+                                     <img loading="lazy" src="{{ getImageUrl($package->routemap) }}" alt="Everest camp"
                                         class="img-fluid" />
                                 </div>
                             @endif
@@ -274,7 +274,7 @@
 
                             <div class="card boxShadow outline p-3 p-md-4 pb-md-5 mb-md-5 mb-4 trip_details bg_lightwhite"
                                 id="itinerary">
-                                <h5 class="mb-md-4 mb-3">Outline Itinerary</h5>
+                                {{-- <h5 class="mb-md-4 mb-3">Outline Itinerary</h5> --}}
                                 <div>
                                     {{-- @foreach ($package->itenaries as $itenary)
                                         <div
@@ -302,7 +302,7 @@
                                 <div class="pb-md-5 mb-md-5 mb-4">
                                     <div class="card boxShadow p-3 p-md-4 pb-md-5 trip_details">
                                         <h5 class="mb-md-4 mb-3">{{ $package->name }} Altitude Chart</h5>
-                                        <img src="{{ getImageUrl($package->circuit_image) }}"
+                                         <img loading="lazy" src="{{ getImageUrl($package->circuit_image) }}"
                                             alt="Everest camp altitude chart" class="img-fluid" />
                                     </div>
                                 </div>
@@ -319,7 +319,7 @@
                                         @endphp
                                         <div class="d-flex align-items-center gap-3 my-md-4 my-3">
                                             <div class="position-relative">
-                                                <img src="{{ asset("frontend/images/spiral-calendar-pad $iteration.png") }}"
+                                                 <img loading="lazy" src="{{ asset("frontend/images/spiral-calendar-pad $iteration.png") }}"
                                                     alt="{{ $itenary->title }}" loading='lazy' width="40">
 
                                             </div>
@@ -332,9 +332,9 @@
                                             @if ($itenary->car)
                                                 <div class="col-md-4 mb-3">
                                                     <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                        <img src='{{ asset('frontend/images/cardIcon.png') }}'
+                                                         <img loading="lazy" src='{{ asset('frontend/images/cardIcon.png') }}'
                                                             alt='car' class='img-fluid' width='40'
-                                                            height='40' loading="lazy" />
+                                                            height='40' />
                                                         <div class="text-md-start text-center trip_itinerary_content">
                                                             <h4 class='mb-0 border-bottom border-light-subtle'>Car</h4>
                                                             <p class='mb-0 font_montserrat'>{{ $itenary->car }}</p>
@@ -346,9 +346,9 @@
                                             @if ($itenary->overnight)
                                                 <div class="col-md-4 mb-3">
                                                     <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                        <img src='{{ asset('frontend/images/locationIcon.png') }}'
+                                                         <img loading="lazy" src='{{ asset('frontend/images/locationIcon.png') }}'
                                                             alt='overnight' class='img-fluid' width='40'
-                                                            height='40' loading="lazy" />
+                                                            height='40' />
                                                         <div class="text-md-start text-center trip_itinerary_content">
                                                             <h4 class='mb-0 border-bottom border-light-subtle'>Overnight
                                                             </h4>
@@ -360,9 +360,9 @@
                                             @if ($itenary->meal)
                                                 <div class="col-md-4 mb-3">
                                                     <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                        <img src='{{ asset('frontend/images/mealsIcon.png') }}'
+                                                         <img loading="lazy" src='{{ asset('frontend/images/mealsIcon.png') }}'
                                                             alt='meal' width='40' height='40'
-                                                            loading="lazy" />
+                                                            />
                                                         <div class="text-md-start text-center trip_itinerary_content">
                                                             <h4 class='mb-0 border-bottom border-light-subtle'>Meal</h4>
                                                             <p class='mb-0 font_montserrat'>{{ $itenary->meal }}</p>
@@ -374,9 +374,9 @@
                                             @if ($itenary->flight)
                                                 <div class="col-md-4 mb-3">
                                                     <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                        <img src='{{ asset('frontend/images/flight.png') }}'
+                                                         <img loading="lazy" src='{{ asset('frontend/images/flight.png') }}'
                                                             alt='meal' width='40' height='40'
-                                                            loading="lazy" />
+                                                            />
                                                         <div class="text-md-start text-center trip_itinerary_content">
                                                             <h4 class='mb-0 border-bottom border-light-subtle'>Flight</h4>
                                                             <p class='mb-0 font_montserrat'>{{ $itenary->flight }}</p>
@@ -387,9 +387,9 @@
                                             @if ($itenary->distance)
                                                 <div class="col-md-4 mb-3">
                                                     <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                        <img src='{{ asset('frontend/images/distance.webp') }}'
+                                                         <img loading="lazy" src='{{ asset('frontend/images/distance.webp') }}'
                                                             alt='meal' width='40' height='40'
-                                                            loading="lazy" />
+                                                            />
                                                         <div class="text-md-start text-center trip_itinerary_content">
                                                             <h4 class='mb-0 border-bottom border-light-subtle'>Trekking
                                                                 Distance</h4>
@@ -399,15 +399,15 @@
                                                 </div>
                                             @endif
 
-                                            @if ($itenary->walking)
+                                            @if ($itenary->walk)
                                                 <div class="col-md-4 mb-3">
                                                     <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                        <img src='{{ asset('frontend/images/walking.png') }}'
+                                                         <img loading="lazy" src='{{ asset('frontend/images/walking.png') }}'
                                                             alt='meal' width='40' height='40'
-                                                            loading="lazy" />
+                                                            />
                                                         <div class="text-md-start text-center trip_itinerary_content">
                                                             <h4 class='mb-0 border-bottom border-light-subtle'>Walking</h4>
-                                                            <p class='mb-0 font_montserrat'>{{ $itenary->walking }}</p>
+                                                            <p class='mb-0 font_montserrat'>{{ $itenary->walk }}</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -417,9 +417,9 @@
                                             @if ($itenary->accommodation)
                                                 <div class="col-md-4 mb-3">
                                                     <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                        <img src='{{ asset('frontend/images/accommodation.png') }}'
+                                                         <img loading="lazy" src='{{ asset('frontend/images/accommodation.png') }}'
                                                             alt='meal' width='40' height='40'
-                                                            loading="lazy" />
+                                                            />
                                                         <div class="text-md-start text-center trip_itinerary_content">
                                                             <h4 class='mb-0 border-bottom border-light-subtle'>
                                                                 Accommodation</h4>
@@ -434,9 +434,9 @@
                                             @if ($itenary->breakfast)
                                                 <div class="col-md-4 mb-3">
                                                     <div class="d-flex flex-md-row flex-column align-items-center gap-2">
-                                                        <img src='{{ asset('frontend/images/breakfast.png') }}'
+                                                         <img loading="lazy" src='{{ asset('frontend/images/breakfast.png') }}'
                                                             alt='meal' width='40' height='40'
-                                                            loading="lazy" />
+                                                            />
                                                         <div class="text-md-start text-center trip_itinerary_content">
                                                             <h4 class='mb-0 border-bottom border-light-subtle'>Breakfast
                                                             </h4>
@@ -449,7 +449,7 @@
                                         </div>
                                         <p class="mb-md-5 mb-4"> {{ $itenary->content }}</p>
 
-                                        <img src="{{ getImageUrl($itenary->thumbnail) }}" class='img-fluid mb-2' />
+                                         <img loading="lazy" src="{{ getImageUrl($itenary->thumbnail) }}" class='img-fluid mb-2' />
                                         {{-- <p class='mb-0'>Kathmandu International Airport</p> --}}
                                     </div>
                                 @endforeach
@@ -471,7 +471,7 @@
 
 
                             <div>
-                                <div class="card boxShadow p-3 p-md-4 mb-md-5 mb-4 bg_lightwhite">
+                                <div id="departDate" class="card boxShadow p-3 p-md-4 mb-md-5 mb-4 bg_lightwhite">
                                     <div class="mb-md-4 mb-3">
                                         <div class="section-header mb-md-1">
                                             <hr class="section-line py-2" />
@@ -536,7 +536,7 @@
                                                     <td>
                                                         <p
                                                             class="d-flex align-items-center gap-1 mb-0 fw-bold trip_table_text">
-                                                            <img src="{{ asset('frontend/images/gurantedIcon.png') }}"
+                                                             <img loading="lazy" src="{{ asset('frontend/images/gurantedIcon.png') }}"
                                                                 alt="guranted" width="24" height="24">
                                                             Guaranteed
                                                         </p>
@@ -582,7 +582,7 @@
                                 </div>
                             </div>
 
-                            <div class="card boxShadow mb-md-5 mb-4">
+                            <div class="card boxShadow mb-md-5 mb-4" id="reviews">
                                 @include('frontend.inc.testimonial', [
                                     'testimonials' => $package->testimonials()->where('status', 1)
     ->whereRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) < 60')
@@ -654,7 +654,7 @@
                                             </span>
                                             person
                                         @else
-                                            <span class="fs_18 fw-bolder text-danger">${{ $price }}</span> per
+                                            <span class="fs_18 fw-bolder text_darkprimary">${{ $price }}</span> per
                                             person
                                         @endif
                                     </p>
@@ -691,7 +691,7 @@
                                                 <!-- Total Price -->
                                                 <div class="d-flex justify-content-between align-items-center">
                                                     <h6>Total Price</h6>
-                                                    <span class="text-primary fs-5 fw-bolder">US
+                                                    <span class="text_darkprimary fs-5 fw-bolder">US
                                                         $@{{ totalPrice }}</span>
                                                 </div>
 
@@ -709,7 +709,7 @@
                                                 service</p>
                                             <a target="_blank" href="https://api.whatsapp.com/send?phone=9779802342081"
                                                 class="d-flex text-decoration-none justify-content-md-start justify-content-center">
-                                                <img src="{{ asset('frontend/images/whatsapp.png') }}" alt="whatsapp"
+                                                 <img loading="lazy" src="{{ asset('frontend/images/whatsapp.png') }}" alt="whatsapp"
                                                     width="24" height="24">
                                                 <p class="text-muted  fs-6 fw-bold font_montserrat ms-2">+977-9802342081
                                                 </p>

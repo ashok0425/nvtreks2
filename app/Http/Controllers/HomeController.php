@@ -34,6 +34,7 @@ public function home(Request $request) {
         $year = $request->get('year', Carbon::now()->year);
         $departures = Departure::whereMonth('start_date', $month)
         ->whereYear('start_date', $year)
+        ->whereDate('start_date', '>', Carbon::today())
         ->with(['package' => function ($query) {
             $query->select('id', 'name', 'url', 'duration', 'discounted_price', 'price', 'status');
         }])
@@ -46,6 +47,7 @@ public function home(Request $request) {
         ->paginate(5);
         $blogs=Blog::where('display_homepage',1)->latest()->limit(5)->whereNotNull('title')->get();
         $gallery_packages= Package::with('package_images')
+        ->whereHas('package_images')
         ->inRandomOrder()
         ->limit(4)
         ->get();
@@ -58,7 +60,12 @@ public function home(Request $request) {
             'mobile_meta_description' => setting()->mobile_meta_description??setting()->keyword,
             'mobile_meta_keyword' => setting()->mobile_meta_keyword??setting()->descr,
         ];
-      return view('frontend.index',compact('missed_packages','destinations','popular_packages','destination_categories','discounted_packages','departures','month','year','blogs','video','seo','gallery_packages'));
+
+        $gallery_images=[];
+        foreach ($gallery_packages as $key => $gallery_package) {
+            $gallery_images=array_merge($gallery_images,$gallery_package->package_images()->pluck('image')->toArray());
+        }
+      return view('frontend.index',compact('missed_packages','destinations','popular_packages','destination_categories','discounted_packages','departures','month','year','blogs','video','seo','gallery_packages','gallery_images'));
 }
 
 public function about() {
