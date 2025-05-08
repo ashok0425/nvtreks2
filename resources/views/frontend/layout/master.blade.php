@@ -238,6 +238,19 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+    <script>
+        window.addEventListener('load', function () {
+            const video = document.querySelector('.video-banner');
+            const source = video.querySelector('source');
+            source.src = source.getAttribute('data-src');
+            video.load(); // Trigger loading the new src
+
+             const images = document.querySelectorAll('img[data-src]');
+            images.forEach(img => {
+                img.src = img.getAttribute('data-src');
+        });
+        });
+    </script>
     {{-- toastr --}}
     <script>
         @if (Session::has('messege')) //toatser

@@ -45,10 +45,10 @@ if (!isset($testimonials)) {
 
                 <div class="d-flex justify-content-center mt-2 gap-2">
                     <div>
-                        <img src="{{asset('frontend/images/starImg.png')}}" alt="star" class='img-fluid' width="34" height="34">
+                        <img data-src="{{asset('frontend/images/starImg.png')}}" alt="star" class='img-fluid' width="34" height="34">
                     </div>
                     <div>
-                        <img src="{{asset('frontend/images/tripadvisorsymboImg.png')}}" alt="tripadvisor" class='img-fluid' width="34"
+                        <img data-src="{{asset('frontend/images/tripadvisorsymboImg.png')}}" alt="tripadvisor" class='img-fluid' width="34"
                             height="34">
                     </div>
                 </div>

@@ -25,7 +25,7 @@
                     <!-- Location 1 -->
                     <div class=" px-md-4 contact_info_card contact_info_card_broder">
                         <div class="text-center text-md-start">
-                            <img src="{{asset('frontend/images/thamel_location.png')}}" alt="location" class="mb-md-3 mb-1" width="50"
+                            <img data-src="{{asset('frontend/images/thamel_location.png')}}" alt="location" class="mb-md-3 mb-1" width="50"
                                 height="50">
                             <div>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">{{setting()->address}}
@@ -48,7 +48,7 @@
                     <!-- Location 2 -->
                     <div class="px-md-4 contact_info_card contact_info_card_broder">
                         <div class="text-center text-md-start">
-                            <img src="{{asset('frontend/images/usa_location.png')}}" alt="location" class="mb-md-3 mb-1" width="50"
+                            <img data-src="{{asset('frontend/images/usa_location.png')}}" alt="location" class="mb-md-3 mb-1" width="50"
                                 height="50">
                             <div>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">{{setting()->address2}}
@@ -69,7 +69,7 @@
                     <!-- Location 3 -->
                     <div class="px-md-4 contact_info_card contact_info_card_broder">
                         <div class="text-center text-md-start">
-                            <img src="{{asset('frontend/images/australia_location.png')}}" alt="location" class="mb-md-3 mb-1"
+                            <img data-src="{{asset('frontend/images/australia_location.png')}}" alt="location" class="mb-md-3 mb-1"
                                 width="50" height="50">
                             <div>
 
@@ -91,7 +91,7 @@
                     <!-- Location 3 -->
                     <div class="px-md-4 contact_info_card contact_info_card_broder">
                         <div class="text-center text-md-start">
-                            <img src="{{asset('frontend/images/location_canada.webp')}}" alt="location" class="mb-md-3 mb-1"
+                            <img data-src="{{asset('frontend/images/location_canada.webp')}}" alt="location" class="mb-md-3 mb-1"
                                 width="50" height="50">
                             <div>
                                                                <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Regina, Canada</p>
@@ -112,7 +112,7 @@
                     <!-- Location 3 -->
                     <div class="px-md-4 contact_info_card contact_info_card_broder">
                         <div class="text-center text-md-start">
-                            <img src="{{asset('frontend/images/China.svg')}}" alt="location" class="mb-md-3 mb-1"
+                            <img data-src="{{asset('frontend/images/China.svg')}}" alt="location" class="mb-md-3 mb-1"
                                 width="50" height="50">
                             <div>
                                 ‬
@@ -141,27 +141,27 @@
                     <div class="splide__track">
                         <ul class="splide__list">
                             <li class="splide__slide d-flex align-items-center px-1 px-md-4 ">
-                                <img src="{{asset('frontend/images/tripadvisorsymboImg.png')}}" alt="tripadvisor" class="img-fluid"
+                                <img data-src="{{asset('frontend/images/tripadvisorsymboImg.png')}}" alt="tripadvisor" class="img-fluid"
                                     width="34" height="34">
                             </li>
                             <li class="splide__slide d-flex align-items-center px-1 px-md-4 ">
-                                <img src="{{asset('frontend/images/newyorktimesImg.png')}}" alt="newyorktimes" class="img-fluid"
+                                <img data-src="{{asset('frontend/images/newyorktimesImg.png')}}" alt="newyorktimes" class="img-fluid"
                                     width="240" height="34">
                             </li>
                             <li class="splide__slide d-flex align-items-center px-1 px-md-4 ">
-                                <img src="{{asset('frontend/images/expedia_logoImg.png')}}" alt="expedia" class="img-fluid" width="95"
+                                <img data-src="{{asset('frontend/images/expedia_logoImg.png')}}" alt="expedia" class="img-fluid" width="95"
                                     height="34">
                             </li>
                             <li class="splide__slide d-flex align-items-center px-1 px-md-4 ">
-                                <img src="{{asset('frontend/images/condnasttraveler_logoImg.png')}}" alt="condé nast" class="img-fluid"
+                                <img data-src="{{asset('frontend/images/condnasttraveler_logoImg.png')}}" alt="condé nast" class="img-fluid"
                                     width="81" height="34">
                             </li>
                             <li class="splide__slide d-flex align-items-center px-1 px-md-4 ">
-                                <img src="{{asset('frontend/images/lonelyplanetlogoImg.png')}}" alt="lonely planet" class="img-fluid"
+                                <img data-src="{{asset('frontend/images/lonelyplanetlogoImg.png')}}" alt="lonely planet" class="img-fluid"
                                     width="69" height="34">
                             </li>
                             <li class="splide__slide d-flex align-items-center px-1 px-md-4 ">
-                                <img src="{{asset('frontend/images/forbestravelguide_logoImg.png')}}" alt="forbes travel"
+                                <img data-src="{{asset('frontend/images/forbestravelguide_logoImg.png')}}" alt="forbes travel"
                                     class="img-fluid" width="120" height="34">
                             </li>
                         </ul>

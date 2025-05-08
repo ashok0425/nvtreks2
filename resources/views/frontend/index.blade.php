@@ -70,7 +70,7 @@
             <div class="col-12 col-md">
                 <a href="{{route('destination',['url'=>'nepal'])}}" >
                 <div class="card destination-card  p-0 border-0 rounded-3">
-                    <img loading="lazy" data-src="{{getImageUrl($destinations[0]['image'])}}" alt="NEPAL" class="card-img-top rounded-3"
+                    <img loading="lazy" src="{{getImageUrl($destinations[0]['image'])}}" alt="NEPAL" class="card-img-top rounded-3"
                         style="height: 455px;object-fit: cover;">
                     <div class="card-img-overlay destination-overlay">
                         <h5 class="destination-title bg_darkOrange">{{$destinations[0]['name']}}</h5>
@@ -83,7 +83,7 @@
 
             <div class="col-12 col-md">
                 <div class="card destination-card  p-0 border-0 rounded-3">
-                    <img loading="lazy" data-src="{{getImageUrl($destinations[3]['image'])}}" alt="BHUTAN" class="card-img-top rounded-3"
+                    <img loading="lazy" src="{{getImageUrl($destinations[3]['image'])}}" alt="BHUTAN" class="card-img-top rounded-3"
                         style="height: 455px;object-fit: cover;">
                     <div class="card-img-overlay destination-overlay">
                         <h5 class="destination-title bg_darkOrange">{{$destinations[3]['name']}}</h5>
@@ -96,7 +96,7 @@
             <!-- Third Column with Stacked Cards -->
             <div class="col-12 col-md-5 d-flex flex-column">
                 <div class="card destination-card  p-0 border-0 rounded-3 mb-3">
-                    <img loading="lazy" data-src="{{getImageUrl($destinations[2]['image'])}}" alt="TIBET" class="card-img-top rounded-3"
+                    <img loading="lazy" src="{{getImageUrl($destinations[2]['image'])}}" alt="TIBET" class="card-img-top rounded-3"
                         style="height: 220px;object-fit: cover;">
                     <div class="card-img-overlay destination-overlay">
                         <h5 class="destination-title bg_darkOrange">{{$destinations[2]['name']}}</h5>
@@ -105,7 +105,7 @@
                 </div>
 
                 <div class="card destination-card  p-0 border-0 rounded-3">
-                    <img loading="lazy" data-src="{{getImageUrl($destinations[1]['image'])}}" alt="INDIA" class="card-img-top rounded-3"
+                    <img loading="lazy" src="{{getImageUrl($destinations[1]['image'])}}" alt="INDIA" class="card-img-top rounded-3"
                         style="height: 220px;object-fit: cover;">
                     <div class="card-img-overlay destination-overlay">
                         <h5 class="destination-title bg_darkOrange">{{$destinations[1]['name']}}</h5>
@@ -743,21 +743,6 @@
 @endpush
 @push('script')
 
-<script>
-    window.addEventListener('load', function () {
-        const video = document.querySelector('.video-banner');
-        const source = video.querySelector('source');
-        source.src = source.getAttribute('data-src');
-        video.load(); // Trigger loading the new src
-
-       setTimeout(() => {
-         const images = document.querySelectorAll('img[data-src]');
-        images.forEach(img => {
-            img.src = img.getAttribute('data-src');
-    });
-       }, 2000);
-    });
-</script>
 <script>
 
 
