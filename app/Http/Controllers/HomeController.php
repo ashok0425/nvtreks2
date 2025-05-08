@@ -61,19 +61,19 @@ $seo = [
 ];
 
 // Cache and return the rendered response
-$response = Cache::remember('homepage', 1440, function () use (
-    $missed_packages, $destinations, $popular_packages,
-    $destination_categories, $discounted_packages,
-    $departures, $month, $year, $blogs, $seo, $gallery_images
-) {
+// $response = Cache::remember('homepage', 1440, function () use (
+//     $missed_packages, $destinations, $popular_packages,
+//     $destination_categories, $discounted_packages,
+//     $departures, $month, $year, $blogs, $seo, $gallery_images
+// ) {
     return view('frontend.index', compact(
         'missed_packages', 'destinations', 'popular_packages',
         'destination_categories', 'discounted_packages',
         'departures', 'month', 'year', 'blogs', 'seo', 'gallery_images'
-    ))->render();
-});
+    ));
+// });
 
-return response($response);
+// return response($response);
 
 
 }
