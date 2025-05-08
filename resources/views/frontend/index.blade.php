@@ -781,7 +781,7 @@
     // Initial load
    setTimeout(() => {
     updateImages();
-   }, 4000);
+   }, 1000);
 
     // Rotate every 5 seconds
     setInterval(updateImages, 7000);
