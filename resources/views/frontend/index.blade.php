@@ -554,7 +554,7 @@
 
 
 
-    <section class='bg_lightwhite py-5'>
+    <section class='bg_lightwhite py-5 d-none d-md-block'>
         <div class="d-flex justify-content-center text-center mb-4">
             <div class="">
                 <div class="section-header mb-md-1 d-flex justify-content-center">
