@@ -90,8 +90,3 @@ Route::resource('/country', App\Http\Controllers\Admin\CountryController::class)
 Route::post('/blog-posts/upload', [App\Http\Controllers\Admin\BlogController::class, 'uploadimage']);
 
 // Cache Clear Route
-Route::get('/cache', function () {
-    Artisan::call('cache:synblog');
-    // Artisan::call('cache:clear');
-    // Artisan::call('config:clear');
-});

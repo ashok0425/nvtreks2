@@ -8,6 +8,8 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
+use Illuminate\Support\Facades\Artisan;
+
 
 // Index page
 Route::get('/', [HomeController::class, 'home'])->name('/');
@@ -68,4 +70,9 @@ Route::get('load-quick-trip', function () {
 
 Route::get('blog/{assa}', function () {
     return redirect()->route('blog');
+});
+
+Route::get('/cache', function () {
+    Artisan::call('cache:clear');
+    // Artisan::call('config:clear');
 });
