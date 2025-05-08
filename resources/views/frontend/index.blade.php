@@ -763,15 +763,15 @@
         for (let i = 0; i < imageIds.length; i++) {
             const imgEl = document.getElementById(imageIds[i]);
             const image = allImages[currentIndex + i];
+            console.log(image);
             if (image) {
                 imgEl.src = getImageUrl(image);
-                imgEl.style.display = 'block';
             } else {
-                imgEl.src = "{{asset('frontend/images/travelphotogallerImg8.png')}}";
-                imgEl.style.display = 'none'; // Optional: hide extra slots
+                const rand = Math.floor(Math.random() * 8) + 1; // Random number from 1 to 8
+            imgEl.src = `{{ asset('frontend/images') }}/travelphotogallerImg${rand}.png`;
             }
         }
-
+console.log(currentIndex);
         currentIndex += 8;
         if (currentIndex >= allImages.length) {
             currentIndex = 0;
