@@ -158,6 +158,24 @@
                                     alt="location" width="16" height="16"></span>{{setting()->email}}</p>
                         <p class="contact_info mb-2"><span class="pe-2"><img src="{{asset('frontend/images/locationIcon.png')}}"
                                     alt="location" width="16" height="16"></span>{{setting()->address}}</p>
+
+                                    <div class='d-flex gap-3 justify-content-center' style='max-width: 220px;'>
+                                        <a href='{{ setting()->facebook }}'><img src='{{ asset('frontend/images/fb_logo.png') }}'
+                                                alt='fb' class='img-fluid' width='28' height='28' /></a>
+                                        <a href='{{ setting()->instagram }}'><img
+                                                src='{{ asset('frontend/images/instagram.png') }}' alt='symbol' class='img-fluid'
+                                                width='28' height='28' /></a>
+                                        {{-- <a href='#{{setting()->pinterest}}'><img src='{{asset('frontend/images/pinterest_logo.png')}}' alt='pinterest' class='img-fluid' --}}
+                                        {{-- width='28' height='28' /></a> --}}
+                                        {{-- <a href='{{setting()->whatsapp}}'><img src='{{asset('frontend/images/whatsapp_logo.png')}}' alt='whatsapp' class='img-fluid' --}}
+                                        {{-- width='28' height='28' /></a> --}}
+                                        <a href='{{ setting()->linkedin }}'><img
+                                                src='{{ asset('frontend/images/linkedin_logo.png') }}' alt='linkedin'
+                                                class='img-fluid' width='28' height='28' /></a>
+                                        <a href='{{ setting()->twitter }}'><img src='{{ asset('frontend/images/x_logo.png') }}'
+                                                alt='x' class='img-fluid' width='28' height='28' /></a>
+
+                                    </div>
                     </div>
 
                     <!-- Recent Posts -->

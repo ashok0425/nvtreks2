@@ -261,7 +261,7 @@
     <div class=" ">
     <video     preload="none"
     loop muted autoPlay playsInline poster='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' style="width: 100vw;padding:1rem 0;">
-        <source data-src='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' type="video/mp4" />
+        <source src='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' type="video/mp4" />
     </video>
     </div>
     </div>

@@ -45,7 +45,7 @@ public function home(Request $request) {
         ->orderBy('start_date')
         // ->limit(5)
         ->paginate(5);
-        $blogs=Blog::where('display_homepage',1)->latest()->limit(5)->whereNotNull('title')->get();
+        $blogs=Blog::query()->latest()->limit(5)->whereNotNull('title')->get();
         $gallery_images= PackageImage::where('show_on_home_page',1)->inRandomOrder()->limit(24)->pluck('image')->toArray();
 
         $seo=[
