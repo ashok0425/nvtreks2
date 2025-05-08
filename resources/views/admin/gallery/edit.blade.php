@@ -14,10 +14,13 @@
             <input type="hidden" name="id" value="{{$gallery->id}}">
             @csrf
             <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
                 <label >Thumbnail</label>
            <input type="file" class="form-control" name="thumbnail" required>
            <img src="{{getImageUrl($gallery->image)}}" alt="" width="100" height="100">
+            </div>
+            <div class="form-group col-md-6">
+                <label><input type="checkbox" {{$gallery->show_on_home_page?'checked':''}} name="show_on_home_page" id="">Show on Home page</label>
             </div>
 
             <div class="form-group col-md-12">

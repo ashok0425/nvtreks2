@@ -53,6 +53,7 @@ class PackagesGalleryController extends Controller
             $gallery = new PackageImage;
             $gallery->package_id=$request->package_id;
             $gallery->image=$path;
+            $gallery->show_on_home_page=$request->show_on_home_page;
             $gallery->save();
 
             $notification=array(
@@ -113,6 +114,7 @@ class PackagesGalleryController extends Controller
             }
             $gallery = PackageImage::findorFail($request->id);
             $gallery->image=$path??$gallery->image;
+            $gallery->show_on_home_page=$request->show_on_home_page;
             $gallery->save();
             $notification=array(
                 'alert-type'=>'success',

@@ -15,9 +15,12 @@
             <input type="hidden" name="package_id" value="{{request()->query('package_id')}}">
             @csrf
             <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
                 <label >Thumbnail</label>
            <input type="file" class="form-control" name="thumbnail" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label><input type="checkbox" name="show_on_home_page" id="">Show on Home page</label>
             </div>
 
             <div class="form-group col-md-12">

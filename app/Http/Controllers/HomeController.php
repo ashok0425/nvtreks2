@@ -29,7 +29,7 @@ public function home(Request $request) {
     $destination_categories=CategoryDestination::where('status',1)->select('id','name','url','image','icon')->limit(6)->get();
     $discounted_packages=Package::where('status',1)->whereNotNull('discounted_price')->limit(3)->get();
 
-        $video=MainSlider::where('status',1)->where('type',2)->first()?->details;
+        // $video=MainSlider::where('status',1)->where('type',2)->first()?->details;
         $month = $request->get('month', Carbon::now()->month);
         $year = $request->get('year', Carbon::now()->year);
         $departures = Departure::whereMonth('start_date', $month)
@@ -46,11 +46,7 @@ public function home(Request $request) {
         // ->limit(5)
         ->paginate(5);
         $blogs=Blog::where('display_homepage',1)->latest()->limit(5)->whereNotNull('title')->get();
-        $gallery_packages= Package::with('package_images')
-        ->whereHas('package_images')
-        ->inRandomOrder()
-        ->limit(4)
-        ->get();
+        $gallery_images= PackageImage::where('show_on_home_page',1)->inRandomOrder()->limit(24)->pluck('image')->toArray();
 
         $seo=[
             'meta_title' => setting()->title,
@@ -61,11 +57,8 @@ public function home(Request $request) {
             'mobile_meta_keyword' => setting()->mobile_meta_keyword??setting()->descr,
         ];
 
-        $gallery_images=[];
-        foreach ($gallery_packages as $key => $gallery_package) {
-            $gallery_images=array_merge($gallery_images,$gallery_package->package_images()->pluck('image')->toArray());
-        }
-      return view('frontend.index',compact('missed_packages','destinations','popular_packages','destination_categories','discounted_packages','departures','month','year','blogs','video','seo','gallery_packages','gallery_images'));
+
+      return view('frontend.index',compact('missed_packages','destinations','popular_packages','destination_categories','discounted_packages','departures','month','year','blogs','seo','gallery_images'));
 }
 
 public function about() {
