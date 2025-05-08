@@ -16,11 +16,11 @@
                         If you have any queries, feel free to contact us at
                     </p>
                     <p class="text_lightDark fs-6 font_montserrat mb-3 text-wrap">
-                        sales@nepalvisiontreks.com / 977-1-4424762 / +977 9802342081
+                        sales@nepalvisiontreks.com / +977 9802342080 / +977 1 4701537
                     </p>
 
                     <div class="d-flex flex-column flex-md-row justify-content-md-between gap-2">
-                        <a href="{{route('home')}}"
+                        <a href="{{route('/')}}"
                             class="btn btn_darkprimary rounded-0 px-4 py-3 text-decoration-none d-flex align-items-center justify-content-center gap-2">
                             <i class="bi bi-arrow-left fs-5 fw-bold"></i> RETURN TO HOME
                         </a>

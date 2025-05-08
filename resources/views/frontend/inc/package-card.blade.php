@@ -1,7 +1,7 @@
 <div class="card border-0 bg-white rounded overflow-hidden hover_effect rounded-0" style="height: 435px">
     <a href="{{route('package.detail',['url'=>$package->url])}}" class="text-decoration-none text-dark">
         <div class="position-relative">
-            <img src="{{getImageUrl($package->thumbnail)}}" alt="{{$package->name}}"
+            <img data-src="{{getImageUrl($package->thumbnail)}}" alt="{{$package->name}}"
                 class="img-fluid w-100 rounded-0" style="height: 180px">
             <div class="badge-container position-absolute top-0 end-0 py-3 px-1">
                 @if ($package->is_luxury!=null)

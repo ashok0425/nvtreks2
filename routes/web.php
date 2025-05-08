@@ -10,7 +10,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
 
 // Index page
-Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('/');
 
 Route::get('contact', [ContactController::class, 'index'])->name('contactus');
 Route::post('contact', [ContactController::class, 'store'])->name('contactus.store');

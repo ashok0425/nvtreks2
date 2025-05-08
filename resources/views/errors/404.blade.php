@@ -706,7 +706,7 @@
             <div class="sky-bg"></div>
             <div class="wave-7"></div>
             <div class="wave-6">Hello</div>
-            <a class="wave-island" href="{{route('home')}}">
+            <a class="wave-island" href="{{route('/')}}">
                     <img src="http://res.cloudinary.com/andrewhani/image/upload/v1524501929/404/island.svg" alt="Island">
                 </a>
             <div class="wave-5"></div>
@@ -723,7 +723,7 @@
             <div class="wave-2"></div>
             <div class="wave-1"></div>
             <div class="wave-message">
-               <a href="{{route('home')}}" class="btn btn-primary">⬅ Back to Home</a>            <p>You're lost</p>
+               <a href="{{route('/')}}" class="btn btn-primary">⬅ Back to Home</a>            <p>You're lost</p>
                 <p>Click on the island to return</p>
             </div>
         </div>

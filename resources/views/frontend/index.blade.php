@@ -3,13 +3,10 @@
 <section class="video_section mb-md-5 mb-4">
     @include('frontend.layout.header')
 <div class="video_banner_container">
-    @php
-    $banner = App\Models\MainSlider::where('status',1)->where('link', request()->path())->first();
-@endphp
 
 <div class="hero_video_wrapper">
 <video loop muted autoPlay playsInline poster='{{asset('frontend/images/nvtrek-herothumbnail.webp')}}' class="video-banner">
-    <source data-src='https://d2i9o55ouvfvau.cloudfront.net/uploads/nvtreks-video.mp4' type="video/mp4" />
+    <source defer data-src='https://d2i9o55ouvfvau.cloudfront.net/uploads/nvtreks-video.mp4' type="video/mp4" />
 </video>
 </div>
 <div class="position-absolute top-0 start-0 w-100 ">
@@ -50,7 +47,6 @@
 </div>
 </div>
 </section>
-<div class="home-images">
     <section class="container my-5">
         <!-- Section Heading -->
         <div class="row align-items-center mb-md-5 mb-3">
@@ -264,7 +260,6 @@
         <source src='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' type="video/mp4" />
     </video>
     </div>
-    </div>
     </section>
 
 
@@ -395,7 +390,7 @@
 
         </div>
         <div class="text-center mb-3">
-            <a href="{{route('home',['page'=>request()->query('page')?request()->query('page')+1:2])}}" class="btn btn_darkprimary destination-button">LOAD MORE</a>
+            <a href="{{route('/',['page'=>request()->query('page')?request()->query('page')+1:2])}}" class="btn btn_darkprimary destination-button">LOAD MORE</a>
 
         </div>
     </section>
@@ -755,13 +750,17 @@
         source.src = source.getAttribute('data-src');
         video.load(); // Trigger loading the new src
 
-        const images = document.querySelectorAll('img[data-src]');
+       setTimeout(() => {
+         const images = document.querySelectorAll('img[data-src]');
         images.forEach(img => {
             img.src = img.getAttribute('data-src');
     });
+       }, 2000);
     });
 </script>
 <script>
+
+
     const allImages = @json($gallery_images);
     const baseUrl = "https://d2i9o55ouvfvau.cloudfront.net/public"; // Adjust as needed
 
