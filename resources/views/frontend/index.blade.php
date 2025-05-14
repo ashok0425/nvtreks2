@@ -194,7 +194,7 @@
                 <div class="d-flex flex-wrap justify-content-md-between justify-content-center gap-2">
                     @foreach ($destination_categories as $item)
                     <div class="text-white fs-5 fw-bold text-center">
-                        <div><img loading="lazy" data-src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" style="height: 140;width:140;object-fit:cover"></div>
+                        <div><img loading="lazy" data-src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" style="height: 140px;width:140px;object-fit:cover"></div>
                         {{$item->name}}
                     </div>
                     @endforeach
