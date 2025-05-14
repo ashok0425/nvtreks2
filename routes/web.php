@@ -10,7 +10,13 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\EventController;
 use Illuminate\Support\Facades\Artisan;
 
+Route::get('public/{any?}', function () {
+    return redirect('/' , 301);
+})->where('any', '.*');
 
+Route::get('index.php/{any}', function ($any) {
+    return redirect('/' . $any, 301);
+})->where('any', '.*');
 // Index page
 Route::get('/', [HomeController::class, 'home'])->name('/');
 
