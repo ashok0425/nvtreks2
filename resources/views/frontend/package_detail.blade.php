@@ -483,7 +483,7 @@
                                         <div>
                                             <button class="btn btn_darkprimary rounded-0 py-2 px-4 fw-bold">GROUP
                                                 TRIP</button>
-                                            <button class="btn btn_darkgray rounded-0 py-2 px-4 fw-bold">PRIVATE
+                                            <button class="btn staticBackdropBtn btn_darkgray rounded-0 py-2 px-4 fw-bold" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-id="{{$package->id}}" data-payment="0" data-type="3">PRIVATE
                                                 TRIP</button>
                                         </div> <!-- Month/Year Filter -->
                                         <div class="dropdown month_select mb-3">
@@ -567,9 +567,9 @@
                                                             </span>
                                                         </div>
                                                         <div>
-                                                            <button
+                                                            <a href="{{ route('booknow',['package'=>$package->id,'destination'=>$package->destination_id,'size'=>2]) }}"
                                                                 class="btn btn_lightprimary_outline mt-2 rounded-0 px-md-4 py-md-2">JOIN
-                                                                US</button>
+                                                                US</a>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -695,9 +695,9 @@
                                                         $@{{ totalPrice }}</span>
                                                 </div>
 
-                                                <button
+                                                <a href="{{ route('booknow',['package'=>$package->id,'destination'=>$package->destination_id,'size'=>2]) }}"
                                                     class="btn bg_darkprimary w-100 rounded-0 py-2 px-4 fw-bold fs-6 mt-3 mt-md-0">BOOK
-                                                    A TRIP</button>
+                                                    A TRIP</a>
                                             </form>
                                             <!-- Form Ends -->
 

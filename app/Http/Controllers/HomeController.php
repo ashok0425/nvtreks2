@@ -38,7 +38,7 @@ $departures = Departure::whereMonth('start_date', $month)
     ->whereYear('start_date', $year)
     ->whereDate('start_date', '>', Carbon::today())
     ->with(['package' => function ($query) {
-        $query->select('id', 'name', 'url', 'duration', 'discounted_price', 'price', 'status');
+        $query->select('id', 'name', 'url', 'duration', 'discounted_price', 'price', 'status','destination_id');
     }])
     ->whereHas('package', function ($query) {
         $query->where('status', 1)->whereNotNull('duration')->whereNotNull('discounted_price')->whereNotNull('price');

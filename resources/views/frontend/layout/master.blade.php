@@ -229,6 +229,65 @@
         </div>
     </footer>
 
+
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div>
+            <div class="section-header mb-md-1">
+                <hr class="section-line py-2" />
+                <p class="section-subtitle">ONGOING TRIPS</p>
+            </div>
+            <h2 class='mb-md-3 h3 fw-bold'>JOIN FIXED DEPARTURE TRIPS</h2>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{{route('booknow.store')}}" method="post">
+            @csrf
+            <input type="hidden" name="type" id="type">
+        <div class="modal-body">
+            <div class="form-group mb-3">
+                <input type="text" name="name" class="form-control rounded-0 text-muted" placeholder="Full name">
+            </div>
+             <div class="form-group mb-3">
+                <input type="email" name="email" class="form-control rounded-0 text-muted" placeholder="Email Address">
+            </div>
+             <div class="form-group mb-3">
+                <input type="number" name="phone" class="form-control rounded-0 text-muted" placeholder="Phone number">
+            </div>
+             <div class="form-group mb-3" id="date">
+                <input type="date" name="departure_date" class="form-control rounded-0 text-muted" placeholder="date">
+            </div>
+             <div class="form-group mb-3" id="size">
+                <input type="number" name="size" class="form-control rounded-0 text-muted" placeholder="Group Size">
+            </div>
+             <div class="form-group mb-3">
+                <select name="package_id" id="packageSelect" class="form-select form-control rounded-0">
+                    <option value="">select package</option>
+                    @foreach (App\Models\Package::where('status',1)->where('price','!=',null)->select('id','name')->get() as $package)
+                        <option value="{{$package->id}}">{{$package->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+             <div class="form-group mb-3">
+                <input type="number" name="amount" id="amountInput" class="form-control rounded-0 text-muted" placeholder="Amount want to pay (USD)">
+            </div>
+              <div class="form-group mb-3">
+                <textarea name="message" id="" class="form-control rounded-0" rows="2" placeholder="Anything we should consider for your trip?"></textarea>
+            </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary destination-button" data-bs-dismiss="modal">Close</button>
+           <button  class="btn btn_darkprimary destination-button">Submit</button>
+
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
@@ -237,13 +296,46 @@
     {{-- toastr --}}
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+$(document).ready(function () {
+    $(document).on('click','.staticBackdropBtn', function () {
+        let packageId = $(this).data('id');
+        let payment = $(this).data('payment');
+        let type = $(this).data('type');
+
+
+        // Set the selected package
+        $('#packageSelect').val(packageId);
+        $('#type').val(type);
+
+
+        // Check if payment is required
+        if (payment == 1) {
+            // Set and show the amount input
+            $('#amountInput').closest('.form-group').show();
+                $('#size').closest('.form-group').hide();
+            $('#date').closest('.form-group').hide();
+        } else {
+            // Clear and hide the amount input
+            $('#amountInput').closest('.form-group').hide();
+            $('#size').closest('.form-group').show();
+            $('#date').closest('.form-group').show();
+
+        }
+    });
+
+});
+</script>
 
     <script>
         window.addEventListener('DOMContentLoaded', function () {
             const video = document.querySelector('.video-banner');
-            const source = video.querySelector('source');
+            if (video) {
+             const source = video.querySelector('source');
             source.src = source.getAttribute('data-src');
             video.load(); // Trigger loading the new src
+            }
+
 
              const images = document.querySelectorAll('img[data-src]');
             images.forEach(img => {

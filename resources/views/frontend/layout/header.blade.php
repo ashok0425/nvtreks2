@@ -107,7 +107,7 @@
                     </li>
                 </ul>
                 <div class="ml-auto">
-                    <a href="/book-trip" class="btn btn_darkprimary px-2 px-xl-4 py-2">PAY ONLINE</a>
+                    <a href="/book-now?type=payment" class="btn btn_darkprimary px-2 px-xl-4 py-2" >PAY ONLINE</a>
                 </div>
             </div>
 

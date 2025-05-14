@@ -370,8 +370,8 @@
                                 <span
                                     class="original-price ps-2 text-decoration-line-through text-danger small">${{$departure->package->price}}</span>
                                 <div>
-                                    <button class="btn btn_lightprimary_outline mt-2 rounded-0 px-md-4 py-md-2">JOIN
-                                        US</button>
+                                    <a href="{{ route('booknow',['package'=>$departure->package_id,'destination'=>$departure->package->destination_id,'size'=>2,'departure_date'=>$departure->start_date]) }}" class="btn btn_lightprimary_outline mt-2 rounded-0 px-md-4 py-md-2" >JOIN
+                                        US</a>
                                 </div>
                             </td>
                         </tr>

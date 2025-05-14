@@ -78,7 +78,6 @@ class ContactController extends Controller
 
 
 
-
       function IPtoLocation($ip)
       {
             $apiURL = 'https://api.geoapify.com/v1/ipinfo?apiKey=ba7648986b064e67a1418a20662a6dba';

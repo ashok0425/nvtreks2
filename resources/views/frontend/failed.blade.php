@@ -1,8 +1,5 @@
 @extends('frontend.layout.master')
-@php
-    define('PAGE', 'destination');
-    $num = rand(1, 7);
-@endphp
+
 @section('styles')
     <style>
         .thanks-div {
@@ -12,6 +9,7 @@
 @endsection
 
 @section('content')
+@include('frontend.inc.banner')
     <section class="thanks-div my-5">
 
         <div class="container">
@@ -26,14 +24,14 @@
                     <p class="mb-0">If you have any queries feel free to contact us at </p>
                     <p class="mail">sales@nepalvisiontreks.com / 977-1-4424762 / +977-9851189771</p>
 
-                    <a href="{{ route('/') }}" class="btn btn-primary">⬅ Return to home</a>
-                    <a href="{{ route('package.all') }}" class="btn btn-primary">Explore more ➡</a>
+                    <a href="{{ route('/') }}" class="btn_lightprimary_outline mt-2 rounded-0 px-md-4 py-md-2">⬅ Return to home</a>
+                    <a href="{{ route('deals') }}" class="btn_lightprimary_outline mt-2 rounded-0 px-md-4 py-md-2">Explore more ➡</a>
 
                 </div>
 
             </div>
 
-            @include('frontend.template.top_package')
+            {{-- @include('frontend.template.top_package') --}}
         </div>
 
     </section>

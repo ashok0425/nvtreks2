@@ -46,7 +46,7 @@ Route::get('blog-detail/{url}', [BlogController::class, 'show'])->name('blog.det
 Route::get('events', [EventController::class, 'index'])->name('events');
 Route::get('event-detail/{id}', [EventController::class, 'show'])->name('event.detail');
 
-Route::post('enquery-post', [ContactController::class, 'Enquery'])->name('enquery.post');
+Route::post('payment', [BookingController::class, 'store'])->name('payment');
 Route::get('about-us', [HomeController::class, 'about'])->name('about');
 Route::get('useful-info', [HomeController::class, 'UsefulInfo'])->name('usefulinfo');
 Route::get('privacy-policy', [HomeController::class, 'privacy'])->name('privacy');

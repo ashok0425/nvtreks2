@@ -17,17 +17,17 @@ $finalImage = $defaultImage;
             discover incredible destinations waiting to be explored</p>
         <div class="row gap-3 gap-md-0">
             <div class="col-md-6 d-flex">
-                <img src="{{getImageUrl($package->package_images()->first()?->image)??$finalImage}}" alt="{{$package->name}}"
+                <img data-src="{{getImageUrl($package->package_images()->first()?->image)??$finalImage}}" alt="{{$package->name}}"
                     class="img-fluid w-100 h-100 object-fit-cover">
             </div>
             <div class="col-md-3 d-flex flex-column">
-                <img src="{{getImageUrl($package->package_images()->skip(1)->first()?->image)??$finalImage}}" alt="{{$package->name}}"
+                <img data-src="{{getImageUrl($package->package_images()->skip(1)->first()?->image)??$finalImage}}" alt="{{$package->name}}"
                     class="img-fluid w-100 h-50 object-fit-cover mb-4">
-                <img src="{{getImageUrl($package->package_images()->skip(2)->first()?->image)??$finalImage}}" alt="{{$package->name}}"
+                <img data-src="{{getImageUrl($package->package_images()->skip(2)->first()?->image)??$finalImage}}" alt="{{$package->name}}"
                     class="img-fluid w-100 h-50 object-fit-cover">
             </div>
             <div class="col-md-3 d-flex">
-                <img src="{{getImageUrl($package->package_images()->skip(3)->first()?->image)??$finalImage}}" alt="{{$package->name}}"
+                <img data-src="{{getImageUrl($package->package_images()->skip(3)->first()?->image)??$finalImage}}" alt="{{$package->name}}"
                     class="img-fluid w-100 h-100 object-fit-cover">
             </div>
         </div>

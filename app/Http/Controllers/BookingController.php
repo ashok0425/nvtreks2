@@ -30,7 +30,7 @@ class BookingController extends Controller
             'phone' => 'required',
             'departure_date' => 'required',
             'package_id' => 'required',
-            'destination_id' => 'required',
+            'destination_id' => 'nullable',
             'group_size' => 'nullable',
             'message' => 'required'
         ]);
@@ -42,9 +42,10 @@ class BookingController extends Controller
                 'phone' => $request->phone,
                 'departure_date' => $request->departure_date,
                 'package_id' => $request->package_id,
-                'group_size' => $request->group_size,
+                'group_size' => $request->group_size??1,
                 'message' => $request->message,
                 'user_ip' => $userIP,
+                'type'=>$request->type??1,
                 'destination_id' => $request->destination_id,
                 'source' => $request->source,
                 'uuid'=>Str::uuid()
@@ -54,11 +55,12 @@ class BookingController extends Controller
                 'inquiry@nepalvisiontreks.com',
                 $booking->email
             ])->notify(new BookingNotification($booking));
-
+            $package=Package::find($request->package_id);
+            $Pname=$package?->name;
             // $currency=$request->currency;
-            // if ($request->bookandpay) {
-            //       return redirect()->route('booking.online', ['id' => $request->booking,'cu'=>$currency]);
-            // }
+            if ($request->type==2) {
+                return redirect("https://pay.nepalvisiontreks.com/hbldemo2/?productName=$Pname&currency=USD&amount=$request->amount");
+            }
 
             $notification = array(
                   'alert-type' => 'success',
