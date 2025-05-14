@@ -342,12 +342,12 @@ $(document).ready(function () {
 
     <script>
         window.addEventListener('DOMContentLoaded', function () {
-            const video = document.querySelector('.video-banner');
-            if (video) {
+            const videos = document.querySelectorAll('.video-banner');
+           videos.forEach(video => {
              const source = video.querySelector('source');
             source.src = source.getAttribute('data-src');
             video.load(); // Trigger loading the new src
-            }
+            })
 
 
              const images = document.querySelectorAll('img[data-src]');
