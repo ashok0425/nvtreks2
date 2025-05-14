@@ -128,7 +128,7 @@
 
                     </div>
                     <div class="row">
-                        <div class="col-md-8 pe-md-4">
+                        <div class="col-md-8 pe-md-4 order-md-1 order-2">
                             <div class="card boxShadow p-3 p-md-4 pb-md-5 mb-md-5 mb-4 border-0">
                                 <div class="row align-items-center g-md-5 g-4">
                                     @if ($package->duration)
@@ -624,7 +624,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 ps-md-4">
+                        <div class="col-md-4 ps-md-4 order-md-2 order-1">
                             @php
                             $price = $package->price;
                             $discounted = $package->discounted_price;

@@ -15,6 +15,9 @@
                 <img src="{{getImageurl($setting->image)}}" alt="Nepal Vision">
             </a>
 
+            <a href="javascript:void(0);" id="openSearch" class="ml-auto ms-auto me-3 d-md-none d-inline-block mr-3">
+    <i class="fas fa-search h4 text-white"></i>
+</a>
             <!-- Mobile Menu Button -->
             <button class="navbar-toggler btn-light text-white " type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#mobileMenu">
@@ -184,7 +187,28 @@
             <li class="nav-item mx-1 mx-xl-4">
                 <a class="nav-link font_mulish text-white" href="/deals">Deals</a>
             </li>
+             <li class="nav-item mx-1 mx-xl-4">
+                 <a href="/book-now?type=payment" class="btn btn_darkprimary px-2 px-xl-4 py-2" >PAY ONLINE</a>
+             </li>
+
         </ul>
 
+    </div>
+</div>
+<!-- Search Overlay -->
+<div id="searchOverlay" class="position-absolute top-0 start-0 w-100 h-100 bg-dark bg-opacity-75 d-none" style="z-index: 1050;">
+     <button class="btn position-absolute top-0 end-0 m-3 text-white" id="closeSearch" style="z-index: 1051;">
+        <i class="fas fa-times fa-2x"></i>
+    </button>
+    <div class="container h-100 d-flex align-items-center justify-content-center">
+        <div class="position-relative w-100" style="max-width: 600px;">
+            <form action="{{route('search')}}">
+            <input type="text" name="keyword" class="form-control form-control-lg" required placeholder="Search..." autofocus>
+            <button  class="btn position-absolute top-50 end-0 translate-middle-y me-3 text-dark">
+                <i class="fas fa-search fa-lg"></i>
+            </button>
+            </form>
+
+        </div>
     </div>
 </div>

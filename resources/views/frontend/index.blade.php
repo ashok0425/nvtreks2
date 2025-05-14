@@ -82,6 +82,7 @@
     @if (isset($destinations[3]))
 
             <div class="col-12 col-md">
+                <a href="{{route('destination',['url'=>'bhutan'])}}" >
                 <div class="card destination-card  p-0 border-0 rounded-3">
                     <img loading="lazy" data-src="{{getImageUrl($destinations[3]['image'])}}" alt="BHUTAN" class="card-img-top rounded-3"
                         style="height: 455px;object-fit: cover;">
@@ -90,11 +91,13 @@
                         <p class="destination-description">{{count($destinations[3]->packages)}} Destinations</p>
                     </div>
                 </div>
+                </a>
             </div>
             @endif
 
             <!-- Third Column with Stacked Cards -->
             <div class="col-12 col-md-5 d-flex flex-column">
+                <a href="{{route('destination',['url'=>'tibet'])}}" >
                 <div class="card destination-card  p-0 border-0 rounded-3 mb-3">
                     <img loading="lazy" data-src="{{getImageUrl($destinations[2]['image'])}}" alt="TIBET" class="card-img-top rounded-3"
                         style="height: 220px;object-fit: cover;">
@@ -104,6 +107,8 @@
                     </div>
                 </div>
 
+                </a>
+                <a href="{{route('destination',['url'=>'india'])}}" >
                 <div class="card destination-card  p-0 border-0 rounded-3">
                     <img loading="lazy" data-src="{{getImageUrl($destinations[1]['image'])}}" alt="INDIA" class="card-img-top rounded-3"
                         style="height: 220px;object-fit: cover;">
@@ -112,6 +117,7 @@
                         <p class="destination-description">{{count($destinations[1]->packages)}} Destinations</p>
                     </div>
                 </div>
+                </a>
             </div>
         </div>
 
@@ -184,14 +190,30 @@
                 </div>
 
                 <!-- Categories -->
+                <div class="d-none d-md-block">
                 <div class="d-flex flex-wrap justify-content-md-between justify-content-center gap-2">
                     @foreach ($destination_categories as $item)
                     <div class="text-white fs-5 fw-bold text-center">
-                        <div><img data-loading="lazy" src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" width="140"></div>
+                        <div><img loading="lazy" data-src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" width="140"></div>
                         {{$item->name}}
                     </div>
                     @endforeach
+                </div>
+                </div>
 
+                <div class="d-block d-md-none ">
+                     <div class="splide" id="topcategory">
+                        <div class="splide__track">
+                            <ul class="splide__list">
+                                 @foreach ($destination_categories as $item)
+                                <li class="splide__slide px-md-4">
+                                     <div><img loading="lazy" data-src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" width="100" height="100"></div>
+                        {{$item->name}}
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                     </div>
                 </div>
 
             </div>
@@ -255,9 +277,9 @@
 
     <section class="w-100 mb-md-5 mb-4" style="overflow:hidden">
     <div class=" ">
-    <video     preload="none"
+    <video     class="video-banner"
     loop muted autoPlay playsInline poster='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' style="width: 100vw;padding:1rem 0;">
-        <source src='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' type="video/mp4" />
+        <source defer data-src='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' type="video/mp4" />
     </video>
     </div>
     </section>
@@ -402,7 +424,9 @@
             <div class="container py-5">
                 <div class="row my-md-5 align-items-center">
                     <div class="col-lg-6 col-12 text-center mb-4 mb-lg-0">
+                        <a href="/about-us">
                         <img loading="lazy" data-src="{{asset('frontend/images/epicadventuresImg.png')}}" alt="Epic Adventures" class="img-fluid" />
+                        </a>
                     </div>
                     <div class="col-lg-6 col-12 px-3 px-lg-5">
                         <p class="text_darkprimary mb-3 fw-bold text-center text-lg-start">INTRODUCTION ABOUT US</p>
@@ -658,12 +682,12 @@
                             @foreach ($blogs as $blog)
                             <li class="splide__slide my-4">
                                 <a href="{{ route('blog.detail', ['url' => $blog->slug]) }}" class="text-decoration-none">
-                                <div class="card rounded-0 border-0 hover_effect recent_post_card mx-md-2">
+                                <div class="card rounded-0 border-0 hover_effect recent_post_card mx-md-2" >
                                     <div class="recent_post_card_img">
-                                        <img loading="lazy" data-src="{{getImageUrl($blog->thumbnail)}}" alt="{{$blog->title}}" class="img-fluid">
+                                        <img loading="lazy" data-src="{{getImageUrl($blog->thumbnail)}}" alt="{{$blog->title}}" class="img-fluid" style="height:290px">
                                     </div>
-                                    <div class="card-body shadow-sm px-4 py-3">
-                                        <p class='fs-5 fw-bold'>{!! strip_tags(Str::limit($blog->title,400))!!}</p>
+                                    <div class="card-body shadow-sm px-4 py-3" style="height:140px">
+                                        <p class='fs-5 fw-bold'>{!! strip_tags(Str::limit($blog->title,180))!!}</p>
                                         <p class='mb-0 text_darkGray small'>{{Carbon\Carbon::parse($blog->created_at)->format('F d, Y')}}</p>
                                     </div>
                                 </div>

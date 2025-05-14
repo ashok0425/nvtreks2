@@ -58,6 +58,9 @@
             right:-70px;
 
         }
+#searchOverlay {
+    transition: opacity 0.3s ease;
+}
 
         .splide__arrow.splide__arrow--prev{
             left:-70px;
@@ -296,6 +299,16 @@
     {{-- toastr --}}
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+    document.getElementById('openSearch').addEventListener('click', function () {
+        document.getElementById('searchOverlay').classList.remove('d-none');
+    });
+
+    document.getElementById('closeSearch').addEventListener('click', function () {
+        document.getElementById('searchOverlay').classList.add('d-none');
+    });
+</script>
 <script>
 $(document).ready(function () {
     $(document).on('click','.staticBackdropBtn', function () {
@@ -407,6 +420,20 @@ $(document).ready(function () {
             new Splide('#epic-img-slider', {
                 type: 'loop',
                 perPage: 5,
+                autoplay: true,
+                interval: 2000, // Adjust auto-scroll speed (ms)
+                pauseOnHover: false,
+                pauseOnFocus: false,
+                arrows: false,
+                pagination: false,
+            }).mount();
+        }
+
+           let topcategory=document.getElementById('topcategory');
+            if(topcategory){
+            new Splide('#topcategory', {
+                type: 'loop',
+                perPage: 1,
                 autoplay: true,
                 interval: 2000, // Adjust auto-scroll speed (ms)
                 pauseOnHover: false,
