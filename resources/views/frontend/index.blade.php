@@ -686,7 +686,7 @@
                                     <div class="recent_post_card_img">
                                         <img loading="lazy" data-src="{{getImageUrl($blog->thumbnail)}}" alt="{{$blog->title}}" class="img-fluid" style="height:290px">
                                     </div>
-                                    <div class="card-body shadow-sm px-4 py-3" style="height:140px">
+                                    <div class="card-body shadow-sm px-4 py-3" style="height:160px">
                                         <p class='fs-5 fw-bold'>{!! strip_tags(Str::limit($blog->title,180))!!}</p>
                                         <p class='mb-0 text_darkGray small'>{{Carbon\Carbon::parse($blog->created_at)->format('F d, Y')}}</p>
                                     </div>
