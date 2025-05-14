@@ -8,7 +8,7 @@ class Booking extends Model
 {
     protected $fillable = [
         'name', 'email', 'phone', 'departure_date', 'package_id',
-        'group_size', 'message', 'user_ip', 'destination_id', 'source','uuid','page'
+        'group_size', 'message', 'user_ip', 'destination_id', 'source','uuid','page','type','amount'
     ];
 
     public function destination() {

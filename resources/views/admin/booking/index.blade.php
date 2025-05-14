@@ -2,6 +2,13 @@
 @section('content')
 
 <div class="container">
+     <div class="ml-auto" style="width: 230px;">
+        <form action="" >
+            <div class="form-group">
+                <input type="search" class="form-control" name="search" id="" placeholder="Search here..." value="{{request()->query('search')}}">
+            </div>
+        </form>
+    </div>
     <div class="card">
         <div class="card-header">
             <h3>Booking List</h3>
@@ -15,6 +22,7 @@
                     <th>User Detail</th>
                     <th>Group</th>
                     <th>Package</th>
+                    <th>Type</th>
                     <th>Booked on</th>
                     <th>Message</th>
 
@@ -34,9 +42,20 @@
                              {{'Date: '.$booking->departure_date}}
                         </td>
 
-                        <td>{{$booking->destination->name}}
+                        <td>{{$booking->destination?->name}}
                             <br>
                             {{$booking->package->name}}
+                       </td>
+                       <td>
+                        @if ($booking->type==1)
+                            <span class="badge bg-primary">Normal Booking</span>
+                            @elseif($booking->type==2)
+                            <span class="badge bg-primary">Payment</span>
+                            <p>Amount: {{$booking->amount}}</p>
+
+                              @elseif($booking->type==3)
+                              <span class="badge bg-primary">Private Booking</span>
+                        @endif
                        </td>
 
                        <td >
