@@ -109,11 +109,11 @@
         </div>
 
             <div id="package-list" class="row gap-4 gap-md-0">
-                <div v-if="loading" class="text-center my-5 loading-overlay">
+                {{-- <div v-if="loading" class="text-center my-5 loading-overlay">
     <div class="spinner-border text-primary" role="status">
         <span class="visually-hidden">Loading...</span>
     </div>
-</div>
+</div> --}}
                 <div v-if="!loading" v-for="package in packages" :key="package.id" class="col-12 col-md-6 px-md-4 mb-md-5">
                     <div class="card border-0 bg-white rounded overflow-hidden hover_effect rounded-0">
                         <div class="position-relative">
