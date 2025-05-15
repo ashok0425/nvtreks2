@@ -194,7 +194,7 @@
                 <div class="row gap-2">
                     @foreach ($destination_categories as $item)
                     <div class="text-white fs-5 fw-bold text-center col-md-2 col-4">
-                        <div><img loading="lazy" data-src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" style="height: 140px;width:140px;object-fit:cover"></div>
+                        <div><img loading="lazy" data-src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" class="img-fluid"></div>
                         {{$item->name}}
                     </div>
                     @endforeach
