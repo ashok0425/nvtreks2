@@ -191,11 +191,11 @@
 
                 <!-- Categories -->
                 <div class="">
-                <div class="row">
+                <div class="row destination_categories">
                     @foreach ($destination_categories as $item)
                     <div class="text-white  fw-bold text-center col-md-2 col-4">
                         <div><img loading="lazy" data-src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" style="height: 140px;object-fit:cover"></div>
-                        {{$item->name}}
+                        <span>{{$item->name}}</span>
                     </div>
                     @endforeach
                 </div>
@@ -720,6 +720,14 @@
 @endsection
 @push('style')
 <style>
+    @media (max-width: 768px) {
+        .destination_categories img{
+            width: 100px;
+        }
+        .destination_categories span{
+            font-size: 14px!important;
+        }
+    }
     #gallery-frame img{
         height: 200px!important;
         width: 260px!important;
