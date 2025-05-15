@@ -14,16 +14,18 @@
                     <!-- Repeat this block for each item -->
                     @foreach ($blogs as $blog)
                     <div class='col-md-6'>
-                        <div class='card border-0 hover_effect'>
+                        <a href='{{route('blog.detail',['url'=>$blog->slug])}}' class="text-decoration-none">
+                        <div class='card border-0 hover_effect' style="height: 520px">
                             <img src='{{getImageUrl($blog->thumbnail)}}' alt='{{$blog->title}}' class='img-fluid' />
                             <div class='card-body'>
-                                <p class='popular_card_head mb-2'>{{$blog->title}}</p>
+                                <p class='popular_card_head mb-2'>{{Str::limit($blog->title,100)}}</p>
                                 <p class='small text_darkGray font_montserrat mb-3'>Nepal vision | {{Carbon\Carbon::parse($blog->created_at)->format('d/m/Y')}}</p>
-                                <p class='fs-6 font_montserrat'>{!!Str::limit(strip_tags($blog->long_description),100)!!}</p>
-                                <a href='{{route('blog.detail',['url'=>$blog->slug])}}' class='text_darkprimary fs-6 text-decoration-none fw-semibold'>CONTINUE
+                                <p class='fs-6 font_montserrat text_darkGray'>{!!Str::limit(strip_tags($blog->long_description),100)!!}</p>
+                                <a  class='text_darkprimary text_darkGray fs-6 text-decoration-none fw-semibold'>CONTINUE
                                     READING..</a>
                             </div>
                         </div>
+                        </a>
                     </div>
                     @endforeach
 

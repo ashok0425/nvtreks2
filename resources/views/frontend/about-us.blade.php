@@ -20,7 +20,7 @@
                     <span class="fs-4 fw-bold text_darkOrange">&#8226;</span>
                     <span class="fs-4 fw-bold text_darkOrange">&#8226;</span>
                     <span class="fs-4 fw-bold text_darkOrange">&#8226;</span>
-                    <span class="mx-2"><img src="./images/epicbagIcon.png" alt="price guaranted" width="15"
+                    <span class="mx-2"><img src="{{asset('frontend/images/epicbagIcon.png')}}" alt="price guaranted" width="15"
                             height="24"></span>
                     <span class="fs-4 fw-bold text_darkOrange">&#8226;</span>
                     <span class="fs-4 fw-bold text_darkOrange">&#8226;</span>

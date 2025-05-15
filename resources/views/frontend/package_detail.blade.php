@@ -457,12 +457,10 @@
                             </div>
 
                             <div class="card boxShadow p-3 p-md-4 mb-md-5 mb-4 trip_details">
-                                <h5 class="mb-md-5 mb-4">Trip cost includes</h5>
                                 <div class="mb-md-5 mb-4">
                                     {!! $package->include_exclude !!}
                                     <!-- Add more inclusions here as per your data -->
                                 </div>
-                                <h5 class="mb-md-5 mb-4">Trip cost excludes</h5>
                                 <div class="">
                                     {!! $package->trip_excludes !!}
 
@@ -888,8 +886,8 @@
                             <!-- Description -->
                             <p class="text_lightwhite mb-0 fw-medium font_montserrat mx-auto mx-md-0"
                                 style="max-width: 700px;">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-                                tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                                Subscribe to receive exclusive deals, destination highlights, and insider travel tips delivered straight to your inbox.
+
                             </p>
                         </div>
                     </div>

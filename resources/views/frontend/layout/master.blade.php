@@ -429,19 +429,6 @@ $(document).ready(function () {
             }).mount();
         }
 
-           let topcategory=document.getElementById('topcategory');
-            if(topcategory){
-            new Splide('#topcategory', {
-                type: 'loop',
-                perPage: 1,
-                autoplay: true,
-                interval: 2000, // Adjust auto-scroll speed (ms)
-                pauseOnHover: false,
-                pauseOnFocus: false,
-                arrows: false,
-                pagination: false,
-            }).mount();
-        }
         });
     </script>
 

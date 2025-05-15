@@ -120,7 +120,7 @@
                             <img :src="package.thumbnail || './images/listImg1.jpg'" :alt="package.name"
                                 class="img-fluid w-100 rounded-0" style="height: 200px"/>
 
-                                <div v-if="package.is_luxury" class="badge-container position-absolute top-0 end-0 py-3 px-1">
+                                <div v-if="filters.type!='deal'&&package.is_luxury" class="badge-container position-absolute top-0 end-0 py-3 px-1">
                                     <div class="badge-arrow bg_darkOrange">
                                         <div class="d-flex align-items-center gap-1 badge-arrow-content">
                                             <img src="{{asset('frontend/images/crownIcon.svg')}}" alt="crown">
@@ -129,7 +129,7 @@
                                     </div>
                                 </div>
 
-                                <div v-else-if="package.is_group" class="badge-container position-absolute top-0 end-0 py-3 px-1">
+                                <div v-else-if="filters.type!='deal'&&package.is_group" class="badge-container position-absolute top-0 end-0 py-3 px-1">
                                     <div class="badge-arrow bg-danger">
                                         <div class="d-flex align-items-center gap-1 badge-arrow-content">
                                             <img src="{{asset('frontend/images/proplegroupIcon.svg')}}" alt="group" loadin='lazy'>

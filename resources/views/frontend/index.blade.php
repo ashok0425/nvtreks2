@@ -190,10 +190,10 @@
                 </div>
 
                 <!-- Categories -->
-                <div class="d-none d-md-block">
-                <div class="d-flex flex-wrap justify-content-md-between justify-content-center gap-2">
+                <div class="">
+                <div class="row gap-2">
                     @foreach ($destination_categories as $item)
-                    <div class="text-white fs-5 fw-bold text-center">
+                    <div class="text-white fs-5 fw-bold text-center col-md-2 col-4">
                         <div><img loading="lazy" data-src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" style="height: 140px;width:140px;object-fit:cover"></div>
                         {{$item->name}}
                     </div>
@@ -201,20 +201,7 @@
                 </div>
                 </div>
 
-                <div class="d-block d-md-none ">
-                     <div class="splide" id="topcategory">
-                        <div class="splide__track">
-                            <ul class="splide__list">
-                                 @foreach ($destination_categories as $item)
-                                <li class="splide__slide px-md-4">
-                                     <div><img loading="lazy" data-src="{{getImageUrl($item->icon)}}" alt="{{$item->name}}" width="100" height="100"></div>
-                        {{$item->name}}
-                                </li>
-                                @endforeach
-                            </ul>
-                        </div>
-                     </div>
-                </div>
+
 
             </div>
         </div>
