@@ -1,11 +1,11 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
-    # Redirect to remove index.php
-    RewriteCond %{REQUEST_URI} ^/index\.php
-    RewriteRule ^index\.php/?(.*)$ /$1 [L,R=301]
+    # Redirect /index.php/... to /...
+    RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/index\.php(/[^\s]*)?\s [NC]
+    RewriteRule ^index\.php(/.*)?$ /$1 [R=301,L]
 
-    # Redirect non-existing files and folders to index.php
+    # Redirect all requests to index.php internally (for Laravel routing)
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^ index.php [L]
