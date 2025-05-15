@@ -20,7 +20,7 @@
                             <div class='card-body'>
                                 <p class='popular_card_head mb-2'>{{Str::limit($blog->title,100)}}</p>
                                 <p class='small text_darkGray font_montserrat mb-3'>Nepal vision | {{Carbon\Carbon::parse($blog->created_at)->format('d/m/Y')}}</p>
-                                <p class='fs-6 font_montserrat text_darkGray'>{!!Str::limit(strip_tags($blog->long_description),100)!!}</p>
+                                <p class='fs-6 font_montserrat text_darkGray'>{!!Str::limit(strip_tags($blog->long_description),30)!!}</p>
                                 <a  class='text_darkprimary text_darkGray fs-6 text-decoration-none fw-semibold'>CONTINUE
                                     READING..</a>
                             </div>
