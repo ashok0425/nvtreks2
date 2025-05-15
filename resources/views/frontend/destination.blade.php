@@ -107,8 +107,14 @@
                 destinations waiting to be explored
             </p>
         </div>
+
             <div id="package-list" class="row gap-4 gap-md-0">
-                <div v-for="package in packages" :key="package.id" class="col-12 col-md-6 px-md-4 mb-md-5">
+                <div v-if="loading" class="text-center my-5 loading-overlay">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+                <div v-if="!loading" v-for="package in packages" :key="package.id" class="col-12 col-md-6 px-md-4 mb-md-5">
                     <div class="card border-0 bg-white rounded overflow-hidden hover_effect rounded-0">
                         <div class="position-relative">
                             <img :src="package.thumbnail || './images/listImg1.jpg'" :alt="package.name"
@@ -299,6 +305,19 @@
             position: relative;
             z-index: 2;
         }
+        .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(225, 225, 225, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
     </style>
 @endpush
 
@@ -312,6 +331,7 @@
       delimiters: ['@{{', '}}'],
       data() {
         return {
+         loading: false, // ← ADD THIS
           packages: [],
           currentPage: 1,
           totalPages: 1, // You will update this based on the response
@@ -353,6 +373,8 @@
       },
       methods: {
         fetchPackages() {
+             this.loading = true;
+
           // Preparing filters to be sent in the query string
           const params = {
             ...this.filters,
@@ -367,13 +389,20 @@
             })
             .catch(error => {
               console.error('Error fetching packages:', error);
-            });
+            }).finally(() => {
+            this.loading = false; // ✅ hide loading after request
+        });
+
+
         },
         changePage(page) {
+
           if (page > 0 && page <= this.totalPages) {
             this.currentPage = page;
             this.fetchPackages();
           }
+
+
         },
         clearAll() {
           this.filters = {

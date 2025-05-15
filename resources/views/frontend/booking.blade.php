@@ -12,8 +12,7 @@
                         <p class='section-subtitle'>BOOKING</p>
                     </div>
                     <h2 class='head_title mb-3 text-md-start text-center'>TIME TO BOOK YOUR HOLIDAY</h2>
-                    <p class='section-description mb-4'>Explore our curated list of the best countries to visit in 2024
-                        and discover incredible destinations waiting to be explored</p>
+                    <p class='section-description mb-4'>Your next adventure is just a few clicks away. Whether you're dreaming of mountain trails, cultural wonders, or peaceful escapes, now is the perfect moment to turn those travel plans into reality. Let’s make it happen!</p>
                     <div id="bookingApp">
                         <form action="{{ route('booknow.store') }}" method="POST">
                             @csrf

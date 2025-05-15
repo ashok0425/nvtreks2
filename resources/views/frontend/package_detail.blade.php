@@ -911,8 +911,7 @@
                         </div>
                         <h2 class='head_title mb-md-3'>RELATED TRIPS</h2>
                         <p class='text_lightDark font_montserrat mb-0' style="max-width: 800px;">
-                            Explore our curated list of the best countries to visit in 2024 and discover incredible
-                            destinations waiting to be explored
+                           Whether you're looking to explore nearby regions, extend your journey, or try a different trekking experience, these carefully curated trips are perfect companions to your current itinerary.
                         </p>
                     </div>
                 </div>

@@ -21,23 +21,22 @@ public function index(Request $request,$url=null) {
     if(Route::is('package.place')){
         $data = CategoryPlace::where('url',$url)->orwhere('id',$url)->firstOrFail();
         $categories = CategoryDestination::where('status',1)->limit(10)->get();
-        $type=null;
+        $type='place';
 
     }elseif(Route::is('package.category')){
         $data = CategoryDestination::where('url',$url)->orwhere('id',$url)->firstOrFail();
 	   $categories = CategoryDestination::where('status',1)->limit(10)->get();
-       $type=null;
+       $type='category';
 
     }
     elseif(Route::is('deals')){
         $data = (object)['name'=>'Special Deals','cover_image'=>null,'image'=>null,'id'=>1];
 	   $categories = CategoryDestination::where('status',1)->limit(10)->get();
-       $type=null;
+       $type='deal';
     }
     elseif(Route::is('search')){
         $data = (object)['name'=>'Special Deals','cover_image'=>null,'image'=>null,'id'=>1,'keyword'=>$request->keyword];
 	   $categories = CategoryDestination::where('status',1)->limit(10)->get();
-       $type='deal';
     }
     else{
         $data = Destination::where('url',$url)->orwhere('id',$url)->firstOrFail();
@@ -107,6 +106,12 @@ public function filter(Request $request)
 
     if ($request->type=='destination') {
         $query->where('destination_id', $request->destination_id)->get();
+    }
+    if ($request->type=='place') {
+        $query->where('category_place_id', $request->destination_id)->get();
+    }
+    if ($request->type=='category') {
+        $query->where('category_destination_id', $request->destination_id)->get();
     }
     if ($request->type=='deal') {
         $query->whereNotNull('discounted_price')->get();
