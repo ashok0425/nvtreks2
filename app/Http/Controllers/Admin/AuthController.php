@@ -142,26 +142,17 @@ $admin->save();
 
 
     public function destroy(){
-        try {
             $notification=array(
                 'alert-type'=>'success',
                 'messege'=>'successfully logout !',
 
              );
             Auth::logout();
-         session()->flush();
             return redirect()->route('admin.logins')->with($notification);
-        } catch (\Throwable $th) {
-            $notification=array(
-                'alert-type'=>'info',
-                'messege'=>'something went wrong please try again later !',
 
-             );
-            Auth::logout();
-            return redirect()->back()->with($notification);;
+            return redirect('/admin/login')->with($notification);;
         }
 
-    }
 
     public function userList(){
         $user=User::orderBy('id','desc')->get();
