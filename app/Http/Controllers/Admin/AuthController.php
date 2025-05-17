@@ -148,7 +148,6 @@ $admin->save();
 
              );
             Auth::logout();
-            return redirect()->route('admin.logins')->with($notification);
 
             return redirect('/admin/login')->with($notification);;
         }
