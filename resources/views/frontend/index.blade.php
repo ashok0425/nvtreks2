@@ -66,7 +66,7 @@
         </div>
 
         <!-- Destination Grid -->
-        {{-- <div class="row g-3">
+        <div class="row g-3">
             <!-- First Two Columns -->
             <div class="col-12 col-md">
                 <a href="{{route('destination',['url'=>'nepal'])}}" >
@@ -120,7 +120,7 @@
                 </div>
                 </a>
             </div>
-        </div> --}}
+        </div>
 
         <!-- Button -->
         {{-- <div class="text-center mt-4">

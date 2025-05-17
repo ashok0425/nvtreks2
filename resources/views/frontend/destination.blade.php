@@ -115,6 +115,7 @@
     </div>
 </div> --}}
                 <div v-if="!loading" v-for="package in packages" :key="package.id" class="col-12 col-md-6 px-md-4 mb-md-5">
+                    <a :href="package.url" class="text-decoration-none">
                     <div class="card border-0 bg-white rounded overflow-hidden hover_effect rounded-0">
                         <div class="position-relative">
                             <img :src="package.thumbnail || './images/listImg1.jpg'" :alt="package.name"
@@ -210,10 +211,11 @@
                                         $@{{ package.price }}
                                     </span>
                                 </div>
-                                <a :href="package.url" class='btn btn_darkprimary rounded-0 px-3'>VIEW DETAILS</a>
+                                <a  class='btn btn_darkprimary rounded-0 px-3'>VIEW DETAILS</a>
                             </div>
                         </div>
                     </div>
+                    </a>
                 </div>
             </div>
         <div>
