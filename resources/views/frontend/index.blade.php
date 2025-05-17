@@ -230,7 +230,7 @@
                 <div class="col-12 col-sm-6 col-md-4">
                     <div class="card border-0 bg-white shadow rounded-3 hover_effect position-relative">
                         <a href="{{route('package.detail',['url'=>$package->url])}}" class="text-decoration-none text-dark">
-                        <img loading="lazy" data-src="{{getImageUrl($package->thumbnail)}}" class="img-fluid w-100 rounded-top"
+                        <img loading="lazy" data-src="{{getImageUrl($package->banner)}}" class="img-fluid w-100 rounded-top"
                             alt="{{$package->price}}" style="height: 400px;object-fit:cover">
                             <div class="discount-badge">
                                 @php

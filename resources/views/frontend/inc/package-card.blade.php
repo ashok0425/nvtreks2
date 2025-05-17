@@ -2,7 +2,7 @@
     <a href="{{route('package.detail',['url'=>$package->url])}}" class="text-decoration-none text-dark">
         <div class="position-relative">
             <img data-src="{{getImageUrl($package->banner)}}" alt="{{$package->name}}"
-                class="img-fluid w-100 rounded-0" style="height: 180px">
+                class="img-fluid w-100 rounded-0" style="height: 180px;object-fit:cover">
             <div class="badge-container position-absolute top-0 end-0 py-3 px-1">
                 @if ($package->is_luxury!=null)
                 <div class="badge-arrow bg_darkOrange">
