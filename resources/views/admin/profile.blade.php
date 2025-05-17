@@ -108,25 +108,25 @@
                                 <div class="d-flex">
                                     <img src="" class="image-preview1 mr-2">
 
-                                    <img src="{{ getImageurl(__getAdmin()->profile_photo_path) }}" alt=""
+                                    <img src="{{ getImageurl(auth()->user()->profile_photo_path) }}" alt=""
                                         width="70" class='image1'>
                                 </div>
 
                             </div>
                             <div class="form- mt-2">
-                                <input type="text" value="{{ __getAdmin()->name }}" class="form-control" name="name"
+                                <input type="text" value="{{ auth()->user()->name }}" class="form-control" name="name"
                                     required>
 
                             </div>
                             <div class="form-group mt-2">
-                                <input type="email" value="{{ __getAdmin()->email }}" class="form-control" name="email"
+                                <input type="email" value="{{ auth()->user()->email }}" class="form-control" name="email"
                                     required>
 
                             </div>
                             <div class="form-group mt-2">
 
                                 <input type="text"
-                                    value="updated at: {{ carbon\carbon::parse(__getAdmin()->updated_at)->diffForHumans() }}"
+                                    value="updated at: {{ carbon\carbon::parse(auth()->user()->updated_at)->diffForHumans() }}"
                                     class="form-control" readonly>
                             </div>
                             <div class="form-group mt-2">
