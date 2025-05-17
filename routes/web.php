@@ -62,8 +62,7 @@ Route::get('our-team', [HomeController::class, 'team'])->name('team');
 
 Route::get('testimonials/{package?}', [PackageController::class, 'Testimonial'])->name('testimonials');
 Route::post('testimonials/store', [PackageController::class, 'testimonialStore'])->name('testimonials.store');
-
-Route::post('subscribe/store', [ContactController::class, 'subscribeStore'])->name('subscribe.store');
+Route::post('subscribe/store', [ContactController::class, 'subscribeStore'])->name('subscribe');
 
 // Optional static routes
 Route::get('itinerary/{id?}/{d?}', function () {

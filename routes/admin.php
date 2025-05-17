@@ -51,6 +51,7 @@ Route::get('/events/delete/{id}', [App\Http\Controllers\Admin\EventController::c
 
 // Contact
 Route::get('contacts', [App\Http\Controllers\Admin\ContactController::class, 'index'])->name('contacts.index');
+Route::get('subscribers', [App\Http\Controllers\Admin\ContactController::class, 'subscriber'])->name('subscriber');
 Route::get('bookings', [App\Http\Controllers\Admin\BookingController::class, 'index'])->name('bookings');
 
 

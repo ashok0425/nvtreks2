@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
-use Str;
+use Illuminate\Support\Str;
 class ContactController extends Controller
 {
 
@@ -102,30 +102,22 @@ class ContactController extends Controller
       public function subscribeStore(Request $request)
       {
             if (Str::contains($request->email,  ".godaddy")) {
-                            abort(403);
+                abort(403);
             }
 
             $request->validate([
                 'email' => 'required|email'
             ]);
 
-            try {
-                  //code...
                   $newsletter = new Newsletter;
                   $newsletter->email = $request->email;
                   $newsletter->save();
                   $notification = array(
                         'alert-type' => 'success',
-                        'messege' => 'Newsletter subscribed sucessfully.',
+                        'messege' => 'Thank you for subscribing our Newsletter.',
 
                   );
-            } catch (\Throwable $th) {
-                  $notification = array(
-                        'alert-type' => 'error',
-                        'messege' => 'Failed to subscribed. Try again.',
 
-                  );
-            }
             return redirect()->back()->with($notification);
       }
 }

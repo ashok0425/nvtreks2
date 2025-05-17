@@ -543,13 +543,16 @@
                         <!-- Email input -->
                         <div class="email_input mb-4 mx-auto mx-md-0" style="max-width: 650px;">
                             <div class="input-group">
+                                <form action="{{route('subscribe')}}" method="POST">
+                                    @csrf
                                 <input type="email"
                                     class="form-control bg-transparent border border-white text-white py-md-3 rounded-0"
-                                    placeholder="Your Email Address..." aria-label="Recipient's email" />
+                                    placeholder="Your Email Address..." aria-label="Recipient's email" name="email"/>
                                 <button class="btn btn_darkprimary rounded-0 px-md-3 fw-semibold email_signup_btn"
                                     type="button">
                                     SIGN UP NOW
                                 </button>
+                                </form>
                             </div>
                         </div>
 

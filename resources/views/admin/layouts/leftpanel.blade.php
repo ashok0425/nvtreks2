@@ -60,12 +60,7 @@
                 </li>
                 <div class="dropdown-divider"></div>
 
-                <li class="nav-item">
-                    <a href="{{ route('admin.teams.index') }}" class="nav-link">
-                        <i class=" fas fa-users"></i>
-                        <p>Teams</p>
-                    </a>
-                </li>
+
                 <li class="nav-item">
                     <a href="{{ route('admin.contacts.index') }}" class="nav-link">
                         <i class=" fas fa-address-book"></i>
@@ -79,9 +74,20 @@
                         <p>Booking</p>
                     </a>
                 </li>
+                 <li class="nav-item">
+                    <a href="{{ route('admin.subscriber') }}" class="nav-link">
+                        <i class=" fas fa-users"></i>
+                        <p>Subscriber</p>
+                    </a>
+                </li>
 
                 <div class="dropdown-divider"></div>
-
+ <li class="nav-item">
+                    <a href="{{ route('admin.teams.index') }}" class="nav-link">
+                        <i class=" fas fa-users"></i>
+                        <p>Teams</p>
+                    </a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.blogs.index') }}" class="nav-link">
                         <i class="fas fa-file-image"></i>

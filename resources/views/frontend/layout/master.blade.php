@@ -197,9 +197,10 @@
                         <p class="py-md-3 py-2 mb-0 text_lightgray font_montserrat">
                             Subscribe to Nepal Vision – stay inspired for your next journey.
                         </p>
-                        <form>
+                         <form action="{{route('subscribe')}}" method="POST">
+                            @csrf
                             <input type="email" class="form-control mb-4 rounded-0 py-md-3 py-2"
-                                placeholder="Your Email..." required>
+                                placeholder="Your Email..." required name="email">
                             <button type="submit"
                                 class="btn btn_darkprimary w-100 py-md-3 py-2 rounded-0 fw-semibold">SUBSCRIBE
                                 NOW</button>
