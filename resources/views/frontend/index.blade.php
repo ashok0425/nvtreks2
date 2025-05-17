@@ -18,8 +18,8 @@
             <h1 class="home_banner_title mb-md-4">NEPAL</h1>
             </h1>
             <div class="home_banner_input">
-                <form action="{{route('search')}}" class="w-100">
-                    <div class="d-md-block d-none">
+                <form action="{{route('search')}}" class="w-100 d-md-block d-none">
+                    <div class="">
                         <div class="input-group search_input">
                             <span class="input-group-text bg-white ps-3 pe-0 rounded-start-2 py-md-3"
                                 id="basic-addon1">
@@ -27,11 +27,12 @@
 
                             </span>
                         <input type="text" class="form-control border border-start-0 ps-2 py-md-3 rounded-end-2"
-                    placeholder="Find your trip.." aria-label="search"
-                    aria-describedby="basic-addon1" required name="keyword"/>
+                    placeholder="Find your trip.."   name="keyword"/>
                         </div>
                     </div>
-                        <div class="d-md-none d-block">
+                </form>
+                  <form action="{{route('search')}}" class="w-100 d-md-none d-block">
+                        <div class="">
                             <div class="input-group search_input">
                             <input type="text" class="form-control border border-start-0 ps-2 py-md-3 rounded-start-5"
                         placeholder="Find your trip.." aria-label="search"
@@ -65,7 +66,7 @@
         </div>
 
         <!-- Destination Grid -->
-        <div class="row g-3">
+        {{-- <div class="row g-3">
             <!-- First Two Columns -->
             <div class="col-12 col-md">
                 <a href="{{route('destination',['url'=>'nepal'])}}" >
@@ -119,7 +120,7 @@
                 </div>
                 </a>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Button -->
         {{-- <div class="text-center mt-4">
@@ -588,7 +589,8 @@
                     <div><img id="img-2" class="img-fluid" /></div>
                 </div>
                 <div class="col-12 col-md mb-3 mb-md-0">
-                    <div class="mb-3 mb-md-4"><img id="img-3" class="img-fluid" /></div>
+                    <div class="mb-3 mb-md-4">
+                        <img id="img-3" class="img-fluid" /></div>
                     <div><img id="img-4" class="img-fluid" /></div>
                 </div>
                 <div class="col-12 col-md mb-3 mb-md-0">
@@ -732,6 +734,9 @@
         height: 200px!important;
         width: 260px!important;
         object-fit: cover;
+    }
+     #gallery-frame #img-3,#img-4{
+        height: 280px!important;
     }
    #splideMissed .splide__pagination {
         position: absolute;

@@ -37,6 +37,7 @@ public function index(Request $request,$url=null) {
     elseif(Route::is('search')){
         $data = (object)['name'=>'Special Deals','cover_image'=>null,'image'=>null,'id'=>1,'keyword'=>$request->keyword];
 	   $categories = CategoryDestination::where('status',1)->limit(10)->get();
+       $type=null;
     }
     else{
         $data = Destination::where('url',$url)->orwhere('id',$url)->firstOrFail();
