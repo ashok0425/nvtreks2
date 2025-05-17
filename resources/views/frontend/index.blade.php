@@ -6,7 +6,7 @@
 
 <div class="hero_video_wrapper">
 <video loop muted autoPlay playsInline poster='{{asset('frontend/images/banner-thumbnail.webp.webp')}}' class="video-banner">
-    <source defer data-src='https://d2i9o55ouvfvau.cloudfront.net/uploads/nvtreks-video.mp4' type="video/mp4" />
+    <source defer data-src='https://d2i9o55ouvfvau.cloudfront.net/uploads/nvbanner.mp4' type="video/mp4" />
 </video>
 </div>
 <div class="position-absolute top-0 start-0 w-100 ">
