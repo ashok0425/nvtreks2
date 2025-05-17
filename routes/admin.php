@@ -10,8 +10,7 @@ Route::get('/profile', [App\Http\Controllers\Admin\AuthController::class, 'profi
 Route::post('profile/update-profile', [App\Http\Controllers\Admin\AuthController::class, 'update'])->name('profile.update');
 Route::post('profile/change-password', [App\Http\Controllers\Admin\AuthController::class, 'changePassword'])->name('password');
 Route::get('profile/change-password', [App\Http\Controllers\Admin\AuthController::class, 'getpassword'])->name('password');
-Route::post('profile/logout', [App\Http\Controllers\Admin\AuthController::class, 'destroy'])->name('logout');
-Route::get('profile/logout/admin', [App\Http\Controllers\Admin\AuthController::class, 'destroy'])->name('logout');
+Route::get('logout', [App\Http\Controllers\Admin\AuthController::class, 'destroy'])->name('logout');
 
 // Destination
 Route::resource('/destinations', App\Http\Controllers\Admin\Travel\DestinationsController::class);

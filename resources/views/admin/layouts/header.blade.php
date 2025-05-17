@@ -15,7 +15,7 @@
 
 <!-- Pending Order -->
     {{-- <li class="nav-item dropdown">
-   
+
       <a class="nav-link" data-toggle="dropdown" href="#" title="Pending order">
         <i class="far fa-bell"></i>
         <span class="badge badge-warning navbar-badge">3</span>
@@ -27,8 +27,8 @@
           22333
           <span class="float-right text-muted text-sm">ee/Qty</span>
         </a>
-        
-       
+
+
         <div class="dropdown-divider"></div>
         <a href="" class="dropdown-item dropdown-footer">See All Notifications</a>
       </div>
@@ -54,10 +54,10 @@
               <i class="fas fa-lock mr-2"></i> Change password
             </a>
             <div class="dropdown-divider"></div>
-            <a href="{{ route('logout') }}" class="dropdown-item">
+            <a href="{{ route('admin.logout') }}" class="dropdown-item">
               <i class="fas fa-sign-out-alt mr-2"></i> Logout
             </a>
-          
+
           </div>
         </li>
   </ul>
