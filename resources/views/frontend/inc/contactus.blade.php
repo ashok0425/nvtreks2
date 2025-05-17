@@ -115,10 +115,6 @@
                             <img data-src="{{asset('frontend/images/China.svg')}}" alt="location" class="mb-md-3 mb-1"
                                 width="50" height="50">
                             <div>
-                                ‬
-
-
-
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Beijing, China</p>
                                 <p class="text-white font_montserrat fw-semibold mb-md-2 mb-1">Phone: +86 198 5746 8386
 

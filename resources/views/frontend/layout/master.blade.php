@@ -163,20 +163,14 @@
                                     alt="location" width="16" height="16"></span>{{setting()->address}}</p>
 
                                     <div class='d-flex gap-3 justify-content-center' style='max-width: 220px;'>
-                                        <a href='{{ setting()->facebook }}'><img src='{{ asset('frontend/images/fb_logo.png') }}'
-                                                alt='fb' class='img-fluid' width='28' height='28' /></a>
-                                        <a href='{{ setting()->instagram }}'><img
-                                                src='{{ asset('frontend/images/instagram.png') }}' alt='symbol' class='img-fluid'
-                                                width='28' height='28' /></a>
+                                        <a href='{{ setting()->facebook }}'><i class="fab fa-facebook fa-2x text-white"></i></a>
+                                        <a href='{{ setting()->instagram }}'><i class="fab fa-instagram fa-2x text-white"></i></a>
                                         {{-- <a href='#{{setting()->pinterest}}'><img src='{{asset('frontend/images/pinterest_logo.png')}}' alt='pinterest' class='img-fluid' --}}
                                         {{-- width='28' height='28' /></a> --}}
                                         {{-- <a href='{{setting()->whatsapp}}'><img src='{{asset('frontend/images/whatsapp_logo.png')}}' alt='whatsapp' class='img-fluid' --}}
                                         {{-- width='28' height='28' /></a> --}}
-                                        <a href='{{ setting()->linkedin }}'><img
-                                                src='{{ asset('frontend/images/linkedin_logo.png') }}' alt='linkedin'
-                                                class='img-fluid' width='28' height='28' /></a>
-                                        <a href='{{ setting()->twitter }}'><img src='{{ asset('frontend/images/x_logo.png') }}'
-                                                alt='x' class='img-fluid' width='28' height='28' /></a>
+                                        <a href='{{ setting()->linkedin }}'><i class="fab fa-linkedin fa-2x text-white"></i></a>
+                                        {{-- <a href='{{ setting()->twitter }}'><i class="fab fa-twitter fa-2x text-white"></i></a> --}}
 
                                     </div>
                     </div>
@@ -188,7 +182,7 @@
                         </div>
                        @foreach (App\Models\Blog::limit(4)->latest()->where('display_homepage',1)->get() as $blog)
                        <p class=" fs-6 fw-semibold font_montserrat border-bottom border-dark-subtle pb-3">
-                       <a href="" class="text-light text-decoration-none"> {{$blog->post_title}}</a>
+                       <a href="" class="text-light text-decoration-none"> {{$blog->title}}</a>
                         {{-- <small class="fw-light text_lightgray font_montserrat">{{$blog->}}</small> --}}
                     </p>
                        @endforeach

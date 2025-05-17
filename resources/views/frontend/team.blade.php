@@ -13,7 +13,7 @@
 
             <div class="col-md-4 px-md-4 mb-md-5 mb-4">
                 <div class="card border-0 team_card hover_effect">
-                    <img src="{{getImageUrl($team->thumbnail)}}" alt="{{$team->name}}" class="img-fluid" />
+                    <img src="{{getImageUrl($team->image)}}" alt="{{$team->name}}" class="img-fluid" />
                     <div class="card-body px-3">
                         <p class="mb-0 team_card_title">{{$team->name}}</p>
                         <p class="mb-3 team_card_subtitle">{{$team->position}}</p>

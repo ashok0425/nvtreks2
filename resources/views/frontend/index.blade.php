@@ -5,7 +5,7 @@
 <div class="video_banner_container">
 
 <div class="hero_video_wrapper">
-<video loop muted autoPlay playsInline poster='{{asset('frontend/images/nvtrek-herothumbnail.webp')}}' class="video-banner">
+<video loop muted autoPlay playsInline poster='{{asset('frontend/images/banner-thumbnail.webp.webp')}}' class="video-banner">
     <source defer data-src='https://d2i9o55ouvfvau.cloudfront.net/uploads/nvtreks-video.mp4' type="video/mp4" />
 </video>
 </div>
@@ -265,8 +265,8 @@
     <section class="w-100 mb-md-5 mb-4" style="overflow:hidden">
     <div class=" ">
     <video     class="video-banner"
-    loop muted autoPlay playsInline poster='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' style="width: 100vw;padding:1rem 0;">
-        <source defer data-src='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' type="video/mp4" />
+    loop muted autoPlay playsInline poster='{{asset('frontend/images/video-thumbnail.webp')}}' style="width: 100vw;padding:1rem 0;">
+        <source  data-src='https://d2i9o55ouvfvau.cloudfront.net/uploads/trekking.mp4' type="video/mp4" />
     </video>
     </div>
     </section>

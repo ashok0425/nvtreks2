@@ -40,7 +40,7 @@ class TeamController extends Controller
                 $thumbnail=$this->uploadFile('upload/team',$request->thumbnail)??null;
                 $team=new Team();
                 $team->name=$request->name;
-                $team->thumbnail=$thumbnail;
+                $team->image=$thumbnail;
                 $team->content=$request->content;
                 $team->position=$request->position;
                 $team->save();
@@ -69,7 +69,7 @@ class TeamController extends Controller
 
                 $thumbnail=$this->uploadFile('upload/team',$request->thumbnail)??$team->thumbnail;
                 $team->name=$request->name;
-                $team->thumbnail=$thumbnail;
+                $team->image=$thumbnail;
                 $team->content=$request->content;
                 $team->position=$request->position;
                 $team->save();
