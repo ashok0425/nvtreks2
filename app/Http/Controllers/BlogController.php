@@ -10,7 +10,9 @@ class BlogController extends Controller
 {
 
 public function index(Request $request){
-     $blogs=Blog::orderBy('id','desc')->where('status',1)->where('title','!=',null)
+        //  dd(Blog::latest('created_at')->where('status',1)->limit(8)->pluck('id'));
+
+     $blogs=Blog::orderBy('created_at','desc')->where('status',1)->where('title','!=',null)
      ->when($request->keyword,function($query) use ($request){
           $query->where('title','LIKE',"%$request->keyword%")->orWhere('long_description','LIKE',"%$request->keyword%");
      })->paginate(12);

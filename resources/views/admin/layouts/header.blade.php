@@ -45,14 +45,14 @@
           </a>
           <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
             <div class="dropdown-divider"></div>
-            <a href="{{ route('admin.profile') }}" class="dropdown-item">
+            {{-- <a href="{{ route('admin.profile') }}" class="dropdown-item">
               <i class="fas fa-user-circle mr-2"></i> Profile
             </a>
             <div class="dropdown-divider"></div>
 
             <a href="{{ route('admin.password') }}" class="dropdown-item">
               <i class="fas fa-lock mr-2"></i> Change password
-            </a>
+            </a> --}}
             <div class="dropdown-divider"></div>
             <a href="{{ route('admin.logout') }}" class="dropdown-item">
               <i class="fas fa-sign-out-alt mr-2"></i> Logout
