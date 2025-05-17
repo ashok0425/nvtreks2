@@ -27,7 +27,7 @@
             <!-- Desktop Navigation -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item mx-1 mx-xl-4">
+                    <li class="nav-item mx-0 mx-xl-4">
                         <a class="nav-link font_mulish text-white" href="/">Home</a>
                     </li>
 
@@ -40,7 +40,7 @@
                                 $places = $destination->places()->where('status',1)->get();
                             @endphp
 
-                            <li class="nav-item mx-1 mx-xl-4 dropdown">
+                            <li class="nav-item mx-0 mx-xl-4 dropdown">
                                 <a class="nav-link text-white dropdown-item d-flex  align-items-center" href="#">
                                     {{ $destination->name }}
                                     @if (count($categories))
@@ -102,7 +102,7 @@
                         @endif
                     @endforeach
 
-                    <li class="nav-item mx-1 mx-xl-4 position-relative">
+                    <li class="nav-item mx-0 mx-xl-4 position-relative">
                         <a class="nav-link font_mulish text-white" href="/deals">
                             Deals
                             <span class="ribbon">Bestseller</span>
@@ -128,7 +128,7 @@
     </div>
     <div class="offcanvas-body">
         <ul class="navbar-nav mx-auto">
-            <li class="nav-item mx-1 mx-xl-4">
+            <li class="nav-item mx-0 mx-xl-4">
                 <a class="nav-link font_mulish text-white" href="/">Home</a>
             </li>
 
@@ -184,10 +184,10 @@
                 @endif
             @endforeach
 
-            <li class="nav-item mx-1 mx-xl-4">
+            <li class="nav-item mx-0 mx-xl-4">
                 <a class="nav-link font_mulish text-white" href="/deals">Deals</a>
             </li>
-             <li class="nav-item mx-1 mx-xl-4">
+             <li class="nav-item mx-0 mx-xl-4">
                  <a href="/book-now?type=payment" class="btn btn_darkprimary px-2 px-xl-4 py-2" >PAY ONLINE</a>
              </li>
 

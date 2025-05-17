@@ -167,7 +167,7 @@
                                 <div class="d-flex align-items-center text_darkGray font_montserrat gap-2">
                                     <img
                                     v-if="package.difficulty!=null && (package.difficulty.toLowerCase() === 'easy')"
-                                    src="/frontend/images/speedmetereasyImg.png"
+                                    src="{{asset('frontend/images/speedmetereasyImg.png')}}"
                                     alt="Speed Meter Easy"
                                     width="32"
                                     height="32"
@@ -175,7 +175,7 @@
                                   />
                                   <img
                                     v-else-if="package.difficulty!=null && (package.difficulty.toLowerCase() === 'medium')"
-                                    src="/frontend/images/speedmetermediumImg.png"
+                                    src="{{asset('frontend/images/speedmetermediumImg.png')}}"
                                     alt="Speed Meter Medium"
                                     width="32"
                                     height="32"
@@ -183,7 +183,7 @@
                                   />
                                   <img
                                     v-else-if="package.difficulty!=null && (package.difficulty.toLowerCase() === 'hard')"
-                                    src="/frontend/images/speedmetermediumImg.png"
+                                    src="{{asset('frontend/images/speedmetermediumImg.png')}}"
                                     alt="Speed Meter Hard"
                                     width="32"
                                     height="32"

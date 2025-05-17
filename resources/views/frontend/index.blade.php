@@ -606,7 +606,7 @@
     </section>
 
 
-    <section class="splide position-relative" aria-label="Special Offers Carousel" style="min-height: 550px;" id="splideMissed">
+    <section class="splide position-relative mt-5 mt-md-0" aria-label="Special Offers Carousel" style="min-height: 550px;" id="splideMissed">
         <div class="splide__track h-100">
             <ul class="splide__list h-100">
 
@@ -652,9 +652,9 @@
         <div class="container">
             <div class="d-flex justify-content-center text-center mb-md-5 mb-4">
                 <div>
-                    <div class="section-header mb-md-1 d-flex justify-content-center">
+                    <div class="mt-5 mt-md-0 section-header mb-md-1 d-flex justify-content-center">
                         <hr class="section-line py-2">
-                        <p class="section-subtitle">FROM OUR BLOG</p>
+                        <p class="section-subtitle ">FROM OUR BLOG</p>
                     </div>
                     <h2 class='head_title mb-md-3'>OUR RECENT POSTS</h2>
                     <p class='text_lightDark font_montserrat mb-0' style="max-width: 800px;">

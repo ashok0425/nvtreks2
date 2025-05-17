@@ -29,7 +29,7 @@
                             </p>
                         </div>
                         <div class="text-center">
-                            <button class="btn btn_darkprimary destination-button">BOOK A TRIP</button>
+                            <a href="book-now" class="btn btn_darkprimary destination-button">BOOK A TRIP</a>
                         </div>
                     </div>
                 </div>

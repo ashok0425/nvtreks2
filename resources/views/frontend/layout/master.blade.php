@@ -162,14 +162,14 @@
                         <p class="contact_info mb-2"><span class="pe-2"><img src="{{asset('frontend/images/locationIcon.png')}}"
                                     alt="location" width="16" height="16"></span>{{setting()->address}}</p>
 
-                                    <div class='d-flex gap-3 justify-content-center' style='max-width: 220px;'>
-                                        <a href='{{ setting()->facebook }}'><i class="fab fa-facebook fa-2x text-white"></i></a>
-                                        <a href='{{ setting()->instagram }}'><i class="fab fa-instagram fa-2x text-white"></i></a>
+                                    <div class='text-center text-md-start my-3 my-md-0' >
+                                        <a href='{{ setting()->facebook }}' class="mx-2"><i class="fab fa-facebook fa-2x text-white"></i></a>
+                                        <a href='{{ setting()->instagram }}' class="mx-2"><i class="fab fa-instagram fa-2x text-white"></i></a>
                                         {{-- <a href='#{{setting()->pinterest}}'><img src='{{asset('frontend/images/pinterest_logo.png')}}' alt='pinterest' class='img-fluid' --}}
                                         {{-- width='28' height='28' /></a> --}}
                                         {{-- <a href='{{setting()->whatsapp}}'><img src='{{asset('frontend/images/whatsapp_logo.png')}}' alt='whatsapp' class='img-fluid' --}}
                                         {{-- width='28' height='28' /></a> --}}
-                                        <a href='{{ setting()->linkedin }}'><i class="fab fa-linkedin fa-2x text-white"></i></a>
+                                        <a href='{{ setting()->linkedin }}' class="mx-2"><i class="fab fa-linkedin fa-2x text-white"></i></a>
                                         {{-- <a href='{{ setting()->twitter }}'><i class="fab fa-twitter fa-2x text-white"></i></a> --}}
 
                                     </div>
