@@ -52,7 +52,7 @@ $request->validate([
 ]);
 try {
 
-    $admin=Admin::find(__getAdmin()->id);
+    $admin=Admin::find(auth()->user()->id);
 
 
     $file=$request->file('file');
@@ -99,9 +99,9 @@ function changePassword(Request $request){
     ]);
     try {
 
-        if(Hash::check($request->currentpassword, __getAdmin()->password)){
+        if(Hash::check($request->currentpassword, auth()->user()->password)){
             if($request->newpassword===$request->confirmpassword){
-                $admin=Admin::find( __getAdmin()->id);
+                $admin=Admin::find( auth()->user()->id);
                 $admin->password=Hash::make($request->newpassword);
 
 $admin->save();
@@ -141,7 +141,7 @@ $admin->save();
 
 
 
-    public function destory(){
+    public function destroy(){
         try {
             $notification=array(
                 'alert-type'=>'success',
