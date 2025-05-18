@@ -33,33 +33,13 @@
                                 <input type="number" class="form-control rounded-0 py-3" name="phone" required
                                     placeholder="Your Number*" v-model="form.phone">
                             </div>
-                            <!-- Phone -->
-                            <div class="mb-3 mb-md-4">
-                                <input type="number" class="form-control rounded-0 py-3" name="group_size" required
-                                    placeholder="Group Size*" v-model="form.group_size">
-                            </div>
-                            <!-- Destination -->
-                            <div class="mb-3 mb-md-3">
-                                <select class="form-select rounded-0 py-3" name="destination_id"
-                                    v-model="form.destination_id">
-                                    <option value="">Choose Destination</option>
-                                    @foreach ($destinations as $destination)
-                                        <option value="{{ $destination->id }}">{{ $destination->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
 
-                            <!-- Departure Date -->
-                            <div class="mb-3 mb-md-4">
-                                <input type="date" class="form-control rounded-0 py-3" name="departure_date" required
-                                    :min="today" v-model="form.departure_date">
-                            </div>
 
                             <!-- Packages -->
                             <div class="mb-3 mb-md-3">
                                 <select class="form-select rounded-0 py-3" name="package_id" v-model="form.package_id">
-                                    <option value="">Packages Type</option>
-                                    <option v-for="pkg in filteredPackages" :key="pkg.id" :value="pkg.id">
+                                    <option value="">Packages</option>
+                                    <option v-for="pkg in allPackages" :key="pkg.id" :value="pkg.id">
                                         @{{ pkg.name }}
                                     </option>
                                 </select>
@@ -72,6 +52,28 @@
                                     <input type="number" class="form-control rounded-0 py-3" name="amount" required
                                         placeholder="Amount want to pay (USD)">
                                 </div>
+                                @else
+                                  <!-- Phone -->
+                            <div class="mb-3 mb-md-4">
+                                <input type="number" class="form-control rounded-0 py-3" name="group_size" required
+                                    placeholder="Group Size*" v-model="form.group_size">
+                            </div>
+                            <!-- Destination -->
+                            {{-- <div class="mb-3 mb-md-3">
+                                <select class="form-select rounded-0 py-3" name="destination_id"
+                                    v-model="form.destination_id">
+                                    <option value="">Choose Destination</option>
+                                    @foreach ($destinations as $destination)
+                                        <option value="{{ $destination->id }}">{{ $destination->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div> --}}
+
+                            <!-- Departure Date -->
+                            <div class="mb-3 mb-md-4">
+                                <input type="date" class="form-control rounded-0 py-3" name="departure_date" required
+                                    :min="today" v-model="form.departure_date">
+                            </div>
                             @endif
                             <!-- Message -->
                             <div class="mb-3 mb-md-5">

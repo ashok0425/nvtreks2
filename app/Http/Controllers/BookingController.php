@@ -28,7 +28,7 @@ class BookingController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required',
-            'departure_date' => 'required',
+            'departure_date' => 'nullable',
             'package_id' => 'required',
             'destination_id' => 'nullable',
             'group_size' => 'nullable',
