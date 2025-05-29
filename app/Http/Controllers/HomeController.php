@@ -43,9 +43,10 @@ $departures = Departure::whereMonth('start_date', $month)
     ->whereHas('package', function ($query) {
         $query->where('status', 1)->whereNotNull('duration')->whereNotNull('discounted_price')->whereNotNull('price');
     })
+    // ->where("show_on_home_page",1)
     ->select('id', 'package_id', 'start_date', 'end_date', 'total_seats', 'booked_seats')
     ->orderBy('start_date')
-    ->paginate(5);
+    ->paginate(10);
 
 $blogs = Blog::query()->latest()->limit(5)->whereNotNull('title')->get();
 $gallery_images = PackageImage::where('show_on_home_page',1)->inRandomOrder()->limit(24)->pluck('image')->toArray();

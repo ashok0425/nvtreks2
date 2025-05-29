@@ -2,6 +2,7 @@
 if (!isset($testimonials)) {
    $testimonials =DB::table('testimonials')
     ->where('status', 1)
+    ->where('display_home', 1)
     ->whereRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) < 60')
     ->orderByRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) DESC')
      ->limit(5)
@@ -28,7 +29,7 @@ if (!isset($testimonials)) {
                                 @foreach ($testimonials as $testimonial)
                                 <li class="splide__slide my-4">
                                     <div class="text-center mb-md-5 mb-3">
-                                        <p class='font_montserrat fs-6 fst-italic mb-md-5 mb-3'>{!! strip_tags($testimonial->content),100 !!}</p>
+                                        <p class='font_montserrat fs-6 fst-italic mb-md-5 mb-3'>{!! Str::limit(strip_tags($testimonial->content),400) !!}</p>
 
                                         <p class='font_montserrat fs-5 fst-italic mb-1 fw-bold text_darkprimary'>
                                             {{ $testimonial->name }}</p>

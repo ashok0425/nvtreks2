@@ -35,7 +35,7 @@
                         @if ($destination->id != 12)
                             @php
                                 // Fetch categories and places for each destination
-                                $categories = $destination->categories()->where('status',1)->get();
+                                $categories = $destination->categories()->orderBy('order','desc')->where('status',1)->get();
 
                                 $places = $destination->places()->where('status',1)->get();
                             @endphp
@@ -51,7 +51,7 @@
                                     @foreach ($places as $place)
                                         @php
                                             // Fetch packages for each place
-                                            $packages = $place->packages()->where('status',1)->get();
+                                            $packages = $place->packages()->where('status',1)->orderBy('order', 'desc')->get();
                                         @endphp
 
                                         <li class="dropdown-item  pl-0">
@@ -76,7 +76,7 @@
                                     @foreach ($categories as $category)
                                         @php
                                             // Fetch packages for each category
-                                            $packages =$category->packages()->where('status',1)->get();
+                                            $packages =$category->packages()->orderBy('order', 'desc')->where('status',1)->get();
                                         @endphp
 
                                         <li class="dropdown-item  pl-0">

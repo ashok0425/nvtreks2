@@ -332,67 +332,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($departures as $departure)
+                        @php
+    $firstBatch = $departures->take(5);
+    $remaining = $departures->slice(5);
+@endphp
 
-                        <tr>
-                            <td class='trip_table_text fw-bold'>{{Str::limit($departure->package->name,25)}}</td>
-                            <td>
-                                <span class='trip_table_text fw-bolder'>{{$departure->package->duration}}</span><br />
+{{-- First 5 rows --}}
+@foreach($firstBatch as $departure)
+    @include('frontend.inc.departure_row', ['departure' => $departure])
+@endforeach
 
-                                <span class='fs-6 text_lightDark'>
-                                    From {{ date("j F", strtotime($departure->start_date)) }} -
-                                    @if($departure->package->duration)
-                                        @php
-                                            $durationDays = (int) filter_var($departure->package->duration, FILTER_SANITIZE_NUMBER_INT);
-                                        @endphp
-                                        {{ date('j F, Y', strtotime($departure->start_date . ' + ' . ($durationDays - 1) . ' days')) }}
-                                    @else
-                                        {{ date("j F", strtotime($departure->start_date)) }}
-                                    @endif
-                                </span>
+{{-- Remaining rows hidden initially --}}
+@foreach($remaining as $departure)
+    @include('frontend.inc.departure_row', ['departure' => $departure, 'hidden' => true])
+@endforeach
 
-
-                            </td>
-                            <td>
-                                <p class="d-flex align-items-center gap-1 mb-0 fw-bold trip_table_text">
-                                    <img loading="lazy" data-src="{{asset('frontend/images/gurantedIcon.png')}}" alt="guranted" width="24"
-                                        height="24">Guaranteed
-                                </p>
-                                @php
-                                $totalSeats = $departure->total_seats; // Total available seats
-                                $bookedSeats = $departure->booked_seats; // Seats that are already booked
-                                $seatsLeft = $totalSeats - $bookedSeats; // Calculate remaining seats
-
-                                // Calculate progress bar width
-                                $progressPercentage = ($totalSeats > 0) ? round(($bookedSeats / $totalSeats) * 100) : 0;
-                            @endphp
-
-                            <span class='fs-6 font_montserrat'>{{ $seatsLeft }} Seat{{ $seatsLeft > 1 ? 's' : '' }} Left</span>
-                            <div class="progress">
-                                <div class="progress-bar bg_lightprimary rounded-0" role="progressbar"
-                                    style="width: {{ $progressPercentage }}%"
-                                    aria-valuenow="{{ $progressPercentage }}" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
-                            </td>
-                            <td>
-                                <span class="fs-6 font_montserrat fw-bolder">${{$departure->package->discounted_price}}</span>
-                                <span
-                                    class="original-price ps-2 text-decoration-line-through text-danger small">${{$departure->package->price}}</span>
-                                <div>
-                                    <a href="{{ route('booknow',['package'=>$departure->package_id,'destination'=>$departure->package->destination_id,'size'=>2,'departure_date'=>$departure->start_date]) }}" class="btn btn_lightprimary_outline mt-2 rounded-0 px-md-4 py-md-2" >JOIN
-                                        US</a>
-                                </div>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="4" class="text-center py-4">
-                                No departures found for {{ Carbon\Carbon::create(null, $month)->format('F') }},
-                                {{ $year }}
-                            </td>
-                        </tr>
-                    @endforelse
 
                     </tbody>
                 </table>
@@ -400,7 +354,8 @@
 
         </div>
         <div class="text-center mb-3">
-            <a href="{{route('/',['page'=>request()->query('page')?request()->query('page')+1:2])}}" class="btn btn_darkprimary destination-button">LOAD MORE</a>
+                 <button id="toggleDepartures" class="btn btn_darkprimary destination-button">LOAD MORE</button>
+
 
         </div>
     </section>
@@ -771,6 +726,28 @@
 
 @endpush
 @push('script')
+<script>
+    const toggleBtn = document.getElementById('toggleDepartures');
+    let expanded = false;
+
+    toggleBtn?.addEventListener('click', function () {
+        const extraRows = document.querySelectorAll('.extra-row');
+
+        if (!expanded) {
+            // Show extra rows
+            extraRows.forEach(row => row.classList.remove('d-none'));
+            toggleBtn.textContent = 'SHOW LESS';
+        } else {
+            // Hide extra rows
+            extraRows.forEach(row => row.classList.add('d-none'));
+            toggleBtn.textContent = 'LOAD MORE';
+            window.scrollTo({ top: document.querySelector('.trip_table').offsetTop - 150, behavior: 'smooth' });
+        }
+
+        expanded = !expanded;
+    });
+</script>
+
 
 <script>
 

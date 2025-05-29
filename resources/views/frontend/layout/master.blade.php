@@ -21,6 +21,9 @@
    <link defer rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style>
+        .trip_table_text{
+            font-size: 18px!important;
+        }
     .ribbon {
         position: absolute;
         top: -15px;
@@ -162,7 +165,7 @@
                         <p class="contact_info mb-2"><span class="pe-2"><img src="{{asset('frontend/images/locationIcon.png')}}"
                                     alt="location" width="16" height="16"></span>{{setting()->address}}</p>
 
-                                    <div class='text-center text-md-start my-3 my-md-0' >
+                                    <div class='text-center text-md-start my-3 mb-0 mt-5' >
                                         <a href='{{ setting()->facebook }}' class="mx-2"><i class="fab fa-facebook fa-2x text-white"></i></a>
                                         <a href='{{ setting()->instagram }}' class="mx-2"><i class="fab fa-instagram fa-2x text-white"></i></a>
                                         {{-- <a href='#{{setting()->pinterest}}'><img src='{{asset('frontend/images/pinterest_logo.png')}}' alt='pinterest' class='img-fluid' --}}
@@ -182,7 +185,7 @@
                         </div>
                        @foreach (App\Models\Blog::limit(4)->latest()->where('display_homepage',1)->get() as $blog)
                        <p class=" fs-6 fw-semibold font_montserrat border-bottom border-dark-subtle pb-3">
-                       <a href="" class="text-light text-decoration-none"> {{$blog->title}}</a>
+                       <a href="{{ route('blog.detail', ['url' => $blog->slug]) }}" class="text-light text-decoration-none"> {{$blog->title}}</a>
                         {{-- <small class="fw-light text_lightgray font_montserrat">{{$blog->}}</small> --}}
                     </p>
                        @endforeach
