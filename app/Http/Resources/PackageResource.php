@@ -23,7 +23,7 @@ class PackageResource extends JsonResource
             'is_luxury'=>$this->is_luxury,
             'testimonial_count'=>$this->testimonial_count,
             'testimonial_avg'=>$this->testimonial_avg,
-            'difficulty'=>$this->difficulty,
+            'difficulty'=>$this->fitness_level,
             'duration'=>$this->duration,
             'destination'=>$this->destination?->name,
             'url'=>route('package.detail',['url'=>$this->url])

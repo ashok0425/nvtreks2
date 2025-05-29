@@ -36,20 +36,20 @@
                     <p class="mb-0 small">{{$package->category?->name}}</p>
                 </div>
                 <div class="d-flex align-items-center text_darkGray font_montserrat gap-2">
-                    @if ($package->difficulty=='easy'||$package->difficulty=='Easy'||$package->difficulty=='EASY')
+                    @if ($package->fitness_level=='easy'||$package->fitness_level=='Easy'||$package->fitness_level=='EASY')
                     <img src="{{asset('frontend/images/speedmetereasyImg.png')}}" alt="Speed Meter Easy" width="32"
                     height="32" loading='lazy'>
                     @endif
-                    @if ($package->difficulty=='medium'||$package->difficulty=='Medium'||$package->difficulty=='MEDIUM')
+                    @if ($package->fitness_level=='medium'||$package->fitness_level=='Medium'||$package->fitness_level=='MEDIUM')
                     <img src="{{asset('frontend/images/speedmetermediumImg.png')}}" alt="Speed Meter Easy" width="32"
                     height="32" loading='lazy'>
                     @endif
-                    @if ($package->difficulty=='hard'||$package->difficulty=='Hard'||$package->difficulty=='HARD')
+                    @if ($package->fitness_level=='hard'||$package->fitness_level=='Hard'||$package->fitness_level=='HARD')
                     <img src="{{asset('frontend/images/speedmetermediumImg.png')}}" alt="Speed Meter Easy" width="32"
                     height="32" loading='lazy'>
                     @endif
 
-                    <p class="mb-0 small">{{$package->difficulty}}</p>
+                    <p class="mb-0 small">{{$package->fitness_level}}</p>
                 </div>
             </div>
             <h5 class="popular_card_head mb-md-4 mb-3 text-start">{{$package->name}}

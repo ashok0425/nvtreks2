@@ -165,13 +165,13 @@
                                                     height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
                                                     <h4 class="mb-0 border-bottom border-light-subtle">Maximum Altitude</h4>
-                                                    <p class="mb-0 font_montserrat">{{ $package->altitude }}</p>
+                                                    <p class="mb-0 font_montserrat">{{ $package->max_altitude }}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     @endif
 
-                                    @if ($package->difficulty)
+                                    @if ($package->fitness_level)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
                                                  <img loading="lazy" src="{{ asset('frontend/images/gradeIcon.png') }}"
@@ -180,22 +180,24 @@
                                                 <div class="text-md-start text-center trip_itinerary_content">
                                                     <h4 class="mb-0 border-bottom border-light-subtle">Difficulty Grade
                                                     </h4>
-                                                    <p class="mb-0 font_montserrat">{{ $package->difficulty }}</p>
+                                                    <p class="mb-0 font_montserrat">{{ $package->fitness_level }}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     @endif
 
-                                    @if ($package->departure_from)
+                                    @if ($package->departure_from && $package->arrival)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
                                                  <img loading="lazy" src="{{ asset('frontend/images/poinsIcon.png') }}"
                                                     alt="Start & End Point" class="img-fluid" width="51"
                                                     height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
-                                                    <h4 class="mb-0 border-bottom border-light-subtle">Start Point
+                                                    <h4 class="mb-0 border-bottom border-light-subtle">Start Point & End Point
                                                     </h4>
                                                     <p class="mb-0 font_montserrat">{{ $package->departure_from }}</p>
+                                                    <p class="mb-0 font_montserrat">{{ $package->arrival }}</p>
+
                                                 </div>
                                             </div>
                                         </div>
