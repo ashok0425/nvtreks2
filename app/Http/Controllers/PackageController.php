@@ -68,6 +68,8 @@ public function Departure(Request $request){
     $month = $request->get('month', Carbon::now()->month);
     $year = $request->get('year', Carbon::now()->year);
     $departures = Departure::where('package_id',$request->id)
+      ->whereYear('start_date', $year)
+    ->whereDate('start_date', '>', Carbon::today())
     ->with('package:name,duration,id,price,discounted_price')
     ->whereMonth('start_date', $month)
     ->whereYear('start_date', $year)
