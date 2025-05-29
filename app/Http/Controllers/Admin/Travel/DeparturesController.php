@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Models\Departure;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class DeparturesController extends Controller
 {
@@ -18,13 +19,18 @@ class DeparturesController extends Controller
      */
     public function index(Request $request)
     {
+        $month = $request->get('month', Carbon::now()->month);
+$year = $request->get('year', Carbon::now()->year);
+
         $departures = Departure::with('package')
+           ->whereYear('start_date', $year)
+    ->whereDate('start_date', '>', Carbon::today())
         ->when($request->search,function($query) use($request){
             $query->WhereHas('package',function($q) use ($request){
             return $q->where('name','like','%'.$request->search.'%');
         });
         })
-        ->latest()->paginate(20);
+        ->orderBy('start_date','asc')->paginate(20);
         return view('admin.departure.index',compact('departures'));
     }
 

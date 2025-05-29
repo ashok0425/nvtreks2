@@ -31,6 +31,7 @@
                         <th>#</th>
                         <th>Package</th>
                         <th>Date</th>
+                        <th>Show Home Page</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -44,6 +45,8 @@
                         <td>@if(isset($departure->package)){{ $departure->package->name }}@else NA @endif</td>
 
                         <td>{{ carbon\carbon::parse($departure->start_date)->format('d M Y') }}</td>
+                        <td>{{ $departure->show_on_home_page?'✅':''}}</td>
+
                         <td>{!! $departure->status ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-danger">Deactive</span>' !!}</td>
                         <td>
                            <a href="{{ route('admin.departures.edit',$departure) }}" class="btn btn-primary btn-sm pull-left m-r-10"><i class="fa fa-edit"></i>

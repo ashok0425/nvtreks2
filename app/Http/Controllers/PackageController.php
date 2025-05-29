@@ -71,7 +71,6 @@ public function Departure(Request $request)
 
     // Handle year rollover for December
     $nextMonth = $month == 12 ? 1 : $month + 1;
-    $nextMonthYear = $month == 12 ? $year + 1 : $year;
 
     $departures = Departure::where('package_id', $request->id)
         ->where(function ($query) use ($month, $year, $nextMonth, $request) {
@@ -79,7 +78,7 @@ public function Departure(Request $request)
                 $q->whereMonth('start_date', $month)
                   ->whereYear('start_date', $year);
             })
-            ->when(!$request->get('month'),function($query) use ($nextMonth, $year){
+            ->when($request->get('month'),function($query) use ($nextMonth, $year){
             $query->orWhere(function ($q) use ($nextMonth, $year) {
                 $q->whereMonth('start_date', $nextMonth)
                   ->whereYear('start_date', $year);
