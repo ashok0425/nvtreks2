@@ -64,24 +64,40 @@ public function printpackage($id){
 
 
 
-public function Departure(Request $request){
+public function Departure(Request $request)
+{
     $month = $request->get('month', Carbon::now()->month);
     $year = $request->get('year', Carbon::now()->year);
-    $departures = Departure::where('package_id',$request->id)
-      ->whereYear('start_date', $year)
-    ->whereDate('start_date', '>', Carbon::today())
-    ->with('package:name,duration,id,price,discounted_price')
-    ->whereMonth('start_date', $month)
-    ->whereYear('start_date', $year)
-    ->select('id', 'package_id', 'start_date', 'end_date', 'total_seats', 'booked_seats')
-    ->orderBy('start_date')
-    ->limit(10)
-    ->get();
-return response()->json([
-    'departures' => $departures,
 
-]);
+    // Handle year rollover for December
+    $nextMonth = $month == 12 ? 1 : $month + 1;
+    $nextMonthYear = $month == 12 ? $year + 1 : $year;
+
+    $departures = Departure::where('package_id', $request->id)
+        ->where(function ($query) use ($month, $year, $nextMonth, $request) {
+            $query->where(function ($q) use ($month, $year) {
+                $q->whereMonth('start_date', $month)
+                  ->whereYear('start_date', $year);
+            })
+            ->when(!$request->get('month'),function($query) use ($nextMonth, $year){
+            $query->orWhere(function ($q) use ($nextMonth, $year) {
+                $q->whereMonth('start_date', $nextMonth)
+                  ->whereYear('start_date', $year);
+            });
+        });
+    })
+        ->whereDate('start_date', '>', Carbon::today())
+        ->with('package:name,duration,id,price,discounted_price')
+        ->select('id', 'package_id', 'start_date', 'end_date', 'total_seats', 'booked_seats')
+        ->orderBy('start_date')
+        ->limit(10)
+        ->get();
+
+    return response()->json([
+        'departures' => $departures,
+    ]);
 }
+
 
 
 
