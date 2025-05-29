@@ -47,7 +47,7 @@ class BookingController extends Controller
                 'user_ip' => $userIP,
                 'type'=>$request->type??1,
                 'amount'=>$request->amount??1,
-                'destination_id' => $request->destination_id,
+                'destination_id' => $request->destination_id??8,
                 'source' => $request->source,
                 'uuid'=>Str::uuid()
             ]);
