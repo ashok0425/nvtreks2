@@ -157,7 +157,7 @@
                                         </div>
                                     @endif
 
-                                    @if ($package->altitude)
+                                    @if ($package->max_altitude)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
                                                  <img loading="lazy" src="{{ asset('frontend/images/maxaltitudeIcon.png') }}"
@@ -186,16 +186,16 @@
                                         </div>
                                     @endif
 
-                                    @if ($package->start_end_point)
+                                    @if ($package->departure_from)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
                                                  <img loading="lazy" src="{{ asset('frontend/images/poinsIcon.png') }}"
                                                     alt="Start & End Point" class="img-fluid" width="51"
                                                     height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
-                                                    <h4 class="mb-0 border-bottom border-light-subtle">Start & End Point
+                                                    <h4 class="mb-0 border-bottom border-light-subtle">Start Point
                                                     </h4>
-                                                    <p class="mb-0 font_montserrat">{{ $package->start_end_point }}</p>
+                                                    <p class="mb-0 font_montserrat">{{ $package->departure_from }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -215,14 +215,14 @@
                                         </div>
                                     @endif
 
-                                    @if ($package->meal)
+                                    @if ($package->meals)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
                                                  <img loading="lazy" src="{{ asset('frontend/images/mealsIcon.png') }}" alt="Meals"
                                                     class="img-fluid" width="51" height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
                                                     <h4 class="mb-0 border-bottom border-light-subtle">Meals</h4>
-                                                    <p class="mb-0 font_montserrat">{{ $package->meal }}</p>
+                                                    <p class="mb-0 font_montserrat">{{ $package->meals }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -242,7 +242,7 @@
                                         </div>
                                     @endif
 
-                                    @if ($package->accommodation)
+                                    @if ($package->room)
                                         <div class="col-6 col-md-4 trip_itinerary_card">
                                             <div class="d-flex flex-md-row flex-column align-items-center gap-2">
                                                  <img loading="lazy" src="{{ asset('frontend/images/accommodationIcon.png') }}"
@@ -250,7 +250,7 @@
                                                     height="51" />
                                                 <div class="text-md-start text-center trip_itinerary_content">
                                                     <h4 class="mb-0 border-bottom border-light-subtle">Accommodation</h4>
-                                                    <p class="mb-0 font_montserrat">{{ $package->accommodation }}</p>
+                                                    <p class="mb-0 font_montserrat">{{ $package->room }}</p>
                                                 </div>
                                             </div>
                                         </div>
