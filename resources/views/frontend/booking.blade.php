@@ -93,19 +93,9 @@
                     </div>
 
                 </div>
-              <div class='col-md-6 px-md-5'>
-    <div class='border-bottom border-black pb-md-5 pb-3 mb-md-5 mb-3'>
-        <h5 class='fw-bolder fs-4 mb-3'>1. Payment by wire transfer</h5>
-        <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Beneficiary Bank :</span> Himalayan Bank Ltd.</p>
-        <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Beneficiary Company :</span> Nepal Vision Treks & Expedition (P). Ltd.</p>
-        <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Account No :</span> 01900041700038</p>
-        <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Account Type :</span> Current Account</p>
-        <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Bank Address :</span> Sanchaya Kosh Building, Tridevimarga</p>
-        <p class='mb-2 fs_18'><span class=''>P.O. Box :</span> 20590, Thamel, Kathmandu</p>
-        <p class='mb-2 fs_18'><span class=''>SWIFT :</span> HIMANPKA</p>
-        <p class='mb-2 fs_18'><span class=''>Web Address :</span> www.himalayanbank.com</p>
-    </div>
-    <h5 class='fw-bolder fs-4 mb-3'>2. Payment by wire transfer</h5>
+            <div class='col-md-6 px-md-5'>
+  <div class='border-bottom border-black pb-md-5 pb-3 mb-md-5 mb-3'>
+    <h5 class='fw-bolder fs-4 mb-3'>1. Payment by wire transfer</h5>
     <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Beneficiary Bank :</span> Himalayan Bank Ltd.</p>
     <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Beneficiary Company :</span> Nepal Vision Treks & Expedition (P). Ltd.</p>
     <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Account No :</span> 01900041700038</p>
@@ -114,7 +104,19 @@
     <p class='mb-2 fs_18'><span class=''>P.O. Box :</span> 20590, Thamel, Kathmandu</p>
     <p class='mb-2 fs_18'><span class=''>SWIFT :</span> HIMANPKA</p>
     <p class='mb-2 fs_18'><span class=''>Web Address :</span> www.himalayanbank.com</p>
+  </div>
+
+  <h5 class='fw-bolder fs-4 mb-3'>2. Payment by wire transfer</h5>
+  <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Beneficiary Bank :</span> Nabil Bank Ltd.</p>
+  <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Beneficiary Company :</span> Nepal Vision Treks & Expedition (P). Ltd.</p>
+  <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Account No :</span> 0102211820301</p>
+  <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Account Type :</span> Current Account</p>
+  <p class='mb-2 fs_18'><span class='text_darkOrange fw-bolder'>Bank Address :</span> Nabil House, Kamaladi, Kathmandu</p>
+  <p class='mb-2 fs_18'><span class=''>P.O. Box :</span> 3729, Kathmandu</p>
+  <p class='mb-2 fs_18'><span class=''>SWIFT :</span> NARBNPKA</p>
+  <p class='mb-2 fs_18'><span class=''>Web Address :</span> www.nabilbank.com</p>
 </div>
+
 
             </div>
         </div>
