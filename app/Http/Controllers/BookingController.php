@@ -60,7 +60,7 @@ class BookingController extends Controller
             $Pname=$package?->name;
             // $currency=$request->currency;
             if ($request->type==2) {
-                return redirect("https://pay.nepalvisiontreks.com/hbldemo2/?productName=$Pname&currency=USD&amount=$request->amount");
+                return redirect("https://pay.nepalvisiontreks.com/?productName=$Pname&currency=USD&amount=$request->amount");
             }
 
             $notification = array(
