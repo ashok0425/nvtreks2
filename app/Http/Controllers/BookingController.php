@@ -35,7 +35,6 @@ class BookingController extends Controller
             'message' => 'required'
         ]);
             $userIP = $request->ip();
-
             $booking= Booking::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -44,7 +43,7 @@ class BookingController extends Controller
                 'package_id' => $request->package_id,
                 'group_size' => $request->group_size??1,
                 'message' => $request->message,
-                'user_ip' => $userIP,
+                'user_ip' => "<a href='https://www.ip-tracker.org/locator/ip-lookup.php?ip={$userIP}'>Click here to view more info :{$userIP}</a>",
                 'type'=>$request->type??1,
                 'amount'=>$request->amount??1,
                 'destination_id' => $request->destination_id??8,
@@ -53,7 +52,6 @@ class BookingController extends Controller
             ]);
             Notification::route('mail', [
                 'sales@nepalvisiontreks.com',
-                'inquiry@nepalvisiontreks.com',
                 $booking->email
             ])->notify(new BookingNotification($booking));
             $package=Package::find($request->package_id);

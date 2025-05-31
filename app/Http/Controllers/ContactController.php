@@ -63,8 +63,10 @@ class ContactController extends Controller
                         'source' => $request->source,
                   ];
 
-                  Notification::route('mail', 'ashokmehta1234y@gmail.com')
-                  ->notify(new EnquiryReceived($data));
+                  Notification::route('mail', [
+                'sales@nepalvisiontreks.com',
+                $request->email
+            ])->notify(new EnquiryReceived($data));
 
                   $notification = array(
                         'alert-type' => 'success',
@@ -74,29 +76,6 @@ class ContactController extends Controller
 
             return redirect()->back()->with($notification);
       }
-
-
-
-
-      function IPtoLocation($ip)
-      {
-            $apiURL = 'https://api.geoapify.com/v1/ipinfo?apiKey=ba7648986b064e67a1418a20662a6dba';
-
-            // Make HTTP GET request using cURL
-            $ch = curl_init($apiURL);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $apiResponse = curl_exec($ch);
-
-            curl_close($ch);
-
-            // Retrieve IP data from API response
-            $ipData = json_decode($apiResponse, true);
-
-            // Return geolocation data
-            return !empty($ipData) ? $ipData : false;
-      }
-
-
 
 
       public function subscribeStore(Request $request)
