@@ -34,20 +34,6 @@ $discounted_packages = Package::where('status',1)->whereNotNull('discounted_pric
 $month = $request->get('month', Carbon::now()->month);
 $year = $request->get('year', Carbon::now()->year);
 
-$departures = Departure::whereMonth('start_date', $month)
-    ->whereYear('start_date', $year)
-    ->whereDate('start_date', '>', Carbon::today())
-    ->with(['package' => function ($query) {
-        $query->select('id', 'name', 'url', 'duration', 'discounted_price', 'price', 'status','destination_id');
-    }])
-    ->whereHas('package', function ($query) {
-        $query->where('status', 1)->whereNotNull('duration')->whereNotNull('discounted_price')->whereNotNull('price');
-    })
-    ->where("show_on_home_page",1)
-    ->select('id', 'package_id', 'start_date', 'end_date', 'total_seats', 'booked_seats')
-    ->orderBy('start_date')
-    ->paginate(10);
-
 $blogs = Blog::query()->latest()->limit(5)->whereNotNull('title')->get();
 $gallery_images = PackageImage::where('show_on_home_page',1)->inRandomOrder()->limit(24)->pluck('image')->toArray();
 
@@ -70,7 +56,7 @@ $seo = [
     return view('frontend.index', compact(
         'missed_packages', 'destinations', 'popular_packages',
         'destination_categories', 'discounted_packages',
-        'departures', 'month', 'year', 'blogs', 'seo', 'gallery_images'
+         'month', 'year', 'blogs', 'seo', 'gallery_images'
     ));
 // });
 
@@ -154,6 +140,34 @@ public function team() {
 public function UsefulInfo(){
     $UsefulInfo=Package::where('useful_info','!=',null)->value('useful_info');
     return view('frontend.usefulinfo',compact('UsefulInfo'));
+}
+
+
+public function Departure(Request $request)
+{
+    $month = $request->get('month', Carbon::now()->month);
+    $year = $request->get('year', Carbon::now()->year);
+
+    // Handle year rollover for December
+    $nextMonth = $month == 12 ? 1 : $month + 1;
+
+    $departures = Departure::where('show_on_home_page', 1)
+        ->where(function ($query) use ($month, $year, $nextMonth, $request) {
+            $query->where(function ($q) use ($month, $year) {
+                $q->whereMonth('start_date', $month)
+                  ->whereYear('start_date', $year);
+            });
+    })
+        ->whereDate('start_date', '>', Carbon::today())
+        ->with('package:name,duration,id,price,discounted_price')
+        ->select('id', 'package_id', 'start_date', 'end_date', 'total_seats', 'booked_seats')
+        ->orderBy('start_date')
+        ->limit($request->limit)
+        ->get();
+
+    return response()->json([
+        'departures' => $departures,
+    ]);
 }
 
 }

@@ -39,6 +39,7 @@ Route::get('departure-date', [PackageController::class, 'Departure'])->name('dep
 Route::get('book-now', [BookingController::class, 'index'])->name('booknow');
 Route::post('book-now', [BookingController::class, 'store'])->name('booknow.store');
 Route::any('payment-success', [BookingController::class, 'success'])->name('booknow.success');
+Route::get('fetch-date', [HomeController::class, 'Departure'])->name('fetch.date');
 
 Route::any('payment-failed', function () {
     return view('frontend.failed');

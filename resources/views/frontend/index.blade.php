@@ -273,86 +273,116 @@
     </section>
 
 
-    <section>
-        <div class="container pt-md-5 mt-md-5 mt-4">
-            <div class="row align-items-center">
-                <div class="col-md-9">
-                    <div class="section-header mb-md-1">
-                        <hr class="section-line py-2" />
-                        <p class="section-subtitle">ONGOING TRIPS</p>
-                    </div>
-                    <h2 class='head_title mb-md-3'>JOIN FIXED DEPARTURE TRIPS</h2>
-                </div>
-                <div class="col-md-3 text-end">
-                    <div class="dropdown month_select">
-                        <button class="month_select btn_darkprimary destination-button dropdown-toggle border-0" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            {{ Carbon\Carbon::create(null, $month)->format('F') }}, {{ $year }}
-                        </button>
-                        <div class="dropdown-menu" style="min-width: 250px;">
-                            <form class="px-4 py-3" action="{{ url('/#departures') }}" method="GET">
-                                <div class="mb-3">
-                                    <label for="monthSelect" class="form-label">SELECT MONTH, YEAR</label>
-                                    <select class="form-select" id="monthSelect" name="month">
-                                        @foreach (range(1, 12) as $m)
-                                            <option value="{{ $m }}" {{ $month == $m ? 'selected' : '' }}>
-                                                {{ Carbon\Carbon::create(null, $m)->format('F') }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+    <section id="departureApp" class="container">
+         <div>
+                                <div id="departDate" class="">
+                                    <div class="mb-md-4 mb-3">
+                                        <div class="section-header mb-md-1">
+                                            <hr class="section-line py-2" />
+                                            <p class="section-subtitle">ONGOING TRIPS</p>
+                                        </div>
+                                        <h2 class='head_title mb-md-3'>JOIN FIXED DEPARTURE TRIPS</h2>
+                                    </div>
+                                    <div class="d-flex flex-md-row flex-column justify-content-end mb-md-4 mb-3">
+
+                                        <div class="dropdown month_select mb-3">
+                                            <button class="btn btn_darkprimary rounded-0 py-2 px-4 fw-bold dropdown-toggle"
+                                                type="button" data-bs-toggle="dropdown">
+                                                @{{ getMonthName(month) }}, @{{ year }}
+                                            </button>
+                                            <div class="dropdown-menu p-3" style="min-width: 250px;">
+                                                <div class="mb-2">
+                                                    <label>Select Month</label>
+                                                    <select v-model="month" class="form-select">
+                                                        <option v-for="m in 12" :value="m">
+                                                            @{{ getMonthName(m) }}</option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label>Select Year</label>
+                                                    <select v-model="year" class="form-select">
+                                                        <option v-for="y in years" :value="y">
+                                                            @{{ y }}</option>
+                                                    </select>
+                                                </div>
+                                                <button @click="fetchDepartures(10)"
+                                                    class="btn btn_darkprimary rounded-0 py-2 px-4 fw-bold">Filter</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!-- Table -->
+                                    <div class="" v-if="departures.length">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Trip Name</th>
+                                                    <th>Departure Date</th>
+                                                    <th>Status</th>
+                                                    <th>Prices</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="departure in departures" :key="departure.id">
+                                                    <td>@{{departure.package.name}}</td>
+                                                    <td>
+                                                        <span
+                                                            class="trip_table_text fw-bolder">@{{ departure.package.duration }}</span><br />
+                                                        <span class="fs-6 text_lightDark">
+                                                            From @{{ formatDate(departure.start_date) }} -
+                                                            @{{ formatEndDate(departure.start_date, departure.package.duration) }}
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <p
+                                                            class="d-flex align-items-center gap-1 mb-0 fw-bold trip_table_text">
+                                                             <img loading="lazy" src="{{ asset('frontend/images/gurantedIcon.png') }}"
+                                                                alt="guranted" width="24" height="24">
+                                                            Guaranteed
+                                                        </p>
+                                                        <span class="fs-6 font_montserrat">@{{ departure.total_seats - departure.booked_seats }} Seats
+                                                            Left</span>
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg_lightprimary rounded-0"
+                                                                :style="{ width: getProgress(departure) + '%' }"
+                                                                role="progressbar" :aria-valuenow="getProgress(departure)"
+                                                                aria-valuemin="0" aria-valuemax="100">
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div
+                                                            v-if="departure.package.discounted_price && departure.package.discounted_price < departure.package.price">
+                                                            <span class="fs-6 font_montserrat fw-bolder text-success">
+                                                                $@{{ departure.package.discounted_price }}
+                                                            </span>
+                                                            <span
+                                                                class="ps-2 text-decoration-line-through text-danger small">
+                                                                $@{{ departure.package.price }}
+                                                            </span>
+                                                        </div>
+                                                        <div v-else>
+                                                            <span class="fs-6 font_montserrat fw-bolder text-success">
+                                                                $@{{ departure.package.price }}
+                                                            </span>
+                                                        </div>
+                                                        <div>
+                                                        <a :href="`/book-now?package=${departure.package_id}&size=2`"
+   class="btn btn_lightprimary_outline mt-2 rounded-0 px-md-4 py-md-2">
+   JOIN US
+</a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div v-else class="text-center py-4">
+                                        No departures found for @{{ getMonthName(month) }}, @{{ year }}
+                                    </div>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="yearSelect" class="form-label">Year</label>
-                                    <select class="form-select" id="yearSelect" name="year">
-                                        @php
-                                            $currentYear = date('Y');
-                                            $endYear = $currentYear + 2;
-                                        @endphp
-                                        @for ($y = $currentYear; $y <= $endYear; $y++)
-                                            <option value="{{ $y }}" {{ $year == $y ? 'selected' : '' }}>
-                                                {{ $y }}</option>
-                                        @endfor
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Filter</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="table-responsive">
-                <table class="table trip_table">
-                    <thead>
-                        <tr>
-                            <th>Trip Name</th>
-                            <th>Departure Date</th>
-                            <th>Status</th>
-                            <th>Prices</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-    $firstBatch = $departures->take(5);
-    $remaining = $departures->slice(5);
-@endphp
-
-{{-- First 5 rows --}}
-@foreach($firstBatch as $departure)
-    @include('frontend.inc.departure_row', ['departure' => $departure])
-@endforeach
-
-{{-- Remaining rows hidden initially --}}
-@foreach($remaining as $departure)
-    @include('frontend.inc.departure_row', ['departure' => $departure, 'hidden' => true])
-@endforeach
-
-
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
+                            </div>
         <div class="text-center mb-3">
                  <button id="toggleDepartures" class="btn btn_darkprimary destination-button">LOAD MORE</button>
 
@@ -805,4 +835,99 @@ console.log(currentIndex);
         }).mount();
     });
 </script>
+
+
+  <!-- Vue 3 CDN -->
+    <script src="https://unpkg.com/vue@3.4.21/dist/vue.global.prod.js"></script>
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-toastification@2.0.0-beta.12/dist/index.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue-toastification@2.0.0-beta.12/dist/index.umd.min.js"></script>
+
+    <script>
+        const {
+            createApp
+        } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    // Existing
+                    month: {{ $month }},
+                    year: {{ $year }},
+                    id: '',
+                    departures: [],
+                    years: (() => {
+                        const y = new Date().getFullYear();
+                        return [y, y + 1, y + 2];
+                    })(),
+
+                    // New - for form
+                    selectedDate: '',
+                    groupSize: 1,
+                    basePrice: '', // fallback if not set
+                };
+            },
+            computed: {
+                totalPrice() {
+                    return this.basePrice * this.groupSize;
+                }
+            },
+            mounted() {
+                this.fetchDepartures();
+            },
+            methods: {
+                // Existing methods
+                getMonthName(month) {
+                    return new Date(2000, month - 1, 1).toLocaleString('default', {
+                        month: 'long'
+                    });
+                },
+                formatDate(dateStr) {
+                    const date = new Date(dateStr);
+                    return `${date.getDate()} ${date.toLocaleString('default', { month: 'long' })}`;
+                },
+                formatEndDate(startDate, duration) {
+                    let days = parseInt(duration.match(/\d+/)?.[0] || 0);
+                    let end = new Date(startDate);
+                    end.setDate(end.getDate() + days - 1);
+                    return `${end.getDate()} ${end.toLocaleString('default', { month: 'long' })}, ${end.getFullYear()}`;
+                },
+                getProgress(dep) {
+                    return dep.total_seats > 0 ? Math.round((dep.booked_seats / dep.total_seats) * 100) : 0;
+                },
+                fetchDepartures(limit=5) {
+                    axios.get(`/fetch-date?id=${this.id}&month=${this.month}&limit=${limit}&year=${this.year}`)
+                        .then(res => {
+                            this.departures = res.data.departures;
+                        })
+                        .catch(err => console.error(err));
+                },
+
+
+                increaseGroupSize() {
+                    this.groupSize++;
+                },
+                decreaseGroupSize() {
+                    if (this.groupSize > 1) {
+                        this.groupSize--;
+                    }
+                },
+                submitForm() {
+                    const formData = {
+                        date: this.selectedDate,
+                        groupSize: this.groupSize,
+                        totalPrice: this.totalPrice
+                    };
+
+                    console.log('Form submitted:', formData);
+
+                    // Submit form via axios
+                    axios.post('/api/book', formData)
+                        .then(response => alert("Success"))
+                        .catch(error => alert("Failed"));
+                }
+            }
+        }).mount('#departureApp');
+    </script>
 @endpush
