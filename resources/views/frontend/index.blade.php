@@ -853,7 +853,7 @@ console.log(currentIndex);
             data() {
                 return {
                     // Existing
-                    month: {{ $month }},
+                    month: '',
                     year: {{ $year }},
                     id: '',
                     departures: [],

@@ -145,29 +145,43 @@ public function UsefulInfo(){
 
 public function Departure(Request $request)
 {
-    $month = $request->get('month', Carbon::now()->month);
-    $year = $request->get('year', Carbon::now()->year);
+    $month = $request->get('month');
+    $year = $request->get('year', now()->year);
 
-    // Handle year rollover for December
-    $nextMonth = $month == 12 ? 1 : $month + 1;
-
-    $departures = Departure::where('show_on_home_page', 1)
-        ->where(function ($query) use ($month, $year, $nextMonth, $request) {
-            $query->where(function ($q) use ($month, $year) {
-                $q->whereMonth('start_date', $month)
-                  ->whereYear('start_date', $year);
-            });
-    })
-        ->whereDate('start_date', '>', Carbon::today())
+    $query = Departure::query()
+        ->where('show_on_home_page', 1)
+        ->whereDate('start_date', '>', now())
         ->with('package:name,duration,id,price,discounted_price')
-        ->select('id', 'package_id', 'start_date', 'end_date', 'total_seats', 'booked_seats')
-        ->orderBy('start_date')
-        ->limit($request->limit)
-        ->get();
+        ->select('id', 'package_id', 'start_date', 'end_date', 'total_seats', 'booked_seats');
+
+    // Filter by month/year if not provided: default to current + next month
+    if (!$month) {
+        $currentMonth = now()->month;
+        $nextMonth = $currentMonth === 12 ? 1 : $currentMonth + 1;
+        $nextYear = $currentMonth === 12 ? $year + 1 : $year;
+
+        $query->where(function ($q) use ($currentMonth, $nextMonth, $year, $nextYear) {
+            $q->where(function ($sub) use ($currentMonth, $year) {
+                $sub->whereMonth('start_date', $currentMonth)
+                    ->whereYear('start_date', $year);
+            })->orWhere(function ($sub) use ($nextMonth, $nextYear) {
+                $sub->whereMonth('start_date', $nextMonth)
+                    ->whereYear('start_date', $nextYear);
+            });
+        });
+    } else {
+        $query->whereMonth('start_date', $month)
+              ->whereYear('start_date', $year);
+    }
+
+    $departures = $query->orderBy('start_date')
+                        ->limit($request->get('limit'))
+                        ->get();
 
     return response()->json([
         'departures' => $departures,
     ]);
 }
+
 
 }
