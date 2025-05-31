@@ -103,6 +103,12 @@
 .sub {
     transition: visibility 0.3s, opacity 0.3s ease-in-out;
 }
+
+@media (max-width: 768px) {
+    .two-word-title {
+        font-size: 40rem;
+    }
+}
     </style>
 @stack('style')
 
