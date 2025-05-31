@@ -63,7 +63,7 @@ $year = $request->get('year', Carbon::now()->year);
             foreach ($request->start_date as $key => $date) {
                 $departure = new Departure();
                 $departure->start_date = $date;
-                $departure->end_date = $request->end_date[$key] ?? null;
+                // $departure->end_date = $request->end_date[$key] ?? null;
                 $departure->total_seats = $request->total_seats[$key] ?? 0;
                 $departure->show_on_home_page = $request->show_on_home_page[$key] ?? 0;
                 $departure->package_id = $request->package_id;
@@ -114,7 +114,7 @@ $year = $request->get('year', Carbon::now()->year);
 
             $departure->start_date=$request->start_date;
             $departure->package_id=$request->package_id;
-            $departure->end_date = $request->end_date ?? null;
+            // $departure->end_date = $request->end_date ?? null;
             $departure->total_seats = $request->total_seats ?? $departure->total_seats;
             $departure->booked_seats = $request->booked_seats ?? $departure->booked_seats;
             $departure->show_on_home_page = $request->show_on_home_page ?? $departure->show_on_home_page;

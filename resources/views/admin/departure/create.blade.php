@@ -38,7 +38,6 @@
                         {{-- First Input Row --}}
                         <div class="d-flex gap-2 mb-2">
                             <input type="date" class="form-control" name="start_date[]" required>
-                            <input type="date" class="form-control" name="end_date[]" >
                             <input type="number" class="form-control" name="total_seats[]"  placeholder="Total Seats">
                             <select name="show_on_home_page[]" class="form-control" >
                                 <option value="0">No</option>
@@ -66,7 +65,6 @@ $(document).ready(function(){
         let html = `
         <div class="d-flex gap-2 mb-2">
             <input type="date" class="form-control" name="start_date[]" required>
-            <input type="date" class="form-control" name="end_date[]" required>
             <input type="number" class="form-control" name="total_seats[]" required placeholder="Total Seats">
             <select name="show_on_home_page[]" class="form-control" required>
                 <option value="0">No</option>

@@ -56,7 +56,6 @@
                     {{-- First Input Row --}}
                     <div class="d-flex gap-2 mb-2">
                         <input type="date" class="form-control" name="start_date" required value="{{ $departure->start_date }}">
-                        <input type="date" class="form-control" name="end_date" value="{{ Carbon\Carbon::parse($departure->end_date)->format('Y-m-d') }}">
                         <input type="number" class="form-control" name="total_seats"  placeholder="Total Seats" value="{{ $departure->total_seats }}">
                         <select name="show_on_home_page" class="form-control" {{$departure->show_on_home_page==1?'checked':''}}>
                             <option value="0">No</option>
