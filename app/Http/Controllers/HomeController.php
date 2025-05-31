@@ -43,7 +43,7 @@ $departures = Departure::whereMonth('start_date', $month)
     ->whereHas('package', function ($query) {
         $query->where('status', 1)->whereNotNull('duration')->whereNotNull('discounted_price')->whereNotNull('price');
     })
-    // ->where("show_on_home_page",1)
+    ->where("show_on_home_page",1)
     ->select('id', 'package_id', 'start_date', 'end_date', 'total_seats', 'booked_seats')
     ->orderBy('start_date')
     ->paginate(10);

@@ -28,7 +28,7 @@ class EnquiryReceived extends Notification
         return (new MailMessage)
             ->from('info@nepalvisiontreks.com', 'Nepal Vision')
             ->subject($this->data['subject'])
-            ->bcc('yubraj.misfit@gmail.com')
+            // ->bcc('yubraj.misfit@gmail.com')
             ->line('Hello')
             ->line('New Enquiry Request Received')
             ->line("Name: ".$this->data['name'])

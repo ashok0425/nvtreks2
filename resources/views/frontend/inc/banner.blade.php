@@ -19,10 +19,13 @@
                     @if (isset($banner)&&$banner->details)
                     <p class="home_banner_subtitle mb-0">{{$banner->details}}</p>
                     @endif
-                    @if (isset($banner)&&$banner->title)
-                    <h1 class="home_banner_title mb-md-4">{{$banner->title}}</h1>
-                    </h1>
-                    @endif
+                  @if (isset($banner) && $banner->title)
+    @php
+        $wordCount = str_word_count($banner->title);
+        $titleClass = $wordCount === 2 ? 'home_banner_title small-font' : 'home_banner_title';
+    @endphp
+    <h1 class="{{ $titleClass }} mb-md-4">{{ $banner->title }}</h1>
+@endif
                 </div>
             </div>
         </div>

@@ -21,6 +21,9 @@
    <link defer rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
     <style>
+       .small-font {
+    font-size: 2rem; /* Adjust this size as needed */
+}
         .trip_table_text{
             font-size: 18px!important;
         }
