@@ -22,7 +22,7 @@
 
     <style>
        .small-font {
-    font-size: 2rem; /* Adjust this size as needed */
+    font-size: 80px; /* Adjust this size as needed */
 }
         .trip_table_text{
             font-size: 18px!important;
