@@ -106,7 +106,7 @@
 
 @media (max-width: 768px) {
     .small-font{
-        font-size: 40rem;
+        font-size: 45px;
     }
 }
     </style>
