@@ -105,7 +105,7 @@
 }
 
 @media (max-width: 768px) {
-    .two-word-title {
+    .small-font{
         font-size: 40rem;
     }
 }
