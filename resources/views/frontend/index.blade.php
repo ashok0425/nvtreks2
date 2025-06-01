@@ -288,7 +288,7 @@
                                         <div class="dropdown month_select mb-3">
                                             <button class="btn btn_darkprimary rounded-0 py-2 px-4 fw-bold dropdown-toggle"
                                                 type="button" data-bs-toggle="dropdown">
-                                                @{{ getMonthName(month) }}, @{{ year }}
+                                                @{{ getMonthName(month?month:mon) }}, @{{ year }}
                                             </button>
                                             <div class="dropdown-menu p-3" style="min-width: 250px;">
                                                 <div class="mb-2">
@@ -354,7 +354,7 @@
                                                     <td>
                                                         <div
                                                             v-if="departure.package.discounted_price && departure.package.discounted_price < departure.package.price">
-                                                            <span class="fs-6 font_montserrat fw-bolder text-success">
+                                                            <span class="fs-6 font_montserrat fw-bolder text_darkprimary">
                                                                 $@{{ departure.package.discounted_price }}
                                                             </span>
                                                             <span
@@ -363,7 +363,7 @@
                                                             </span>
                                                         </div>
                                                         <div v-else>
-                                                            <span class="fs-6 font_montserrat fw-bolder text-success">
+                                                            <span class="fs-6 font_montserrat fw-bolder text_darkprimary">
                                                                 $@{{ departure.package.price }}
                                                             </span>
                                                         </div>
@@ -854,6 +854,8 @@ console.log(currentIndex);
                 return {
                     // Existing
                     month: '',
+                    mon: {{$month}},
+
                     year: {{ $year }},
                     id: '',
                     departures: [],

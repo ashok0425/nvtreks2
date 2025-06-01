@@ -34,7 +34,7 @@
                            <a href="{{ route('admin.package.gallery.edit',$gallery->id) }}" class="btn btn-primary btn-sm pull-left m-r-10"><i class="fa fa-edit"></i>
                            </a>
 
-                           <a href="{{ route('admin.package.gallery.delete',$gallery->id ) }}" class="btn btn-danger btn-sm delete_row" id="delete_row" ><i class="fa fa-trash"></i>
+                           <a href="{{ route('admin.package.gallery.delete',$gallery->id ) }}" class="btn btn-danger btn-sm " ><i class="fa fa-trash"></i>
                            </a>
 
 
