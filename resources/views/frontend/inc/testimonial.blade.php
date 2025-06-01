@@ -3,6 +3,7 @@ if (!isset($testimonials)) {
    $testimonials =DB::table('testimonials')
     ->where('status', 1)
     ->where('display_home', 1)
+     ->latest()
     ->whereRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) < 60')
     ->orderByRaw('(LENGTH(content) - LENGTH(REPLACE(content, " ", "")) + 1) DESC')
      ->limit(5)

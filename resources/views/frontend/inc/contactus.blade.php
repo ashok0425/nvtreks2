@@ -132,7 +132,7 @@
                 </div>
 
             </div>
-            <div class="contact_imgs" style="height: 150px">
+            <div class="contact_imgs" style="height: 150px;margin-top:120px">
                 <div class="splide" id="image-slider">
                     <div class="splide__track">
                         <ul class="splide__list">
