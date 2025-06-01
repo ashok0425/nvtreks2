@@ -174,17 +174,6 @@
                         <p class="contact_info mb-2"><span class="pe-2"><img src="{{asset('frontend/images/locationIcon.png')}}"
                                     alt="location" width="16" height="16"></span>{{setting()->address}}</p>
 
-                                    <div class='text-center text-md-start my-3 mb-0 mt-5' >
-                                        <a href='{{ setting()->facebook }}' class="mx-2"><i class="fab fa-facebook fa-2x text-white"></i></a>
-                                        <a href='{{ setting()->instagram }}' class="mx-2"><i class="fab fa-instagram fa-2x text-white"></i></a>
-                                        {{-- <a href='#{{setting()->pinterest}}'><img src='{{asset('frontend/images/pinterest_logo.png')}}' alt='pinterest' class='img-fluid' --}}
-                                        {{-- width='28' height='28' /></a> --}}
-                                        {{-- <a href='{{setting()->whatsapp}}'><img src='{{asset('frontend/images/whatsapp_logo.png')}}' alt='whatsapp' class='img-fluid' --}}
-                                        {{-- width='28' height='28' /></a> --}}
-                                        <a href='{{ setting()->linkedin }}' class="mx-2"><i class="fab fa-linkedin fa-2x text-white"></i></a>
-                                        {{-- <a href='{{ setting()->twitter }}'><i class="fab fa-twitter fa-2x text-white"></i></a> --}}
-
-                                    </div>
                     </div>
 
                     <!-- Recent Posts -->
@@ -217,6 +206,23 @@
                                 class="btn btn_darkprimary w-100 py-md-3 py-2 rounded-0 fw-semibold">SUBSCRIBE
                                 NOW</button>
                         </form>
+
+
+ <div class='text-center text-md-start my-3 mb-0 mt-5' >
+                                        <a href='{{ setting()->facebook }}' class="mx-2 text-decoration-none">
+                                            <img src="{{asset('frontend/images/facebook.webp')}}" alt="" ></a>
+                                        <a href='{{ setting()->instagram }}' class="mx-2 text-decoration-none">
+                                            <img src="{{asset('frontend/images/instagram.webp')}}" alt="" >
+                                        </a>
+
+                                        <a href='{{ setting()->linkedin }}' class="mx-2 text-decoration-none">
+                                            <img src="{{asset('frontend/images/linkedin.webp')}}" alt="" >
+                                        </a>
+                                        <a href='{{ setting()->youtube }}' class="mx-2 text-decoration-none"><img src="{{asset('frontend/images/youtube.webp')}}" alt="" ></a>
+
+                                         <a href='{{ setting()->pinterest }}' class="mx-2 text-decoration-none"><img src="{{asset('frontend/images/pinterest.webp')}}" alt="" ></a>
+
+                                    </div>
                     </div>
                 </div>
             </div>

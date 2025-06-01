@@ -553,7 +553,7 @@
                                                     <td>
                                                         <div
                                                             v-if="departure.package.discounted_price && departure.package.discounted_price < departure.package.price">
-                                                            <span class="fs-6 font_montserrat fw-bolder text-success">
+                                                            <span class="fs-6 font_montserrat fw-bolder text_darkprimary">
                                                                 $@{{ departure.package.discounted_price }}
                                                             </span>
                                                             <span
@@ -562,7 +562,7 @@
                                                             </span>
                                                         </div>
                                                         <div v-else>
-                                                            <span class="fs-6 font_montserrat fw-bolder text-success">
+                                                            <span class="fs-6 font_montserrat fw-bolder text_darkprimary">
                                                                 $@{{ departure.package.price }}
                                                             </span>
                                                         </div>
