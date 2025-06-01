@@ -193,7 +193,7 @@
                             <h5 class="footer_border_start ps-2">RECENT POSTS</h5>
                         </div>
                        @foreach (App\Models\Blog::limit(4)->latest()->where('display_homepage',1)->get() as $blog)
-                       <p class=" fs-6 fw-semibold font_montserrat border-bottom border-dark-subtle pb-3">
+                       <p class=" fs-6  font_montserrat border-bottom border-dark-subtle pb-3">
                        <a href="{{ route('blog.detail', ['url' => $blog->slug]) }}" class="text-light text-decoration-none"> {{$blog->title}}</a>
                         {{-- <small class="fw-light text_lightgray font_montserrat">{{$blog->}}</small> --}}
                     </p>

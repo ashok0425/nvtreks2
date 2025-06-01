@@ -32,7 +32,8 @@ class BookingController extends Controller
             'package_id' => 'required',
             'destination_id' => 'nullable',
             'group_size' => 'nullable',
-            'message' => 'required'
+            'message' => 'required',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
             $userIP = $request->ip();
             $booking= Booking::create([

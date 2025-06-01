@@ -2,6 +2,7 @@
 
 
 @section('content')
+{!! NoCaptcha::renderJs() !!}
     @include('frontend.inc.banner')
     <section class='mb-md-5 mb-4'>
         <div class='container'>
@@ -76,12 +77,19 @@
                             </div>
                             @endif
                             <!-- Message -->
-                            <div class="mb-3 mb-md-5">
+                            <div class=" mb-md-5">
                                 <textarea class="form-control rounded-0" name="message" rows="5" placeholder="Your Message*" required
                                     v-model="form.message"></textarea>
                             </div>
+
+                              {!! app('captcha')->display() !!}
+                                                @if ($errors->has('g-recaptcha-response'))
+                                                    <span class="help-block text-danger">
+                                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                                    </span>
+                                                @endif
                             <!-- Submit -->
-                            <button class="btn btn_darkprimary rounded-0 py-2 py-md-3 px-3 px-md-4 fw-semibold"
+                            <button class="btn mt-3 btn_darkprimary rounded-0 py-2 py-md-3 px-3 px-md-4 fw-semibold"
                                 type="submit">
                                 @if (request()->query('type') == 'payment')
                                     Continue Payment
@@ -89,6 +97,7 @@
                                     BOOK A TRIP
                                 @endif
                             </button>
+
                         </form>
                     </div>
 
