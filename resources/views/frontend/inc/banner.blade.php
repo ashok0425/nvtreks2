@@ -22,7 +22,7 @@
                   @if (isset($banner) && $banner->title)
     @php
         $wordCount = str_word_count($banner->title);
-        $titleClass = $wordCount === 2 ? 'home_banner_title small-font' : 'home_banner_title';
+        $titleClass = $wordCount >= 2 ? 'home_banner_title small-font' : 'home_banner_title';
     @endphp
     <h1 class="{{ $titleClass }} mb-md-4">{{ $banner->title }}</h1>
 @endif

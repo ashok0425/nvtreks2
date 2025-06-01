@@ -82,12 +82,14 @@
                                     v-model="form.message"></textarea>
                             </div>
 
-                              {!! app('captcha')->display() !!}
+                             <div>
+                                 {!! app('captcha')->display() !!}
                                                 @if ($errors->has('g-recaptcha-response'))
                                                     <span class="help-block text-danger">
-                                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                                        <strong>Invalid Captch</strong>
                                                     </span>
                                                 @endif
+                             </div>
                             <!-- Submit -->
                             <button class="btn mt-3 btn_darkprimary rounded-0 py-2 py-md-3 px-3 px-md-4 fw-semibold"
                                 type="submit">
